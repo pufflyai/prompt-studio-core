@@ -1,11 +1,8 @@
 import { Configuration, OpenAIApi } from "openai";
 import { AdapterSettings } from "../../types";
-import { CompletionNodeInput, CompletionNodeOutput } from "@pufflig/ps-types";
+import { CompletionNodeIO } from "@pufflig/ps-types";
 
-export async function createCompletion(
-  input: CompletionNodeInput,
-  options: AdapterSettings
-): Promise<CompletionNodeOutput> {
+export async function createCompletion(input: CompletionNodeIO, options: AdapterSettings): Promise<CompletionNodeIO> {
   const { prompt } = input;
   const { model, settings } = options;
   const { modelId, parameters } = model;
@@ -23,6 +20,7 @@ export async function createCompletion(
   const completionText = completion.data.choices[0].text || "";
 
   return {
-    res: completionText,
+    prompt,
+    completion: completionText,
   };
 }

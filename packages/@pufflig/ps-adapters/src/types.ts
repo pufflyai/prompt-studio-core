@@ -1,4 +1,4 @@
-import { ChatNodeIO, CompletionNodeInput, CompletionNodeOutput, EmbeddingNodeIO, FormatType } from "@pufflig/ps-types";
+import { ChatNodeIO, CompletionNodeIO, EmbeddingNodeIO, FormatType } from "@pufflig/ps-types";
 export type AdapterNode = "adapter/openai" | "adapter/prompt-studio" | "adapter/custom_api";
 
 export interface NumberParam {
@@ -51,7 +51,7 @@ export interface AdapterSettings {
 }
 
 export interface Adapter {
-  createCompletion: (input: CompletionNodeInput, options: AdapterSettings) => Promise<CompletionNodeOutput>;
+  createCompletion: (input: CompletionNodeIO, options: AdapterSettings) => Promise<CompletionNodeIO>;
   createChatCompletion: (messages: ChatNodeIO, options: AdapterSettings) => Promise<ChatNodeIO>;
   createEmbedding: (input: EmbeddingNodeIO, options: AdapterSettings) => Promise<EmbeddingNodeIO>;
 }

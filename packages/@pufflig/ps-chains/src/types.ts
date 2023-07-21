@@ -1,6 +1,6 @@
 import { AdapterNode } from "@pufflig/ps-adapters";
 import { ModifierNode } from "@pufflig/ps-modifiers";
-import { ChatMessage, CompletionNodeOutput } from "@pufflig/ps-types";
+import { ChatMessage, CompletionNodeIO } from "@pufflig/ps-types";
 
 export interface ChainDefinition {
   nodes: CompletionNode[];
@@ -29,9 +29,15 @@ export interface ChainState {
 }
 
 export interface CompletionNodeState {
-  id: AdapterNode;
+  id: AdapterNode | ModifierNode;
   status: "idle" | "running" | "streaming" | "error";
-  result: CompletionNodeOutput | null;
+  result: CompletionNodeIO | null;
+}
+
+export interface ChatNodeState {
+  id: AdapterNode | ModifierNode;
+  status: "idle" | "running" | "streaming" | "error";
+  result: CompletionNodeIO | null;
 }
 
 export interface CompletionRun {

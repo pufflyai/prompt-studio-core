@@ -2,13 +2,9 @@ import { ChatMessage } from "./chat";
 
 export type FormatType = "embedding" | "completion" | "chat";
 
-export interface CompletionNodeInput {
+export interface CompletionNodeIO {
   prompt: string;
   completion: string;
-}
-
-export interface CompletionNodeOutput {
-  res: string;
 }
 
 export interface EmbeddingNodeIO {

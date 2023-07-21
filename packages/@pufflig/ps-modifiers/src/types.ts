@@ -1,4 +1,4 @@
-import { ChatNodeIO, CompletionNodeInput, CompletionNodeOutput, TextParam } from "@pufflig/ps-types";
+import { ChatNodeIO, CompletionNodeIO, TextParam } from "@pufflig/ps-types";
 
 export interface ModifierSettings {
   variables: {
@@ -7,7 +7,7 @@ export interface ModifierSettings {
 }
 
 export interface Modifier {
-  modifyCompletion: (input: CompletionNodeInput, options: ModifierSettings) => Promise<CompletionNodeOutput>;
+  modifyCompletion: (input: CompletionNodeIO, options: ModifierSettings) => Promise<CompletionNodeIO>;
   modifyChat: (input: ChatNodeIO, options: ModifierSettings) => Promise<ChatNodeIO>;
 }
 
