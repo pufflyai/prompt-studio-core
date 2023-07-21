@@ -1,0 +1,23 @@
+{
+  "name": "@pufflig/ps-modifiers",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Pufflig AB",
+  "main": "./dist/ps-modifiers.umd.js",
+  "module": "./dist/ps-modifiers.es.js",
+  "types": "./dist/ps-modifiers.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@pufflig/ps-types": "*",
+    "mustache": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/mustache": "^4.2.2"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@pufflig/ps-chains",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "./dist/ps-chains.umd.js",
+  "module": "./dist/ps-chains.es.js",
+  "types": "./dist/ps-chains.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "@pufflig/ps-types": "*",
+    "@pufflig/ps-adapters": "*",
+    "@pufflig/ps-modifiers": "*"
+  }
+}
