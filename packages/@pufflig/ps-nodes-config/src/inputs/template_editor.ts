@@ -12,6 +12,7 @@ export const templateEditor: NodeConfig = {
       name: "Prompt",
       description: "The prompt to send to OpenAI",
       type: "text",
+      defaultValue: "",
     },
   ],
   inputs: [],

@@ -17,6 +17,7 @@ export const handlebarTemplateCompletion: NodeConfig = {
       name: "Text",
       description: "The text from the handlebar template filled in",
       type: "text",
+      defaultValue: "",
     },
   ],
   inputs: [
@@ -25,6 +26,7 @@ export const handlebarTemplateCompletion: NodeConfig = {
       name: "Template",
       description: "Template to fill in",
       type: "text",
+      defaultValue: "",
     },
   ],
 };

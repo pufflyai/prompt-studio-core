@@ -12,6 +12,7 @@ export const customCompletionConfig: NodeConfig = {
       name: "API Definition",
       type: "api",
       description: "The Definition of your API",
+      defaultValue: null,
     },
   ],
   outputs: [
@@ -20,6 +21,7 @@ export const customCompletionConfig: NodeConfig = {
       name: "Completion",
       description: "A completion from your API",
       type: "text",
+      defaultValue: "",
     },
   ],
   inputs: [
@@ -28,6 +30,7 @@ export const customCompletionConfig: NodeConfig = {
       name: "Prompt",
       description: "The prompt to send to your API",
       type: "text",
+      defaultValue: "",
     },
   ],
 };

@@ -14,12 +14,14 @@ export const completionDisplay: NodeConfig = {
       name: "Prompt",
       description: "The prompt used for this completion",
       type: "text",
+      defaultValue: "",
     },
     {
       id: "completion",
       name: "Completion",
       description: "The completion generated from the prompt",
       type: "text",
+      defaultValue: "",
     },
   ],
 };

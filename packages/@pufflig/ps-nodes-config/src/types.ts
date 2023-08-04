@@ -1,27 +1,7 @@
+import { Param } from "@pufflig/ps-types";
+
 export type ParamType = "text" | "number" | "boolean" | "message" | "chat" | "secret" | "tool" | "model" | "api";
 export type NodeCategory = "input" | "modifier" | "adapter" | "converter" | "output";
-
-export interface NumberParam {
-  name: string;
-  max?: number;
-  min?: number;
-  step?: number;
-  default: number;
-  description: string;
-}
-
-export interface TextParam {
-  name: string;
-  default: string;
-  description: string;
-}
-
-export interface ModelConfig {
-  modelId: string;
-  parameters: {
-    [key: string]: NumberParam | TextParam;
-  };
-}
 
 export interface APIConfig {
   url: string;
@@ -36,23 +16,6 @@ export interface APIConfig {
   headers: {
     [key: string]: string;
   };
-}
-
-export interface Models {
-  defaultModel: string;
-  models: {
-    [key: string]: ModelConfig;
-  };
-}
-
-export interface Param {
-  id: string;
-  name: string;
-  description: string;
-  type: ParamType;
-  value?: string | number | boolean;
-  default?: string | number | boolean;
-  definition?: Models;
 }
 
 export interface NodeConfig {

@@ -13,7 +13,7 @@ export const openaiChatConfig: NodeConfig = {
       name: "API Key",
       type: "secret",
       description: "The API key for OpenAI",
-      value: "${{SECRET:open_ai/api_key}}",
+      defaultValue: "${{SECRET:open_ai/api_key}}",
     },
   ],
   outputs: [
@@ -22,6 +22,7 @@ export const openaiChatConfig: NodeConfig = {
       name: "Message",
       description: "A message from OpenAI",
       type: "message",
+      defaultValue: null,
     },
   ],
   inputs: [
@@ -30,6 +31,7 @@ export const openaiChatConfig: NodeConfig = {
       name: "Chat",
       description: "The chat to send to OpenAI",
       type: "chat",
+      defaultValue: [],
     },
     {
       id: "model",
@@ -37,6 +39,10 @@ export const openaiChatConfig: NodeConfig = {
       description: "The model to use",
       type: "model",
       definition: chatModels,
+      defaultValue: {
+        modelId: "gpt-3.5-turbo",
+        parameters: {},
+      },
     },
   ],
 };

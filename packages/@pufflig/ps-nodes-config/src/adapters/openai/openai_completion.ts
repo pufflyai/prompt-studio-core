@@ -13,7 +13,7 @@ export const openaiCompletionConfig: NodeConfig = {
       name: "API Key",
       type: "secret",
       description: "The API key for OpenAI",
-      value: "${{SECRET:openai/api_key}}",
+      defaultValue: "${{SECRET:openai/api_key}}",
     },
   ],
   outputs: [
@@ -22,6 +22,7 @@ export const openaiCompletionConfig: NodeConfig = {
       name: "Completion",
       description: "The completion from OpenAI",
       type: "text",
+      defaultValue: "",
     },
   ],
   inputs: [
@@ -30,6 +31,7 @@ export const openaiCompletionConfig: NodeConfig = {
       name: "Prompt",
       description: "The prompt to send to OpenAI",
       type: "text",
+      defaultValue: "",
     },
     {
       id: "model",
@@ -37,6 +39,10 @@ export const openaiCompletionConfig: NodeConfig = {
       description: "The model to use",
       type: "model",
       definition: completionModels,
+      defaultValue: {
+        modelId: "text-davinci-003",
+        parameters: {},
+      },
     },
   ],
 };

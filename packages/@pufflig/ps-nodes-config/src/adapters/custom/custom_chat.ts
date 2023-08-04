@@ -12,6 +12,7 @@ export const customChatConfig: NodeConfig = {
       name: "API Definition",
       type: "api",
       description: "The Definition of your API",
+      defaultValue: null,
     },
   ],
   outputs: [
@@ -20,6 +21,7 @@ export const customChatConfig: NodeConfig = {
       name: "Message",
       description: "A message from your API",
       type: "message",
+      defaultValue: null,
     },
   ],
   inputs: [
@@ -28,6 +30,7 @@ export const customChatConfig: NodeConfig = {
       name: "Chat",
       description: "The chat to send to your API",
       type: "chat",
+      defaultValue: [],
     },
   ],
 };
