@@ -24,10 +24,6 @@ export interface NodeConfig {
   format?: "chat" | "text";
   name: string;
   description: string;
-  custom_inputs?: boolean;
-  custom_input_schema?: {
-    type: ParamType;
-  };
   inputs: Param[];
   outputs: Param[];
   parameters: Param[];

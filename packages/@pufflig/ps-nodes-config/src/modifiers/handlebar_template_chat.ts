@@ -7,10 +7,6 @@ export const handlebarTemplateChat: NodeConfig = {
   format: "chat",
   description: "",
   parameters: [],
-  custom_inputs: true,
-  custom_input_schema: {
-    type: "text",
-  },
   outputs: [
     {
       id: "chat",
@@ -26,6 +22,13 @@ export const handlebarTemplateChat: NodeConfig = {
       name: "Chat",
       description: "Chat template to fill in",
       type: "chat",
+      defaultValue: [],
+    },
+    {
+      id: "variables",
+      name: "Variables",
+      description: "Chat variables to use on the template",
+      type: "object",
       defaultValue: [],
     },
   ],
