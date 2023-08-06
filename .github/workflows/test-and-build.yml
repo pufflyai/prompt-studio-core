@@ -1,0 +1,13 @@
+name: Test and build when pushing to a branch
+on: push
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install monorepo dependencies
+        run: yarn install --frozen-lockfile
+      - name: build monorepo packages
+        run: npx lerna run build
+      - name: test monorepo
+        run: npx lerna run test

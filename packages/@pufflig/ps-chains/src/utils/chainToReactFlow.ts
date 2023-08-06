@@ -15,7 +15,7 @@ export const chainToReactFlow = (chain: Chain): ReactFlowData => {
     const nodeData: Node = {
       id: node.id,
       type: node.type,
-      position: chain.state[node.id].editor.position || { x: 0, y: 0 },
+      position: node.editor.position || { x: 0, y: 0 },
       data: {},
     };
     return nodeData;
