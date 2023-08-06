@@ -1,7 +1,7 @@
 {
   "name": "@pufflig/ps-nodes",
   "private": false,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Collection of nodes used in Prompt Studio",
   "files": [
     "dist"
