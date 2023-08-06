@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`avoid hanging on loops 1`] = `
+{
+  "1": {
+    "data": {},
+    "status": "idle",
+  },
+}
+`;
+
+exports[`ignore autorun=false flag on root node 1`] = `
+{
+  "1": {
+    "data": {
+      "template": "Hello {{World}}",
+    },
+    "status": "idle",
+  },
+  "2": {
+    "data": {
+      "template": "Hello {{World}}",
+      "variables": [
+        {
+          "defaultValue": "mars",
+          "description": "",
+          "id": "World",
+          "name": "World",
+          "type": "text",
+        },
+      ],
+    },
+    "status": "idle",
+  },
+  "3": {
+    "data": {
+      "text": "Hello mars",
+    },
+    "status": "idle",
+  },
+}
+`;
+
+exports[`nodes with autorun=false down the chain do not update the inputs of their targets 1`] = `
+{
+  "1": {
+    "data": {
+      "template": "Hello {{World}}",
+    },
+    "status": "idle",
+  },
+  "2": {
+    "data": {
+      "template": "Hello {{World}}",
+      "variables": [
+        {
+          "defaultValue": "mars",
+          "description": "",
+          "id": "World",
+          "name": "World",
+          "type": "text",
+        },
+      ],
+    },
+    "status": "idle",
+  },
+  "3": {
+    "data": {},
+    "status": "idle",
+  },
+}
+`;
+
+exports[`set input for several nodes in the editor 1`] = `
+{
+  "1": {
+    "data": {
+      "template": "Hello {{World}}",
+    },
+    "status": "idle",
+  },
+  "2": {
+    "data": {
+      "template": "Hello {{World}}",
+      "variables": [
+        {
+          "defaultValue": "mars",
+          "description": "",
+          "id": "World",
+          "name": "World",
+          "type": "text",
+        },
+      ],
+    },
+    "status": "idle",
+  },
+  "3": {
+    "data": {
+      "text": "Hello mars",
+    },
+    "status": "idle",
+  },
+}
+`;
+
+exports[`set input for single node in the editor 1`] = `
+{
+  "1": {
+    "data": {
+      "template": "Hello World",
+    },
+    "status": "idle",
+  },
+}
+`;

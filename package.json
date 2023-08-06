@@ -1,6 +1,7 @@
 {
   "name": "root",
   "private": true,
+  "author": "Pufflig AB",
   "scripts": {
     "build": "npx lerna run build",
     "test": "npx lerna run test"

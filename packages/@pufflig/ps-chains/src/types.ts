@@ -4,6 +4,10 @@ import { ParamValue } from "@pufflig/ps-types";
 export interface ChainNode {
   id: string;
   type: NodeType;
+  autorun?: boolean;
+  editor: {
+    position: { x: number; y: number };
+  };
 }
 
 export interface ChainEdge {
@@ -22,9 +26,6 @@ export interface ChainDefinition {
 export interface NodeState {
   status: "idle" | "running" | "streaming" | "error";
   data: Record<string, ParamValue>;
-  editor: {
-    position: { x: number; y: number };
-  };
 }
 
 export interface Chain {
