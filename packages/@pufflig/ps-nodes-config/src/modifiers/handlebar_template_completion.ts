@@ -1,5 +1,14 @@
 import { NodeConfig } from "../types";
 
+export interface HandlebarTemplateCompletionInput {
+  template: string;
+  variables: object;
+}
+
+export interface HandlebarTemplateCompletionOutput {
+  text: string;
+}
+
 export const handlebarTemplateCompletion: NodeConfig = {
   type: "modifier/handlebar_template_completion",
   name: "Handlebar Template (Completion)",

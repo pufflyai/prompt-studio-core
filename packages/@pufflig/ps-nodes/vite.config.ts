@@ -11,9 +11,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "@pufflig/ps-modifiers",
+      name: "@pufflig/ps-nodes",
       formats: ["es", "umd"],
-      fileName: (format) => `ps-modifiers.${format}.js`,
+      fileName: (format) => `ps-nodes.${format}.js`,
     },
     rollupOptions: {
       external: ["axios", "lodash", "uuid", "openai"],

@@ -1,4 +1,14 @@
+import { Chat } from "@pufflig/ps-types";
 import { NodeConfig } from "../types";
+
+export interface HandlebarTemplateChatInput {
+  chat: Chat;
+  variables: object;
+}
+
+export interface HandlebarTemplateChatOutput {
+  chat: Chat;
+}
 
 export const handlebarTemplateChat: NodeConfig = {
   type: "modifier/handlebar_template_chat",

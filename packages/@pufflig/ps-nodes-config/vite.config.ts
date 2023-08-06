@@ -15,8 +15,5 @@ export default defineConfig({
       formats: ["es", "umd"],
       fileName: (format) => `ps-nodes-config.${format}.js`,
     },
-    rollupOptions: {
-      external: ["axios", "lodash", "uuid", "openai"],
-    },
   },
 });

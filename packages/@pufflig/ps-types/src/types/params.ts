@@ -80,7 +80,18 @@ export interface MessageParam extends BaseParam {
 export interface ObjectParam extends BaseParam {
   type: "object";
   defaultValue: (NumberParam | TextParam)[];
+  editableSchema?: boolean;
 }
+
+export type ParamValue =
+  | number
+  | string
+  | APIDefinition
+  | ModelValue
+  | ChatMessage[]
+  | ChatMessage
+  | null
+  | (NumberParam | TextParam)[];
 
 export type Param =
   | NumberParam

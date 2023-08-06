@@ -1,5 +1,16 @@
+import { Chat, ChatMessage, ModelConfig } from "@pufflig/ps-types";
 import { NodeConfig } from "../../types";
 import { chatModels } from "./openai_models";
+
+export interface OpenAIChatInput {
+  api_key: string;
+  chat: Chat;
+  model: ModelConfig;
+}
+
+export interface OpenAIChatOutput {
+  message: ChatMessage;
+}
 
 export const openaiChatConfig: NodeConfig = {
   type: "adapter/openai_chat",

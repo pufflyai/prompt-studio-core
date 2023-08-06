@@ -5,3 +5,7 @@ export interface ChatMessage {
   content: string;
   name?: string;
 }
+
+export interface Chat {
+  messages: ChatMessage[];
+}

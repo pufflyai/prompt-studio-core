@@ -1,66 +1,33 @@
-import { AdapterNode } from "@pufflig/ps-adapters";
-import { ModifierNode } from "@pufflig/ps-modifiers";
-import { ChatMessage, CompletionNodeIO } from "@pufflig/ps-types";
+import { NodeConfig, NodeType } from "@pufflig/ps-nodes-config";
+import { ParamValue } from "@pufflig/ps-types";
+
+export interface ChainNode {
+  id: string;
+  type: NodeType;
+}
+
+export interface ChainEdge {
+  id: string;
+  source: string;
+  target: string;
+  source_handle: string;
+  target_handle: string;
+}
 
 export interface ChainDefinition {
-  nodes: CompletionNode[];
+  edges: ChainEdge[];
+  nodes: (ChainNode & NodeConfig)[];
 }
 
-export interface CompletionNode {
-  id: AdapterNode | ModifierNode;
-  enabled: boolean;
-  write: "prompt" | "completion";
-  options: {
-    [key: string]: any;
+export interface NodeState {
+  status: "idle" | "running" | "streaming" | "error";
+  data: Record<string, ParamValue>;
+  editor: {
+    position: { x: number; y: number };
   };
 }
 
-export interface ChatNode {
-  id: AdapterNode | ModifierNode;
-  enabled: boolean;
-  options: {
-    [key: string]: any;
-  };
-}
-
-export interface ChainState {
-  status: "idle" | "running" | "error";
-  nodes: CompletionNodeState[];
-}
-
-export interface CompletionNodeState {
-  id: AdapterNode | ModifierNode;
-  status: "idle" | "running" | "streaming" | "error";
-  result: CompletionNodeIO | null;
-}
-
-export interface ChatNodeState {
-  id: AdapterNode | ModifierNode;
-  status: "idle" | "running" | "streaming" | "error";
-  result: CompletionNodeIO | null;
-}
-
-export interface CompletionRun {
-  runId: string;
-  createdAt: Date;
-  chain: ChainDefinition;
-  prompt: string;
-  completion: string;
-  promptTokens?: number;
-  completionTokens?: number;
-}
-
-export interface EmbeddingRun {
-  runId: string;
-  createdAt: Date;
-  chain: ChainDefinition;
-  text: string;
-  embedding: number[];
-}
-
-export interface ChatRun {
-  runId: string;
-  createdAt: Date;
-  chain: ChainDefinition;
-  messages: ChatMessage[];
+export interface Chain {
+  definition: ChainDefinition;
+  state: Record<string, NodeState>;
 }

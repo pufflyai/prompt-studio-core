@@ -41,14 +41,13 @@ export interface UserSettings {
   };
 }
 
-export type ChatMessageRole = "user" | "assistant" | "system" | "function";
+// adapters
+export type { OpenAIChatInput, OpenAIChatOutput } from "./adapters/openai/openai_chat";
+export type { OpenAICompletionInput, OpenAICompletionOutput } from "./adapters/openai/openai_completion";
 
-export interface ChatMessage {
-  role: ChatMessageRole;
-  content: string;
-  name?: string;
-}
-
-export interface Chat {
-  messages: ChatMessage[];
-}
+// modifiers
+export type { HandlebarTemplateChatInput, HandlebarTemplateChatOutput } from "./modifiers/handlebar_template_chat";
+export type {
+  HandlebarTemplateCompletionInput,
+  HandlebarTemplateCompletionOutput,
+} from "./modifiers/handlebar_template_completion";
