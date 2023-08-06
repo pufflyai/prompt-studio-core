@@ -1,9 +1,9 @@
-import { Chat } from "@pufflig/ps-types";
+import { Chat, ObjectDefinition } from "@pufflig/ps-types";
 import { NodeConfig } from "../types";
 
 export interface HandlebarTemplateChatInput {
   chat: Chat;
-  variables: object;
+  variables: ObjectDefinition;
 }
 
 export interface HandlebarTemplateChatOutput {

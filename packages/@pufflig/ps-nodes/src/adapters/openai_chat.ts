@@ -1,7 +1,7 @@
 import { OpenAIChatInput, OpenAIChatOutput } from "@pufflig/ps-nodes-config";
 import { Configuration, OpenAIApi } from "openai";
 
-export const runOpenAiChat = async (input: OpenAIChatInput): Promise<OpenAIChatOutput> => {
+export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput> => {
   const { chat, model, api_key } = input;
   const { modelId, parameters } = model;
 
@@ -18,4 +18,8 @@ export const runOpenAiChat = async (input: OpenAIChatInput): Promise<OpenAIChatO
       role: chatCompletion?.role || "user",
     },
   };
+};
+
+export const openaiChat = {
+  execute,
 };

@@ -1,19 +1,17 @@
-import { NodeType } from "@pufflig/ps-nodes-config";
-import { runOpenAiChat } from "./adapters/openai_chat";
-import { runOpenAiCompletion } from "./adapters/openai_completion";
-import { runHandlebarTemplateChat } from "./modifiers/handlebar_template_chat";
-import { runHandlebarTemplateCompletion } from "./modifiers/handlebar_template_completion";
-
-type Nodes = Record<NodeType, (input: any) => Promise<Record<string, any>>>;
+import { openaiChat } from "./adapters/openai_chat";
+import { openaiCompletion } from "./adapters/openai_completion";
+import { handlebarTemplateChat } from "./modifiers/handlebar_template_chat";
+import { handlebarTemplateCompletion } from "./modifiers/handlebar_template_completion";
+import { Nodes } from "./types";
 
 export const nodes: Nodes = {
-  "adapter/custom_api_chat": async () => ({}),
-  "adapter/custom_api_completion": async () => ({}),
-  "adapter/openai_chat": runOpenAiChat,
-  "adapter/openai_completion": runOpenAiCompletion,
-  "input/template_editor": async () => ({}), // TODO: remove
-  "modifier/handlebar_template_chat": runHandlebarTemplateChat,
-  "modifier/handlebar_template_completion": runHandlebarTemplateCompletion,
-  "output/chat_display": async () => ({}), // TODO: remove
-  "output/completion_display": async () => ({}), // TODO: remove
+  "adapter/custom_api_chat": { execute: async (input) => input },
+  "adapter/custom_api_completion": { execute: async (input) => input },
+  "adapter/openai_chat": openaiChat,
+  "adapter/openai_completion": openaiCompletion,
+  "input/template_editor": { execute: async (input) => input },
+  "modifier/handlebar_template_chat": handlebarTemplateChat,
+  "modifier/handlebar_template_completion": handlebarTemplateCompletion,
+  "output/chat_display": { execute: async (input) => input },
+  "output/completion_display": { execute: async (input) => input },
 };

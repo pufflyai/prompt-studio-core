@@ -12,7 +12,8 @@
     "build": "tsc && vite build",
     "prepublishOnly": "yarn build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "jest"
   },
   "dependencies": {
     "@pufflig/ps-nodes": "*",

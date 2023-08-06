@@ -1,4 +1,4 @@
-import { NodeConfig, NodeType } from "@pufflig/ps-nodes-config";
+import { NodeType } from "@pufflig/ps-nodes-config";
 import { ParamValue } from "@pufflig/ps-types";
 
 export interface ChainNode {
@@ -16,7 +16,7 @@ export interface ChainEdge {
 
 export interface ChainDefinition {
   edges: ChainEdge[];
-  nodes: (ChainNode & NodeConfig)[];
+  nodes: ChainNode[];
 }
 
 export interface NodeState {

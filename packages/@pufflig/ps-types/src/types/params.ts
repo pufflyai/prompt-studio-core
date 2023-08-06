@@ -77,9 +77,11 @@ export interface MessageParam extends BaseParam {
   defaultValue: ChatMessage | null;
 }
 
+export type ObjectDefinition = (NumberParam | TextParam)[];
+
 export interface ObjectParam extends BaseParam {
   type: "object";
-  defaultValue: (NumberParam | TextParam)[];
+  defaultValue: ObjectDefinition;
   editableSchema?: boolean;
 }
 

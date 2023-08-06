@@ -1,8 +1,9 @@
+import { ObjectDefinition } from "@pufflig/ps-types";
 import { NodeConfig } from "../types";
 
 export interface HandlebarTemplateCompletionInput {
   template: string;
-  variables: object;
+  variables: ObjectDefinition;
 }
 
 export interface HandlebarTemplateCompletionOutput {

@@ -1,6 +1,5 @@
 import { Param } from "@pufflig/ps-types";
 
-export type ParamType = "text" | "number" | "boolean" | "message" | "chat" | "secret" | "tool" | "model" | "api";
 export type NodeCategory = "input" | "modifier" | "adapter" | "converter" | "output";
 
 export interface APIConfig {
