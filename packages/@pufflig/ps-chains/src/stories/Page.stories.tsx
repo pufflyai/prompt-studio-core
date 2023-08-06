@@ -26,14 +26,23 @@ const chain: Chain = {
       {
         id: "1",
         type: "input/template_editor",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
       },
       {
         id: "2",
         type: "modifier/handlebar_template_completion",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
       },
       {
         id: "3",
         type: "output/completion_display",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
       },
     ],
   },
@@ -41,23 +50,14 @@ const chain: Chain = {
     "1": {
       status: "idle",
       data: {},
-      editor: {
-        position: { x: 0, y: 0 },
-      },
     },
     "2": {
       status: "idle",
       data: {},
-      editor: {
-        position: { x: 0, y: 100 },
-      },
     },
     "3": {
       status: "idle",
       data: {},
-      editor: {
-        position: { x: 0, y: 200 },
-      },
     },
   },
 };
