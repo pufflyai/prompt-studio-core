@@ -11,11 +11,11 @@ function paramToDefaults(params: Param[]) {
   return defaults;
 }
 
-function applyDefaultInputs(nodeState: NodeState | undefined, nodeType: NodeType) {
+export function applyDefaultInputs(nodeStateData: Record<string, ParamValue> | undefined, nodeType: NodeType) {
   const nodeConfig = nodeConfigMap[nodeType];
   const inputs = [...nodeConfig.inputs, ...nodeConfig.parameters];
   const defaults = paramToDefaults(inputs);
-  return { ...defaults, ...(nodeState?.data || {}) };
+  return { ...defaults, ...(nodeStateData || {}) };
 }
 
 function getEdgeMap(edge: ChainEdge[]): Record<string, string> {
@@ -48,7 +48,7 @@ export async function runFromNode(
   chain: Chain,
   nodeId: string,
   input: Record<string, ParamValue>,
-  onNodeStateUpdate: (id: string, state: object) => void
+  onNodeStateUpdate: (id: string, state: NodeState) => void
 ) {
   // avoid hanging on loops by keeping track of the nodes that have been visited
   // current implementation allows a node to be visited only as many times as it has inputs
@@ -59,13 +59,19 @@ export async function runFromNode(
     chain: Chain,
     nodeId: string,
     input: Record<string, ParamValue>,
-    onNodeStateUpdate: (id: string, state: object) => void,
+    onNodeStateUpdate: (id: string, state: NodeState) => void,
     isChild = false
   ) {
     const nodeDefinition = chain.definition.nodes.find((n) => n.id === nodeId);
     if (!nodeDefinition) {
       throw new Error(`Definition for node ${nodeId} not found`);
     }
+
+    // parse the input
+    const nodeType = nodeDefinition.type;
+    const nodeState = chainState[nodeId];
+    const prevInput = nodeState?.data;
+    const parsedInput = await nodes[nodeType].parseInput(input, prevInput);
 
     // a node can only be visited as many times as it has connected inputs
     const inputEdges = chain.definition.edges.filter((e) => e.target === nodeId);
@@ -77,9 +83,7 @@ export async function runFromNode(
 
     visitedNodes[nodeId] = visitedNodes[nodeId] ? visitedNodes[nodeId] + 1 : 1;
 
-    const nodeType = nodeDefinition.type;
-    const nodeState = chainState[nodeId];
-    const newInput = { ...applyDefaultInputs(nodeState, nodeType), ...input };
+    const newInput = { ...applyDefaultInputs(nodeState?.data, nodeType), ...parsedInput };
     const newState = { ...nodeState, data: newInput };
 
     let newChainState = { ...chainState, [nodeId]: newState };
@@ -95,7 +99,8 @@ export async function runFromNode(
       }
     }
 
-    // get all target nodes
+    // get all target nodes of the node we updated the input of
+    // avoid running the node if it has no target nodes
     const targetNodes = chain.definition.edges.filter((e) => e.source === nodeId);
     if (targetNodes.length === 0) {
       return;
@@ -107,9 +112,6 @@ export async function runFromNode(
 
     // ignore target nodes that are not connected to the values that have been edited
     const targetNodeIds = targetNodes.filter((e) => editedKeys.includes(e.source_handle)).map((e) => e.target);
-    if (targetNodeIds.length === 0) {
-      return;
-    }
 
     // update the state of all target nodes
     for (const targetNodeId of targetNodeIds) {

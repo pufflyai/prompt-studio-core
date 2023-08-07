@@ -22,7 +22,15 @@ exports[`can handle input from multiple origins 1`] = `
   "2": {
     "data": {
       "template": "Hello {{World}}",
-      "variables": [],
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "",
+          "id": "World",
+          "name": "World",
+          "type": "text",
+        },
+      ],
     },
   },
   "3": {
@@ -51,7 +59,15 @@ exports[`can handle missing states 1`] = `
   "85c8bc66-cc5a-4400-b4d3-bc119ed1b2f7": {
     "data": {
       "template": "Hello {{World}}",
-      "variables": [],
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "",
+          "id": "World",
+          "name": "World",
+          "type": "text",
+        },
+      ],
     },
   },
   "c96eeaef-a4bb-4fa6-a32f-b9ad176456ea": {

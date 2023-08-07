@@ -85,6 +85,11 @@ export interface ObjectParam extends BaseParam {
   editableSchema?: boolean;
 }
 
+export interface ListParam extends BaseParam {
+  type: "list";
+  defaultValue: [];
+}
+
 export type ParamValue =
   | number
   | string
@@ -93,7 +98,8 @@ export type ParamValue =
   | ChatMessage[]
   | ChatMessage
   | null
-  | (NumberParam | TextParam)[];
+  | (NumberParam | TextParam)[]
+  | Array<string>;
 
 export type Param =
   | NumberParam
@@ -104,4 +110,5 @@ export type Param =
   | ChatParam
   | SecretParam
   | MessageParam
-  | ObjectParam;
+  | ObjectParam
+  | ListParam;

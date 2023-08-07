@@ -1,5 +1,6 @@
 import { OpenAIChatInput, OpenAIChatOutput } from "@pufflig/ps-nodes-config";
 import { Configuration, OpenAIApi } from "openai";
+import { Node } from "../types";
 
 export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput> => {
   const { chat, model, api_key } = input;
@@ -20,6 +21,7 @@ export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput>
   };
 };
 
-export const openaiChat = {
+export const openaiChat: Node = {
   execute,
+  parseInput: (i) => i,
 };

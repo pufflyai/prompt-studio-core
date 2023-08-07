@@ -11,7 +11,8 @@
   "types": "./dist/ps-nodes.d.ts",
   "scripts": {
     "build": "tsc && vite build",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "test": "jest"
   },
   "author": "Pufflig AB",
   "license": "MIT",

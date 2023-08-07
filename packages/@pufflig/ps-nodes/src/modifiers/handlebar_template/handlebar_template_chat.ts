@@ -1,6 +1,7 @@
 import { HandlebarTemplateChatInput, HandlebarTemplateChatOutput } from "@pufflig/ps-nodes-config";
 import Mustache from "mustache";
-import { objectDefinitionToMap } from "../utils/objectDefinitionToMap";
+import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
+import { Node } from "../../types";
 
 export const execute = async (input: HandlebarTemplateChatInput): Promise<HandlebarTemplateChatOutput> => {
   const { chat, variables } = input;
@@ -21,6 +22,7 @@ export const execute = async (input: HandlebarTemplateChatInput): Promise<Handle
   };
 };
 
-export const handlebarTemplateChat = {
+export const handlebarTemplateChat: Node = {
   execute,
+  parseInput: (i) => i,
 };
