@@ -1,5 +1,13 @@
 import { runFromNode } from "./dataflow";
-import { autorunExample, autorunRootExample, simpleChain, simpleLoop, singleNode } from "./mocks";
+import {
+  autorunExample,
+  autorunRootExample,
+  missingStates,
+  multiInput,
+  simpleChain,
+  simpleLoop,
+  singleNode,
+} from "./mocks";
 
 test("set input for single node in the editor", async () => {
   const onNodeStateUpdate = jest.fn();
@@ -32,6 +40,25 @@ test("nodes with autorun=false down the chain do not update the inputs of their 
 test("avoid hanging on loops", async () => {
   const onNodeStateUpdate = jest.fn();
   const res = await runFromNode(simpleLoop, "1", { template: "Hello {{World}}" }, onNodeStateUpdate);
-  expect(onNodeStateUpdate).toHaveBeenCalledTimes(1);
+  expect(onNodeStateUpdate).toHaveBeenCalledTimes(2);
+  expect(res).toMatchSnapshot();
+});
+
+test("can handle missing states", async () => {
+  const onNodeStateUpdate = jest.fn();
+  const res = await runFromNode(
+    missingStates,
+    "197375bb-c777-4be5-a423-6d5618e2200f",
+    { template: "Hello {{World}}" },
+    onNodeStateUpdate
+  );
+  expect(onNodeStateUpdate).toHaveBeenCalledTimes(4);
+  expect(res).toMatchSnapshot();
+});
+
+test("can handle input from multiple origins", async () => {
+  const onNodeStateUpdate = jest.fn();
+  const res = await runFromNode(multiInput, "1", { template: "Hello {{World}}" }, onNodeStateUpdate);
+  expect(onNodeStateUpdate).toHaveBeenCalledTimes(4);
   expect(res).toMatchSnapshot();
 });

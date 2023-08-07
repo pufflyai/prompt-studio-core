@@ -3,8 +3,66 @@
 exports[`avoid hanging on loops 1`] = `
 {
   "1": {
-    "data": {},
+    "data": {
+      "template": "Hello {{World}}",
+    },
     "status": "idle",
+  },
+}
+`;
+
+exports[`can handle input from multiple origins 1`] = `
+{
+  "1": {
+    "data": {
+      "template": "Hello {{World}}",
+    },
+    "status": "idle",
+  },
+  "2": {
+    "data": {
+      "template": "Hello {{World}}",
+      "variables": [],
+    },
+  },
+  "3": {
+    "data": {
+      "completion": "Hello ",
+      "prompt": "Hello {{World}}",
+    },
+  },
+}
+`;
+
+exports[`can handle missing states 1`] = `
+{
+  "197375bb-c777-4be5-a423-6d5618e2200f": {
+    "data": {
+      "template": "Hello {{World}}",
+    },
+    "status": "idle",
+  },
+  "2708636f-633c-4c02-abec-093fdc79f4d5": {
+    "data": {
+      "completion": "",
+      "prompt": "Hello ",
+    },
+  },
+  "85c8bc66-cc5a-4400-b4d3-bc119ed1b2f7": {
+    "data": {
+      "template": "Hello {{World}}",
+      "variables": [],
+    },
+  },
+  "c96eeaef-a4bb-4fa6-a32f-b9ad176456ea": {
+    "data": {
+      "api_key": "\${{SECRET:openai/api_key}}",
+      "model": {
+        "modelId": "text-davinci-003",
+        "parameters": {},
+      },
+      "prompt": "Hello ",
+    },
   },
 }
 `;
@@ -34,7 +92,8 @@ exports[`ignore autorun=false flag on root node 1`] = `
   },
   "3": {
     "data": {
-      "text": "Hello mars",
+      "completion": "",
+      "prompt": "Hello mars",
     },
     "status": "idle",
   },
@@ -96,7 +155,8 @@ exports[`set input for several nodes in the editor 1`] = `
   },
   "3": {
     "data": {
-      "text": "Hello mars",
+      "completion": "",
+      "prompt": "Hello mars",
     },
     "status": "idle",
   },

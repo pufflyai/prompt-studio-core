@@ -8,12 +8,20 @@ export const templateEditor: NodeConfig = {
   parameters: [],
   outputs: [
     {
-      id: "prompt",
-      name: "Prompt",
-      description: "The prompt to send to OpenAI",
+      id: "template",
+      name: "Template",
+      description: "",
       type: "text",
       defaultValue: "",
     },
   ],
-  inputs: [],
+  inputs: [
+    {
+      id: "template",
+      name: "Template",
+      description: "",
+      type: "text",
+      defaultValue: "",
+    },
+  ],
 };
