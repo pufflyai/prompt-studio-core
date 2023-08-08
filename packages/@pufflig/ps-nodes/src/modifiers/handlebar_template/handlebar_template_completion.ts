@@ -14,11 +14,22 @@ export const execute = async (input: HandlebarTemplateCompletionInput) => {
   };
 };
 
+/**
+ * Parse the input and extract variables from the template.
+ * If no template is provided, the input is returned as is.
+ * @param input
+ * @param prev
+ * @returns
+ */
 export const parseInput = async (
   input: HandlebarTemplateCompletionInput,
   prev?: Partial<HandlebarTemplateCompletionInput>
 ) => {
   const { template, variables } = input;
+
+  if (template === undefined) {
+    return input;
+  }
 
   const extractedVariables = extractVariables(template);
 

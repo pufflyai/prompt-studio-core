@@ -189,3 +189,41 @@ exports[`set input for single node in the editor 1`] = `
   },
 }
 `;
+
+exports[`update array variables 1`] = `
+{
+  "1": {
+    "data": {},
+    "status": "idle",
+  },
+  "2": {
+    "data": {
+      "template": "",
+      "variables": [
+        {
+          "defaultValue": "test1",
+          "description": "",
+          "id": "world",
+          "name": "world",
+          "type": "text",
+        },
+        {
+          "defaultValue": "test2",
+          "description": "",
+          "id": "hello",
+          "name": "hello",
+          "type": "text",
+        },
+      ],
+    },
+    "status": "idle",
+  },
+  "3": {
+    "data": {
+      "completion": "",
+      "prompt": "",
+    },
+    "status": "idle",
+  },
+}
+`;

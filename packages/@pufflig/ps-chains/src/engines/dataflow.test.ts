@@ -62,3 +62,20 @@ test("can handle input from multiple origins", async () => {
   expect(onNodeStateUpdate).toHaveBeenCalledTimes(4);
   expect(res).toMatchSnapshot();
 });
+
+test("update array variables", async () => {
+  const onNodeStateUpdate = jest.fn();
+  const res = await runFromNode(
+    simpleChain,
+    "2",
+    {
+      variables: [
+        { id: "world", name: "world", type: "text", description: "", defaultValue: "test1" },
+        { id: "hello", name: "hello", type: "text", description: "", defaultValue: "test2" },
+      ],
+    },
+    onNodeStateUpdate
+  );
+  expect(onNodeStateUpdate).toHaveBeenCalledTimes(2);
+  expect(res).toMatchSnapshot();
+});
