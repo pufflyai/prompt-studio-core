@@ -34,6 +34,9 @@ function mapOutputToInput(output: Record<string, ParamValue>, map: Record<string
   return res;
 }
 
+// updateNodeInputs
+export async function updateNodeInputs() {}
+
 /**
  * This function updates the input state of a node and executes the node on the new input.
  * Read all target nodes and update their input state.
@@ -41,15 +44,10 @@ function mapOutputToInput(output: Record<string, ParamValue>, map: Record<string
  *
  * @param chain current definition and state of the chain
  * @param nodeId id of the node to run
- * @param input input to update the node inputs with
- * @param onNodeStateUpdate callback that triggers when a node input is updated
+ * @param input input to update the node inputs with, empty object if existing inputs should be used
+ * @param cbs functions to call when a node state is updated or an error occurs
  */
-export async function runFromNode(
-  chain: Chain,
-  nodeId: string,
-  input: Record<string, ParamValue>,
-  onNodeStateUpdate: (id: string, state: NodeState) => void
-) {
+export async function runFromNode(chain: Chain, nodeId: string, input: Record<string, ParamValue>, cbs: Callbacks) {
   // avoid hanging on loops by keeping track of the nodes that have been visited
   // current implementation allows a node to be visited only as many times as it has inputs
   const visitedNodes: Record<string, number> = {};
@@ -59,7 +57,7 @@ export async function runFromNode(
     chain: Chain,
     nodeId: string,
     input: Record<string, ParamValue>,
-    onNodeStateUpdate: (id: string, state: NodeState) => void,
+    cbs: Callbacks,
     isChild = false
   ) {
     const nodeDefinition = chain.definition.nodes.find((n) => n.id === nodeId);
@@ -89,7 +87,7 @@ export async function runFromNode(
     let newChainState = { ...chainState, [nodeId]: newState };
     chainState = newChainState;
 
-    onNodeStateUpdate(nodeId, newState);
+    cbs.onNodeStateUpdate?.(nodeId, newState);
 
     // do not run nodes in the chain that have autorun=false
     // except for the root node
@@ -107,7 +105,16 @@ export async function runFromNode(
     }
 
     // run the node we updated the input of
-    const res = await nodes[nodeType].execute(newInput);
+    let res;
+    try {
+      // resolve references in the input
+      res = await nodes[nodeType].execute(newInput);
+    } catch (error) {
+      // if running the node fails, stop the chain
+      cbs.onNodeError?.(nodeId, error as Error);
+      return;
+    }
+
     const editedKeys = Object.keys(res);
 
     // ignore target nodes that are not connected to the values that have been edited
@@ -119,11 +126,11 @@ export async function runFromNode(
       const edges = chain.definition.edges.filter((e) => e.source === nodeId && e.target === targetNodeId);
       const edgeMap = getEdgeMap(edges);
       const mappedInput = mapOutputToInput(res, edgeMap);
-      await _runFromNode(chain, targetNodeId, mappedInput, onNodeStateUpdate, true);
+      await _runFromNode(chain, targetNodeId, mappedInput, cbs, true);
     }
   }
 
-  await _runFromNode(chain, nodeId, input, onNodeStateUpdate);
+  await _runFromNode(chain, nodeId, input, cbs);
 
   return chainState;
 }

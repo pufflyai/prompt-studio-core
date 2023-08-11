@@ -15,3 +15,5 @@ export const nodes: Nodes = {
   "output/chat_display": { execute: async (input) => input, parseInput: async (input) => input },
   "output/completion_display": { execute: async (input) => input, parseInput: async (input) => input },
 };
+
+export * from "./types";
