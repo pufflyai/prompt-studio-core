@@ -5,7 +5,7 @@ import { extractVariables } from "./utils/extractVariables";
 import { Node, ObjectDefinition } from "@pufflig/ps-types";
 import { nodes } from "@pufflig/ps-nodes-config";
 
-export const nodeType = "modifier/handlebar_template_completion";
+export const handlebarTemplateCompletionNodeType = "modifier/handlebar_template_completion";
 
 export interface HandlebarTemplateCompletionInput {
   template: string;
@@ -72,7 +72,7 @@ export const parseInput = async (
 };
 
 export const handlebarTemplateCompletion: Node<HandlebarTemplateCompletionInput, HandlebarTemplateCompletionOutput> = {
-  ...nodes[nodeType],
+  ...nodes[handlebarTemplateCompletionNodeType],
   execute,
   parseInput,
 };

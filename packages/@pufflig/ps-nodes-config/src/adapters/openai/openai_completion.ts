@@ -1,15 +1,5 @@
-import { ModelConfig, NodeConfig } from "@pufflig/ps-types";
+import { NodeConfig } from "@pufflig/ps-types";
 import { completionModels } from "./openai_models";
-
-export interface OpenAICompletionInput {
-  api_key: string;
-  prompt: string;
-  model: ModelConfig;
-}
-
-export interface OpenAICompletionOutput {
-  completion: string;
-}
 
 export const openaiCompletionConfig: NodeConfig = {
   name: "OpenAI (Completion)",

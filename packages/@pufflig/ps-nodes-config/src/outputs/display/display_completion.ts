@@ -1,6 +1,6 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
-export const completionDisplay: NodeConfig = {
+export const displayCompletion: NodeConfig = {
   name: "Completion Display",
   description: "",
   tags: ["output", "text"],

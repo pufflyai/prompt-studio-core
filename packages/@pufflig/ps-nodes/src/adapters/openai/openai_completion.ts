@@ -2,7 +2,7 @@ import { nodes } from "@pufflig/ps-nodes-config";
 import { ModelConfig, Node } from "@pufflig/ps-types";
 import { Configuration, OpenAIApi } from "openai";
 
-export const nodeType = "adapter/openai_completion" as const;
+export const openaiCompletionNodeType = "adapter/openai_completion" as const;
 
 export interface OpenAICompletionInput {
   api_key: string;
@@ -32,7 +32,7 @@ export const execute = async (input: OpenAICompletionInput): Promise<OpenAICompl
 };
 
 export const openaiCompletion: Node<OpenAICompletionInput, OpenAICompletionOutput> = {
-  ...nodes[nodeType],
+  ...nodes[openaiCompletionNodeType],
   execute,
   parseInput: async (i) => i,
 };

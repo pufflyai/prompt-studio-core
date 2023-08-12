@@ -3,7 +3,7 @@ import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
 import { nodes } from "@pufflig/ps-nodes-config";
 
-export const nodeType = "modifier/handlebar_template_chat";
+export const handlebarTemplateChatNodeType = "modifier/handlebar_template_chat";
 
 export interface HandlebarTemplateChatInput {
   chat: Chat;
@@ -34,7 +34,7 @@ export const execute = async (input: HandlebarTemplateChatInput): Promise<Handle
 };
 
 export const handlebarTemplateChat: Node<HandlebarTemplateChatInput, HandlebarTemplateChatOutput> = {
-  ...nodes[nodeType],
+  ...nodes[handlebarTemplateChatNodeType],
   execute,
   parseInput: async (i) => i,
 };

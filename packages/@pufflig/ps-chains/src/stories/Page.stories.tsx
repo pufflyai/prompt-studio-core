@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import ReactFlow, { addEdge, useEdgesState, useNodesState } from "reactflow";
 import "reactflow/dist/style.css";
-import { autorunExample, multiInput, simpleChain, simpleLoop } from "../mocks/chains";
+import { multiInput } from "../mocks/chains";
 import { chainToReactFlow } from "../utils/chainToReactFlow";
 
 function Page() {

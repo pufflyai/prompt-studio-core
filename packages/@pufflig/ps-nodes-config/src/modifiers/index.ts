@@ -1,5 +1,5 @@
-import { handlebarTemplateChat } from "./handlebar_template_chat";
-import { handlebarTemplateCompletion } from "./handlebar_template_completion";
+import { handlebarTemplateChat } from "./handlebar_template/handlebar_template_chat";
+import { handlebarTemplateCompletion } from "./handlebar_template/handlebar_template_completion";
 
 export const modifierNodes = {
   "modifier/handlebar_template_chat": handlebarTemplateChat,
