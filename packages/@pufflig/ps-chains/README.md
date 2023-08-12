@@ -15,37 +15,3 @@ You can preview the chain in a storybook by running:
 ```
 yarn storybook
 ```
-
-```ts
-const chain = {
-  definition: {
-    nodes: {
-      [nodeID]: {
-        config,
-        execute,
-        parseInput,
-      },
-    },
-    edges: {
-      [edgeID]: {},
-    },
-  },
-  state: {
-    nodes: {
-      [nodeID]: {},
-    },
-  },
-};
-
-const input = {};
-
-const options = {
-  resolveVariables,
-  callbacks: {
-    onInputChange,
-    onNodeError,
-  },
-};
-
-runFromNode(nodeId, input, chain, options);
-```
