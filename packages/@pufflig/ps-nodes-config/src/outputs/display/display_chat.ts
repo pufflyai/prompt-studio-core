@@ -1,11 +1,9 @@
-import { NodeConfig } from "../types";
+import { NodeConfig } from "@pufflig/ps-types";
 
-export const chatDisplay: NodeConfig = {
-  type: "output/chat_display",
+export const displayChat: NodeConfig = {
   name: "Chat Display",
-  category: "output",
-  format: "chat",
   description: "",
+  tags: ["output", "chat"],
   parameters: [],
   outputs: [],
   inputs: [

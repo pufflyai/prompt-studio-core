@@ -1,11 +1,9 @@
-import { NodeConfig } from "../../types";
+import { NodeConfig } from "@pufflig/ps-types";
 
 export const customChatConfig: NodeConfig = {
-  type: "adapter/custom_api_chat",
-  category: "adapter",
-  format: "chat",
   name: "Custom API (Chat)",
   description: "",
+  tags: ["adapter", "chat"],
   parameters: [
     {
       id: "api_definition",

@@ -1,5 +1,5 @@
-import { customChatConfig } from "./custom/custom_chat";
-import { customCompletionConfig } from "./custom/custom_completion";
+import { customChatConfig } from "./custom_api/custom_api_chat";
+import { customCompletionConfig } from "./custom_api/custom_api_completion";
 import { openaiChatConfig } from "./openai/openai_chat";
 import { openaiCompletionConfig } from "./openai/openai_completion";
 import { chatModels, completionModels, embeddingModels } from "./openai/openai_models";

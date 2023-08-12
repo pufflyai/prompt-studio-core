@@ -1,10 +1,9 @@
-import { NodeConfig } from "../types";
+import { NodeConfig } from "@pufflig/ps-types";
 
 export const templateEditor: NodeConfig = {
-  type: "input/template_editor",
   name: "Template Editor",
-  category: "input",
   description: "Template Editor",
+  tags: ["input", "text"],
   parameters: [],
   outputs: [
     {

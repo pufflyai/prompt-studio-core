@@ -1,9 +1,5 @@
 # @pufflig/ps-nodes-config
 
-Configuration for all nodes used in prompt studio
+[![Version](https://img.shields.io/npm/v/@pufflig/ps-nodes-config?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/@pufflig/ps-nodes-config)
 
-> inputs
-> modifiers
-> adapters
-
-Read by the frontend to build the UI.
+Configuration of all nodes used by Prompt Studio.

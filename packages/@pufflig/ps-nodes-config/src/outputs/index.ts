@@ -1,7 +1,7 @@
-import { chatDisplay } from "./chat_display";
-import { completionDisplay } from "./completion_display";
+import { displayChat } from "./display/display_chat";
+import { displayCompletion } from "./display/display_completion";
 
 export const outputNodes = {
-  "output/chat_display": chatDisplay,
-  "output/completion_display": completionDisplay,
+  "output/display_chat": displayChat,
+  "output/display_completion": displayCompletion,
 };

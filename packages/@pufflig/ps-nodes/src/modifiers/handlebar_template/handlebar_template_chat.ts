@@ -1,7 +1,18 @@
-import { HandlebarTemplateChatInput, HandlebarTemplateChatOutput } from "@pufflig/ps-nodes-config";
+import { Chat, Node, ObjectDefinition } from "@pufflig/ps-types";
 import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
-import { Node } from "../../types";
+import { nodes } from "@pufflig/ps-nodes-config";
+
+export const handlebarTemplateChatNodeType = "modifier/handlebar_template_chat";
+
+export interface HandlebarTemplateChatInput {
+  chat: Chat;
+  variables: ObjectDefinition;
+}
+
+export interface HandlebarTemplateChatOutput {
+  chat: Chat;
+}
 
 export const execute = async (input: HandlebarTemplateChatInput): Promise<HandlebarTemplateChatOutput> => {
   const { chat, variables } = input;
@@ -22,7 +33,8 @@ export const execute = async (input: HandlebarTemplateChatInput): Promise<Handle
   };
 };
 
-export const handlebarTemplateChat: Node = {
+export const handlebarTemplateChat: Node<HandlebarTemplateChatInput, HandlebarTemplateChatOutput> = {
+  ...nodes[handlebarTemplateChatNodeType],
   execute,
-  parseInput: (i) => i,
+  parseInput: async (i) => i,
 };

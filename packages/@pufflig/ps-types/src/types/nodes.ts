@@ -1,17 +1,16 @@
-import { ChatMessage } from "./chat";
+import { Param, ParamValue } from "./params";
 
-export type FormatType = "embedding" | "completion" | "chat";
-
-export interface CompletionNodeIO {
-  prompt: string;
-  completion: string;
+export interface NodeConfig {
+  name: string;
+  description?: string;
+  tags?: string[];
+  parameters: Param[];
+  inputs: Param[];
+  outputs: Param[];
 }
 
-export interface EmbeddingNodeIO {
-  text: string;
-  embedding: number[];
-}
-
-export interface ChatNodeIO {
-  messages: ChatMessage[];
+export interface Node<InputType = Record<string, ParamValue>, OutputType = Record<string, ParamValue>>
+  extends NodeConfig {
+  execute: (input: InputType) => Promise<OutputType>;
+  parseInput: (input: InputType, prev?: InputType) => Promise<InputType>;
 }

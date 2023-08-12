@@ -1,68 +1,12 @@
 # @pufflig/ps-chains
 
-Prompt Studio allows you to chain editors, modifiers and external adapters to create more complex procedural text.
+[![Version](https://img.shields.io/npm/v/@pufflig/ps-chains?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/@pufflig/ps-chains)
 
-## Example chain
+Flow runner that updates the state of nodes based on how they are connected with each other.
 
-```json
-{
-  "definition": {
-    "edges": [
-      {
-        "id": "1",
-        "source": "1",
-        "target": "2",
-        "source_handle": "text",
-        "target_handle": "template"
-      },
-      {
-        "id": "2",
-        "source": "2",
-        "target": "3",
-        "source_handle": "text",
-        "target_handle": "input"
-      }
-    ],
-    "nodes": [
-      {
-        "id": "1",
-        "type": "input/template_editor",
-        "editor": {
-          "position": { "x": 0, "y": 0 }
-        }
-      },
-      {
-        "id": "2",
-        "type": "modifier/handlebar_template_completion",
-        "editor": {
-          "position": { "x": 0, "y": 0 }
-        }
-      },
-      {
-        "id": "3",
-        "type": "output/completion_display",
-        "editor": {
-          "position": { "x": 0, "y": 0 }
-        }
-      }
-    ]
-  },
-  "state": {
-    "1": {
-      "status": "idle",
-      "data": {}
-    },
-    "2": {
-      "status": "idle",
-      "data": {}
-    },
-    "3": {
-      "status": "idle",
-      "data": {}
-    }
-  }
-}
-```
+## Documentation
+
+You can find the documentation for this package [here]().
 
 ## Storybook
 

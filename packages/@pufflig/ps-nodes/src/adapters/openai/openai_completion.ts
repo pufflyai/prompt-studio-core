@@ -1,6 +1,18 @@
-import { OpenAICompletionInput, OpenAICompletionOutput } from "@pufflig/ps-nodes-config";
+import { nodes } from "@pufflig/ps-nodes-config";
+import { ModelConfig, Node } from "@pufflig/ps-types";
 import { Configuration, OpenAIApi } from "openai";
-import { Node } from "../types";
+
+export const openaiCompletionNodeType = "adapter/openai_completion" as const;
+
+export interface OpenAICompletionInput {
+  api_key: string;
+  prompt: string;
+  model: ModelConfig;
+}
+
+export interface OpenAICompletionOutput {
+  completion: string;
+}
 
 export const execute = async (input: OpenAICompletionInput): Promise<OpenAICompletionOutput> => {
   const { prompt, model, api_key } = input;
@@ -19,7 +31,8 @@ export const execute = async (input: OpenAICompletionInput): Promise<OpenAICompl
   };
 };
 
-export const openaiCompletion: Node = {
+export const openaiCompletion: Node<OpenAICompletionInput, OpenAICompletionOutput> = {
+  ...nodes[openaiCompletionNodeType],
   execute,
-  parseInput: (i) => i,
+  parseInput: async (i) => i,
 };
