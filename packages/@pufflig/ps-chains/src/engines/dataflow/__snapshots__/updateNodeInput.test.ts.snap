@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`updateNodeInput - simpleChain, the children nodes are not updated 1`] = `
+{
+  "n1": {
+    "input": {
+      "template": "Hello World",
+    },
+    "status": "idle",
+  },
+  "n2": {
+    "input": {
+      "variables": [
+        {
+          "defaultValue": "mars",
+          "description": "",
+          "id": "World",
+          "name": "World",
+          "type": "text",
+        },
+      ],
+    },
+    "status": "idle",
+  },
+  "n3": {
+    "input": {},
+    "status": "idle",
+  },
+}
+`;
+
+exports[`updateNodeInput - singleNodeChain 1`] = `
+{
+  "1": {
+    "input": {
+      "template": "Hello World",
+    },
+    "status": "idle",
+  },
+}
+`;
