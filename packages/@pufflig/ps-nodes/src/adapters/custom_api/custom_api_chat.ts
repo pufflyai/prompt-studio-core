@@ -1,13 +1,17 @@
 import { nodes } from "@pufflig/ps-nodes-config";
-import { Node } from "@pufflig/ps-types";
+import { Chat, Node } from "@pufflig/ps-types";
 
 export const customApiChatNodeType = "adapter/custom_api_chat" as const;
 
 // PLACEHOLDER
 
-interface CustomAPIChatInput {}
+export interface CustomAPIChatInput {
+  chat: Chat;
+}
 
-interface CustomAPIChatOutput {}
+export interface CustomAPIChatOutput {
+  chat: Chat;
+}
 
 export const customApiChat: Node<CustomAPIChatInput, CustomAPIChatOutput> = {
   ...nodes[customApiChatNodeType],

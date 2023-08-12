@@ -5,12 +5,20 @@ export const customApiCompletionNodeType = "adapter/custom_api_completion" as co
 
 // PLACEHOLDER
 
-interface CustomAPICompletionInput {}
+export interface CustomAPICompletionInput {
+  prompt: string;
+}
 
-interface CustomAPICompletionOutput {}
+export interface CustomAPICompletionOutput {
+  completion: string;
+}
 
 export const customApiCompletion: Node<CustomAPICompletionInput, CustomAPICompletionOutput> = {
   ...nodes[customApiCompletionNodeType],
-  execute: async (i) => i,
+  execute: async (i) => {
+    return {
+      completion: i.prompt,
+    };
+  },
   parseInput: async (i) => i,
 };
