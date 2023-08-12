@@ -1,4 +1,10 @@
 ---
+title: &title "@pufflig/ps-chains"
+description: &description "@pufflig/ps-chains API reference"
+head:
+  - ["meta", { property: "og:title", content: *title }]
+  - ["meta", { name: "twitter:title", content: *title }]
+  - ["meta", { name: "twitter:description", content: *description }]
 outline: deep
 ---
 
@@ -10,24 +16,26 @@ A dataflow engine written in NodeJS to run your no-code projects. A dataflow def
 
 ## `Chain`
 
-Contains the `definition` of the chain (how nodes are connected to each other) and the `state` of the chain (the values in each node).
+Contains the different types of nodes used in the chain, the `definition` of the chain (how nodes are connected to each other) and the `state` of the chain (the values in each node).
+
+::: details `nodeTypes`
+
+> | name        | type     | data type                                        | description          |
+> | ----------- | -------- | ------------------------------------------------ | -------------------- |
+> | <NODE_TYPE> | required | Record<string,[NodeDefinition](#nodedefinition)> | definition of a node |
+
+:::
 
 ::: details `definition`
 
-### Chain Definition
-
-> | name    | type     | data type                              |
-> | ------- | -------- | -------------------------------------- |
-> | `edges` | required | Record<string,[ChainEdge](#chainedge)> |
-> | `nodes` | required | Record<string,[ChainNode](#chainnode)> |
+> | name    | type     | data type                              | description                           |
+> | ------- | -------- | -------------------------------------- | ------------------------------------- |
+> | `edges` | required | Record<string,[ChainEdge](#chainedge)> | connection between nodes in the chain |
+> | `nodes` | required | Record<string,[ChainNode](#chainnode)> | nodes in the chain                    |
 
 :::
 
 ::: details `state`
-
-### Chain State
-
-A record of nodes indexes by their nodeId.
 
 > | name      | type     | data type     |
 > | --------- | -------- | ------------- |
@@ -35,17 +43,213 @@ A record of nodes indexes by their nodeId.
 
 :::
 
-## `ChainNode`
+::: details example
 
-::: warning INCOMPLETE
-
-This function is not documented yet.
+```ts
+const chain = {
+  nodeTypes: {
+    numberNode: {
+      name: "Number",
+      parameters: [],
+      inputs: [
+        {
+          name: "number",
+          type: "number",
+          defaultValue: 0,
+          description: "Number input",
+          id: "number",
+        },
+      ],
+      outputs: [
+        {
+          name: "number",
+          type: "number",
+          defaultValue: 0,
+          description: "Number input",
+          id: "number",
+        },
+      ],
+      execute: async (i) => i,
+      parseInput: async (i) => i,
+    },
+    additionNode: {
+      name: "Addition",
+      parameters: [],
+      inputs: [
+        {
+          name: "number1",
+          type: "number",
+          defaultValue: 0,
+          description: "Number input",
+          id: "number1",
+        },
+        {
+          name: "number2",
+          type: "number",
+          defaultValue: 0,
+          description: "Number input",
+          id: "number2",
+        },
+      ],
+      outputs: [
+        {
+          name: "sum",
+          type: "number",
+          defaultValue: 0,
+          description: "Sum of two numbers",
+          id: "sum",
+        },
+      ],
+      execute: async ({ number1, number2 }: any) => ({ sum: (number1 || 0) + (number2 || 0) }),
+      parseInput: async (i) => i,
+    },
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n3",
+        sourceHandle: "number",
+        targetHandle: "number1",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "number",
+        targetHandle: "number2",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "numberNode",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+      n2: {
+        id: "n2",
+        type: "numberNode",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+      n3: {
+        id: "n3",
+        type: "additionNode",
+        autorun: true,
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+    },
+  },
+  state: {
+    n1: {
+      status: "idle",
+      input: {
+        number: 1,
+      },
+    },
+    n2: {
+      status: "idle",
+      input: {
+        number: 1,
+      },
+    },
+    n3: {
+      status: "idle",
+      input: {
+        number1: 1,
+        number2: 1,
+      },
+    },
+  },
+};
+```
 
 :::
 
+## `NodeDefinition`
+
+Definition of a node. A node is some logic that can run given some input data and generate some output.
+
+::: details `schema`
+
+> | name          | type     | data type               | description             |
+> | ------------- | -------- | ----------------------- | ----------------------- |
+> | `name`        | required | string                  | name of the node        |
+> | `description` | optional | string                  | description of the node |
+> | `type`        | required | string                  | type of node            |
+> | `execute`     | required | [function](#execute)    |
+> | `parseInput`  | required | [function](#parseinput) |
+
+:::
+
+### `execute()`
+
+Generate an output given the node input.
+
+```ts
+function execute(variable: Record<string, any>): Promise<Record<sring, any>>;
+```
+
+::: details Parameters
+
+> | name       | type     | data type           | description |
+> | ---------- | -------- | ------------------- | ----------- |
+> | `variable` | required | Record<string, any> |
+
+:::
+
+::: details Returns
+
+> | data type                     | description |
+> | ----------------------------- | ----------- |
+> | `Promise<Record<sring, any>>` |
+
+:::
+
+### `parseInput()`
+
+```ts
+function parseInput(variable: string): Promise<string>;
+```
+
+::: details Parameters
+
+> | name       | type     | data type | description |
+> | ---------- | -------- | --------- | ----------- |
+> | `variable` | required | string    |
+
+:::
+
+::: details Returns
+
+> | data type         | description |
+> | ----------------- | ----------- |
+> | `Promise<string>` |
+
+:::
+
+## `ChainNode`
+
+Definition for some logic that can run given some input data and generate some output.
+
+::: details `schema`
+
+> | name      | type     | data type | description                                                   |
+> | --------- | -------- | --------- | ------------------------------------------------------------- |
+> | `id`      | required | string    |                                                               |
+> | `type`    | required | string    | type of node                                                  |
+> | `autorun` | optional | boolean   | automatically run this node when the inputs have been updated |
+> | `editor`  | optional | object    |
+
 ## `ChainEdge`
 
-An edge is a connection between two handles on two different nodes.
+A connection between two handles on two different nodes. Used to map the output from one node to the input of another
 
 ::: details `schema`
 

@@ -1,17 +1,15 @@
-import { ChatMessage } from "./chat";
+import { Param, ParamValue } from "./params";
 
-export type FormatType = "embedding" | "completion" | "chat";
-
-export interface CompletionNodeIO {
-  prompt: string;
-  completion: string;
-}
-
-export interface EmbeddingNodeIO {
-  text: string;
-  embedding: number[];
-}
-
-export interface ChatNodeIO {
-  messages: ChatMessage[];
+export interface Node {
+  name: string;
+  description?: string;
+  tags?: string[];
+  parameters: Param[];
+  inputs: Param[];
+  outputs: Param[];
+  execute: (input: Record<string, ParamValue>) => Promise<Record<string, ParamValue>>;
+  parseInput: (
+    input: Record<string, ParamValue>,
+    prev?: Record<string, ParamValue>
+  ) => Promise<Record<string, ParamValue>>;
 }

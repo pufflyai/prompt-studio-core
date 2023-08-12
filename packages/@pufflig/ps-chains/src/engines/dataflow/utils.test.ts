@@ -1,11 +1,12 @@
-import { applyDefaultInputs } from "./dataflow";
+import { simpleNode } from "../../mocks/nodes";
+import { applyDefaultInputs } from "./utils";
 
 test("apply default inputs without overwriting them", async () => {
   const res = applyDefaultInputs(
     {
       variables: [
         {
-          id: "hello",
+          id: "template",
           name: "hello",
           type: "text",
           defaultValue: "TEST",
@@ -13,7 +14,7 @@ test("apply default inputs without overwriting them", async () => {
         },
       ],
     },
-    "modifier/handlebar_template_completion"
+    simpleNode
   );
 
   expect(res).toMatchInlineSnapshot(`
@@ -23,7 +24,7 @@ test("apply default inputs without overwriting them", async () => {
         {
           "defaultValue": "TEST",
           "description": "",
-          "id": "hello",
+          "id": "template",
           "name": "hello",
           "type": "text",
         },

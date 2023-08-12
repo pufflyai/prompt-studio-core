@@ -3,10 +3,13 @@
 exports[`avoid hanging on loops 1`] = `
 {
   "1": {
-    "data": {
+    "input": {},
+    "status": "idle",
+  },
+  "n1": {
+    "input": {
       "template": "Hello {{World}}",
     },
-    "status": "idle",
   },
 }
 `;
@@ -14,28 +17,24 @@ exports[`avoid hanging on loops 1`] = `
 exports[`can handle input from multiple origins 1`] = `
 {
   "1": {
-    "data": {
-      "template": "Hello {{World}}",
+    "input": {
+      "template": "This is a test!",
     },
     "status": "idle",
   },
-  "2": {
-    "data": {
+  "n1": {
+    "input": {
       "template": "Hello {{World}}",
-      "variables": [
-        {
-          "defaultValue": "",
-          "description": "",
-          "id": "World",
-          "name": "World",
-          "type": "text",
-        },
-      ],
     },
   },
-  "3": {
-    "data": {
-      "completion": "Hello ",
+  "n2": {
+    "input": {
+      "template": "Hello {{World}}",
+    },
+  },
+  "n3": {
+    "input": {
+      "completion": "Hello {{World}} (PARSED)",
       "prompt": "Hello {{World}}",
     },
   },
@@ -44,40 +43,22 @@ exports[`can handle input from multiple origins 1`] = `
 
 exports[`can handle missing states 1`] = `
 {
-  "197375bb-c777-4be5-a423-6d5618e2200f": {
-    "data": {
+  "n2": {
+    "input": {
       "template": "Hello {{World}}",
+    },
+  },
+  "n3": {
+    "input": {
+      "prompt": "Hello {{World}} (PARSED)",
+      "template": "This is a test!",
     },
     "status": "idle",
   },
-  "2708636f-633c-4c02-abec-093fdc79f4d5": {
-    "data": {
-      "completion": "",
-      "prompt": "Hello ",
-    },
-  },
-  "85c8bc66-cc5a-4400-b4d3-bc119ed1b2f7": {
-    "data": {
-      "template": "Hello {{World}}",
-      "variables": [
-        {
-          "defaultValue": "",
-          "description": "",
-          "id": "World",
-          "name": "World",
-          "type": "text",
-        },
-      ],
-    },
-  },
-  "c96eeaef-a4bb-4fa6-a32f-b9ad176456ea": {
-    "data": {
-      "api_key": "\${{SECRET:openai/api_key}}",
-      "model": {
-        "modelId": "text-davinci-003",
-        "parameters": {},
-      },
-      "prompt": "Hello ",
+  "n4": {
+    "input": {
+      "completion": "Hello {{World}} (PARSED) (COMPLETION)",
+      "prompt": "Hello {{World}} (PARSED)",
     },
   },
 }
@@ -85,14 +66,14 @@ exports[`can handle missing states 1`] = `
 
 exports[`ignore autorun=false flag on root node 1`] = `
 {
-  "1": {
-    "data": {
+  "n1": {
+    "input": {
       "template": "Hello {{World}}",
     },
     "status": "idle",
   },
-  "2": {
-    "data": {
+  "n2": {
+    "input": {
       "template": "Hello {{World}}",
       "variables": [
         {
@@ -106,10 +87,10 @@ exports[`ignore autorun=false flag on root node 1`] = `
     },
     "status": "idle",
   },
-  "3": {
-    "data": {
+  "n3": {
+    "input": {
       "completion": "",
-      "prompt": "Hello mars",
+      "prompt": "Hello {{World}} (PARSED)",
     },
     "status": "idle",
   },
@@ -118,14 +99,14 @@ exports[`ignore autorun=false flag on root node 1`] = `
 
 exports[`nodes with autorun=false down the chain do not update the inputs of their targets 1`] = `
 {
-  "1": {
-    "data": {
+  "n1": {
+    "input": {
       "template": "Hello {{World}}",
     },
     "status": "idle",
   },
-  "2": {
-    "data": {
+  "n2": {
+    "input": {
       "template": "Hello {{World}}",
       "variables": [
         {
@@ -139,8 +120,8 @@ exports[`nodes with autorun=false down the chain do not update the inputs of the
     },
     "status": "idle",
   },
-  "3": {
-    "data": {},
+  "n3": {
+    "input": {},
     "status": "idle",
   },
 }
@@ -148,14 +129,14 @@ exports[`nodes with autorun=false down the chain do not update the inputs of the
 
 exports[`set input for several nodes in the editor 1`] = `
 {
-  "1": {
-    "data": {
+  "n1": {
+    "input": {
       "template": "Hello {{World}}",
     },
     "status": "idle",
   },
-  "2": {
-    "data": {
+  "n2": {
+    "input": {
       "template": "Hello {{World}}",
       "variables": [
         {
@@ -169,10 +150,10 @@ exports[`set input for several nodes in the editor 1`] = `
     },
     "status": "idle",
   },
-  "3": {
-    "data": {
-      "completion": "",
-      "prompt": "Hello mars",
+  "n3": {
+    "input": {
+      "prompt": "Hello {{World}} (PARSED)",
+      "template": "",
     },
     "status": "idle",
   },
@@ -182,7 +163,7 @@ exports[`set input for several nodes in the editor 1`] = `
 exports[`set input for single node in the editor 1`] = `
 {
   "1": {
-    "data": {
+    "input": {
       "template": "Hello World",
     },
     "status": "idle",
@@ -192,12 +173,12 @@ exports[`set input for single node in the editor 1`] = `
 
 exports[`update array variables 1`] = `
 {
-  "1": {
-    "data": {},
+  "n1": {
+    "input": {},
     "status": "idle",
   },
-  "2": {
-    "data": {
+  "n2": {
+    "input": {
       "template": "",
       "variables": [
         {
@@ -218,10 +199,10 @@ exports[`update array variables 1`] = `
     },
     "status": "idle",
   },
-  "3": {
-    "data": {
-      "completion": "",
-      "prompt": "",
+  "n3": {
+    "input": {
+      "prompt": " (PARSED)",
+      "template": "",
     },
     "status": "idle",
   },

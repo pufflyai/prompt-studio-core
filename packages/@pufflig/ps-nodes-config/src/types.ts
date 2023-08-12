@@ -2,21 +2,6 @@ import { Param } from "@pufflig/ps-types";
 
 export type NodeCategory = "input" | "modifier" | "adapter" | "converter" | "output";
 
-export interface APIConfig {
-  url: string;
-  method: "GET" | "POST" | "PUT" | "DELETE";
-  payloadPath: string;
-  resultPath: string;
-  body: {
-    // change to a definition that can be edited by the user
-    // of the API config
-    [key: string]: string;
-  };
-  headers: {
-    [key: string]: string;
-  };
-}
-
 export interface NodeConfig {
   type: string;
   category: NodeCategory;

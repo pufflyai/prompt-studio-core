@@ -1,6 +1,6 @@
 {
   "name": "@pufflig/ps-chains",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "license": "MIT",
   "main": "./dist/ps-chains.umd.js",
   "module": "./dist/ps-chains.es.js",
@@ -16,8 +16,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@pufflig/ps-nodes": "*",
-    "@pufflig/ps-nodes-config": "*",
     "@pufflig/ps-types": "*"
   },
   "devDependencies": {

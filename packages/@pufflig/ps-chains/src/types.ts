@@ -1,12 +1,9 @@
-import { NodeConfig, NodeType } from "@pufflig/ps-nodes-config";
-import { Node } from "@pufflig/ps-nodes";
-import { ParamValue } from "@pufflig/ps-types";
+import { Node, ParamValue } from "@pufflig/ps-types";
 
-export interface ChainNode extends Node {
+export interface ChainNode {
   id: string;
-  type: NodeType;
+  type: keyof Chain["nodeTypes"];
   autorun?: boolean;
-  config: NodeConfig;
   editor: {
     position: { x: number; y: number };
   };
@@ -27,20 +24,17 @@ export interface ChainDefinition {
 
 export interface NodeState {
   status: "idle" | "running" | "streaming" | "error";
-  data: Record<string, ParamValue>;
+  input: Record<string, ParamValue>;
 }
 
 export interface Chain {
+  nodeTypes: Record<string, Node>;
   definition: ChainDefinition;
   state: Record<string, NodeState>;
 }
 
 export interface RunOptions {
-  callbacks?: Callbacks;
-  resolver: (variable: string) => Promise<string>;
-}
-
-export interface Callbacks {
-  onNodeInputUpdate?: (id: string, input: Record<string, ParamValue>) => void;
+  resolveReferences?: (variable: string) => Promise<string>;
+  onNodeInputUpdate?: (id: string, input: NodeState) => void;
   onNodeRunError?: (id: string, error: Error) => void;
 }
