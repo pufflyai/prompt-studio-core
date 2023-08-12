@@ -1,5 +1,4 @@
-import { ModelConfig } from "@pufflig/ps-types";
-import { NodeConfig } from "../../types";
+import { ModelConfig, NodeConfig } from "@pufflig/ps-types";
 import { completionModels } from "./openai_models";
 
 export interface OpenAICompletionInput {
@@ -13,11 +12,9 @@ export interface OpenAICompletionOutput {
 }
 
 export const openaiCompletionConfig: NodeConfig = {
-  type: "adapter/openai_completion",
-  category: "adapter",
-  format: "text",
   name: "OpenAI (Completion)",
   description: "OpenAI Completion",
+  tags: ["adapter", "text"],
   parameters: [
     {
       id: "api_key",

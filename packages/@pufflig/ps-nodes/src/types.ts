@@ -1,8 +1,4 @@
 import { NodeType } from "@pufflig/ps-nodes-config";
-
-export interface Node {
-  execute: (input: any) => Promise<Record<string, any>>;
-  parseInput: (input: any, prev?: any) => Promise<any>;
-}
+import { Node } from "@pufflig/ps-types";
 
 export type Nodes = Record<NodeType, Node>;

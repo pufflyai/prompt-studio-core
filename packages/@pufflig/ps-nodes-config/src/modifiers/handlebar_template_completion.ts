@@ -1,21 +1,9 @@
-import { ObjectDefinition } from "@pufflig/ps-types";
-import { NodeConfig } from "../types";
-
-export interface HandlebarTemplateCompletionInput {
-  template: string;
-  variables: ObjectDefinition;
-}
-
-export interface HandlebarTemplateCompletionOutput {
-  text: string;
-}
+import { NodeConfig } from "@pufflig/ps-types";
 
 export const handlebarTemplateCompletion: NodeConfig = {
-  type: "modifier/handlebar_template_completion",
   name: "Handlebar Template (Completion)",
-  category: "modifier",
-  format: "text",
   description: "",
+  tags: ["modifier", "text"],
   parameters: [],
   outputs: [
     {

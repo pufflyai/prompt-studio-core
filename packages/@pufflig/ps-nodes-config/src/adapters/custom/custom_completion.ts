@@ -1,11 +1,9 @@
-import { NodeConfig } from "../../types";
+import { NodeConfig } from "@pufflig/ps-types";
 
 export const customCompletionConfig: NodeConfig = {
-  type: "adapter/custom_api_completion",
-  category: "adapter",
-  format: "text",
   name: "Custom API (Completion)",
   description: "",
+  tags: ["adapter", "text"],
   parameters: [
     {
       id: "api_definition",

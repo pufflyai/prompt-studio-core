@@ -1,21 +1,9 @@
-import { Chat, ObjectDefinition } from "@pufflig/ps-types";
-import { NodeConfig } from "../types";
-
-export interface HandlebarTemplateChatInput {
-  chat: Chat;
-  variables: ObjectDefinition;
-}
-
-export interface HandlebarTemplateChatOutput {
-  chat: Chat;
-}
+import { NodeConfig } from "@pufflig/ps-types";
 
 export const handlebarTemplateChat: NodeConfig = {
-  type: "modifier/handlebar_template_chat",
   name: "Handlebar Template (Chat)",
-  category: "modifier",
-  format: "chat",
   description: "",
+  tags: ["modifier", "chat"],
   parameters: [],
   outputs: [
     {

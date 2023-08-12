@@ -1,15 +1,16 @@
 import { Param, ParamValue } from "./params";
 
-export interface Node {
+export interface NodeConfig {
   name: string;
   description?: string;
   tags?: string[];
   parameters: Param[];
   inputs: Param[];
   outputs: Param[];
-  execute: (input: Record<string, ParamValue>) => Promise<Record<string, ParamValue>>;
-  parseInput: (
-    input: Record<string, ParamValue>,
-    prev?: Record<string, ParamValue>
-  ) => Promise<Record<string, ParamValue>>;
+}
+
+export interface Node<InputType = Record<string, ParamValue>, OutputType = Record<string, ParamValue>>
+  extends NodeConfig {
+  execute: (input: InputType) => Promise<OutputType>;
+  parseInput: (input: InputType, prev?: InputType) => Promise<InputType>;
 }

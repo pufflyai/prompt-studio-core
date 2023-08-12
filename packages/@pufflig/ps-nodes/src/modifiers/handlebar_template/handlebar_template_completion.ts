@@ -1,9 +1,20 @@
-import { HandlebarTemplateCompletionInput } from "@pufflig/ps-nodes-config";
 import _ from "lodash";
 import Mustache from "mustache";
-import { Node } from "../../types";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
 import { extractVariables } from "./utils/extractVariables";
+import { Node, ObjectDefinition } from "@pufflig/ps-types";
+import { nodes } from "@pufflig/ps-nodes-config";
+
+export const nodeType = "modifier/handlebar_template_completion";
+
+export interface HandlebarTemplateCompletionInput {
+  template: string;
+  variables: ObjectDefinition;
+}
+
+export interface HandlebarTemplateCompletionOutput {
+  text: string;
+}
 
 export const execute = async (input: HandlebarTemplateCompletionInput) => {
   const { template, variables } = input;
@@ -60,7 +71,8 @@ export const parseInput = async (
   };
 };
 
-export const handlebarTemplateCompletion: Node = {
+export const handlebarTemplateCompletion: Node<HandlebarTemplateCompletionInput, HandlebarTemplateCompletionOutput> = {
+  ...nodes[nodeType],
   execute,
   parseInput,
 };
