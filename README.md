@@ -27,3 +27,11 @@ From the root of the repo, run `npx lerna run build`.
 ### Run all tests
 
 From the root of the repo, run `npx lerna run test`.
+
+### Update packages
+
+From the root of the repo, run `npx lerna version --no-private`
+
+### Publish packages
+
+From the root of the repo, run `npx lerna publish --no-private`
