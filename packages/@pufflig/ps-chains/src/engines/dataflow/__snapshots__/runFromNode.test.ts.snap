@@ -64,6 +64,31 @@ exports[`can handle missing states 1`] = `
 }
 `;
 
+exports[`can resolve variables correctly 1`] = `
+{
+  "n1": {
+    "input": {
+      "template": "\${{ps:ref:file:MY_FILE}} {{keep}}",
+    },
+    "status": "idle",
+  },
+  "n2": {
+    "input": {
+      "template": "INSERTED_FILE {{keep}}",
+      "variables": [],
+    },
+    "status": "idle",
+  },
+  "n3": {
+    "input": {
+      "prompt": "INSERTED_FILE {{keep}} (PARSED)",
+      "template": "",
+    },
+    "status": "idle",
+  },
+}
+`;
+
 exports[`ignore autorun=false flag on root node 1`] = `
 {
   "n1": {

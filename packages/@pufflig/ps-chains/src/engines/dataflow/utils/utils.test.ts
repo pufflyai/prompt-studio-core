@@ -1,4 +1,4 @@
-import { simpleNode } from "../../mocks/nodes";
+import { simpleNode } from "../../../mocks/nodes";
 import { applyDefaultInputs } from "./utils";
 
 test("apply default inputs without overwriting them", async () => {

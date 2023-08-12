@@ -1,5 +1,5 @@
 import { Node, Param, ParamValue } from "@pufflig/ps-types";
-import { ChainEdge } from "../../types";
+import { ChainEdge } from "../../../types";
 
 /**
  * Create a record of the default values for a list of parameters

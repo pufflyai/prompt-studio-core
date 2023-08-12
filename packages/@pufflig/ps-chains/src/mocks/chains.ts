@@ -409,3 +409,69 @@ export const multiInput: Chain = {
     },
   },
 };
+
+export const simpleChainWithVars: Chain = {
+  nodeTypes: {
+    simple_node: simpleNode,
+    template_node: templateNode,
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "template",
+        targetHandle: "template",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "text",
+        targetHandle: "prompt",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+      n2: {
+        id: "n2",
+        type: "template_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+      n3: {
+        id: "n3",
+        type: "simple_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+    },
+  },
+  state: {
+    n1: {
+      input: {
+        template: "${{ps:ref:file:MY_FILE}} {{keep}}",
+      },
+      status: "idle",
+    },
+    n2: {
+      input: {
+        variables: [],
+      },
+      status: "idle",
+    },
+    n3: {
+      input: {},
+      status: "idle",
+    },
+  },
+};

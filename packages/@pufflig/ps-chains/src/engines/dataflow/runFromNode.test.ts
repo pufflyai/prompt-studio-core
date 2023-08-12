@@ -4,6 +4,7 @@ import {
   missingStates,
   multiInput,
   simpleChain,
+  simpleChainWithVars,
   simpleLoop,
   singleNodeChain,
 } from "../../mocks/chains";
@@ -96,5 +97,21 @@ test("update array variables", async () => {
     }
   );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
+  expect(res).toMatchSnapshot();
+});
+
+test("can resolve variables correctly", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const res = await runFromNode("n1", {}, simpleChainWithVars, {
+    onNodeInputUpdate,
+    onNodeRunError: () => {},
+    resolveReferences: async (variable) => {
+      if (variable === "file:MY_FILE") {
+        return "INSERTED_FILE";
+      }
+      return "${{ps:ref:" + variable + "}}";
+    },
+  });
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(3);
   expect(res).toMatchSnapshot();
 });

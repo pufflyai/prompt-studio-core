@@ -1,6 +1,7 @@
 import { ParamValue } from "@pufflig/ps-types";
 import { Chain, NodeState, RunOptions } from "../../types";
-import { applyDefaultInputs, getEdgeMap, mapOutputToInput } from "./utils";
+import { resolveVariables } from "./utils/resolveVariables";
+import { applyDefaultInputs, getEdgeMap, mapOutputToInput } from "./utils/utils";
 
 /**
  * This function updates the input state of a node and executes the node on the new input.
@@ -51,7 +52,7 @@ export async function runFromNode(
 
     visitedNodes[nodeId] = visitedNodes[nodeId] ? visitedNodes[nodeId] + 1 : 1;
 
-    const newInput = { ...applyDefaultInputs(nodeState?.input, nodeDefinition), ...parsedInput };
+    const newInput = { ...applyDefaultInputs(prevInput, nodeDefinition), ...parsedInput };
     const newState: NodeState = { ...nodeState, input: newInput };
 
     let newChainState = { ...chainState, [nodeId]: newState };
@@ -74,11 +75,19 @@ export async function runFromNode(
       return;
     }
 
+    let resolvedInput = newInput;
+    try {
+      resolvedInput = await resolveVariables(newInput, runOptions?.resolveReferences || (async (i) => i));
+    } catch (error) {
+      runOptions?.onNodeRunError?.(nodeId, error as Error);
+      return;
+    }
+
     // run the node we updated the input of
     let res;
     try {
       // resolve references in the input
-      res = await nodeDefinition.execute(newInput);
+      res = await nodeDefinition.execute(resolvedInput);
     } catch (error) {
       // if running the node fails, stop the chain
       runOptions?.onNodeRunError?.(nodeId, error as Error);
