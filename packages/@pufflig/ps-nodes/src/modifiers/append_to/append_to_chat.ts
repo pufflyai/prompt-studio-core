@@ -15,7 +15,7 @@ export interface AppendToChatOutput {
 
 export const execute = async (
   input: AppendToChatInput,
-  prevInput: AppendToChatInput
+  prevInput?: AppendToChatInput
 ): Promise<AppendToChatOutput | null> => {
   // if there is no message, return the chat without change
   if (!input.message) {
@@ -25,7 +25,7 @@ export const execute = async (
   }
 
   // if the message has not changed, return the chat without change
-  if (prevInput.message?.id === input.message?.id) {
+  if (prevInput?.message?.id === input.message?.id) {
     return {
       chat: input.chat,
     };
