@@ -1,5 +1,5 @@
 import { Chat, ChatMessage, ModelConfig, Node } from "@pufflig/ps-types";
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi, ChatCompletionRequestMessage } from "openai";
 import { nodes } from "@pufflig/ps-nodes-config";
 import { v4 as uuid } from "uuid";
 
@@ -15,6 +15,15 @@ export interface OpenAIChatOutput {
   message: ChatMessage;
 }
 
+const mapMessage = (message: ChatMessage): ChatCompletionRequestMessage => {
+  return {
+    role: message.role,
+    content: message.content,
+    name: message.name,
+    // TODO: add function calls
+  };
+};
+
 export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput> => {
   const { chat, model, api_key } = input;
   const { modelId, parameters } = model;
@@ -23,7 +32,8 @@ export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput>
   const openai = new OpenAIApi(configuration);
 
   const params = { ...parameters, model: modelId };
-  const completion = await openai.createChatCompletion({ ...params, messages: chat?.messages || [] });
+  const mappedMessages = (chat?.messages || []).map(mapMessage);
+  const completion = await openai.createChatCompletion({ ...params, messages: mappedMessages });
   const chatCompletion = completion.data.choices[0].message;
 
   return {
