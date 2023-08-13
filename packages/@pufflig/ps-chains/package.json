@@ -17,20 +17,10 @@
   },
   "devDependencies": {
     "@pufflig/ps-types": "^0.7.1",
-    "@storybook/addon-essentials": "^7.2.1",
-    "@storybook/addon-interactions": "^7.2.1",
-    "@storybook/addon-links": "^7.2.1",
-    "@storybook/addon-onboarding": "^1.0.8",
-    "@storybook/blocks": "^7.2.1",
-    "@storybook/react": "^7.2.1",
-    "@storybook/react-vite": "^7.2.1",
-    "@storybook/testing-library": "^0.2.0",
     "@types/react-dom": "^18.2.7",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "reactflow": "^11.7.4",
-    "storybook": "^7.2.1",
     "typescript": "^5.1.6"
   },
   "dependencies": {
