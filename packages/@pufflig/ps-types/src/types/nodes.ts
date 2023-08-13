@@ -9,8 +9,8 @@ export interface NodeConfig {
   outputs: Param[];
 }
 
-export interface Node<InputType = Record<string, ParamValue>, OutputType = Record<string, ParamValue>>
+export interface Node<InputType = Record<string, ParamValue>, OutputType = Record<string, ParamValue> | null>
   extends NodeConfig {
-  execute: (input: InputType) => Promise<OutputType>;
-  parseInput: (input: InputType, prev?: InputType) => Promise<InputType>;
+  execute: (input: InputType, prevInput?: InputType) => Promise<OutputType>;
+  parseInput: (input: InputType, prevInput?: InputType) => Promise<InputType>;
 }

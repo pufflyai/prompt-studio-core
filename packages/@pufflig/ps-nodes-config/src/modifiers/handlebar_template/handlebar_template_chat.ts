@@ -11,7 +11,9 @@ export const handlebarTemplateChat: NodeConfig = {
       name: "Chat",
       description: "The chat with variables filled in",
       type: "chat",
-      defaultValue: [],
+      defaultValue: {
+        messages: [],
+      },
     },
   ],
   inputs: [
@@ -20,7 +22,9 @@ export const handlebarTemplateChat: NodeConfig = {
       name: "Chat",
       description: "Chat template to fill in",
       type: "chat",
-      defaultValue: [],
+      defaultValue: {
+        messages: [],
+      },
     },
     {
       id: "variables",

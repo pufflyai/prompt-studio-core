@@ -1,6 +1,7 @@
 import { Chat, ChatMessage, ModelConfig, Node } from "@pufflig/ps-types";
 import { Configuration, OpenAIApi } from "openai";
 import { nodes } from "@pufflig/ps-nodes-config";
+import { v4 as uuid } from "uuid";
 
 export const openaiChatNodeType = "adapter/openai_chat" as const;
 
@@ -27,6 +28,8 @@ export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput>
 
   return {
     message: {
+      id: uuid(),
+      createdAt: new Date().toISOString(),
       content: chatCompletion?.content || "",
       role: chatCompletion?.role || "user",
     },

@@ -11,7 +11,7 @@ export const openaiChatConfig: NodeConfig = {
       name: "API Key",
       type: "secret",
       description: "The API key for OpenAI",
-      defaultValue: "${{SECRET:open_ai/api_key}}",
+      defaultValue: "${{ps:ref:secret:openai/api_key}}",
     },
   ],
   outputs: [
@@ -29,7 +29,9 @@ export const openaiChatConfig: NodeConfig = {
       name: "Chat",
       description: "The chat to send to OpenAI",
       type: "chat",
-      defaultValue: [],
+      defaultValue: {
+        messages: [],
+      },
     },
     {
       id: "model",

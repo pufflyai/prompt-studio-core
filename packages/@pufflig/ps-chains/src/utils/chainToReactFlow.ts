@@ -1,4 +1,4 @@
-import { Edge, Node } from "reactflow";
+import { Edge, Node, Position } from "reactflow";
 import { Chain } from "../types";
 
 interface ReactFlowData {
@@ -12,11 +12,36 @@ interface ReactFlowData {
  */
 export const chainToReactFlow = (chain: Chain): ReactFlowData => {
   const nodes: Node[] = Object.values(chain.definition.nodes).map((node) => {
+    const nodeDefinition = chain.nodeTypes[node.type];
+
+    const inputs = nodeDefinition.inputs.reduce(
+      (acc, parameter) => ({
+        ...acc,
+        [parameter.id]: parameter.id,
+      }),
+      {}
+    );
+
+    const outputs = chain.nodeTypes[node.type].outputs.reduce(
+      (acc, parameter) => ({
+        ...acc,
+        [parameter.id]: parameter.id,
+      }),
+      {}
+    );
+
     const nodeData: Node = {
       id: node.id,
-      type: node.type,
+      type: "node",
+      sourcePosition: Position.Right,
+      targetPosition: Position.Left,
+      data: {
+        type: node.type,
+        label: nodeDefinition.name,
+        inputs,
+        outputs,
+      },
       position: node.editor.position || { x: 0, y: 0 },
-      data: {},
     };
     return nodeData;
   });
@@ -26,6 +51,7 @@ export const chainToReactFlow = (chain: Chain): ReactFlowData => {
       id: edge.id,
       source: edge.source,
       target: edge.target,
+      type: "smoothstep",
       sourceHandle: edge.sourceHandle,
       targetHandle: edge.targetHandle,
     };

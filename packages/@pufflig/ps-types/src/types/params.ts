@@ -1,4 +1,4 @@
-import { ChatMessage } from "./chat";
+import { Chat, ChatMessage } from "./chat";
 
 export interface BaseParam {
   id: string;
@@ -64,7 +64,7 @@ export interface ModelParam extends BaseParam {
 
 export interface ChatParam extends BaseParam {
   type: "chat";
-  defaultValue: ChatMessage[];
+  defaultValue: Chat;
 }
 
 export interface SecretParam extends BaseParam {
@@ -95,7 +95,7 @@ export type ParamValue =
   | string
   | APIDefinition
   | ModelValue
-  | ChatMessage[]
+  | Chat
   | ChatMessage
   | null
   | (NumberParam | TextParam)[]

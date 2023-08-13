@@ -37,4 +37,5 @@ export interface RunOptions {
   resolveReferences?: (variable: string) => Promise<string>;
   onNodeInputUpdate?: (id: string, input: NodeState) => void;
   onNodeRunError?: (id: string, error: Error) => void;
+  onNodeRunComplete?: (id: string, output: Record<string, ParamValue> | null) => void;
 }

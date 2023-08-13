@@ -28,7 +28,9 @@ export const customChatConfig: NodeConfig = {
       name: "Chat",
       description: "The chat to send to your API",
       type: "chat",
-      defaultValue: [],
+      defaultValue: {
+        messages: [],
+      },
     },
   ],
 };

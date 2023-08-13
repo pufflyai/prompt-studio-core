@@ -11,7 +11,7 @@ export const openaiCompletionConfig: NodeConfig = {
       name: "API Key",
       type: "secret",
       description: "The API key for OpenAI",
-      defaultValue: "${{SECRET:openai/api_key}}",
+      defaultValue: "${{ps:ref:secret:openai/api_key}}",
     },
   ],
   outputs: [
