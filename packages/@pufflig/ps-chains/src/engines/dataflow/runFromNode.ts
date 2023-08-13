@@ -87,7 +87,10 @@ export async function runFromNode(
     let res;
     try {
       // resolve references in the input
-      res = await nodeDefinition.execute(resolvedInput);
+      res = await nodeDefinition.execute(resolvedInput, prevInput);
+      // break the chain if the node returns null
+      if (res === null) return;
+      // runOptions?.onNodeRunComplete?.(nodeId, res);
     } catch (error) {
       // if running the node fails, stop the chain
       runOptions?.onNodeRunError?.(nodeId, error as Error);

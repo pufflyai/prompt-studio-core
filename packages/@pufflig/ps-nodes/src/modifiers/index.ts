@@ -1,3 +1,4 @@
+import { appendToChat, appendToChatNodeType } from "./append_to/append_to_chat";
 import { handlebarTemplateChat, handlebarTemplateChatNodeType } from "./handlebar_template/handlebar_template_chat";
 import {
   handlebarTemplateCompletion,
@@ -7,4 +8,5 @@ import {
 export const modifierNodes = {
   [handlebarTemplateChatNodeType]: handlebarTemplateChat,
   [handlebarTemplateCompletionNodeType]: handlebarTemplateCompletion,
+  [appendToChatNodeType]: appendToChat,
 };

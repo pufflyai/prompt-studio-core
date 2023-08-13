@@ -12,7 +12,9 @@ export const displayChat: NodeConfig = {
       name: "Chat",
       description: "",
       type: "chat",
-      defaultValue: [],
+      defaultValue: {
+        messages: [],
+      },
     },
   ],
 };
