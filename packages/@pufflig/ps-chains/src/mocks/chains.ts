@@ -377,6 +377,12 @@ export const multiInput: Chain = {
         autorun: true,
         editor: { position: { x: 0, y: 0 } },
       },
+      n4: {
+        id: "n4",
+        type: "simple_node",
+        autorun: true,
+        editor: { position: { x: 0, y: 0 } },
+      },
     },
     edges: {
       e1: {
@@ -400,14 +406,16 @@ export const multiInput: Chain = {
         sourceHandle: "text",
         targetHandle: "completion",
       },
+      e4: {
+        id: "e4",
+        source: "n3",
+        target: "n4",
+        sourceHandle: "completion",
+        targetHandle: "template",
+      },
     },
   },
-  state: {
-    "1": {
-      status: "idle",
-      input: { template: "This is a test!" },
-    },
-  },
+  state: {},
 };
 
 export const simpleChainWithVars: Chain = {

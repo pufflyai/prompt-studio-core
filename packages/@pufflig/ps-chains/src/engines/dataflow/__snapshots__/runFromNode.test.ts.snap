@@ -16,12 +16,6 @@ exports[`avoid hanging on loops 1`] = `
 
 exports[`can handle input from multiple origins 1`] = `
 {
-  "1": {
-    "input": {
-      "template": "This is a test!",
-    },
-    "status": "idle",
-  },
   "n1": {
     "input": {
       "template": "Hello {{World}}",
@@ -36,6 +30,11 @@ exports[`can handle input from multiple origins 1`] = `
     "input": {
       "completion": "Hello {{World}} (PARSED)",
       "prompt": "Hello {{World}}",
+    },
+  },
+  "n4": {
+    "input": {
+      "template": "Hello {{World}} (PARSED)",
     },
   },
 }

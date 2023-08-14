@@ -10,6 +10,9 @@ import {
 } from "../../mocks/chains";
 import { runFromNode } from "./runFromNode";
 
+/**
+ * -> (1)
+ */
 test("set input for single node in the editor", async () => {
   const onNodeInputUpdate = jest.fn();
   const res = await runFromNode("1", { template: "Hello World" }, singleNodeChain, {
@@ -71,12 +74,12 @@ test("can handle missing states", async () => {
 });
 
 test("can handle input from multiple origins", async () => {
-  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
   const res = await runFromNode("n1", { template: "Hello {{World}}" }, multiInput, {
-    onNodeInputUpdate,
+    onNodeRunComplete,
     onNodeRunError: () => {},
   });
-  expect(onNodeInputUpdate).toHaveBeenCalledTimes(4);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(3);
   expect(res).toMatchSnapshot();
 });
 
