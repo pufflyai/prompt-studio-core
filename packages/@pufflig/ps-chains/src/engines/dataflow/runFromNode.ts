@@ -28,6 +28,12 @@ export async function runFromNode(
   // avoid hanging on loops by keeping track of the edges that have been visited
   const visitedEdges: string[] = [];
 
+  const nodeConfig = chain.definition.nodes[nodeId];
+  const nodeDefinition = chain.nodeTypes[nodeConfig?.type];
+  if (!nodeConfig || !nodeDefinition) {
+    throw new Error(`Definition for node ${nodeId} not found`);
+  }
+
   // track nodes that are reachable from the current node
   const reachableNodes = getReachableNodes(nodeId, chain);
 
@@ -109,6 +115,7 @@ export async function runFromNode(
       // only run the node if all incoming edges have been resolved and ignore parents that are not reachable
       const incomingEdges = Object.values(chain.definition.edges)
         .filter((e) => e.target === targetNodeId)
+        .filter((e) => chain.definition.nodes[e.source].autorun !== false)
         .filter((e) => reachableNodes.has(e.source));
       const areIncomingEdgesVisited = incomingEdges.every((e) => visitedEdges.includes(e.id));
 

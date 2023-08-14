@@ -1,24 +1,24 @@
 import { Node } from "@pufflig/ps-types";
 
 export const simpleNode: Node = {
-  name: "data",
+  name: "simpleNode",
   parameters: [],
   inputs: [
     {
-      name: "template",
+      name: "data",
       type: "text",
       defaultValue: "",
-      description: "Template",
-      id: "template",
+      description: "",
+      id: "data",
     },
   ],
   outputs: [
     {
-      name: "template",
+      name: "data",
       type: "text",
       defaultValue: "",
-      description: "Template",
-      id: "template",
+      description: "",
+      id: "data",
     },
   ],
   execute: async (i) => i,
@@ -30,27 +30,27 @@ export const multiInputNode: Node = {
   parameters: [],
   inputs: [
     {
-      name: "prompt",
+      name: "data1",
       type: "text",
       defaultValue: "",
       description: "",
-      id: "prompt",
+      id: "data1",
     },
     {
-      name: "completion",
+      name: "data2",
       type: "text",
       defaultValue: "",
       description: "",
-      id: "completion",
+      id: "data2",
     },
   ],
   outputs: [
     {
-      name: "completion",
+      name: "data1",
       type: "text",
       defaultValue: "",
       description: "",
-      id: "completion",
+      id: "data1",
     },
   ],
   execute: async (i) => i,
@@ -86,59 +86,5 @@ export const multiOutputNode: Node = {
     },
   ],
   execute: async (i) => i,
-  parseInput: async (i) => i,
-};
-
-export const templateNode: Node = {
-  name: "template",
-  parameters: [],
-  inputs: [
-    {
-      name: "template",
-      type: "text",
-      defaultValue: "",
-      description: "Template",
-      id: "template",
-    },
-  ],
-  outputs: [
-    {
-      name: "text",
-      type: "text",
-      defaultValue: "",
-      description: "Parsed Template",
-      id: "text",
-    },
-  ],
-  execute: async (i) => ({
-    text: i.template + " (PARSED)",
-  }),
-  parseInput: async (i) => i,
-};
-
-export const asyncNode: Node = {
-  name: "asyncNode",
-  parameters: [],
-  inputs: [
-    {
-      name: "prompt",
-      type: "text",
-      defaultValue: "",
-      description: "",
-      id: "prompt",
-    },
-  ],
-  outputs: [
-    {
-      name: "completion",
-      type: "text",
-      defaultValue: "",
-      description: "",
-      id: "completion",
-    },
-  ],
-  execute: async (i) => ({
-    completion: i.prompt + " (COMPLETION)",
-  }),
   parseInput: async (i) => i,
 };

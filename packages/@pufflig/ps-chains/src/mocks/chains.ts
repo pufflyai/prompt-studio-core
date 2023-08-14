@@ -1,5 +1,5 @@
 import { Chain } from "../types";
-import { asyncNode, multiInputNode, simpleNode, templateNode } from "./nodes";
+import { multiInputNode, simpleNode } from "./nodes";
 
 export const singleNodeChain: Chain = {
   nodeTypes: {
@@ -8,8 +8,8 @@ export const singleNodeChain: Chain = {
   definition: {
     edges: {},
     nodes: {
-      "1": {
-        id: "1",
+      n1: {
+        id: "n1",
         type: "simple_node",
         editor: {
           position: { x: 0, y: 0 },
@@ -18,7 +18,7 @@ export const singleNodeChain: Chain = {
     },
   },
   state: {
-    "1": {
+    n1: {
       input: {},
       status: "idle",
     },
@@ -28,7 +28,6 @@ export const singleNodeChain: Chain = {
 export const simpleChain: Chain = {
   nodeTypes: {
     simple_node: simpleNode,
-    template_node: templateNode,
   },
   definition: {
     edges: {
@@ -36,15 +35,8 @@ export const simpleChain: Chain = {
         id: "e1",
         source: "n1",
         target: "n2",
-        sourceHandle: "template",
-        targetHandle: "template",
-      },
-      e2: {
-        id: "e2",
-        source: "n2",
-        target: "n3",
-        sourceHandle: "text",
-        targetHandle: "prompt",
+        sourceHandle: "data",
+        targetHandle: "data",
       },
     },
     nodes: {
@@ -57,13 +49,6 @@ export const simpleChain: Chain = {
       },
       n2: {
         id: "n2",
-        type: "template_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
-      },
-      n3: {
-        id: "n3",
         type: "simple_node",
         editor: {
           position: { x: 0, y: 0 },
@@ -71,36 +56,12 @@ export const simpleChain: Chain = {
       },
     },
   },
-  state: {
-    n1: {
-      input: {},
-      status: "idle",
-    },
-    n2: {
-      input: {
-        variables: [
-          {
-            id: "World",
-            name: "World",
-            description: "",
-            type: "text",
-            defaultValue: "mars",
-          },
-        ],
-      },
-      status: "idle",
-    },
-    n3: {
-      input: {},
-      status: "idle",
-    },
-  },
+  state: {},
 };
 
 export const autorunExample: Chain = {
   nodeTypes: {
     simple_node: simpleNode,
-    template_node: templateNode,
   },
   definition: {
     edges: {
@@ -108,15 +69,15 @@ export const autorunExample: Chain = {
         id: "e1",
         source: "n1",
         target: "n2",
-        sourceHandle: "template",
-        targetHandle: "template",
+        sourceHandle: "data",
+        targetHandle: "data",
       },
       e2: {
         id: "e2",
         source: "n2",
         target: "n3",
-        sourceHandle: "text",
-        targetHandle: "prompt",
+        sourceHandle: "data",
+        targetHandle: "data",
       },
     },
     nodes: {
@@ -129,7 +90,7 @@ export const autorunExample: Chain = {
       },
       n2: {
         id: "n2",
-        type: "template_node",
+        type: "simple_node",
         autorun: false,
         editor: {
           position: { x: 0, y: 0 },
@@ -144,105 +105,7 @@ export const autorunExample: Chain = {
       },
     },
   },
-  state: {
-    n1: {
-      input: {},
-
-      status: "idle",
-    },
-    n2: {
-      input: {
-        variables: [
-          {
-            id: "World",
-            name: "World",
-            description: "",
-            type: "text",
-            defaultValue: "mars",
-          },
-        ],
-      },
-      status: "idle",
-    },
-    n3: {
-      input: {},
-      status: "idle",
-    },
-  },
-};
-
-export const autorunRootExample: Chain = {
-  nodeTypes: {
-    simple_node: simpleNode,
-    template_node: templateNode,
-    multi_input_node: multiInputNode,
-  },
-  definition: {
-    edges: {
-      e1: {
-        id: "e1",
-        source: "n1",
-        target: "n2",
-        sourceHandle: "template",
-        targetHandle: "template",
-      },
-      e2: {
-        id: "e2",
-        source: "n2",
-        target: "n3",
-        sourceHandle: "text",
-        targetHandle: "prompt",
-      },
-    },
-    nodes: {
-      n1: {
-        id: "n1",
-        type: "simple_node",
-        autorun: false,
-        editor: {
-          position: { x: 0, y: 0 },
-        },
-      },
-      n2: {
-        id: "n2",
-        type: "template_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
-      },
-      n3: {
-        id: "n3",
-        type: "multi_input_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
-      },
-    },
-  },
-  state: {
-    n1: {
-      input: {},
-      status: "idle",
-    },
-    n2: {
-      input: {
-        variables: [
-          {
-            id: "World",
-            name: "World",
-            description: "",
-            type: "text",
-            defaultValue: "mars",
-          },
-        ],
-      },
-      status: "idle",
-    },
-    n3: {
-      input: {},
-      status: "idle",
-    },
-  },
+  state: {},
 };
 
 export const simpleLoop: Chain = {
@@ -255,8 +118,8 @@ export const simpleLoop: Chain = {
         id: "e1",
         source: "n1",
         target: "n1",
-        sourceHandle: "template",
-        targetHandle: "template",
+        sourceHandle: "data",
+        targetHandle: "data",
       },
     },
     nodes: {
@@ -269,20 +132,84 @@ export const simpleLoop: Chain = {
       },
     },
   },
+  state: {},
+};
+
+export const simpleExistingState: Chain = {
+  nodeTypes: {
+    multi_input: multiInputNode,
+  },
+  definition: {
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "multi_input",
+        editor: { position: { x: 0, y: 0 } },
+      },
+    },
+    edges: {},
+  },
   state: {
-    "1": {
-      input: {},
+    n1: {
       status: "idle",
+      input: { data1: "REPLACE", data2: "KEEP" },
     },
   },
 };
 
-export const missingStates: Chain = {
+export const mappedExample: Chain = {
   nodeTypes: {
     simple_node: simpleNode,
-    template_node: templateNode,
-    multi_input_node: multiInputNode,
-    async_node: asyncNode,
+    multi_input: multiInputNode,
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data",
+        targetHandle: "data1",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "data1",
+        targetHandle: "data",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+      n2: {
+        id: "n2",
+        type: "multi_input",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+      n3: {
+        id: "n3",
+        type: "simple_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+    },
+  },
+  state: {},
+};
+
+export const existingState: Chain = {
+  nodeTypes: {
+    simple_node: simpleNode,
+    multi_node: multiInputNode,
   },
   definition: {
     nodes: {
@@ -354,7 +281,6 @@ export const missingStates: Chain = {
 export const multiInput: Chain = {
   nodeTypes: {
     simple_node: simpleNode,
-    template_node: templateNode,
     multi_input_node: multiInputNode,
   },
   definition: {
@@ -362,25 +288,16 @@ export const multiInput: Chain = {
       n1: {
         id: "n1",
         type: "simple_node",
-        autorun: true,
         editor: { position: { x: 0, y: 0 } },
       },
       n2: {
         id: "n2",
-        type: "template_node",
-        autorun: true,
+        type: "simple_node",
         editor: { position: { x: 0, y: 0 } },
       },
       n3: {
         id: "n3",
         type: "multi_input_node",
-        autorun: true,
-        editor: { position: { x: 0, y: 0 } },
-      },
-      n4: {
-        id: "n4",
-        type: "simple_node",
-        autorun: true,
         editor: { position: { x: 0, y: 0 } },
       },
     },
@@ -389,29 +306,158 @@ export const multiInput: Chain = {
         id: "e1",
         source: "n1",
         target: "n2",
-        sourceHandle: "template",
-        targetHandle: "template",
+        sourceHandle: "data",
+        targetHandle: "data",
       },
       e2: {
         id: "e2",
         source: "n1",
         target: "n3",
-        sourceHandle: "template",
-        targetHandle: "prompt",
+        sourceHandle: "data",
+        targetHandle: "data1",
       },
       e3: {
         id: "e3",
         source: "n2",
         target: "n3",
-        sourceHandle: "text",
-        targetHandle: "completion",
+        sourceHandle: "data",
+        targetHandle: "data2",
+      },
+    },
+  },
+  state: {},
+};
+
+export const multiInputWithOutput: Chain = {
+  nodeTypes: {
+    simple_node: simpleNode,
+    multi_input_node: multiInputNode,
+  },
+  definition: {
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+      n2: {
+        id: "n2",
+        type: "simple_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+      n3: {
+        id: "n3",
+        type: "multi_input_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+      n4: {
+        id: "n4",
+        type: "simple_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+    },
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+      e2: {
+        id: "e2",
+        source: "n1",
+        target: "n3",
+        sourceHandle: "data",
+        targetHandle: "data1",
+      },
+      e3: {
+        id: "e3",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "data",
+        targetHandle: "data2",
       },
       e4: {
         id: "e4",
         source: "n3",
         target: "n4",
-        sourceHandle: "completion",
-        targetHandle: "template",
+        sourceHandle: "data1",
+        targetHandle: "data",
+      },
+    },
+  },
+  state: {},
+};
+
+export const multistep: Chain = {
+  nodeTypes: {
+    simple_node: simpleNode,
+    multi_input_node: multiInputNode,
+  },
+  definition: {
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+      n2: {
+        id: "n2",
+        type: "simple_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+      n3: {
+        id: "n3",
+        type: "simple_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+      n4: {
+        id: "n4",
+        type: "multi_input_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+      n5: {
+        id: "n5",
+        type: "simple_node",
+        editor: { position: { x: 0, y: 0 } },
+      },
+    },
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+      e3: {
+        id: "e3",
+        source: "n3",
+        target: "n4",
+        sourceHandle: "data",
+        targetHandle: "data2",
+      },
+      e4: {
+        id: "e4",
+        source: "n1",
+        target: "n4",
+        sourceHandle: "data",
+        targetHandle: "data1",
+      },
+      e5: {
+        id: "e1",
+        source: "n4",
+        target: "n5",
+        sourceHandle: "data1",
+        targetHandle: "data",
       },
     },
   },
@@ -421,7 +467,6 @@ export const multiInput: Chain = {
 export const simpleChainWithVars: Chain = {
   nodeTypes: {
     simple_node: simpleNode,
-    template_node: templateNode,
   },
   definition: {
     edges: {
@@ -429,15 +474,8 @@ export const simpleChainWithVars: Chain = {
         id: "e1",
         source: "n1",
         target: "n2",
-        sourceHandle: "template",
-        targetHandle: "template",
-      },
-      e2: {
-        id: "e2",
-        source: "n2",
-        target: "n3",
-        sourceHandle: "text",
-        targetHandle: "prompt",
+        sourceHandle: "data",
+        targetHandle: "data",
       },
     },
     nodes: {
@@ -450,13 +488,6 @@ export const simpleChainWithVars: Chain = {
       },
       n2: {
         id: "n2",
-        type: "template_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
-      },
-      n3: {
-        id: "n3",
         type: "simple_node",
         editor: {
           position: { x: 0, y: 0 },
@@ -467,18 +498,8 @@ export const simpleChainWithVars: Chain = {
   state: {
     n1: {
       input: {
-        template: "${{ps:ref:file:MY_FILE}} {{keep}}",
+        data: "${{ps:ref:file:MY_FILE}} {{keep}}",
       },
-      status: "idle",
-    },
-    n2: {
-      input: {
-        variables: [],
-      },
-      status: "idle",
-    },
-    n3: {
-      input: {},
       status: "idle",
     },
   },
