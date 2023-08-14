@@ -2,13 +2,9 @@
 
 exports[`avoid hanging on loops 1`] = `
 {
-  "1": {
-    "input": {},
-    "status": "idle",
-  },
   "n1": {
     "input": {
-      "template": "Hello {{World}}",
+      "data": "Hello {{World}}",
     },
   },
 }
@@ -16,49 +12,20 @@ exports[`avoid hanging on loops 1`] = `
 
 exports[`can handle input from multiple origins 1`] = `
 {
-  "1": {
-    "input": {
-      "template": "This is a test!",
-    },
-    "status": "idle",
-  },
   "n1": {
     "input": {
-      "template": "Hello {{World}}",
+      "data": "Hello {{World}}",
     },
   },
   "n2": {
     "input": {
-      "template": "Hello {{World}}",
+      "data": "Hello {{World}}",
     },
   },
   "n3": {
     "input": {
-      "completion": "Hello {{World}} (PARSED)",
-      "prompt": "Hello {{World}}",
-    },
-  },
-}
-`;
-
-exports[`can handle missing states 1`] = `
-{
-  "n2": {
-    "input": {
-      "template": "Hello {{World}}",
-    },
-  },
-  "n3": {
-    "input": {
-      "prompt": "Hello {{World}} (PARSED)",
-      "template": "This is a test!",
-    },
-    "status": "idle",
-  },
-  "n4": {
-    "input": {
-      "completion": "Hello {{World}} (PARSED) (COMPLETION)",
-      "prompt": "Hello {{World}} (PARSED)",
+      "data1": "Hello {{World}}",
+      "data2": "Hello {{World}}",
     },
   },
 }
@@ -68,23 +35,35 @@ exports[`can resolve variables correctly 1`] = `
 {
   "n1": {
     "input": {
-      "template": "\${{ps:ref:file:MY_FILE}} {{keep}}",
+      "data": "\${{ps:ref:file:MY_FILE}} {{keep}}",
     },
     "status": "idle",
   },
   "n2": {
     "input": {
-      "template": "INSERTED_FILE {{keep}}",
-      "variables": [],
+      "data": "INSERTED_FILE {{keep}}",
     },
-    "status": "idle",
+  },
+}
+`;
+
+exports[`correctly map output from one node onto another 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "test data",
+    },
+  },
+  "n2": {
+    "input": {
+      "data1": "test data",
+      "data2": "",
+    },
   },
   "n3": {
     "input": {
-      "prompt": "INSERTED_FILE {{keep}} (PARSED)",
-      "template": "",
+      "data": "test data",
     },
-    "status": "idle",
   },
 }
 `;
@@ -93,29 +72,75 @@ exports[`ignore autorun=false flag on root node 1`] = `
 {
   "n1": {
     "input": {
-      "template": "Hello {{World}}",
+      "data": "Hello {{World}}",
     },
-    "status": "idle",
   },
   "n2": {
     "input": {
-      "template": "Hello {{World}}",
-      "variables": [
-        {
-          "defaultValue": "mars",
-          "description": "",
-          "id": "World",
-          "name": "World",
-          "type": "text",
-        },
-      ],
+      "data": "Hello {{World}}",
     },
-    "status": "idle",
+  },
+}
+`;
+
+exports[`ignore inputs from nested unreachable nodes 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "Hello {{World}}",
+    },
+  },
+  "n2": {
+    "input": {
+      "data": "Hello {{World}}",
+    },
+  },
+  "n4": {
+    "input": {
+      "data1": "Hello {{World}}",
+      "data2": "",
+    },
+  },
+  "n5": {
+    "input": {
+      "data": "Hello {{World}}",
+    },
+  },
+}
+`;
+
+exports[`ignore inputs from unreachable nodes 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "Hello {{World}}",
+    },
+  },
+  "n2": {
+    "input": {
+      "data": "Hello {{World}}",
+    },
   },
   "n3": {
     "input": {
-      "completion": "",
-      "prompt": "Hello {{World}} (PARSED)",
+      "data1": "Hello {{World}}",
+      "data2": "",
+    },
+  },
+  "n4": {
+    "input": {
+      "data": "Hello {{World}}",
+    },
+  },
+}
+`;
+
+exports[`merge existing state on input 1`] = `
+{
+  "n1": {
+    "input": {
+      "data1": "IS_OVERWRITTEN",
+      "data2": "KEEP",
     },
     "status": "idle",
   },
@@ -126,85 +151,76 @@ exports[`nodes with autorun=false down the chain do not update the inputs of the
 {
   "n1": {
     "input": {
-      "template": "Hello {{World}}",
+      "data": "Hello {{World}}",
     },
-    "status": "idle",
   },
   "n2": {
     "input": {
-      "template": "Hello {{World}}",
-      "variables": [
-        {
-          "defaultValue": "mars",
-          "description": "",
-          "id": "World",
-          "name": "World",
-          "type": "text",
-        },
-      ],
+      "data": "Hello {{World}}",
     },
-    "status": "idle",
-  },
-  "n3": {
-    "input": {},
-    "status": "idle",
   },
 }
 `;
 
-exports[`set input for several nodes in the editor 1`] = `
+exports[`only run a node once all inputs are resolved 1`] = `
 {
   "n1": {
     "input": {
-      "template": "Hello {{World}}",
+      "data": "Hello {{World}}",
     },
-    "status": "idle",
   },
   "n2": {
     "input": {
-      "template": "Hello {{World}}",
-      "variables": [
-        {
-          "defaultValue": "mars",
-          "description": "",
-          "id": "World",
-          "name": "World",
-          "type": "text",
-        },
-      ],
+      "data": "Hello {{World}}",
     },
-    "status": "idle",
   },
   "n3": {
     "input": {
-      "prompt": "Hello {{World}} (PARSED)",
-      "template": "",
+      "data1": "Hello {{World}}",
+      "data2": "Hello {{World}}",
+    },
+  },
+  "n4": {
+    "input": {
+      "data": "Hello {{World}}",
+    },
+  },
+}
+`;
+
+exports[`run a single node chain 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "Hello World",
     },
     "status": "idle",
   },
 }
 `;
 
-exports[`set input for single node in the editor 1`] = `
+exports[`running a node updates the input of its children 1`] = `
 {
-  "1": {
+  "n1": {
     "input": {
-      "template": "Hello World",
+      "data": "Hello {{World}}",
     },
-    "status": "idle",
+  },
+  "n2": {
+    "input": {
+      "data": "Hello {{World}}",
+    },
   },
 }
 `;
+
+exports[`should throw error if the node is undefined 1`] = `[Error: Definition for node not_a_node not found]`;
 
 exports[`update array variables 1`] = `
 {
-  "n1": {
-    "input": {},
-    "status": "idle",
-  },
   "n2": {
     "input": {
-      "template": "",
+      "data": "",
       "variables": [
         {
           "defaultValue": "test1",
@@ -222,14 +238,6 @@ exports[`update array variables 1`] = `
         },
       ],
     },
-    "status": "idle",
-  },
-  "n3": {
-    "input": {
-      "prompt": " (PARSED)",
-      "template": "",
-    },
-    "status": "idle",
   },
 }
 `;

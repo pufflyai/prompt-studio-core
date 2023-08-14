@@ -1,6 +1,7 @@
 import { ParamValue } from "@pufflig/ps-types";
 import { Chain, NodeState, RunOptions } from "../../types";
 import { applyDefaultInputs } from "./utils/utils";
+import _ from "lodash";
 
 /**
  * This function updates the input state of a node without executing the chain.
@@ -16,10 +17,10 @@ export async function updateNodeInput(
   chain: Chain,
   runOptions?: RunOptions
 ) {
-  let chainState: Record<string, NodeState> = chain.state;
-
+  const chainState: Record<string, NodeState> = { ...chain.state };
   const nodeConfig = chain.definition.nodes[nodeId];
   const nodeDefinition = chain.nodeTypes[nodeConfig?.type];
+
   if (!nodeConfig || !nodeDefinition) {
     throw new Error(`Definition for node ${nodeId} not found`);
   }
@@ -35,6 +36,6 @@ export async function updateNodeInput(
 
   runOptions?.onNodeInputUpdate?.(nodeId, newState);
 
-  const newChainState = { ...chainState, [nodeId]: newState };
+  const newChainState = _.merge(chainState, { [nodeId]: newState });
   return newChainState;
 }

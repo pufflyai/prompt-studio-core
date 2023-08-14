@@ -1,7 +1,10 @@
 import { ParamValue } from "@pufflig/ps-types";
-import { Chain, NodeState, RunOptions } from "../../types";
+import _ from "lodash";
+import { Chain, RunOptions } from "../../types";
+import { updateNodeInput } from "./updateNodeInput";
 import { resolveVariables } from "./utils/resolveVariables";
-import { applyDefaultInputs, getEdgeMap, mapOutputToInput } from "./utils/utils";
+import { getEdgeMap, mapOutputToInput } from "./utils/utils";
+import { getReachableNodes } from "./utils/getReachableNodes";
 
 /**
  * This function updates the input state of a node and executes the node on the new input.
@@ -19,63 +22,59 @@ export async function runFromNode(
   chain: Chain,
   runOptions?: RunOptions
 ) {
-  // avoid hanging on loops by keeping track of the nodes that have been visited
-  // current implementation allows a node to be visited only as many times as it has inputs
-  const visitedNodes: Record<string, number> = {};
-  let chainState: Record<string, NodeState> = chain.state;
+  // track the number of times a node has been run
+  const runs: Record<string, number> = {};
 
-  async function _runFromNode(
-    nodeId: string,
-    input: Record<string, ParamValue>,
-    chain: Chain,
-    runOptions?: RunOptions,
-    isChild = false
-  ) {
+  // avoid hanging on loops by keeping track of the edges that have been visited
+  const visitedEdges: string[] = [];
+
+  const nodeConfig = chain.definition.nodes[nodeId];
+  const nodeDefinition = chain.nodeTypes[nodeConfig?.type];
+  if (!nodeConfig || !nodeDefinition) {
+    throw new Error(`Definition for node ${nodeId} not found`);
+  }
+
+  // track nodes that are reachable from the current node
+  const reachableNodes = getReachableNodes(nodeId, chain);
+
+  // chain state after the update
+  let newChainState = _.cloneDeep(chain.state);
+
+  async function run(nodeId: string, input: Record<string, ParamValue>, runOptions?: RunOptions, isChild = false) {
+    const previousState = { ...newChainState[nodeId] };
     const nodeConfig = chain.definition.nodes[nodeId];
     const nodeDefinition = chain.nodeTypes[nodeConfig?.type];
     if (!nodeConfig || !nodeDefinition) {
       throw new Error(`Definition for node ${nodeId} not found`);
     }
 
-    // parse the input
-    const nodeState = chainState[nodeId];
-    const prevInput = nodeState?.input;
-    const parsedInput = await nodeDefinition.parseInput(input, prevInput);
+    // update the current node state
+    const updatedChain = { ...chain, state: newChainState };
+    const updatedChainState = await updateNodeInput(nodeId, input, updatedChain, runOptions);
+    newChainState[nodeId] = { ...updatedChainState[nodeId] };
 
-    // a node can only be visited as many times as it has connected inputs
-    const inputEdges = Object.values(chain.definition.edges).filter((e) => e.target === nodeId);
-    const numInputs = inputEdges.length;
+    // guard against infinite loops
+    const isAlreadyRun = (runs[nodeId] || 0) > 0;
 
-    if (isChild && (visitedNodes[nodeId] || 0) > numInputs) {
-      return;
-    }
-
-    visitedNodes[nodeId] = visitedNodes[nodeId] ? visitedNodes[nodeId] + 1 : 1;
-
-    const newInput = { ...applyDefaultInputs(prevInput, nodeDefinition), ...parsedInput };
-    const newState: NodeState = { ...nodeState, input: newInput };
-
-    let newChainState = { ...chainState, [nodeId]: newState };
-    chainState = newChainState;
-
-    runOptions?.onNodeInputUpdate?.(nodeId, newState);
-
-    // do not run nodes in the chain that have autorun=false
-    // except for the root node
-    if (isChild) {
-      if (nodeConfig.autorun === false) {
-        return;
-      }
-    }
-
-    // get all target nodes of the node we updated the input of
-    // avoid running the node if it has no target nodes
+    // don't run the node if it has no target nodes
     const targetNodes = Object.values(chain.definition.edges).filter((e) => e.source === nodeId);
-    if (targetNodes.length === 0) {
+    const hasTargets = targetNodes.length > 0;
+
+    // autorun false blocks this node from running, unless it is the root node
+    const canAutorun = isChild ? nodeConfig.autorun !== false : true;
+
+    // stop flow if the node should not run
+    const shouldRun = hasTargets && canAutorun && !isAlreadyRun;
+    if (!shouldRun) {
       return;
     }
 
-    let resolvedInput = newInput;
+    // track the run
+    runs[nodeId] = runs[nodeId] ? runs[nodeId] + 1 : 1;
+
+    // resolve variables to use during the run
+    const newInput = newChainState[nodeId]?.input;
+    let resolvedInput: Record<string, ParamValue> = {};
     try {
       resolvedInput = await resolveVariables(newInput, runOptions?.resolveReferences || (async (i) => i));
     } catch (error) {
@@ -83,11 +82,11 @@ export async function runFromNode(
       return;
     }
 
-    // run the node we updated the input of
-    let res;
+    // run the node
+    let res: Record<string, ParamValue> | null = null;
     try {
       // resolve references in the input
-      res = await nodeDefinition.execute(resolvedInput, prevInput);
+      res = await nodeDefinition.execute(resolvedInput, previousState.input);
       runOptions?.onNodeRunComplete?.(nodeId, res);
       // break the chain if the node returns null
       if (res === null) return;
@@ -97,12 +96,11 @@ export async function runFromNode(
       return;
     }
 
-    const editedKeys = Object.keys(res);
-
     // ignore target nodes that are not connected to the values that have been edited
+    const editedKeys = Object.keys(res);
     const targetNodeIds = targetNodes.filter((e) => editedKeys.includes(e.sourceHandle)).map((e) => e.target);
 
-    // update the state of all target nodes
+    // update the input of all target nodes
     for (const targetNodeId of targetNodeIds) {
       // edges between this node and the target node
       const edges = Object.values(chain.definition.edges).filter(
@@ -110,11 +108,27 @@ export async function runFromNode(
       );
       const edgeMap = getEdgeMap(edges);
       const mappedInput = mapOutputToInput(res, edgeMap);
-      await _runFromNode(targetNodeId, mappedInput, chain, runOptions, true);
+
+      // append to visited edges
+      visitedEdges.push(...edges.map((e) => e.id));
+
+      // only run the node if all incoming edges have been resolved and ignore parents that are not reachable
+      const incomingEdges = Object.values(chain.definition.edges)
+        .filter((e) => e.target === targetNodeId)
+        .filter((e) => chain.definition.nodes[e.source].autorun !== false)
+        .filter((e) => reachableNodes.has(e.source));
+      const areIncomingEdgesVisited = incomingEdges.every((e) => visitedEdges.includes(e.id));
+
+      if (areIncomingEdgesVisited) {
+        await run(targetNodeId, mappedInput, runOptions, true);
+      } else {
+        const update = await updateNodeInput(targetNodeId, mappedInput, updatedChain, runOptions);
+        newChainState = { ...newChainState, [targetNodeId]: update[targetNodeId] };
+      }
     }
   }
 
-  await _runFromNode(nodeId, input, chain, runOptions);
+  await run(nodeId, input, runOptions);
 
-  return chainState;
+  return newChainState;
 }

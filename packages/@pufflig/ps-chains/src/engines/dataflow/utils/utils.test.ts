@@ -19,7 +19,7 @@ test("apply default inputs without overwriting them", async () => {
 
   expect(res).toMatchInlineSnapshot(`
     {
-      "template": "",
+      "data": "",
       "variables": [
         {
           "defaultValue": "TEST",
