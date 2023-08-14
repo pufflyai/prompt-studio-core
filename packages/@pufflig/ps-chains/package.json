@@ -27,5 +27,6 @@
   },
   "dependencies": {
     "mustache": "^4.2.0"
-  }
+  },
+  "gitHead": "4049c28b1e3fbb6569fb5bd23466cb9f5d4f03a6"
 }
