@@ -17,6 +17,15 @@ export interface ChatMessage {
   };
 }
 
+export interface ChatFunction {
+  name: string;
+  description?: string;
+  parameters?: {
+    [key: string]: any;
+  };
+}
+
 export interface Chat {
   messages: ChatMessage[];
+  functions?: ChatFunction[];
 }
