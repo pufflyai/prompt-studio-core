@@ -13,20 +13,11 @@ const chatMessage: ChatMessage = {
 };
 
 test("append_to_chat - append message", async () => {
-  const variables = await appendToChat.execute(
-    {
-      chat,
-      message: chatMessage,
-      messageId: "1",
-    },
-    {
-      chat: {
-        messages: [],
-      },
-      message: null,
-      messageId: "",
-    }
-  );
+  const variables = await appendToChat.execute({
+    chat,
+    message: chatMessage,
+    messageId: "1",
+  });
   expect(variables).toMatchInlineSnapshot(`
     {
       "chat": {
@@ -47,18 +38,11 @@ test("append_to_chat - append message with existing messages", async () => {
   const chat = {
     messages: [chatMessage, chatMessage],
   };
-  const variables = await appendToChat.execute(
-    {
-      chat,
-      message: chatMessage,
-      messageId: "",
-    },
-    {
-      chat,
-      message: null,
-      messageId: "",
-    }
-  );
+  const variables = await appendToChat.execute({
+    chat,
+    message: { ...chatMessage, id: "2" },
+    messageId: "",
+  });
   expect(variables).toMatchInlineSnapshot(`
     {
       "chat": {
@@ -78,7 +62,7 @@ test("append_to_chat - append message with existing messages", async () => {
           {
             "content": "hello",
             "createdAt": "2021-01-01",
-            "id": "1",
+            "id": "2",
             "role": "user",
           },
         ],
@@ -91,18 +75,11 @@ test("append_to_chat - don't append message if it hasn't changed", async () => {
   const chat = {
     messages: [chatMessage, chatMessage],
   };
-  const variables = await appendToChat.execute(
-    {
-      chat,
-      message: chatMessage,
-      messageId: "",
-    },
-    {
-      chat,
-      message: chatMessage,
-      messageId: "",
-    }
-  );
+  const variables = await appendToChat.execute({
+    chat,
+    message: chatMessage,
+    messageId: "",
+  });
   expect(variables).toMatchInlineSnapshot(`
     {
       "chat": {
@@ -137,18 +114,11 @@ test("append_to_chat - append to an existing message given the same id", async (
       chatMessage,
     ],
   };
-  const variables = await appendToChat.execute(
-    {
-      chat,
-      message: chatMessage,
-      messageId: "2",
-    },
-    {
-      chat,
-      message: null,
-      messageId: "",
-    }
-  );
+  const variables = await appendToChat.execute({
+    chat,
+    message: { ...chatMessage, id: "3" },
+    messageId: "2",
+  });
   expect(variables).toMatchInlineSnapshot(`
     {
       "chat": {
@@ -162,7 +132,7 @@ test("append_to_chat - append to an existing message given the same id", async (
               {
                 "content": "hello",
                 "createdAt": "2021-01-01",
-                "id": "1",
+                "id": "3",
                 "role": "user",
               },
             ],
