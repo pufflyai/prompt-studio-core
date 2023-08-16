@@ -1,14 +1,14 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
-export const templateEditor: NodeConfig = {
-  name: "Template Editor",
-  description: "Template Editor",
-  tags: ["input", "text"],
+export const text: NodeConfig = {
+  name: "Text",
+  description: "Text data",
+  tags: ["data", "text"],
   parameters: [],
   outputs: [
     {
-      id: "template",
-      name: "Template",
+      id: "text",
+      name: "Text",
       description: "",
       type: "text",
       defaultValue: "",
@@ -16,8 +16,8 @@ export const templateEditor: NodeConfig = {
   ],
   inputs: [
     {
-      id: "template",
-      name: "Template",
+      id: "text",
+      name: "Text",
       description: "",
       type: "text",
       defaultValue: "",

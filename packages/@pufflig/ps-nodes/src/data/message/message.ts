@@ -1,10 +1,10 @@
 import { nodes } from "@pufflig/ps-nodes-config";
 import { Node } from "@pufflig/ps-types";
 
-export const templateEditorNodeType = "input/template_editor" as const;
+export const messageNodeType = "data/message" as const;
 
-export const templateEditor: Node = {
-  ...nodes[templateEditorNodeType],
+export const messageNode: Node = {
+  ...nodes[messageNodeType],
   execute: async (i) => i,
   parseInput: async (i) => i,
 };

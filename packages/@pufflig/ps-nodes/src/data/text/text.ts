@@ -1,10 +1,10 @@
 import { nodes } from "@pufflig/ps-nodes-config";
 import { Node } from "@pufflig/ps-types";
 
-export const messageInputType = "input/message_input" as const;
+export const textNodeType = "data/text" as const;
 
-export const messageInput: Node = {
-  ...nodes[messageInputType],
+export const textNode: Node = {
+  ...nodes[textNodeType],
   execute: async (i) => i,
   parseInput: async (i) => i,
 };
