@@ -8,8 +8,8 @@
     "vitepress": "^1.0.0-rc.4"
   },
   "scripts": {
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "start": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
   }
 }

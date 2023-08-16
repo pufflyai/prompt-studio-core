@@ -1,9 +1,9 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
-export const MessageInput: NodeConfig = {
-  name: "Message Input",
+export const message: NodeConfig = {
+  name: "Message",
   description: "",
-  tags: ["input", "chat"],
+  tags: ["data", "message"],
   parameters: [],
   outputs: [
     {
