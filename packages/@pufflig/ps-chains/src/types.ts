@@ -34,6 +34,7 @@ export interface Chain {
 }
 
 export interface RunOptions {
+  logLevel?: "debug" | "error";
   resolveReferences?: (variable: string) => Promise<string>;
   onNodeInputUpdate?: (id: string, input: NodeState) => void;
   onNodeRunError?: (id: string, error: Error) => void;

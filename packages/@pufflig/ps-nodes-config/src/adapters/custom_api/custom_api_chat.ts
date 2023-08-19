@@ -1,18 +1,10 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
 export const customChatConfig: NodeConfig = {
-  name: "Custom API (Chat)",
+  name: "Custom API",
   description: "",
   tags: ["adapter", "chat"],
-  parameters: [
-    {
-      id: "api_definition",
-      name: "API Definition",
-      type: "api",
-      description: "The Definition of your API",
-      defaultValue: null,
-    },
-  ],
+  parameters: [],
   outputs: [
     {
       id: "message",
@@ -31,6 +23,13 @@ export const customChatConfig: NodeConfig = {
       defaultValue: {
         messages: [],
       },
+    },
+    {
+      id: "api_definition",
+      name: "API Definition",
+      type: "api",
+      description: "The Definition of your API",
+      defaultValue: null,
     },
   ],
 };

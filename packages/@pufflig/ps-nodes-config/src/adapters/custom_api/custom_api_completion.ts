@@ -1,18 +1,10 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
 export const customCompletionConfig: NodeConfig = {
-  name: "Custom API (Completion)",
+  name: "Custom API",
   description: "",
   tags: ["adapter", "text"],
-  parameters: [
-    {
-      id: "api_definition",
-      name: "API Definition",
-      type: "api",
-      description: "The Definition of your API",
-      defaultValue: null,
-    },
-  ],
+  parameters: [],
   outputs: [
     {
       id: "completion",
@@ -29,6 +21,13 @@ export const customCompletionConfig: NodeConfig = {
       description: "The prompt to send to your API",
       type: "text",
       defaultValue: "",
+    },
+    {
+      id: "api_definition",
+      name: "API Definition",
+      type: "api",
+      description: "The Definition of your API",
+      defaultValue: null,
     },
   ],
 };

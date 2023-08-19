@@ -5,6 +5,9 @@ import { updateNodeInput } from "./updateNodeInput";
 import { resolveVariables } from "./utils/resolveVariables";
 import { getEdgeMap, mapOutputToInput } from "./utils/utils";
 import { getReachableNodes } from "./utils/getReachableNodes";
+import pino from "pino";
+
+const logger = pino();
 
 /**
  * This function updates the input state of a node and executes the node on the new input.
@@ -22,6 +25,8 @@ export async function runFromNode(
   chain: Chain,
   runOptions?: RunOptions
 ) {
+  logger.level = runOptions?.logLevel || "error";
+
   // track the number of times a node has been run
   const runs: Record<string, number> = {};
 
@@ -52,6 +57,7 @@ export async function runFromNode(
     const updatedChain = { ...chain, state: newChainState };
     const updatedChainState = await updateNodeInput(nodeId, input, updatedChain, runOptions);
     newChainState[nodeId] = { ...updatedChainState[nodeId] };
+    logger.debug({ nodeId, input, nodeState: updatedChainState[nodeId] }, "Updated node input");
 
     // guard against infinite loops
     const isAlreadyRun = (runs[nodeId] || 0) > 0;
@@ -65,6 +71,7 @@ export async function runFromNode(
 
     // stop flow if the node should not run
     const shouldRun = hasTargets && canAutorun && !isAlreadyRun;
+    logger.debug({ nodeId, isAlreadyRun, hasTargets, canAutorun, shouldRun }, "Check if node should run");
     if (!shouldRun) {
       return;
     }
@@ -78,6 +85,7 @@ export async function runFromNode(
     try {
       resolvedInput = await resolveVariables(newInput, runOptions?.resolveReferences || (async (i) => i));
     } catch (error) {
+      logger.error({ error, nodeId }, "Error resolving variables");
       runOptions?.onNodeRunError?.(nodeId, error as Error);
       return;
     }
@@ -88,9 +96,11 @@ export async function runFromNode(
       // resolve references in the input
       res = await nodeDefinition.execute(resolvedInput, previousState.input);
       runOptions?.onNodeRunComplete?.(nodeId, res);
+      logger.debug({ nodeId, res }, "Node result");
       // break the chain if the node returns null
       if (res === null) return;
     } catch (error) {
+      logger.error({ error, nodeId }, "Error running node");
       // if running the node fails, stop the chain
       runOptions?.onNodeRunError?.(nodeId, error as Error);
       return;
@@ -99,6 +109,7 @@ export async function runFromNode(
     // ignore target nodes that are not connected to the values that have been edited
     const editedKeys = Object.keys(res);
     const targetNodeIds = targetNodes.filter((e) => editedKeys.includes(e.sourceHandle)).map((e) => e.target);
+    logger.debug({ nodeId, targetNodeIds }, "Target nodes");
 
     // update the input of all target nodes
     for (const targetNodeId of targetNodeIds) {
@@ -120,8 +131,10 @@ export async function runFromNode(
       const areIncomingEdgesVisited = incomingEdges.every((e) => visitedEdges.includes(e.id));
 
       if (areIncomingEdgesVisited) {
+        logger.debug({ nodeId, targetNodeId }, "Running target node");
         await run(targetNodeId, mappedInput, runOptions, true);
       } else {
+        logger.debug({ nodeId, targetNodeId }, "Updating target node inputs");
         const update = await updateNodeInput(targetNodeId, mappedInput, updatedChain, runOptions);
         newChainState = { ...newChainState, [targetNodeId]: update[targetNodeId] };
       }
