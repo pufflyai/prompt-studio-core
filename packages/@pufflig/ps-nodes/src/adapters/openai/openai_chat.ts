@@ -33,6 +33,8 @@ export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput>
   return {
     message: {
       id: uuid(),
+      provider: "openai",
+      model,
       createdAt: new Date().toISOString(),
       content: chatCompletion?.content || "",
       role: chatCompletion?.role || "user",

@@ -6,8 +6,9 @@ export interface ChatMessage {
   id: string;
   role: ChatMessageRole;
   content: string;
-  name?: string;
   createdAt: string;
+  provider: string;
+  name?: string;
   isDisabled?: boolean;
   versions?: ChatMessage[];
   model?: ModelValue;
