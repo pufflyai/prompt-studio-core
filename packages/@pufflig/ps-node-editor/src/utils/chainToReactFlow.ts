@@ -1,6 +1,6 @@
 import { Edge, MarkerType, Node, Position } from "reactflow";
-import { Chain } from "../types";
 import _ from "lodash";
+import { Chain } from "@pufflig/ps-chains";
 
 interface ReactFlowData {
   nodes: Node[];
@@ -44,7 +44,9 @@ export const chainToReactFlow = (chain: Chain): ReactFlowData => {
     const inputs = nodeDefinition.inputs.reduce(
       (acc, parameter) => ({
         ...acc,
-        [parameter.id]: parameter.id,
+        [parameter.id]: {
+          type: parameter.type,
+        },
       }),
       {}
     );
@@ -52,7 +54,9 @@ export const chainToReactFlow = (chain: Chain): ReactFlowData => {
     const outputs = chain.nodeTypes[node.type].outputs.reduce(
       (acc, parameter) => ({
         ...acc,
-        [parameter.id]: parameter.id,
+        [parameter.id]: {
+          type: parameter.type,
+        },
       }),
       {}
     );

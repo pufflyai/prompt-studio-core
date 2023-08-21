@@ -8,7 +8,6 @@ interface PromptEditorProps {
 }
 
 const startNodeId = "0e3f8188-8217-4aa5-9982-947aaa7601d6"; // "5";
-const openAINodeId = "3";
 const outputNodeId = "ec63e440-81bd-46d9-a9ab-91c4dd78e21d"; //"1";
 
 const model = {

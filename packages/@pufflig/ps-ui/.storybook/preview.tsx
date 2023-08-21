@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { pufflyTheme } from "@pufflig/ps-ui";
 import type { Preview } from "@storybook/react";
 import React from "react";
+import { pufflyTheme } from "../src/themes/theme";
 import { BaseStory } from "./BaseStory";
 
 const preview: Preview = {

@@ -1,25 +1,41 @@
-import { Handle, Position } from "reactflow";
+import { Box, Flex, Heading, Spacer, Stack, useColorMode } from "@chakra-ui/react";
+import { borderColors, sectionColors } from "@pufflig/ps-ui";
+import { CustomHandle } from "../CustomHandle/CustomHandle";
 
-export function CustomNode({ id, data }: any) {
+interface CustomNodeProps {
+  id: string;
+  data: any;
+}
+
+export function CustomNode({ id, data }: CustomNodeProps) {
+  const { colorMode } = useColorMode();
   return (
-    <div className="custom-node">
-      <div className="custom-node__header">
-        ({id}){data.label}
-      </div>
-      <div className="custom-node__body" style={{ display: "flex", gap: "4px" }}>
+    <Box
+      bg={sectionColors[colorMode]["modal"]}
+      padding="4"
+      borderRadius="4"
+      width={"420px"}
+      border={`1px solid ${borderColors[colorMode].SECONDARY}`}
+    >
+      <Heading size="sm" noOfLines={1}>
+        {data.label}
+      </Heading>
+      {id}
+      <Spacer height="4" />
+      <Stack gap="4">
         {Object.keys(data.inputs).map((handleId) => (
-          <div className="custom-node__select">
-            <span style={{ paddingLeft: "12px" }}>{handleId}</span>
-            <Handle type="target" position={Position.Left} id={handleId} />
-          </div>
+          <Flex gap="4" alignItems={"center"} justifyContent="left" position="relative">
+            <span style={{ paddingLeft: "18px" }}>{handleId}</span>
+            <CustomHandle handleId={handleId} direction="left" type={data.inputs[handleId].type} />
+          </Flex>
         ))}
         {Object.keys(data.outputs).map((handleId) => (
-          <div className="custom-node__select">
+          <Flex gap="4" alignItems={"center"} justifyContent="right" position="relative">
             <span>{handleId}</span>
-            <Handle type="source" position={Position.Right} id={handleId} />
-          </div>
+            <CustomHandle handleId={handleId} direction="right" type={data.outputs[handleId].type} />
+          </Flex>
         ))}
-      </div>
-    </div>
+      </Stack>
+    </Box>
   );
 }

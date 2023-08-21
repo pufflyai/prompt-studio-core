@@ -4,6 +4,7 @@ import { prompt_editor_chain } from "../../examples/chains/prompt_editor_chain";
 import { ChatEditor } from "../../examples/demos/ChatEditor/ChatEditor";
 import { PromptEditor } from "../../examples/demos/PromptEditor/PromptEditor";
 import { NodeEditor } from "./NodeEditor";
+import { Editable } from "../../examples/demos/Editable/Editable";
 
 export default {
   title: "Editors",
@@ -28,4 +29,8 @@ export const ChatEditorDemo = {
       <NodeEditor chain={live_chain as unknown as Chain} />
     </>
   ),
+};
+
+export const EditableDemo = {
+  render: () => <Editable />,
 };
