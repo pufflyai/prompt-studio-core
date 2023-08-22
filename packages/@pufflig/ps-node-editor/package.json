@@ -3,7 +3,6 @@
   "main": "./dist/ps-node-editor.umd.js",
   "module": "./dist/ps-node-editor.es.js",
   "types": "./dist/ps-node-editor.d.ts",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
