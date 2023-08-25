@@ -1,32 +1,32 @@
 import { ParamValue } from "@pufflig/ps-types";
-import { Chain, NodeState, RunOptions } from "../../types";
+import { Flow, NodeState, RunOptions } from "../../types";
 import { applyDefaultInputs } from "./utils/utils";
-import _ from "lodash";
 
 /**
  * This function updates the input state of a node without executing the chain.
  *
+ * @param flow flow to update
  * @param nodeId id of the node to run
- * @param input input to update the node inputs with, empty object if existing inputs should be used
- * @param chain current definition and state of the chain
+ * @param input input to update the node with, empty object if existing inputs should be kept
  * @param runOptions
+ * @returns
  */
 export async function updateNodeInput(
+  flow: Flow,
   nodeId: string,
   input: Record<string, ParamValue>,
-  chain: Chain,
   runOptions?: RunOptions
 ) {
-  const chainState: Record<string, NodeState> = { ...chain.state };
-  const nodeConfig = chain.definition.nodes[nodeId];
-  const nodeDefinition = chain.nodeTypes[nodeConfig?.type];
+  const flowState: Record<string, NodeState> = { ...flow.state };
+  const nodeConfig = flow.definition.nodes[nodeId];
+  const nodeDefinition = flow.nodeTypes[nodeConfig?.type];
 
   if (!nodeConfig || !nodeDefinition) {
     throw new Error(`Definition for node ${nodeId} not found`);
   }
 
   // parse the input
-  const nodeState = chainState[nodeId];
+  const nodeState = flowState[nodeId];
   const prevInput = nodeState?.input;
   const parsedInput = await nodeDefinition.parseInput(input, prevInput);
 
@@ -36,6 +36,5 @@ export async function updateNodeInput(
 
   runOptions?.onNodeInputUpdate?.(nodeId, newState);
 
-  const newChainState = _.merge(chainState, { [nodeId]: newState });
-  return newChainState;
+  return newState;
 }

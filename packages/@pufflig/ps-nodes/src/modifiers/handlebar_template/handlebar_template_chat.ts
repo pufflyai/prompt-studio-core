@@ -33,7 +33,7 @@ export const execute = async (input: HandlebarTemplateChatInput): Promise<Handle
   };
 };
 
-export const handlebarTemplateChat: Node<HandlebarTemplateChatInput, HandlebarTemplateChatOutput> = {
+export const handlebarTemplateChat: Node = {
   ...nodes[handlebarTemplateChatNodeType],
   execute,
   parseInput: async (i) => i,

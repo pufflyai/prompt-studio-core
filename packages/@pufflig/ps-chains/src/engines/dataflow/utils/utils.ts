@@ -1,5 +1,5 @@
-import { Node, Param, ParamValue } from "@pufflig/ps-types";
-import { ChainEdge } from "../../../types";
+import { NodeConfig, Param, ParamValue } from "@pufflig/ps-types";
+import { FlowEdge } from "../../../types";
 
 /**
  * Create a record of the default values for a list of parameters
@@ -20,7 +20,7 @@ export function paramToDefaults(params: Param[]) {
  * @param node node configuration
  * @returns node state with default values
  */
-export function applyDefaultInputs(nodeStateData: Record<string, ParamValue> | undefined, node: Node) {
+export function applyDefaultInputs(nodeStateData: Record<string, ParamValue> | undefined, node: NodeConfig) {
   const inputs = [...node.inputs, ...node.parameters];
   const defaults = paramToDefaults(inputs);
   return { ...defaults, ...(nodeStateData || {}) };
@@ -31,7 +31,7 @@ export function applyDefaultInputs(nodeStateData: Record<string, ParamValue> | u
  * @param edges chain edges
  * @returns record of source and target handles
  */
-export function getEdgeMap(edges: ChainEdge[]): Record<string, string> {
+export function getEdgeMap(edges: FlowEdge[]): Record<string, string> {
   const res: Record<string, string> = {};
   for (const e of edges) {
     res[e.sourceHandle] = e.targetHandle;

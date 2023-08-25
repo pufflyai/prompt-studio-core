@@ -11,6 +11,16 @@ head:
 
 **Note**: the API for the packages in this repo will be highly unstable until we reach v1.0.0"
 
+## 0.13.0
+
+:warning: Breaking changes
+
+### Features
+
+- :warning: **API** [@pufflig/ps-chains] add the concept of execution connections. When creating flows you have now
+  more control over the order in which nodes execute. This replaces the autorun feature.
+- :warning: **API** [@pufflig/ps-chains] the `runFromNode` method is now called `runFlow` and has a slightly different call signature
+
 ## 0.8.0
 
 :warning: Breaking changes

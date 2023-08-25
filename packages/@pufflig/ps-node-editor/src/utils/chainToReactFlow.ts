@@ -1,6 +1,6 @@
 import { Edge, MarkerType, Node, Position } from "reactflow";
-import { Chain } from "../types";
 import _ from "lodash";
+import { Flow } from "@pufflig/ps-chains";
 
 interface ReactFlowData {
   nodes: Node[];
@@ -11,7 +11,7 @@ interface ReactFlowData {
  * convert a chain to be used in react flow
  * @param chain
  */
-export const chainToReactFlow = (chain: Chain): ReactFlowData => {
+export const chainToReactFlow = (chain: Flow): ReactFlowData => {
   const nodes: Node[] = Object.values(chain.definition.nodes).map((node) => {
     const nodeDefinition = chain.nodeTypes[node.type];
 
@@ -44,7 +44,9 @@ export const chainToReactFlow = (chain: Chain): ReactFlowData => {
     const inputs = nodeDefinition.inputs.reduce(
       (acc, parameter) => ({
         ...acc,
-        [parameter.id]: parameter.id,
+        [parameter.id]: {
+          type: parameter.type,
+        },
       }),
       {}
     );
@@ -52,7 +54,9 @@ export const chainToReactFlow = (chain: Chain): ReactFlowData => {
     const outputs = chain.nodeTypes[node.type].outputs.reduce(
       (acc, parameter) => ({
         ...acc,
-        [parameter.id]: parameter.id,
+        [parameter.id]: {
+          type: parameter.type,
+        },
       }),
       {}
     );
@@ -69,7 +73,7 @@ export const chainToReactFlow = (chain: Chain): ReactFlowData => {
         inputs: inputs,
         outputs: outputs,
       },
-      position: node.editor.position || { x: 0, y: 0 },
+      position: node.editor?.position || { x: 0, y: 0 },
     };
     return nodeData;
   });

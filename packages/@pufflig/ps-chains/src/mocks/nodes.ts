@@ -1,6 +1,11 @@
-import { Node } from "@pufflig/ps-types";
+import { Node, NodeActions } from "@pufflig/ps-types";
 
-export const simpleNode: Node = {
+export const passthroughNode: NodeActions = {
+  execute: async (i) => i,
+  parseInput: async (i) => i,
+};
+
+export const simpleDataNode: Node = {
   name: "simpleNode",
   parameters: [],
   inputs: [
@@ -21,11 +26,10 @@ export const simpleNode: Node = {
       id: "data",
     },
   ],
-  execute: async (i) => i,
-  parseInput: async (i) => i,
+  ...passthroughNode,
 };
 
-export const multiInputNode: Node = {
+export const multiInputDataNode: Node = {
   name: "multiInputNode",
   parameters: [],
   inputs: [
@@ -53,11 +57,10 @@ export const multiInputNode: Node = {
       id: "data1",
     },
   ],
-  execute: async (i) => i,
-  parseInput: async (i) => i,
+  ...passthroughNode,
 };
 
-export const multiOutputNode: Node = {
+export const multiOutputDataNode: Node = {
   name: "multiOutputNode",
   parameters: [],
   inputs: [
@@ -85,6 +88,42 @@ export const multiOutputNode: Node = {
       id: "output2",
     },
   ],
-  execute: async (i) => i,
-  parseInput: async (i) => i,
+  ...passthroughNode,
+};
+
+export const simpleExecNode: Node = {
+  name: "simpleNode",
+  execution: {
+    inputs: [
+      {
+        id: "exec:input",
+      },
+    ],
+    outputs: [
+      {
+        id: "exec:output",
+        name: "Completed",
+      },
+    ],
+  },
+  parameters: [],
+  inputs: [
+    {
+      name: "data",
+      type: "text",
+      defaultValue: "",
+      description: "",
+      id: "data",
+    },
+  ],
+  outputs: [
+    {
+      name: "data",
+      type: "text",
+      defaultValue: "",
+      description: "",
+      id: "data",
+    },
+  ],
+  ...passthroughNode,
 };

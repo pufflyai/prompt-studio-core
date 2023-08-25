@@ -4,6 +4,19 @@ export const customCompletionConfig: NodeConfig = {
   name: "Custom API",
   description: "",
   tags: ["adapter", "text"],
+  execution: {
+    inputs: [
+      {
+        id: "input",
+      },
+    ],
+    outputs: [
+      {
+        id: "output",
+        name: "Completed",
+      },
+    ],
+  },
   parameters: [],
   outputs: [
     {

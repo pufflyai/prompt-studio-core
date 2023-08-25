@@ -1,9 +1,9 @@
-import { Chain } from "../types";
-import { multiInputNode, simpleNode } from "./nodes";
+import { Flow } from "../types";
+import { multiInputDataNode, simpleDataNode, simpleExecNode } from "./nodes";
 
-export const singleNodeChain: Chain = {
+export const singleNodeFlow: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
+    simple_node: simpleDataNode,
   },
   definition: {
     edges: {},
@@ -25,9 +25,9 @@ export const singleNodeChain: Chain = {
   },
 };
 
-export const simpleChain: Chain = {
+export const simpleFlow: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
+    simple_node: simpleDataNode,
   },
   definition: {
     edges: {
@@ -59,58 +59,9 @@ export const simpleChain: Chain = {
   state: {},
 };
 
-export const autorunExample: Chain = {
+export const simpleLoop: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
-  },
-  definition: {
-    edges: {
-      e1: {
-        id: "e1",
-        source: "n1",
-        target: "n2",
-        sourceHandle: "data",
-        targetHandle: "data",
-      },
-      e2: {
-        id: "e2",
-        source: "n2",
-        target: "n3",
-        sourceHandle: "data",
-        targetHandle: "data",
-      },
-    },
-    nodes: {
-      n1: {
-        id: "n1",
-        type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
-      },
-      n2: {
-        id: "n2",
-        type: "simple_node",
-        autorun: false,
-        editor: {
-          position: { x: 0, y: 0 },
-        },
-      },
-      n3: {
-        id: "n3",
-        type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
-      },
-    },
-  },
-  state: {},
-};
-
-export const simpleLoop: Chain = {
-  nodeTypes: {
-    simple_node: simpleNode,
+    simple_node: simpleDataNode,
   },
   definition: {
     edges: {
@@ -135,16 +86,15 @@ export const simpleLoop: Chain = {
   state: {},
 };
 
-export const simpleExistingState: Chain = {
+export const simpleExistingState: Flow = {
   nodeTypes: {
-    multi_input: multiInputNode,
+    multi_input: multiInputDataNode,
   },
   definition: {
     nodes: {
       n1: {
         id: "n1",
         type: "multi_input",
-        editor: { position: { x: 0, y: 0 } },
       },
     },
     edges: {},
@@ -157,10 +107,10 @@ export const simpleExistingState: Chain = {
   },
 };
 
-export const mappedExample: Chain = {
+export const mappedExample: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
-    multi_input: multiInputNode,
+    simple_node: simpleDataNode,
+    multi_input: multiInputDataNode,
   },
   definition: {
     edges: {
@@ -206,37 +156,29 @@ export const mappedExample: Chain = {
   state: {},
 };
 
-export const existingState: Chain = {
+export const existingState: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
-    multi_node: multiInputNode,
+    simple_node: simpleDataNode,
+    multi_node: multiInputDataNode,
   },
   definition: {
     nodes: {
       n1: {
         id: "n1",
         type: "simple_node",
-        autorun: true,
-        editor: { position: { x: 0, y: 0 } },
       },
       n2: {
         id: "n2",
         type: "template_node",
-        autorun: true,
-        editor: { position: { x: 0, y: 0 } },
       },
       n3: {
         id: "n3",
         type: "async_node",
-        autorun: true,
-        editor: { position: { x: 0, y: 0 } },
       },
 
       n4: {
         id: "n4",
         type: "multi_input_node",
-        autorun: true,
-        editor: { position: { x: 0, y: 0 } },
       },
     },
     edges: {
@@ -278,27 +220,24 @@ export const existingState: Chain = {
   },
 };
 
-export const multiInput: Chain = {
+export const multiInput: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
-    multi_input_node: multiInputNode,
+    simple_node: simpleDataNode,
+    multi_input: multiInputDataNode,
   },
   definition: {
     nodes: {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
       n2: {
         id: "n2",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
       n3: {
         id: "n3",
-        type: "multi_input_node",
-        editor: { position: { x: 0, y: 0 } },
+        type: "multi_input",
       },
     },
     edges: {
@@ -328,32 +267,28 @@ export const multiInput: Chain = {
   state: {},
 };
 
-export const multiInputWithOutput: Chain = {
+export const multiInputWithOutput: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
-    multi_input_node: multiInputNode,
+    simple_node: simpleDataNode,
+    multi_input: multiInputDataNode,
   },
   definition: {
     nodes: {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
       n2: {
         id: "n2",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
       n3: {
         id: "n3",
-        type: "multi_input_node",
-        editor: { position: { x: 0, y: 0 } },
+        type: "multi_input",
       },
       n4: {
         id: "n4",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
     },
     edges: {
@@ -390,37 +325,32 @@ export const multiInputWithOutput: Chain = {
   state: {},
 };
 
-export const multistep: Chain = {
+export const multistep: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
-    multi_input_node: multiInputNode,
+    simple_node: simpleDataNode,
+    multi_input: multiInputDataNode,
   },
   definition: {
     nodes: {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
       n2: {
         id: "n2",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
       n3: {
         id: "n3",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
       n4: {
         id: "n4",
-        type: "multi_input_node",
-        editor: { position: { x: 0, y: 0 } },
+        type: "multi_input",
       },
       n5: {
         id: "n5",
         type: "simple_node",
-        editor: { position: { x: 0, y: 0 } },
       },
     },
     edges: {
@@ -464,9 +394,10 @@ export const multistep: Chain = {
   state: {},
 };
 
-export const simpleChainWithVars: Chain = {
+export const simpleFlowWithVars: Flow = {
   nodeTypes: {
-    simple_node: simpleNode,
+    simple_node: simpleDataNode,
+    multi_node: multiInputDataNode,
   },
   definition: {
     edges: {
@@ -503,4 +434,91 @@ export const simpleChainWithVars: Chain = {
       status: "idle",
     },
   },
+};
+
+export const simpleFlowWithExec: Flow = {
+  nodeTypes: {
+    simple_node: simpleExecNode,
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+      n2: {
+        id: "n2",
+        type: "simple_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+      n3: {
+        id: "n3",
+        type: "simple_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+    },
+  },
+  state: {},
+};
+
+export const simpleExec: Flow = {
+  nodeTypes: {
+    simple_node: simpleExecNode,
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+      },
+      n2: {
+        id: "n2",
+        type: "simple_node",
+      },
+      n3: {
+        id: "n3",
+        type: "simple_node",
+      },
+    },
+  },
+  state: {},
 };

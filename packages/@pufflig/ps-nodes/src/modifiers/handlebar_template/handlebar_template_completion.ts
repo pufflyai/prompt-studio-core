@@ -71,7 +71,7 @@ export const parseInput = async (
   };
 };
 
-export const handlebarTemplateCompletion: Node<HandlebarTemplateCompletionInput, HandlebarTemplateCompletionOutput> = {
+export const handlebarTemplateCompletion: Node = {
   ...nodes[handlebarTemplateCompletionNodeType],
   execute,
   parseInput,

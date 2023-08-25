@@ -1,24 +1,20 @@
-import { Chain, ChainEdge } from "../../../types";
+import { FlowDefinition, FlowEdge } from "../../../types";
 
 /**
  * recursively get all nodes that are reachable from a node
  * @param nodeId
- * @param chain
+ * @param flow_definition
+ * @returns
  */
-export function getReachableNodes(nodeId: string, chain: Chain) {
-  const edges = chain.definition.edges;
+export function getReachableNodes(nodeId: string, flow_definition: FlowDefinition) {
+  const edges = flow_definition.edges;
   const reachableNodes = new Set<string>();
 
   function _getReachableNodes(nodeId: string) {
-    const node = chain.definition.nodes[nodeId];
     reachableNodes.add(nodeId);
-
-    if (node.autorun === false) return;
-
     const targetNodes = Object.values(edges)
-      .filter((edge: ChainEdge) => edge.source === nodeId)
       // do not consider self to be a valid target
-      .filter((edge: ChainEdge) => edge.target !== nodeId)
+      .filter((edge: FlowEdge) => edge.source === nodeId && edge.target !== nodeId)
       .map((edge) => edge.target);
 
     targetNodes.forEach((targetNode) => {

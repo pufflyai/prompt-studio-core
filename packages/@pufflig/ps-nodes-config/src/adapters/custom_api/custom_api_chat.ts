@@ -4,6 +4,19 @@ export const customChatConfig: NodeConfig = {
   name: "Custom API",
   description: "",
   tags: ["adapter", "chat"],
+  execution: {
+    inputs: [
+      {
+        id: "input",
+      },
+    ],
+    outputs: [
+      {
+        id: "output",
+        name: "Completed",
+      },
+    ],
+  },
   parameters: [],
   outputs: [
     {
