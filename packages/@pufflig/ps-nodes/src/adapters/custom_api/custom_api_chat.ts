@@ -13,7 +13,7 @@ export interface CustomAPIChatOutput {
   chat: Chat;
 }
 
-export const customApiChat: Node<CustomAPIChatInput, CustomAPIChatOutput> = {
+export const customApiChat: Node = {
   ...nodes[customApiChatNodeType],
   execute: async (i) => i,
   parseInput: async (i) => i,

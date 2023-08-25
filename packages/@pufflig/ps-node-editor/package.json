@@ -61,7 +61,8 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "reactflow": "^11.0.0"
   },
   "eslintConfig": {
     "env": {

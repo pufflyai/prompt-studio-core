@@ -68,29 +68,9 @@ exports[`correctly map output from one node onto another 1`] = `
 }
 `;
 
-exports[`ignore autorun=false flag on root node 1`] = `
-{
-  "n1": {
-    "input": {
-      "data": "Hello {{World}}",
-    },
-  },
-  "n2": {
-    "input": {
-      "data": "Hello {{World}}",
-    },
-  },
-}
-`;
-
 exports[`ignore inputs from nested unreachable nodes 1`] = `
 {
   "n1": {
-    "input": {
-      "data": "Hello {{World}}",
-    },
-  },
-  "n2": {
     "input": {
       "data": "Hello {{World}}",
     },
@@ -112,11 +92,6 @@ exports[`ignore inputs from nested unreachable nodes 1`] = `
 exports[`ignore inputs from unreachable nodes 1`] = `
 {
   "n1": {
-    "input": {
-      "data": "Hello {{World}}",
-    },
-  },
-  "n2": {
     "input": {
       "data": "Hello {{World}}",
     },
@@ -147,7 +122,7 @@ exports[`merge existing state on input 1`] = `
 }
 `;
 
-exports[`nodes with autorun=false down the chain do not update the inputs of their targets 1`] = `
+exports[`nodes with an execution input are not run without an execution connection 1`] = `
 {
   "n1": {
     "input": {
@@ -188,13 +163,33 @@ exports[`only run a node once all inputs are resolved 1`] = `
 }
 `;
 
-exports[`run a single node chain 1`] = `
+exports[`run a flow with a single node 1`] = `
 {
   "n1": {
     "input": {
       "data": "Hello World",
     },
     "status": "idle",
+  },
+}
+`;
+
+exports[`run nodes connected through execution nodes 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "",
+    },
+  },
+  "n2": {
+    "input": {
+      "data": "",
+    },
+  },
+  "n3": {
+    "input": {
+      "data": "",
+    },
   },
 }
 `;

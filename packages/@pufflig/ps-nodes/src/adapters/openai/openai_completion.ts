@@ -31,7 +31,7 @@ export const execute = async (input: OpenAICompletionInput): Promise<OpenAICompl
   };
 };
 
-export const openaiCompletion: Node<OpenAICompletionInput, OpenAICompletionOutput> = {
+export const openaiCompletion: Node = {
   ...nodes[openaiCompletionNodeType],
   execute,
   parseInput: async (i) => i,

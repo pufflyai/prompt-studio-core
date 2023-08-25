@@ -13,7 +13,7 @@ export interface CustomAPICompletionOutput {
   completion: string;
 }
 
-export const customApiCompletion: Node<CustomAPICompletionInput, CustomAPICompletionOutput> = {
+export const customApiCompletion: Node = {
   ...nodes[customApiCompletionNodeType],
   execute: async (i) => {
     return {

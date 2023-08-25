@@ -1,10 +1,9 @@
-import { Chain } from "@pufflig/ps-chains";
 import { live_chain } from "../../examples/chains/live_chain";
 import { prompt_editor_chain } from "../../examples/chains/prompt_editor_chain";
 import { ChatEditor } from "../../examples/demos/ChatEditor/ChatEditor";
+import { Editable } from "../../examples/demos/Editable/Editable";
 import { PromptEditor } from "../../examples/demos/PromptEditor/PromptEditor";
 import { NodeEditor } from "./NodeEditor";
-import { Editable } from "../../examples/demos/Editable/Editable";
 
 export default {
   title: "Editors",
@@ -16,8 +15,8 @@ export default {
 export const PromptEditorDemo = {
   render: () => (
     <>
-      <PromptEditor chain={prompt_editor_chain as unknown as Chain} />
-      <NodeEditor chain={prompt_editor_chain as unknown as Chain} />
+      <PromptEditor chain={prompt_editor_chain} />
+      <NodeEditor chain={prompt_editor_chain} />
     </>
   ),
 };
@@ -25,8 +24,8 @@ export const PromptEditorDemo = {
 export const ChatEditorDemo = {
   render: () => (
     <>
-      <ChatEditor chain={live_chain as unknown as Chain} />
-      <NodeEditor chain={live_chain as unknown as Chain} />
+      <ChatEditor chain={live_chain} />
+      <NodeEditor chain={live_chain} />
     </>
   ),
 };

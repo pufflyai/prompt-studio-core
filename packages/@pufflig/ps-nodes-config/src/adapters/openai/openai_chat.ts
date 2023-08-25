@@ -5,6 +5,19 @@ export const openaiChatConfig: NodeConfig = {
   name: "OpenAI (Chat)",
   description: "OpenAI Chat",
   tags: ["adapter", "chat"],
+  execution: {
+    inputs: [
+      {
+        id: "input",
+      },
+    ],
+    outputs: [
+      {
+        id: "output",
+        name: "Completed",
+      },
+    ],
+  },
   parameters: [
     {
       id: "api_key",

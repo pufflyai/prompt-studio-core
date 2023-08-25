@@ -1,12 +1,11 @@
-import { Chain, runFromNode } from "@pufflig/ps-chains";
+import { Flow, runFlow } from "@pufflig/ps-chains";
 import { useState } from "react";
 
 interface PromptEditorProps {
-  chain: Chain;
+  chain: Flow;
 }
 
 const startNodeId = "n2";
-const openAINodeId = "n3";
 const outputNodeId = "n1";
 
 const model = {
@@ -22,14 +21,14 @@ export const PromptEditor = (props: PromptEditorProps) => {
 
   const runFromStart = async () => {
     if (!startNodeId) return;
-    const res = await runFromNode(
+    const res = await runFlow(
+      { ...chain, state: chainState },
       startNodeId,
       {
         template: "this is a {{test}}",
         model,
         variables: [{ id: "test", type: "text", name: "test", defaultValue: "foobar!", description: "" }],
       },
-      { ...chain, state: chainState },
       {
         onNodeInputUpdate: console.log,
         onNodeRunComplete: console.log,
@@ -43,12 +42,12 @@ export const PromptEditor = (props: PromptEditorProps) => {
     console.log(res);
   };
 
-  const runCompletion = async () => {
+  const updateTextNode = async () => {
     if (!startNodeId) return;
-    const res = await runFromNode(
-      openAINodeId,
-      {},
+    const res = await runFlow(
       { ...chain, state: chainState },
+      "n0",
+      { text: "this is a test" },
       {
         resolveReferences: async () => {
           return import.meta.env.VITE_OPENAI_API_KEY;
@@ -65,7 +64,7 @@ export const PromptEditor = (props: PromptEditorProps) => {
   return (
     <div>
       <button onClick={() => runFromStart()}>run from start</button>
-      <button onClick={() => runCompletion()}>run completion</button>
+      <button onClick={() => updateTextNode()}>update text node</button>
       <div>{JSON.stringify(chainState[outputNodeId]?.input)}</div>
     </div>
   );

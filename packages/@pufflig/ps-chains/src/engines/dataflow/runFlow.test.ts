@@ -1,16 +1,17 @@
 import {
-  autorunExample,
   mappedExample,
   multiInput,
   multiInputWithOutput,
   multistep,
-  simpleChain,
-  simpleChainWithVars,
+  simpleExec,
   simpleExistingState,
+  simpleFlow,
+  simpleFlowWithExec,
+  simpleFlowWithVars,
   simpleLoop,
-  singleNodeChain,
+  singleNodeFlow,
 } from "../../mocks/chains";
-import { runFromNode } from "./runFromNode";
+import { runFlow } from "./runFlow";
 import { produce } from "immer";
 
 /**
@@ -18,7 +19,7 @@ import { produce } from "immer";
  */
 test("should throw error if the node is undefined", async () => {
   try {
-    await runFromNode("not_a_node", { data: "Hello World" }, singleNodeChain);
+    await runFlow(singleNodeFlow, "not_a_node", { data: "Hello World" });
   } catch (err) {
     expect(err).toMatchSnapshot();
   }
@@ -27,14 +28,19 @@ test("should throw error if the node is undefined", async () => {
 /**
  * -> (1)
  */
-test("run a single node chain", async () => {
+test("run a flow with a single node", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", { data: "Hello World" }, singleNodeChain, {
-    onNodeInputUpdate,
-    onNodeRunError: () => {},
-  });
+  const res = await runFlow(
+    singleNodeFlow,
+    "n1",
+    { data: "Hello World" },
+    {
+      onNodeInputUpdate,
+      onNodeRunError: () => {},
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(1);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(0);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
@@ -48,11 +54,16 @@ test("running a node updates the input of its children", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", { data: "Hello {{World}}" }, simpleChain, {
-    onNodeRunComplete,
-    onNodeInputUpdate,
-    onNodeRunError,
-  });
+  const res = await runFlow(
+    simpleFlow,
+    "n1",
+    { data: "Hello {{World}}" },
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
@@ -60,48 +71,23 @@ test("running a node updates the input of its children", async () => {
 });
 
 /**
- * -> (1[X]) -> (2)
+ * -> (1x)   (x2x)
+ *        ->  (2) -> (X)
  */
-test("ignore autorun=false flag on root node", async () => {
+test("nodes with an execution input are not run without an execution connection", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const simpleChainWithAutorunFalse = {
-    ...simpleChain,
-    definition: {
-      ...simpleChain.definition,
-      nodes: {
-        ...simpleChain.definition.nodes,
-        n1: {
-          ...simpleChain.definition.nodes.n1,
-          autorun: false,
-        },
-      },
-    },
-  };
-  const res = await runFromNode("n1", { data: "Hello {{World}}" }, simpleChainWithAutorunFalse, {
-    onNodeInputUpdate,
-    onNodeRunComplete,
-    onNodeRunError,
-  });
-  expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
-  expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
-  expect(onNodeRunError).toHaveBeenCalledTimes(0);
-  expect(res).toMatchSnapshot();
-});
-
-/**
- * -> (1) -> (2[X]) -> (X)
- */
-test("nodes with autorun=false down the chain do not update the inputs of their targets", async () => {
-  const onNodeInputUpdate = jest.fn();
-  const onNodeRunComplete = jest.fn();
-  const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", { data: "Hello {{World}}" }, autorunExample, {
-    onNodeInputUpdate,
-    onNodeRunComplete,
-    onNodeRunError,
-  });
+  const res = await runFlow(
+    simpleFlowWithExec,
+    "n1",
+    { data: "Hello {{World}}" },
+    {
+      onNodeInputUpdate,
+      onNodeRunComplete,
+      onNodeRunError,
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
@@ -115,11 +101,16 @@ test("avoid hanging on loops", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", { data: "Hello {{World}}" }, simpleLoop, {
-    onNodeInputUpdate,
-    onNodeRunComplete,
-    onNodeRunError,
-  });
+  const res = await runFlow(
+    simpleLoop,
+    "n1",
+    { data: "Hello {{World}}" },
+    {
+      onNodeInputUpdate,
+      onNodeRunComplete,
+      onNodeRunError,
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
@@ -133,11 +124,16 @@ test("merge existing state on input", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", { data1: "IS_OVERWRITTEN" }, simpleExistingState, {
-    onNodeInputUpdate,
-    onNodeRunComplete,
-    onNodeRunError,
-  });
+  const res = await runFlow(
+    simpleExistingState,
+    "n1",
+    { data1: "IS_OVERWRITTEN" },
+    {
+      onNodeInputUpdate,
+      onNodeRunComplete,
+      onNodeRunError,
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(1);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(0);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
@@ -151,21 +147,21 @@ test("correctly map output from one node onto another", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", { data: "test data" }, mappedExample, {
-    onNodeInputUpdate,
-    onNodeRunComplete,
-    onNodeRunError,
-  });
+  const res = await runFlow(
+    mappedExample,
+    "n1",
+    { data: "test data" },
+    {
+      onNodeInputUpdate,
+      onNodeRunComplete,
+      onNodeRunError,
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(3);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(2);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
 });
-
-/**
- * b -> (a1)
- */
-test.skip("ignore inputs that are not part of a node definition", async () => {});
 
 /**
  * -> (1a) -----------> (a4)
@@ -175,11 +171,16 @@ test("can handle input from multiple origins", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", { data: "Hello {{World}}" }, multiInput, {
-    onNodeRunComplete,
-    onNodeInputUpdate,
-    onNodeRunError,
-  });
+  const res = await runFlow(
+    multiInput,
+    "n1",
+    { data: "Hello {{World}}" },
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(4);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(2);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
@@ -194,11 +195,16 @@ test("only run a node once all inputs are resolved", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", { data: "Hello {{World}}" }, multiInputWithOutput, {
-    onNodeRunComplete,
-    onNodeInputUpdate,
-    onNodeRunError,
-  });
+  const res = await runFlow(
+    multiInputWithOutput,
+    "n1",
+    { data: "Hello {{World}}" },
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(5);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(3);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
@@ -207,7 +213,7 @@ test("only run a node once all inputs are resolved", async () => {
 
 /**
  * -> (1a) ---------> (a4c) --> (a5)
- *       \--> (X) --> (b4)
+ *            (X) --> (b4)
  */
 test("ignore inputs from unreachable nodes", async () => {
   const onNodeInputUpdate = jest.fn();
@@ -215,15 +221,20 @@ test("ignore inputs from unreachable nodes", async () => {
   const onNodeRunError = jest.fn();
 
   const chain = produce(multiInputWithOutput, (draftState) => {
-    draftState.definition.nodes["n2"].autorun = false;
+    delete draftState.definition.edges.e1;
   });
 
-  const res = await runFromNode("n1", { data: "Hello {{World}}" }, chain, {
-    onNodeRunComplete,
-    onNodeInputUpdate,
-    onNodeRunError,
-  });
-  expect(onNodeInputUpdate).toHaveBeenCalledTimes(4);
+  const res = await runFlow(
+    chain,
+    "n1",
+    { data: "Hello {{World}}" },
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(3);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(2);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
@@ -231,23 +242,28 @@ test("ignore inputs from unreachable nodes", async () => {
 
 /**
  * -> (1a) -----------------> (a4c) --> (a5)
- *       \--> (X) --> (X) --> (b4)
+ *            (X) --> (X) --> (b4)
  */
-test.only("ignore inputs from nested unreachable nodes", async () => {
+test("ignore inputs from nested unreachable nodes", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
 
   const chain = produce(multistep, (draftState) => {
-    draftState.definition.nodes["n2"].autorun = false;
+    delete draftState.definition.edges.e1;
   });
 
-  const res = await runFromNode("n1", { data: "Hello {{World}}" }, chain, {
-    onNodeRunComplete,
-    onNodeInputUpdate,
-    onNodeRunError,
-  });
-  expect(onNodeInputUpdate).toHaveBeenCalledTimes(4);
+  const res = await runFlow(
+    chain,
+    "n1",
+    { data: "Hello {{World}}" },
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(3);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(2);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
@@ -261,7 +277,8 @@ test("update array variables", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode(
+  const res = await runFlow(
+    simpleFlow,
     "n2",
     {
       variables: [
@@ -269,7 +286,6 @@ test("update array variables", async () => {
         { id: "hello", name: "hello", type: "text", description: "", defaultValue: "test2" },
       ],
     },
-    simpleChain,
     {
       onNodeInputUpdate,
       onNodeRunComplete,
@@ -289,19 +305,47 @@ test("can resolve variables correctly", async () => {
   const onNodeInputUpdate = jest.fn();
   const onNodeRunComplete = jest.fn();
   const onNodeRunError = jest.fn();
-  const res = await runFromNode("n1", {}, simpleChainWithVars, {
-    onNodeRunComplete,
-    onNodeInputUpdate,
-    onNodeRunError,
-    resolveReferences: async (variable) => {
-      if (variable === "file:MY_FILE") {
-        return "INSERTED_FILE";
-      }
-      return "${{ps:ref:" + variable + "}}";
-    },
-  });
+  const res = await runFlow(
+    simpleFlowWithVars,
+    "n1",
+    {},
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+      resolveReferences: async (variable) => {
+        if (variable === "file:MY_FILE") {
+          return "INSERTED_FILE";
+        }
+        return "${{ps:ref:" + variable + "}}";
+      },
+    }
+  );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
+  expect(onNodeRunError).toHaveBeenCalledTimes(0);
+  expect(res).toMatchSnapshot();
+});
+
+/**
+ * -> (1) => (2) => (3)
+ */
+test("run nodes connected through execution nodes", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
+  const onNodeRunError = jest.fn();
+  const res = await runFlow(
+    simpleExec,
+    "n1",
+    {},
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(3);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(2);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
 });

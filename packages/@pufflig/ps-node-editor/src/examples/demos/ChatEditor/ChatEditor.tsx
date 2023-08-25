@@ -1,10 +1,10 @@
 import { Box, Button, Code } from "@chakra-ui/react";
-import { Chain, runFromNode } from "@pufflig/ps-chains";
+import { Flow, runFlow } from "@pufflig/ps-chains";
 import { ChatMessage } from "@pufflig/ps-types";
 import { useState } from "react";
 
 interface PromptEditorProps {
-  chain: Chain;
+  chain: Flow;
 }
 
 const startNodeId = "0e3f8188-8217-4aa5-9982-947aaa7601d6"; // "5";
@@ -23,7 +23,8 @@ export const ChatEditor = (props: PromptEditorProps) => {
 
   const runFromStart = async () => {
     if (!startNodeId) return;
-    const res = await runFromNode(
+    const res = await runFlow(
+      { ...chain, state: chainState },
       startNodeId,
       {
         chat: { messages: [] },
@@ -35,7 +36,6 @@ export const ChatEditor = (props: PromptEditorProps) => {
         } as ChatMessage,
         model,
       },
-      { ...chain, state: chainState },
       {
         logLevel: "debug",
         onNodeInputUpdate: console.log,

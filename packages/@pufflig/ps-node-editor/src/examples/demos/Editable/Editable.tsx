@@ -1,11 +1,11 @@
 import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
-import { Chain } from "@pufflig/ps-chains";
+import { Flow } from "@pufflig/ps-chains";
 import { useState } from "react";
 import { NodeEditor } from "../../..";
 import { empty_chain } from "../../chains/empty_chain";
 
 export const Editable = () => {
-  const [chain, setChain] = useState<Chain>(empty_chain as unknown as Chain);
+  const [chain, setChain] = useState<Flow>(empty_chain as Flow);
 
   const addNode = (type: any) => {
     setChain((prev) => {
@@ -52,7 +52,7 @@ export const Editable = () => {
           );
         })}
       </Stack>
-      <NodeEditor chain={chain as unknown as Chain} />
+      <NodeEditor chain={chain} />
     </Box>
   );
 };

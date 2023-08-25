@@ -5,6 +5,19 @@ export const openaiCompletionConfig: NodeConfig = {
   name: "OpenAI (Completion)",
   description: "OpenAI Completion",
   tags: ["adapter", "text"],
+  execution: {
+    inputs: [
+      {
+        id: "input",
+      },
+    ],
+    outputs: [
+      {
+        id: "output",
+        name: "Completed",
+      },
+    ],
+  },
   parameters: [
     {
       id: "api_key",

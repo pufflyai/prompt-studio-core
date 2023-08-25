@@ -7,10 +7,19 @@ export const prompt_editor_chain = {
   nodeTypes: nodes,
   definition: {
     nodes: {
+      n0: {
+        id: "n0",
+        type: "data/text",
+        editor: {
+          position: {
+            x: 0,
+            y: 0,
+          },
+        },
+      },
       n1: {
         id: "n1",
         type: "core/output",
-        autorun: true,
         editor: {
           position: {
             x: 500,
@@ -21,7 +30,6 @@ export const prompt_editor_chain = {
       n3: {
         id: "n3",
         type: "adapter/openai_completion",
-        autorun: true,
         editor: {
           position: {
             x: 200,
@@ -32,7 +40,6 @@ export const prompt_editor_chain = {
       n2: {
         id: "n2",
         type: "core/input",
-        autorun: true,
         editor: {
           position: {
             x: 0,
@@ -43,7 +50,6 @@ export const prompt_editor_chain = {
       n4: {
         id: "n4",
         type: "modifier/handlebar_template_completion",
-        autorun: true,
         editor: {
           position: {
             x: 300,
@@ -53,6 +59,27 @@ export const prompt_editor_chain = {
       },
     },
     edges: {
+      ee1: {
+        id: "ee1",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      ee2: {
+        id: "ee2",
+        source: "n3",
+        target: "n1",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      e0: {
+        id: "e0",
+        source: "n0",
+        target: "n4",
+        sourceHandle: "text",
+        targetHandle: "template",
+      },
       e1: {
         id: "e1",
         source: "n4",
@@ -73,13 +100,6 @@ export const prompt_editor_chain = {
         target: "n1",
         sourceHandle: "completion",
         targetHandle: "completion",
-      },
-      e4: {
-        id: "e4",
-        source: "n2",
-        target: "n4",
-        sourceHandle: "template",
-        targetHandle: "template",
       },
       e5: {
         id: "e5",

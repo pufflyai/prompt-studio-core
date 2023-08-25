@@ -1,4 +1,4 @@
-import { simpleNode } from "../../../mocks/nodes";
+import { simpleDataNode } from "../../../mocks/nodes";
 import { applyDefaultInputs } from "./utils";
 
 test("apply default inputs without overwriting them", async () => {
@@ -14,7 +14,7 @@ test("apply default inputs without overwriting them", async () => {
         },
       ],
     },
-    simpleNode
+    simpleDataNode
   );
 
   expect(res).toMatchInlineSnapshot(`

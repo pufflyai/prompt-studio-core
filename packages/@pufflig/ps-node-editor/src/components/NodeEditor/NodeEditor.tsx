@@ -1,6 +1,6 @@
 import "reactflow/dist/style.css";
 
-import { Chain } from "@pufflig/ps-chains";
+import { Flow } from "@pufflig/ps-chains";
 import { useCallback } from "react";
 import { ReactFlow, addEdge, useEdgesState, useNodesState } from "reactflow";
 import { CoreNode } from "../CoreNode/CoreNode";
@@ -9,7 +9,7 @@ import { Box } from "@chakra-ui/react";
 import { chainToReactFlow } from "../../utils/chainToReactFlow";
 
 interface NodeEditorProps {
-  chain: Chain;
+  chain: Flow;
 }
 
 const nodeTypes = {

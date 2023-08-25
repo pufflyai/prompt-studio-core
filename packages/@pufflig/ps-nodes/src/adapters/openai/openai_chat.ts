@@ -42,7 +42,7 @@ export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput>
   };
 };
 
-export const openaiChat: Node<OpenAIChatInput, OpenAIChatOutput> = {
+export const openaiChat: Node = {
   ...nodes[openaiChatNodeType],
   execute,
   parseInput: async (i) => i,
