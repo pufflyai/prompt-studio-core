@@ -1,6 +1,8 @@
-import { Chat, Node, ObjectDefinition } from "@pufflig/ps-types";
+import _ from "lodash";
+import { Chat, Node, NumberParam, ObjectDefinition, TextParam } from "@pufflig/ps-types";
 import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
+import { extractVariables } from "./utils/extractVariables";
 import { nodes } from "@pufflig/ps-nodes-config";
 
 export const handlebarTemplateChatNodeType = "modifier/handlebar_template_chat";
@@ -30,6 +32,68 @@ export const execute = async (input: HandlebarTemplateChatInput): Promise<Handle
     chat: {
       messages: renderedMessages,
     },
+  };
+};
+
+/**
+ * Parse the input and extract variables from the template.
+ * If no template is provided, the input is returned as is.
+ * @param input
+ * @param prev
+ * @returns
+ */
+export const parseInput = async (
+  input: HandlebarTemplateChatInput,
+  prev?: Partial<HandlebarTemplateChatInput>
+) => {
+  const { chat, variables } = input;
+
+  if (chat === undefined) {
+    return input;
+  }
+  const extractedVariableArrays = chat.messages.map((message) => {
+    var messageVars = extractVariables(message.content)
+    console.log("messageVars:", messageVars)
+    return messageVars
+  })
+
+  const extractedVariables = _.flatten(extractedVariableArrays)
+  console.log("extractedVariables:", extractedVariables)
+
+  const uniqueVariables = extractedVariables.reduce((uniqueArr: (NumberParam | TextParam | null)[], currentVariable: NumberParam | TextParam | null) => {
+    const existingVariable = uniqueArr.find(variable => variable?.id === currentVariable?.id);
+    if (!existingVariable) {
+      uniqueArr.push(currentVariable);
+    }
+    return uniqueArr;
+  }, []);
+
+  console.log("uniquevariables: ", uniqueVariables)
+
+  if (uniqueVariables) {
+    // extracted variables that already existed in the previous input are assigned the previous value
+    const variablesObject = uniqueVariables.map((variable) => {
+      const prevVariable = (prev?.variables || []).find((v) => v.id === variable?.id);
+      if (prevVariable) {
+        return {
+          ...variable,
+          defaultValue: prevVariable.defaultValue,
+        };
+      }
+      return variable;
+    });
+
+    const newVariables = _.unionBy(_.intersectionBy(variables, variablesObject, "id"), variablesObject as any, "id");
+
+    return {
+      ...input,
+      variables: newVariables,
+    };
+  }
+
+  return {
+    ...input,
+    variables,
   };
 };
 
