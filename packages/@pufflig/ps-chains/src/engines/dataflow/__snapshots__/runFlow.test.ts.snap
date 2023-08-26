@@ -68,6 +68,16 @@ exports[`correctly map output from one node onto another 1`] = `
 }
 `;
 
+exports[`do not run an executable node unless the parent was run already 1`] = `
+{
+  "n2": {
+    "input": {
+      "data": "",
+    },
+  },
+}
+`;
+
 exports[`ignore inputs from nested unreachable nodes 1`] = `
 {
   "n1": {
