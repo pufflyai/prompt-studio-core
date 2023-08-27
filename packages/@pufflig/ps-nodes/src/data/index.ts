@@ -1,7 +1,10 @@
-import { messageNode, messageNodeType } from "./message/message";
-import { textNode, textNodeType } from "./text/text";
+import { nodeTypes } from "@pufflig/ps-nodes-config";
+import { messageNode } from "./message/message";
+import { objectNode } from "./object/object";
+import { textNode } from "./text/text";
 
 export const dataNodes = {
-  [textNodeType]: textNode,
-  [messageNodeType]: messageNode,
+  [nodeTypes.textNodeType]: textNode,
+  [nodeTypes.messageNodeType]: messageNode,
+  [nodeTypes.objectNodeType]: objectNode,
 };

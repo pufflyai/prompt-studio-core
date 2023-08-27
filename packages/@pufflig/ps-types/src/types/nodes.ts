@@ -9,6 +9,7 @@ export interface NodeConfig {
   name: string;
   description?: string;
   tags?: string[];
+  customSchema?: "input" | "output" | "both";
   execution?: {
     inputs: Exec[];
     outputs: Exec[];
