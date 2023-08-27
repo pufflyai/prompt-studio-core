@@ -1,6 +1,6 @@
 import { resolveVariables } from "./resolveVariables";
 
-test.only("resolveVariables - extract variables", async () => {
+test("resolveVariables - extract variables", async () => {
   const resolver = jest.fn(async (variableName) => {
     return `RESOLVED_WITH_${variableName}`;
   });
