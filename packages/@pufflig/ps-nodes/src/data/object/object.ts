@@ -3,6 +3,10 @@ import { Node } from "@pufflig/ps-types";
 
 export const objectNode: Node = {
   ...nodes[nodeTypes.objectNodeType],
-  execute: async (i) => i,
+  execute: async (inputs) => {
+    return {
+      object: inputs,
+    };
+  },
   parseInput: async (i) => i,
 };
