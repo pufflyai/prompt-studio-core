@@ -349,3 +349,27 @@ test("run nodes connected through execution nodes", async () => {
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
 });
+
+/**
+ * (1) => (2) => (3)
+ *         ^
+ */
+test("do not run an executable node unless the parent was run already", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
+  const onNodeRunError = jest.fn();
+  const res = await runFlow(
+    simpleExec,
+    "n2",
+    {},
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(1);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(0);
+  expect(onNodeRunError).toHaveBeenCalledTimes(0);
+  expect(res).toMatchSnapshot();
+});
