@@ -1,4 +1,3 @@
-export type NodeCategory = "input" | "modifier" | "adapter" | "converter" | "output";
 export type DataFormat = "text" | "chat";
 
 export interface UserSettings {

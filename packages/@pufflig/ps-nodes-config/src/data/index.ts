@@ -1,7 +1,15 @@
-import { message } from "./message/message";
-import { text } from "./text/text";
+import { message, messageNodeType } from "./message/message";
+import { objectNode, objectNodeType } from "./object/object";
+import { text, textNodeType } from "./text/text";
 
 export const dataNodes = {
-  "data/text": text,
-  "data/message": message,
+  [textNodeType]: text,
+  [messageNodeType]: message,
+  [objectNodeType]: objectNode,
+};
+
+export const dataNodeTypes = {
+  textNodeType,
+  messageNodeType,
+  objectNodeType,
 };

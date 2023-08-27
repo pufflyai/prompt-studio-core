@@ -1,8 +1,8 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
 export const inputNodeConfig: NodeConfig = {
-  name: "Input",
-  description: "Input node",
+  name: "Start",
+  description: "First node in a workflow",
   tags: ["core", "input"],
   execution: {
     inputs: [],
@@ -12,6 +12,7 @@ export const inputNodeConfig: NodeConfig = {
       },
     ],
   },
+  customSchema: "output",
   parameters: [],
   outputs: [],
   inputs: [],

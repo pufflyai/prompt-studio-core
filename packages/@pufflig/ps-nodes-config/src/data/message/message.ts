@@ -1,5 +1,7 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
+export const messageNodeType = "data/message" as const;
+
 export const message: NodeConfig = {
   name: "Message",
   description: "",
