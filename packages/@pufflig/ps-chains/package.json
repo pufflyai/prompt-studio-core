@@ -1,6 +1,6 @@
 {
   "name": "@pufflig/ps-chains",
-  "version": "0.14.1",
+  "version": "0.14.2",
   "license": "MIT",
   "main": "./dist/ps-chains.umd.js",
   "module": "./dist/ps-chains.es.js",
