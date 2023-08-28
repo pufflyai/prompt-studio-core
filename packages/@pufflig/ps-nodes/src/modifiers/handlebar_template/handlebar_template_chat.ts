@@ -53,12 +53,10 @@ export const parseInput = async (
   }
   const extractedVariableArrays = chat.messages.map((message) => {
     var messageVars = extractVariables(message.content)
-    console.log("messageVars:", messageVars)
     return messageVars
   })
 
   const extractedVariables = _.flatten(extractedVariableArrays)
-  console.log("extractedVariables:", extractedVariables)
 
   const uniqueVariables = extractedVariables.reduce((uniqueArr: (NumberParam | TextParam | null)[], currentVariable: NumberParam | TextParam | null) => {
     const existingVariable = uniqueArr.find(variable => variable?.id === currentVariable?.id);
@@ -68,7 +66,6 @@ export const parseInput = async (
     return uniqueArr;
   }, []);
 
-  console.log("uniquevariables: ", uniqueVariables)
 
   if (uniqueVariables) {
     // extracted variables that already existed in the previous input are assigned the previous value
