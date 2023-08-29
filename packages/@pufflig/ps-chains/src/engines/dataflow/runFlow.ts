@@ -45,7 +45,6 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
     logger.debug({ nodeId, input, newState: newState[nodeId] }, "Updated node input");
 
     const targets = Object.values(flow.definition.edges).filter((edge) => edge.source === nodeId);
-    const executionTargets = targets.filter((edge) => edge.sourceHandle.startsWith(executionPrefix));
 
     // guard against infinite loops
     const isAlreadyRun = (runs[nodeId] || 0) > 0;
@@ -60,16 +59,6 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
       logger.debug("No targets found");
       return;
     }
-
-    // TEMPORARY: only support one execution target
-    if (executionTargets.length > 1) {
-      logger.debug("More than one execution target found");
-      // TODO: add lifecycle method to select an execution target
-      // the execution target depends on the inputs
-      // the inputs must be resolved before the execution target is selected
-      return;
-    }
-    // ---
 
     // if the node is executable, only run it if the parent is complete
     const parentNodeId = Object.values(flow.definition.edges).find(
@@ -152,11 +141,26 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
     }
 
     // run the execution target
+    if (runOptions?.mode === "dataflow") return;
+
+    const executionTargets = targets.filter((edge) => edge.sourceHandle.startsWith(executionPrefix));
+
+    // TEMPORARY: only support one execution target
+    if (executionTargets.length > 1) {
+      logger.debug("More than one execution target found");
+      // TODO: add lifecycle method to select an execution target
+      // the execution target depends on the inputs
+      // the inputs must be resolved before the execution target is selected
+      return;
+    }
+    // ---
+
     visitedEdges.push(...executionTargets.map((e) => e.id));
     const targetId = executionTargets[0]?.target;
     if (targetId) {
       await run_flow_recursive(targetId, {});
     }
+    // ---
   };
 
   await run_flow_recursive(nodeId, input);

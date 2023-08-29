@@ -246,3 +246,18 @@ exports[`update array variables 1`] = `
   },
 }
 `;
+
+exports[`when running a flow in dataflow mode, do no run child executable nodes 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "",
+    },
+  },
+  "n2": {
+    "input": {
+      "data": "",
+    },
+  },
+}
+`;
