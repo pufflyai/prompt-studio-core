@@ -11,6 +11,14 @@ head:
 
 **Note**: the API for the packages in this repo will be highly unstable until we reach v1.0.0"
 
+## 0.15.0
+
+:warning: Breaking changes
+
+### Features
+
+- :warning: **API** [@pufflig/ps-chains] allow user to specify in which mode to run a flow. The mode can be `dataflow` which will not run executable nodes and `controlflow` which will run executable nodes. The default mode is `controlflow`.
+
 ## 0.13.0
 
 :warning: Breaking changes

@@ -39,6 +39,7 @@ export interface NodeState {
 }
 
 export interface RunOptions {
+  mode?: "dataflow" | "controlflow";
   logLevel?: "debug" | "error";
   resolveReferences?: (variable: string) => Promise<string>;
   onNodeInputUpdate?: (id: string, input: NodeState) => void;

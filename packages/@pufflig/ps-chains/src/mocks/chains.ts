@@ -522,3 +522,56 @@ export const simpleExec: Flow = {
   },
   state: {},
 };
+
+export const simpleExecWithData: Flow = {
+  nodeTypes: {
+    simple_node: simpleExecNode,
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      e3: {
+        id: "e3",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+      e4: {
+        id: "e4",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+      },
+      n2: {
+        id: "n2",
+        type: "simple_node",
+      },
+      n3: {
+        id: "n3",
+        type: "simple_node",
+      },
+    },
+  },
+  state: {},
+};

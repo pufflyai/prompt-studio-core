@@ -4,6 +4,7 @@ import {
   multiInputWithOutput,
   multistep,
   simpleExec,
+  simpleExecWithData,
   simpleExistingState,
   simpleFlow,
   simpleFlowWithExec,
@@ -370,6 +371,31 @@ test("do not run an executable node unless the parent was run already", async ()
   );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(1);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(0);
+  expect(onNodeRunError).toHaveBeenCalledTimes(0);
+  expect(res).toMatchSnapshot();
+});
+
+/**
+ * (1) => (2) => (X)
+ *
+ */
+test("when running a flow in dataflow mode, do no run child executable nodes", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
+  const onNodeRunError = jest.fn();
+  const res = await runFlow(
+    simpleExecWithData,
+    "n1",
+    {},
+    {
+      mode: "dataflow",
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
 });
