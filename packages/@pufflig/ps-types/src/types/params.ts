@@ -90,6 +90,11 @@ export interface ListParam extends BaseParam {
   defaultValue: [];
 }
 
+export interface VectorParam extends BaseParam {
+  type: "vector";
+  defaultValue: [];
+}
+
 export type ParamValue =
   | number
   | string
@@ -99,6 +104,7 @@ export type ParamValue =
   | ChatMessage
   | null
   | (NumberParam | TextParam)[]
+  | Array<number>
   | Array<string>;
 
 export type Param =
@@ -111,4 +117,5 @@ export type Param =
   | SecretParam
   | MessageParam
   | ObjectParam
-  | ListParam;
+  | ListParam
+  | VectorParam;

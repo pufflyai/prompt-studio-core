@@ -1,4 +1,4 @@
-import { adapterNodes, adapterSettings, modelConfig } from "./adapters";
+import { adapterNodeTypes, adapterNodes, adapterSettings, modelConfig } from "./adapters";
 import { coreNodes } from "./core";
 import { dataNodeTypes, dataNodes } from "./data";
 import { modifierNodes } from "./modifiers";
@@ -25,6 +25,7 @@ export const models = {
 
 export const nodeTypes = {
   ...dataNodeTypes,
+  ...adapterNodeTypes,
 };
 
 export * from "./types";
