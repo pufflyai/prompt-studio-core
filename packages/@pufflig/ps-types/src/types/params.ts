@@ -119,3 +119,7 @@ export type Param =
   | ObjectParam
   | ListParam
   | VectorParam;
+
+export interface ParamValueMap {
+  [key: string]: ParamValue;
+}

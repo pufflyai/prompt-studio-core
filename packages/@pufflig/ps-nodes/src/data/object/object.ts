@@ -1,5 +1,5 @@
 import { nodes, nodeTypes } from "@pufflig/ps-nodes-config";
-import { Node, Param, ParamValue } from "@pufflig/ps-types";
+import { Node, NumberParam, Param, ParamValue, TextParam } from "@pufflig/ps-types";
 
 const getTypeFromValue = (value: ParamValue): Param["type"] => {
   if (typeof value === "number") {
@@ -22,9 +22,8 @@ export const objectNode: Node = {
           type: getTypeFromValue(value as ParamValue),
           defaultValue: value,
           description: "",
-        } as Param;
+        } as NumberParam | TextParam;
       }),
     };
   },
-  parseInput: async (i) => i,
 };

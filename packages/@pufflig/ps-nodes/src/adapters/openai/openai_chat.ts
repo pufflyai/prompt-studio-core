@@ -1,5 +1,5 @@
 import { nodes } from "@pufflig/ps-nodes-config";
-import { Chat, ChatMessage, ModelValue, Node } from "@pufflig/ps-types";
+import { Chat, ChatMessage, ModelValue, Node, ParamValueMap } from "@pufflig/ps-types";
 import { Configuration, OpenAIApi, ChatCompletionRequestMessage } from "openai";
 import { v4 as uuid } from "uuid";
 
@@ -15,8 +15,8 @@ export interface OpenAIChatOutput {
   message: ChatMessage;
 }
 
-export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput> => {
-  const { chat, model, api_key } = input;
+export const execute = async (input: ParamValueMap): Promise<ParamValueMap> => {
+  const { chat, model, api_key } = input as unknown as OpenAIChatInput;
   const { modelId, parameters } = model;
 
   const configuration = new Configuration({ apiKey: api_key });
@@ -45,5 +45,5 @@ export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput>
 export const openaiChat: Node = {
   ...nodes[openaiChatNodeType],
   execute,
-  parseInput: async (i) => i,
+  mapInput: async (i) => i,
 };

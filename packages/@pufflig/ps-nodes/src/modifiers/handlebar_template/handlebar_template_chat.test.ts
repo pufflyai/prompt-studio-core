@@ -1,7 +1,7 @@
-import { parseInput } from "./handlebar_template_chat";
+import { mapInput } from "./handlebar_template_chat";
 
-test("parseInput - several variables with two of the same variable", async () => {
-  const variables = await parseInput({
+test("mapInput - several variables with two of the same variable", async () => {
+  const variables = await mapInput({
     chat: {
       messages: [
         {
@@ -76,8 +76,8 @@ test("parseInput - several variables with two of the same variable", async () =>
   `);
 });
 
-test("parseInput - if you pass a template and a variable, take value of the variable", async () => {
-  const variables = await parseInput(
+test("mapInput - if you pass a template and a variable, take value of the variable", async () => {
+  const variables = await mapInput(
     {
       chat: {
         messages: [
@@ -128,8 +128,8 @@ test("parseInput - if you pass a template and a variable, take value of the vari
   `);
 });
 
-test("parseInput - removes non existing variables", async () => {
-  const variables = await parseInput({
+test("mapInput - removes non existing variables", async () => {
+  const variables = await mapInput({
     chat: {
       messages: [
         {
@@ -177,8 +177,8 @@ test("parseInput - removes non existing variables", async () => {
   `);
 });
 
-test("parseInput - keep default values from the previous state", async () => {
-  const variables = await parseInput(
+test("mapInput - keep default values from the previous state", async () => {
+  const variables = await mapInput(
     {
       chat: {
         messages: [
@@ -231,8 +231,8 @@ test("parseInput - keep default values from the previous state", async () => {
   `);
 });
 
-test("parseInput - override values from the previous state with the new value", async () => {
-  const variables = await parseInput(
+test("mapInput - override values from the previous state with the new value", async () => {
+  const variables = await mapInput(
     {
       chat: {
         messages: [

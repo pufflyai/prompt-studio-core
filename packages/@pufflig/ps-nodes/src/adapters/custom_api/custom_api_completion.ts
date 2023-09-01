@@ -20,5 +20,5 @@ export const customApiCompletion: Node = {
       completion: i.prompt,
     };
   },
-  parseInput: async (i) => i,
+  mapInput: async (i) => i,
 };

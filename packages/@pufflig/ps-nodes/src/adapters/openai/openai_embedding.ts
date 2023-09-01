@@ -31,5 +31,5 @@ export async function execute(input: OpenAIEmbeddingInput) {
 export const openaiCompletion: Node = {
   ...nodes[nodeTypes.openaiEmbeddingNodeType],
   execute,
-  parseInput: async (i) => i,
+  mapInput: async (i) => i,
 };

@@ -70,7 +70,7 @@ const chain = {
         },
       ],
       execute: async (i) => i,
-      parseInput: async (i) => i,
+      mapInput: async (i) => i,
     },
     additionNode: {
       name: "Addition",
@@ -101,7 +101,7 @@ const chain = {
         },
       ],
       execute: async ({ number1, number2 }: any) => ({ sum: (number1 || 0) + (number2 || 0) }),
-      parseInput: async (i) => i,
+      mapInput: async (i) => i,
     },
   },
   definition: {
@@ -178,13 +178,13 @@ Definition of a node. A node is some logic that can run given some input data an
 
 ::: details `schema`
 
-> | name          | type     | data type               | description             |
-> | ------------- | -------- | ----------------------- | ----------------------- |
-> | `name`        | required | string                  | name of the node        |
-> | `description` | optional | string                  | description of the node |
-> | `type`        | required | string                  | type of node            |
-> | `execute`     | required | [function](#execute)    |
-> | `parseInput`  | required | [function](#parseinput) |
+> | name          | type     | data type             | description             |
+> | ------------- | -------- | --------------------- | ----------------------- |
+> | `name`        | required | string                | name of the node        |
+> | `description` | optional | string                | description of the node |
+> | `type`        | required | string                | type of node            |
+> | `execute`     | required | [function](#execute)  |
+> | `mapInput`    | required | [function](#mapInput) |
 
 :::
 
@@ -212,10 +212,10 @@ function execute(variable: Record<string, any>): Promise<Record<sring, any>>;
 
 :::
 
-### `parseInput()`
+### `mapInput()`
 
 ```ts
-function parseInput(variable: string): Promise<string>;
+function mapInput(variable: string): Promise<string>;
 ```
 
 ::: details Parameters
@@ -310,7 +310,7 @@ You can provide several callbacks that trigger at different times in the lifecyc
 function onInputChange(nodeId: string, newInput: Record<string, ParamValue>): void;
 ```
 
-Callback that triggers after the input state of a node was updated. This happens after the node's `parseInput` method ran.
+Callback that triggers after the input state of a node was updated. This happens after the node's `mapInput` method ran.
 
 ::: details Parameters
 
@@ -352,7 +352,7 @@ function updateNodeInput(
 ): Promise<Record<string, NodeState>>;
 ```
 
-Update the input values of a node, without executing the node. This method triggers the `parseInput` node lifecycle function.
+Update the input values of a node, without executing the node. This method triggers the `mapInput` node lifecycle function.
 
 ::: details Parameters
 
@@ -384,7 +384,7 @@ function runFromNode(
 ): Promise<Record<string, NodeState>>;
 ```
 
-Run the chain from a node. Run the `parseInput` function on the new inputs, Update the node inputs, run the `execute`
+Run the chain from a node. Run the `mapInput` function on the new inputs, Update the node inputs, run the `execute`
 function on the new inputs
 
 ::: details Parameters

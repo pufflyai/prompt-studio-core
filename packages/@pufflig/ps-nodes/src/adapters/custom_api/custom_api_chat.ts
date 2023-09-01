@@ -16,5 +16,5 @@ export interface CustomAPIChatOutput {
 export const customApiChat: Node = {
   ...nodes[customApiChatNodeType],
   execute: async (i) => i,
-  parseInput: async (i) => i,
+  mapInput: async (i) => i,
 };

@@ -1,7 +1,7 @@
 import { objectNode } from "./object";
 
 test("correctly map empty inputs", async () => {
-  expect(await objectNode.execute({})).toMatchInlineSnapshot(`
+  expect(await objectNode.execute?.({})).toMatchInlineSnapshot(`
     {
       "object": [],
     }
@@ -10,7 +10,7 @@ test("correctly map empty inputs", async () => {
 
 test("correctly map different inputs", async () => {
   expect(
-    await objectNode.execute({
+    await objectNode.execute?.({
       a: "b",
       c: 0.1,
       d: ["1", "2", "3"],

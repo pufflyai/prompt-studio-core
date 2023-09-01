@@ -1,11 +1,11 @@
 import { ParamValue } from "@pufflig/ps-types";
 import pino from "pino";
 import { Flow, RunOptions } from "../../types";
+import { executionPrefix, getDefaultTargets, identity } from "./constants";
 import { updateNodeInput } from "./updateNodeInput";
 import { getReachableNodes } from "./utils/getReachableNodes";
 import { resolveVariables } from "./utils/resolveVariables";
 import { getEdgeMap, mapOutputToInput } from "./utils/utils";
-import { executionPrefix } from "./constants";
 
 const logger = pino();
 
@@ -84,11 +84,14 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
       return;
     }
 
+    const execute = node.execute || identity;
+    const getTargets = node.getTargets || getDefaultTargets(node);
+
     // run the node
     let result: Record<string, ParamValue> | null = null;
     try {
       // resolve references in the input
-      result = await node.execute(resolvedInput, previousState.input);
+      result = await execute(resolvedInput, previousState.input);
       runOptions?.onNodeRunComplete?.(nodeId, result);
       logger.debug({ nodeId, result }, "Node run complete");
       // track the run
@@ -143,24 +146,17 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
     // run the execution target
     if (runOptions?.mode === "dataflow") return;
 
+    // define the execution order
+    const executionStack = await getTargets(result);
     const executionTargets = targets.filter((edge) => edge.sourceHandle.startsWith(executionPrefix));
 
-    // TEMPORARY: only support one execution target
-    if (executionTargets.length > 1) {
-      logger.debug("More than one execution target found");
-      // TODO: add lifecycle method to select an execution target
-      // the execution target depends on the inputs
-      // the inputs must be resolved before the execution target is selected
-      return;
+    for (const execution of executionStack) {
+      visitedEdges.push(...executionTargets.map((e) => e.id));
+      const targetId = executionTargets.find((e) => e.sourceHandle === execution.execSource)?.target;
+      if (targetId) {
+        await run_flow_recursive(targetId, {});
+      }
     }
-    // ---
-
-    visitedEdges.push(...executionTargets.map((e) => e.id));
-    const targetId = executionTargets[0]?.target;
-    if (targetId) {
-      await run_flow_recursive(targetId, {});
-    }
-    // ---
   };
 
   await run_flow_recursive(nodeId, input);
