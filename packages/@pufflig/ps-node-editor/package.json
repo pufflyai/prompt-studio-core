@@ -3,7 +3,7 @@
   "main": "./dist/ps-node-editor.umd.js",
   "module": "./dist/ps-node-editor.es.js",
   "types": "./dist/ps-node-editor.d.ts",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -21,7 +21,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@pufflig/ps-chains": "^0.16.0",
-    "@pufflig/ps-nodes": "^0.16.0",
+    "@pufflig/ps-nodes": "^0.16.1",
     "framer-motion": "^10.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
