@@ -15,13 +15,14 @@ export const forinNodeConfig: NodeConfig = {
     outputs: [
       {
         id: "output",
+        name: "Step",
       },
       {
         id: "complete",
+        name: "Complete",
       },
     ],
   },
-  customSchema: "output",
   parameters: [],
   outputs: [
     {

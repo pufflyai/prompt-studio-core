@@ -24,6 +24,7 @@ export const appendToChat: NodeConfig = {
         "Given a message id, the message is added as a version to the chat message with the same ID. If empty, the message is appended to the chat.",
       type: "text",
       defaultValue: "",
+      singleLine: true,
     },
     {
       id: "chat",
