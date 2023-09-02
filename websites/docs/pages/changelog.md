@@ -11,6 +11,16 @@ head:
 
 **Note**: the API for the packages in this repo will be highly unstable until we reach v1.0.0"
 
+## 0.16.0
+
+:warning: Breaking changes
+
+### Features
+
+- :warning: **API** [@pufflig/ps-chains] rename `parseInput` method to `mapInput`
+- **API** [@pufflig/ps-chains] add `getNext` lifecycle method. With this method a node can decide what target execution nodes to run and in what order. This method can be used to create loops / conditionals.
+- [@pufflig/ps-nodes] add a node to generate embeddings using the openai api.
+
 ## 0.15.0
 
 :warning: Breaking changes

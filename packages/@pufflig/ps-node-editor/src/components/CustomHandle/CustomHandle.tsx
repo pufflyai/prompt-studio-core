@@ -10,16 +10,17 @@ interface CustomHandleProps {
 }
 
 const dataTypeColors: { [key in Param["type"]]: string } = {
-  text: "blue",
-  number: "green",
-  api: "orange",
-  chat: "yellow",
-  secret: "red",
+  text: "#264653",
+  number: "#2A9D8F",
+  api: "#E9C46A",
+  chat: "#F4A261",
+  secret: "#E76F51",
   message: "teal",
   list: "cyan",
   model: "purple",
   selection: "pink",
   object: "magenta",
+  vector: "red",
 };
 
 export function CustomHandle(props: CustomHandleProps) {

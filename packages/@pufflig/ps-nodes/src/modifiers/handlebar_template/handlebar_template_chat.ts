@@ -1,9 +1,9 @@
-import _ from "lodash";
+import { nodes } from "@pufflig/ps-nodes-config";
 import { Chat, Node, NumberParam, ObjectDefinition, TextParam } from "@pufflig/ps-types";
+import _ from "lodash";
 import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
 import { extractVariables } from "./utils/extractVariables";
-import { nodes } from "@pufflig/ps-nodes-config";
 
 export const handlebarTemplateChatNodeType = "modifier/handlebar_template_chat";
 
@@ -16,7 +16,7 @@ export interface HandlebarTemplateChatOutput {
   chat: Chat;
 }
 
-export const execute = async (input: HandlebarTemplateChatInput): Promise<HandlebarTemplateChatOutput> => {
+export const execute = async (input: HandlebarTemplateChatInput) => {
   const { chat, variables } = input;
   const variablesObject = objectDefinitionToMap(variables);
 
@@ -42,30 +42,29 @@ export const execute = async (input: HandlebarTemplateChatInput): Promise<Handle
  * @param prev
  * @returns
  */
-export const parseInput = async (
-  input: HandlebarTemplateChatInput,
-  prev?: Partial<HandlebarTemplateChatInput>
-) => {
+export const mapInput = async (input: HandlebarTemplateChatInput, prev?: Partial<HandlebarTemplateChatInput>) => {
   const { chat, variables } = input;
 
   if (chat === undefined) {
     return input;
   }
   const extractedVariableArrays = chat.messages.map((message) => {
-    var messageVars = extractVariables(message.content)
-    return messageVars
-  })
+    var messageVars = extractVariables(message.content);
+    return messageVars;
+  });
 
-  const extractedVariables = _.flatten(extractedVariableArrays)
+  const extractedVariables = _.flatten(extractedVariableArrays);
 
-  const uniqueVariables = extractedVariables.reduce((uniqueArr: (NumberParam | TextParam | null)[], currentVariable: NumberParam | TextParam | null) => {
-    const existingVariable = uniqueArr.find(variable => variable?.id === currentVariable?.id);
-    if (!existingVariable) {
-      uniqueArr.push(currentVariable);
-    }
-    return uniqueArr;
-  }, []);
-
+  const uniqueVariables = extractedVariables.reduce(
+    (uniqueArr: (NumberParam | TextParam | null)[], currentVariable: NumberParam | TextParam | null) => {
+      const existingVariable = uniqueArr.find((variable) => variable?.id === currentVariable?.id);
+      if (!existingVariable) {
+        uniqueArr.push(currentVariable);
+      }
+      return uniqueArr;
+    },
+    []
+  );
 
   if (uniqueVariables) {
     // extracted variables that already existed in the previous input are assigned the previous value
@@ -94,8 +93,8 @@ export const parseInput = async (
   };
 };
 
-export const handlebarTemplateChat: Node = {
+export const handlebarTemplateChat: Node<HandlebarTemplateChatInput, HandlebarTemplateChatOutput> = {
   ...nodes[handlebarTemplateChatNodeType],
   execute,
-  parseInput: async (i) => i,
+  mapInput,
 };

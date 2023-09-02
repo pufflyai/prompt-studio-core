@@ -1,7 +1,7 @@
-import { parseInput } from "./handlebar_template_completion";
+import { mapInput } from "./handlebar_template_completion";
 
-test("parseInput - no variables", async () => {
-  const variables = await parseInput({
+test("mapInput - no variables", async () => {
+  const variables = await mapInput({
     template: `summarize {{longText}}`,
     variables: [],
   });
@@ -21,8 +21,8 @@ test("parseInput - no variables", async () => {
   `);
 });
 
-test("parseInput - if you pass a template and a variable, take value of the variable", async () => {
-  const variables = await parseInput(
+test("mapInput - if you pass a template and a variable, take value of the variable", async () => {
+  const variables = await mapInput(
     {
       template: `summarize {{longText}}`,
       variables: [
@@ -53,8 +53,8 @@ test("parseInput - if you pass a template and a variable, take value of the vari
   `);
 });
 
-test("parseInput - removes non existing variables", async () => {
-  const variables = await parseInput({
+test("mapInput - removes non existing variables", async () => {
+  const variables = await mapInput({
     template: `summarize {{longText}}`,
     variables: [
       {
@@ -82,8 +82,8 @@ test("parseInput - removes non existing variables", async () => {
   `);
 });
 
-test("parseInput - keep default values from the previous state", async () => {
-  const variables = await parseInput(
+test("mapInput - keep default values from the previous state", async () => {
+  const variables = await mapInput(
     {
       template: `summarize {{longText}}`,
       variables: [],
@@ -116,8 +116,8 @@ test("parseInput - keep default values from the previous state", async () => {
   `);
 });
 
-test("parseInput - override values from the previous state with the new value", async () => {
-  const variables = await parseInput(
+test("mapInput - override values from the previous state with the new value", async () => {
+  const variables = await mapInput(
     {
       template: `summarize {{longText}}`,
       variables: [

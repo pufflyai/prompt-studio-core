@@ -32,7 +32,7 @@ export const execute = async (input: HandlebarTemplateCompletionInput) => {
  * @param prev
  * @returns
  */
-export const parseInput = async (
+export const mapInput = async (
   input: HandlebarTemplateCompletionInput,
   prev?: Partial<HandlebarTemplateCompletionInput>
 ) => {
@@ -71,8 +71,8 @@ export const parseInput = async (
   };
 };
 
-export const handlebarTemplateCompletion: Node = {
+export const handlebarTemplateCompletion: Node<HandlebarTemplateCompletionInput, HandlebarTemplateCompletionOutput> = {
   ...nodes[handlebarTemplateCompletionNodeType],
   execute,
-  parseInput,
+  mapInput,
 };

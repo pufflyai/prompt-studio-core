@@ -1,8 +1,13 @@
-import { Param } from "./params";
+import { Param, ParamValueMap } from "./params";
 
 export interface Exec {
   id: string;
   name?: string;
+}
+
+export interface NextNode {
+  execSource: string;
+  inputs: ParamValueMap;
 }
 
 export interface NodeConfig {
@@ -19,9 +24,14 @@ export interface NodeConfig {
   outputs: Param[];
 }
 
-export interface NodeActions {
-  execute: (input: any, prevInput?: any) => Promise<any>;
-  parseInput: (input: any, prevInput?: any) => Promise<any>;
+export type Execute<I = any, O = any> = (input: I, prevInput?: Partial<I>) => Promise<O | null>;
+export type MapInput<I = any> = (input: I, prevInput?: Partial<I>) => Promise<I | null>;
+export type GetTargets<O = any> = (result: O) => Promise<NextNode[]>;
+
+export interface NodeActions<I = any, O = any> {
+  execute?: Execute<I, O>;
+  mapInput?: MapInput<I>;
+  getTargets?: GetTargets<O>;
 }
 
-export type Node = NodeConfig & NodeActions;
+export type Node<I = any, O = any> = NodeConfig & NodeActions<I, O>;

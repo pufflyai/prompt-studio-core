@@ -13,12 +13,12 @@ export interface CustomAPICompletionOutput {
   completion: string;
 }
 
-export const customApiCompletion: Node = {
+export const customApiCompletion: Node<CustomAPICompletionInput, CustomAPICompletionOutput> = {
   ...nodes[customApiCompletionNodeType],
-  execute: async (i) => {
+  execute: async (input) => {
+    const { prompt } = input;
     return {
-      completion: i.prompt,
+      completion: prompt,
     };
   },
-  parseInput: async (i) => i,
 };

@@ -51,8 +51,7 @@ export const execute = async (input: AppendToChatInput): Promise<AppendToChatOut
   };
 };
 
-export const appendToChat: Node = {
+export const appendToChat: Node<AppendToChatInput, AppendToChatOutput> = {
   ...nodes[appendToChatNodeType],
   execute,
-  parseInput: async (i) => i,
 };

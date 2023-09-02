@@ -1,9 +1,33 @@
 import { Flow } from "../types";
-import { multiInputDataNode, simpleDataNode, simpleExecNode } from "./nodes";
+import { configOnlyNode, multiInputDataNode, simpleDataNode, simpleExecNode } from "./nodes";
 
 export const singleNodeFlow: Flow = {
   nodeTypes: {
     simple_node: simpleDataNode,
+  },
+  definition: {
+    edges: {},
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+        editor: {
+          position: { x: 0, y: 0 },
+        },
+      },
+    },
+  },
+  state: {
+    n1: {
+      input: {},
+      status: "idle",
+    },
+  },
+};
+
+export const configOnlyFlow: Flow = {
+  nodeTypes: {
+    simple_node: configOnlyNode,
   },
   definition: {
     edges: {},

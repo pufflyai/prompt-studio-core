@@ -1,4 +1,5 @@
 import {
+  configOnlyFlow,
   mappedExample,
   multiInput,
   multiInputWithOutput,
@@ -24,6 +25,25 @@ test("should throw error if the node is undefined", async () => {
   } catch (err) {
     expect(err).toMatchSnapshot();
   }
+});
+
+test("should run even when lifecycle methods are missing", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
+  const onNodeRunError = jest.fn();
+  const res = await runFlow(
+    configOnlyFlow,
+    "n1",
+    { data: "Hello World" },
+    {
+      onNodeInputUpdate,
+      onNodeRunError: () => {},
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(1);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(0);
+  expect(onNodeRunError).toHaveBeenCalledTimes(0);
+  expect(res).toMatchSnapshot();
 });
 
 /**

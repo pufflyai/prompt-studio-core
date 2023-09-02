@@ -2,7 +2,7 @@ import { Node, NodeActions } from "@pufflig/ps-types";
 
 export const passthroughNode: NodeActions = {
   execute: async (i) => i,
-  parseInput: async (i) => i,
+  mapInput: async (i) => i,
 };
 
 export const simpleDataNode: Node = {
@@ -27,6 +27,29 @@ export const simpleDataNode: Node = {
     },
   ],
   ...passthroughNode,
+};
+
+export const configOnlyNode: Node = {
+  name: "simpleNode",
+  parameters: [],
+  inputs: [
+    {
+      name: "data",
+      type: "text",
+      defaultValue: "",
+      description: "",
+      id: "data",
+    },
+  ],
+  outputs: [
+    {
+      name: "data",
+      type: "text",
+      defaultValue: "",
+      description: "",
+      id: "data",
+    },
+  ],
 };
 
 export const multiInputDataNode: Node = {

@@ -2,8 +2,9 @@ import { adapterNodes } from "./adapters";
 import { coreNodes } from "./core";
 import { dataNodes } from "./data";
 import { modifierNodes } from "./modifiers";
+import { Nodes } from "./types";
 
-export const nodes = {
+export const nodes: Nodes = {
   ...adapterNodes,
   ...dataNodes,
   ...modifierNodes,

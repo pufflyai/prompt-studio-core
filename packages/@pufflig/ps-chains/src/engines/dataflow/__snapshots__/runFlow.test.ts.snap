@@ -219,6 +219,17 @@ exports[`running a node updates the input of its children 1`] = `
 }
 `;
 
+exports[`should run even when lifecycle methods are missing 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "Hello World",
+    },
+    "status": "idle",
+  },
+}
+`;
+
 exports[`should throw error if the node is undefined 1`] = `[Error: Definition for node not_a_node not found]`;
 
 exports[`update array variables 1`] = `
