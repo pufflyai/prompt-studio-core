@@ -1,5 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`a node can run its children multiple times 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "",
+    },
+  },
+  "n2": {
+    "input": {
+      "list": [
+        "a",
+        "b",
+      ],
+    },
+    "status": "idle",
+  },
+  "n3": {
+    "input": {
+      "data": "b",
+    },
+  },
+  "n4": {
+    "input": {
+      "data": "b",
+    },
+  },
+}
+`;
+
+exports[`a node can run its children multiple times 2 1`] = `
+{
+  "n1": {
+    "input": {
+      "list": [
+        "a",
+        "b",
+      ],
+    },
+    "status": "idle",
+  },
+  "n2": {
+    "input": {
+      "data": "",
+      "list": [
+        "a",
+        "b",
+      ],
+    },
+  },
+  "n3": {
+    "input": {
+      "data": [
+        "a",
+        "b",
+      ],
+    },
+  },
+}
+`;
+
 exports[`avoid hanging on loops 1`] = `
 {
   "n1": {

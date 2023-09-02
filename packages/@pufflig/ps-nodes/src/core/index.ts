@@ -1,7 +1,10 @@
-import { inputNode, inputNodeType } from "./input";
-import { outputNode, outputNodeType } from "./output";
+import { nodeTypes } from "@pufflig/ps-nodes-config";
+import { forinNode } from "./forin";
+import { inputNode } from "./input";
+import { outputNode } from "./output";
 
 export const coreNodes = {
-  [inputNodeType]: inputNode,
-  [outputNodeType]: outputNode,
+  [nodeTypes.inputNodeType]: inputNode,
+  [nodeTypes.outputNodeType]: outputNode,
+  [nodeTypes.forinNodeType]: forinNode,
 };

@@ -20,6 +20,7 @@ head:
 - :warning: **API** [@pufflig/ps-chains] rename `parseInput` method to `mapInput`
 - **API** [@pufflig/ps-chains] add `getNext` lifecycle method. With this method a node can decide what target execution nodes to run and in what order. This method can be used to create loops / conditionals.
 - [@pufflig/ps-nodes] add a node to generate embeddings using the openai api.
+- [@pufflig/ps-nodes] add a node to run loops
 
 ## 0.15.0
 

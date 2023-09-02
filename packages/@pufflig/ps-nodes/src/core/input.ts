@@ -1,8 +1,6 @@
-import { nodes } from "@pufflig/ps-nodes-config";
+import { nodeTypes, nodes } from "@pufflig/ps-nodes-config";
 import { Node } from "@pufflig/ps-types";
 
-export const inputNodeType = "core/input" as const;
-
 export const inputNode: Node = {
-  ...nodes[inputNodeType],
+  ...nodes[nodeTypes.inputNodeType],
 };

@@ -50,7 +50,7 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
     const isAlreadyRun = (runs[nodeId] || 0) > 0;
 
     if (isAlreadyRun) {
-      logger.debug("Node already run");
+      logger.debug({ nodeId }, "Node already run");
       return;
     }
 
@@ -147,14 +147,29 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
     if (runOptions?.mode === "dataflow") return;
 
     // define the execution order
-    const executionStack = await getTargets(result);
+    const executionOrder = await getTargets(resolvedInput, previousState.input, result);
     const executionTargets = targets.filter((edge) => edge.sourceHandle.startsWith(executionPrefix));
 
-    for (const execution of executionStack) {
+    logger.debug({ executions: executionOrder }, "Defined executions");
+
+    for (const execution of executionOrder) {
       visitedEdges.push(...executionTargets.map((e) => e.id));
       const targetId = executionTargets.find((e) => e.sourceHandle === execution.execSource)?.target;
+
       if (targetId) {
-        await run_flow_recursive(targetId, {});
+        // override the infinite loop guard
+        runs[targetId] = runs[targetId] - 1;
+
+        // data edges between this node and the target node
+        const dataEdges = Object.values(flow.definition.edges).filter(
+          (e) => e.source === nodeId && e.target === targetId && !e.sourceHandle.startsWith("exec:")
+        );
+
+        const edgeMap = getEdgeMap(dataEdges);
+        const mappedInput = edgeMap ? mapOutputToInput(execution.inputs, edgeMap) : {};
+
+        logger.debug({ nodeId, targetId, mappedInput }, "Running executable node");
+        await run_flow_recursive(targetId, mappedInput);
       }
     }
   };

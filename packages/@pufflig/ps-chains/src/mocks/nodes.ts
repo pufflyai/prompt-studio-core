@@ -5,6 +5,22 @@ export const passthroughNode: NodeActions = {
   mapInput: async (i) => i,
 };
 
+export const loopNode: NodeActions = {
+  getTargets: async ({ list }) => {
+    return [
+      { execSource: "exec:output", inputs: { data: list?.[0] } },
+      { execSource: "exec:output", inputs: { data: list?.[1] } },
+      { execSource: "exec:complete", inputs: {} },
+    ];
+  },
+};
+
+export const joinNode: NodeActions<{ data: string; list: string[] }> = {
+  mapInput: async ({ data }, prev) => {
+    return { list: [...(prev?.list || []), data] };
+  },
+};
+
 export const simpleDataNode: Node = {
   name: "simpleNode",
   parameters: [],
@@ -149,4 +165,76 @@ export const simpleExecNode: Node = {
     },
   ],
   ...passthroughNode,
+};
+
+export const loopNodeConfig: Node = {
+  name: "loopNode",
+  execution: {
+    inputs: [
+      {
+        id: "exec:input",
+      },
+    ],
+    outputs: [
+      {
+        id: "exec:output",
+      },
+    ],
+  },
+  parameters: [],
+  inputs: [
+    {
+      name: "list",
+      type: "list",
+      defaultValue: [],
+      description: "",
+      id: "list",
+    },
+  ],
+  outputs: [
+    {
+      name: "data",
+      type: "text",
+      defaultValue: "",
+      description: "",
+      id: "data",
+    },
+  ],
+  ...loopNode,
+};
+
+export const joinNodeConfig: Node = {
+  name: "joinNode",
+  execution: {
+    inputs: [
+      {
+        id: "exec:input",
+      },
+    ],
+    outputs: [
+      {
+        id: "exec:output",
+      },
+    ],
+  },
+  parameters: [],
+  inputs: [
+    {
+      name: "data",
+      type: "text",
+      defaultValue: "",
+      description: "",
+      id: "data",
+    },
+  ],
+  outputs: [
+    {
+      name: "list",
+      type: "list",
+      defaultValue: [],
+      description: "",
+      id: "list",
+    },
+  ],
+  ...joinNode,
 };
