@@ -10,7 +10,7 @@
 [![Discord Shield](https://img.shields.io/discord/1086313238960025631?style=flat&colorA=000000&colorB=000000&label=discord&logo=discord&logoColor=ffffff)](https://discord.gg/3RxwUEk8fW)
 [![Version](https://img.shields.io/npm/v/@pufflig/ps-chains?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/@pufflig/ps-chains)
 
-Prompt Studio is a collaborative Prompt Engineering platform for teams that work with LLMs.
+Prompt Studio is a collaborative prompt engineering platform for teams that work with LLMs.
 
 ## Setup
 
