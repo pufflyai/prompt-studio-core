@@ -1,5 +1,12 @@
 import { Flow } from "../types";
-import { configOnlyNode, multiInputDataNode, simpleDataNode, simpleExecNode } from "./nodes";
+import {
+  configOnlyNode,
+  joinNodeConfig,
+  loopNodeConfig,
+  multiInputDataNode,
+  simpleDataNode,
+  simpleExecNode,
+} from "./nodes";
 
 export const singleNodeFlow: Flow = {
   nodeTypes: {
@@ -598,4 +605,131 @@ export const simpleExecWithData: Flow = {
     },
   },
   state: {},
+};
+
+export const execWithLoop: Flow = {
+  nodeTypes: {
+    simple_node: simpleExecNode,
+    loop_node: loopNodeConfig,
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      e3: {
+        id: "e3",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+      e4: {
+        id: "e4",
+        source: "n3",
+        target: "n4",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+      },
+      n2: {
+        id: "n2",
+        type: "loop_node",
+      },
+      n3: {
+        id: "n3",
+        type: "simple_node",
+      },
+      n4: {
+        id: "n4",
+        type: "simple_node",
+      },
+    },
+  },
+  state: {
+    n2: {
+      status: "idle",
+      input: {
+        list: ["a", "b"],
+      },
+    },
+  },
+};
+
+export const loopWithJoin: Flow = {
+  nodeTypes: {
+    simple_node: simpleExecNode,
+    loop_node: loopNodeConfig,
+    join_node: joinNodeConfig,
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      e2: {
+        id: "e2",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
+      e3: {
+        id: "e3",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data",
+        targetHandle: "data",
+      },
+      e4: {
+        id: "e4",
+        source: "n2",
+        target: "n3",
+        sourceHandle: "list",
+        targetHandle: "data",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "loop_node",
+      },
+      n2: {
+        id: "n2",
+        type: "join_node",
+      },
+      n3: {
+        id: "n3",
+        type: "simple_node",
+      },
+    },
+  },
+  state: {
+    n1: {
+      status: "idle",
+      input: {
+        list: ["a", "b"],
+      },
+    },
+  },
 };

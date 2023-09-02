@@ -1,5 +1,7 @@
 import {
   configOnlyFlow,
+  execWithLoop,
+  loopWithJoin,
   mappedExample,
   multiInput,
   multiInputWithOutput,
@@ -416,6 +418,54 @@ test("when running a flow in dataflow mode, do no run child executable nodes", a
   );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
+  expect(onNodeRunError).toHaveBeenCalledTimes(0);
+  expect(res).toMatchSnapshot();
+});
+
+/**
+ * (1) => (🔄2) =2> (3) =2> (4)
+ *
+ */
+test("a node can run its children multiple times", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
+  const onNodeRunError = jest.fn();
+  const res = await runFlow(
+    execWithLoop,
+    "n1",
+    {},
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(6);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(4);
+  expect(onNodeRunError).toHaveBeenCalledTimes(0);
+  expect(res).toMatchSnapshot();
+});
+
+/**
+ * (🔄1) =2> (2) =2> (3)
+ */
+test("a node can run its children multiple times 2", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
+  const onNodeRunError = jest.fn();
+  const res = await runFlow(
+    loopWithJoin,
+    "n1",
+    {},
+    {
+      logLevel: "debug",
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(7);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(3);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
 });
