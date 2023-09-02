@@ -9,7 +9,7 @@ export interface OpenAIEmbeddingInput {
 }
 
 export interface OpenAICompletionOutput {
-  completion: string;
+  embedding: number[];
 }
 
 export async function execute(input: OpenAIEmbeddingInput) {
@@ -28,8 +28,7 @@ export async function execute(input: OpenAIEmbeddingInput) {
   return { embedding };
 }
 
-export const openaiCompletion: Node = {
+export const openaiEmbedding: Node<OpenAIEmbeddingInput, OpenAICompletionOutput> = {
   ...nodes[nodeTypes.openaiEmbeddingNodeType],
   execute,
-  mapInput: async (i) => i,
 };

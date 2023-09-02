@@ -15,6 +15,9 @@ export interface CustomAPIChatOutput {
 
 export const customApiChat: Node = {
   ...nodes[customApiChatNodeType],
-  execute: async (i) => i,
-  mapInput: async (i) => i,
+  execute: async () => {
+    return {
+      chat: { messages: [] },
+    };
+  },
 };

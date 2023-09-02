@@ -15,8 +15,8 @@ export interface OpenAIChatOutput {
   message: ChatMessage;
 }
 
-export const execute = async (input: ParamValueMap): Promise<ParamValueMap> => {
-  const { chat, model, api_key } = input as unknown as OpenAIChatInput;
+export const execute = async (input: OpenAIChatInput): Promise<OpenAIChatOutput> => {
+  const { chat, model, api_key } = input;
   const { modelId, parameters } = model;
 
   const configuration = new Configuration({ apiKey: api_key });
@@ -42,8 +42,7 @@ export const execute = async (input: ParamValueMap): Promise<ParamValueMap> => {
   };
 };
 
-export const openaiChat: Node = {
+export const openaiChat: Node<OpenAIChatInput, OpenAIChatOutput> = {
   ...nodes[openaiChatNodeType],
   execute,
-  mapInput: async (i) => i,
 };
