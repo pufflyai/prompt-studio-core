@@ -16,7 +16,7 @@ export interface HandlebarTemplateChatOutput {
   chat: Chat;
 }
 
-export const execute = async (input: HandlebarTemplateChatInput): Promise<HandlebarTemplateChatOutput> => {
+export const execute = async (input: HandlebarTemplateChatInput) => {
   const { chat, variables } = input;
   const variablesObject = objectDefinitionToMap(variables);
 

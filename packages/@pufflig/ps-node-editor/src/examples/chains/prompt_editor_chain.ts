@@ -1,9 +1,10 @@
+import { Flow } from "@pufflig/ps-chains";
 import { nodes } from "@pufflig/ps-nodes";
 
 export const inputId = "n2";
 export const adapterId = "n3";
 
-export const prompt_editor_chain = {
+export const prompt_editor_chain: Flow = {
   nodeTypes: nodes,
   definition: {
     nodes: {

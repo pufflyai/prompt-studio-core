@@ -120,6 +120,4 @@ export type Param =
   | ListParam
   | VectorParam;
 
-export interface ParamValueMap {
-  [key: string]: ParamValue;
-}
+export type ParamValueMap = Record<string, ParamValue>;

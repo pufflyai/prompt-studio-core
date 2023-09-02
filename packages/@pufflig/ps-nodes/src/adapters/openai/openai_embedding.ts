@@ -8,12 +8,12 @@ export interface OpenAIEmbeddingInput {
   model: ModelValue;
 }
 
-export interface OpenAICompletionOutput {
+export interface OpenAIEmbeddingOutput {
   embedding: number[];
 }
 
-export async function execute(input: OpenAIEmbeddingInput) {
-  const { model, api_key, text } = input;
+export const execute = async (input: OpenAIEmbeddingInput) => {
+  const { model, api_key, text } = input as OpenAIEmbeddingInput;
 
   const configuration = new Configuration({ apiKey: api_key });
   const openai = new OpenAIApi(configuration);
@@ -26,9 +26,9 @@ export async function execute(input: OpenAIEmbeddingInput) {
   const embedding = response.data.data[0].embedding;
 
   return { embedding };
-}
+};
 
-export const openaiEmbedding: Node<OpenAIEmbeddingInput, OpenAICompletionOutput> = {
+export const openaiEmbedding: Node<OpenAIEmbeddingInput, OpenAIEmbeddingOutput> = {
   ...nodes[nodeTypes.openaiEmbeddingNodeType],
   execute,
 };

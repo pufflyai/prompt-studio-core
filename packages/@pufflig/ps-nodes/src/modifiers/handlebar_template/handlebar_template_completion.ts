@@ -16,7 +16,7 @@ export interface HandlebarTemplateCompletionOutput {
   text: string;
 }
 
-export const execute = async (input: HandlebarTemplateCompletionInput): Promise<HandlebarTemplateCompletionOutput> => {
+export const execute = async (input: HandlebarTemplateCompletionInput) => {
   const { template, variables } = input;
   const variablesObject = objectDefinitionToMap(variables);
   const renderedTemplate = Mustache.render(template, variablesObject);
