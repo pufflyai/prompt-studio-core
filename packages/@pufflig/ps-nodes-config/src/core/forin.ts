@@ -9,16 +9,16 @@ export const forinNodeConfig: NodeConfig = {
   execution: {
     inputs: [
       {
-        id: "input",
+        id: "exec:input",
       },
     ],
     outputs: [
       {
-        id: "output",
+        id: "exec:output",
         name: "Step",
       },
       {
-        id: "complete",
+        id: "exec:complete",
         name: "Complete",
       },
     ],

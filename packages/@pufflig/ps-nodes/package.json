@@ -1,7 +1,7 @@
 {
   "name": "@pufflig/ps-nodes",
   "private": false,
-  "version": "0.16.1",
+  "version": "0.16.2",
   "description": "Collection of nodes used in Prompt Studio",
   "files": [
     "dist"
@@ -32,7 +32,7 @@
     "node": "18.16.0"
   },
   "dependencies": {
-    "@pufflig/ps-nodes-config": "^0.16.1",
+    "@pufflig/ps-nodes-config": "^0.16.2",
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
     "openai": "^3.3.0",
