@@ -114,7 +114,7 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
     for (const targetNodeId of dataTargetIds) {
       // data edges between this node and the target node
       const dataEdges = Object.values(flow.definition.edges).filter(
-        (e) => e.source === nodeId && e.target === targetNodeId && !e.sourceHandle.startsWith("exec:")
+        (e) => e.source === nodeId && e.target === targetNodeId && !e.sourceHandle.startsWith(executionPrefix)
       );
       const edgeMap = getEdgeMap(dataEdges);
       const mappedInput = mapOutputToInput(result, edgeMap);
@@ -148,9 +148,11 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
 
     // define the execution order
     const executionOrder = await getTargets(resolvedInput, previousState.input, result);
-    const executionTargets = targets.filter((edge) => edge.sourceHandle.startsWith(executionPrefix));
+    const executionTargets = targets.filter(
+      (edge) => edge.sourceHandle.startsWith(executionPrefix) && edge.source === nodeId
+    );
 
-    logger.debug({ executions: executionOrder }, "Defined executions");
+    logger.debug({ executions: executionOrder }, "Execution Order");
 
     for (const execution of executionOrder) {
       visitedEdges.push(...executionTargets.map((e) => e.id));
@@ -158,11 +160,11 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
 
       if (targetId) {
         // override the infinite loop guard
-        runs[targetId] = runs[targetId] - 1;
+        runs[targetId] = runs[targetId] ? runs[targetId] - 1 : 0;
 
         // data edges between this node and the target node
         const dataEdges = Object.values(flow.definition.edges).filter(
-          (e) => e.source === nodeId && e.target === targetId && !e.sourceHandle.startsWith("exec:")
+          (e) => e.source === nodeId && e.target === targetId && !e.sourceHandle.startsWith(executionPrefix)
         );
 
         const edgeMap = getEdgeMap(dataEdges);
@@ -170,6 +172,8 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
 
         logger.debug({ nodeId, targetId, mappedInput }, "Running executable node");
         await run_flow_recursive(targetId, mappedInput);
+      } else {
+        logger.debug({ executionTargets, executionSource: execution.execSource }, "No target found for source");
       }
     }
   };

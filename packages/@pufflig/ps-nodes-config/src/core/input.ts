@@ -10,7 +10,7 @@ export const inputNodeConfig: NodeConfig = {
     inputs: [],
     outputs: [
       {
-        id: "output",
+        id: "exec:output",
       },
     ],
   },

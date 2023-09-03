@@ -10,12 +10,12 @@ export const openaiEmbeddingConfig: NodeConfig = {
   execution: {
     inputs: [
       {
-        id: "input",
+        id: "exec:input",
       },
     ],
     outputs: [
       {
-        id: "output",
+        id: "exec:output",
         name: "Completed",
       },
     ],
