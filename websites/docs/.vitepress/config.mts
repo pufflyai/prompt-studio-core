@@ -19,7 +19,7 @@ export default defineConfig({
     nav: [
       //  { text: "Guides", link: "/guides/getting-started" },
       { text: "API Reference", link: "/api/getting-started" },
-      { text: "Blog", link: "/blog/", activeMatch: "/blog/$" },
+      { text: "Blog", link: "https://blog.prompt.studio" },
     ],
 
     sidebar: [
