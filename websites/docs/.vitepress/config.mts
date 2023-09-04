@@ -6,19 +6,56 @@ export default defineConfig({
   description: "A collaborative Prompt Engineering platform for teams that work with LLMs",
   srcDir: "./pages",
   lastUpdated: true,
+  head: [
+    ["script", { async: "", src: "https://www.googletagmanager.com/gtag/js?id=G-GEPCR3WDKS" }],
+    ["link", { rel: "icon", href: "/assets/favicon.ico" }],
+  ],
   themeConfig: {
+    logo: "/assets/logo_inverted.svg",
     search: {
       provider: "local",
     },
     // https://vitepress.dev/reference/default-theme-config
-    nav: [{ text: "API Reference", link: "/api/run-flow" }],
+    nav: [
+      //  { text: "Guides", link: "/guides/getting-started" },
+      { text: "API Reference", link: "/api/getting-started" },
+      { text: "Blog", link: "https://blog.prompt.studio" },
+    ],
 
     sidebar: [
+      { text: "Introduction", link: "/" },
+      // {
+      //   text: "Guides",
+      //   items: [
+      //     { text: "Getting Started", link: "/guides/getting-started" },
+      //     { text: "Setting up a Provider", link: "/guides/setting-up-provider" },
+      //   ],
+      // },
+      {
+        text: "Concepts",
+        items: [
+          {
+            text: "Instructions",
+            items: [
+              { text: "Prompt", link: "/concepts/prompt" },
+              { text: "Chat", link: "/concepts/chat" },
+            ],
+          },
+          { text: "Workflow", link: "/concepts/workflow" },
+          { text: "File", link: "/concepts/file" },
+          { text: "Knowledge Base", link: "/concepts/knowledge-base" },
+          { text: "Secrets", link: "/concepts/secrets" },
+        ],
+      },
+      {
+        text: "SDKs",
+        items: [{ text: "Javascript", link: "/sdk/js" }],
+      },
       {
         text: "Rest API",
         items: [
           { text: "Getting Started", link: "/api/getting-started" },
-          { text: "Run a Flow", link: "/api/run-flow" },
+          { text: "Run a Workflow", link: "/api/run-flow" },
         ],
       },
       {
@@ -35,11 +72,11 @@ export default defineConfig({
       },
     ],
     socialLinks: [
-      { icon: "discord", link: "https://github.com/pufflyai/prompt-studio-core" },
+      { icon: "discord", link: "https://discord.gg/3RxwUEk8fW" },
       { icon: "github", link: "https://github.com/pufflyai/prompt-studio-core" },
     ],
     footer: {
-      message: "Built with ❤️ at Pufflig",
+      message: "Made with ❤️ at Pufflig",
       copyright: "Copyright © 2023 Pufflig AB",
     },
   },
