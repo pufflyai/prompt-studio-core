@@ -1,0 +1,47 @@
+---
+slug: llm-agnostic
+title: Becoming LLM Agnostic
+authors: [aure]
+tags: [llm-agnostic, Prompt Studio, features, preview]
+---
+
+import config from "./config.png";
+
+Until now, [OpenAI](https://platform.openai.com/docs/api-reference/models) was the only Provider for Language Models you could connect to from Prompt Studio. We have been working the past week to decouple ourselves from the OpenAI API and allow you to connect to other providers as well. Here is a list of providers we plan to integrate soon:
+
+- [Cohere](https://cohere.com/)
+- [Huggingface](https://huggingface.co/)
+- [Anthropic](https://www.anthropic.com/)
+
+Let us know what providers you are interested in connecting with [here](https://github.com/pufflyai/prompt-studio-docs/discussions)!
+
+## Custom APIs
+
+Being LLM agnostic means you can now use the new **Custom API Model Provider** to connect to a language model you are hosting yourself with your own API. This requires a bit of configuration, but is the most flexible setup and you can already use it while we add the integrations listed above. The image below shows the setup to integrate to a custom GPT-2 model deployed on Huggingface.
+
+![huggingface setup](./huggingface_api.png)
+
+Above is a deployed GPT-2 API on [Huggingface Inference Endpoints](https://huggingface.co/docs/inference-endpoints/index). Below is the corresponding configuration for the **Custom API Model Provider**.
+
+<img
+  src={config}
+  alt="config"
+  width="60%"
+  style={{ height: "auto" }}
+/>
+
+You can now select the custom provider when making your requests:
+
+![using custom provider](./using_custom_provider.png)
+
+## Prompt Studio and your Local Language models
+
+One feature we are looking forward to, is to have a desktop version of Prompt Studio available that would make it easy for you to connect to a language model on your machine. With the work we have done with custom LLM Providers we are one step closer to this.
+
+## Trying out Prompt Studio
+
+You want to try out Prompt Studio, but you don’t want to add your own OpenAI key? No problem! You now have 10 prompts per day to try out Prompt Studio without the need of providing your own OpenAI API Key. To do that, you simply need to select “Prompt Studio” as your LLM provider in the editor to use your free prompts towards OpenAI.
+
+## What’s next?
+
+Next on our roadmap are **collaborative features**. We will start work on adding workspaces, sharing prompts, and teams to Prompt Studio. Stay tuned!

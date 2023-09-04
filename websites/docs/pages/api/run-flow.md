@@ -4,7 +4,7 @@ Run a flow you created on Prompt Studio from within your application given some 
 
 ## `POST` `/v1/flows/:flow_id/run`
 
-<Badge type="warning" text="coming soon" />
+<Badge type="warning" text="unstable" />
 
 Run the flow starting from the input node.
 
