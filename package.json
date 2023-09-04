@@ -6,6 +6,9 @@
     "build": "npx lerna run build",
     "test": "npx lerna run test"
   },
+  "engines": {
+    "node": "18"
+  },
   "workspaces": {
     "packages": [
       "packages/**",
