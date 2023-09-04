@@ -55,7 +55,7 @@ export default defineConfig({
         text: "Rest API",
         items: [
           { text: "Getting Started", link: "/api/getting-started" },
-          { text: "Run a Flow", link: "/api/run-flow" },
+          { text: "Run a Workflow", link: "/api/run-flow" },
         ],
       },
       {
