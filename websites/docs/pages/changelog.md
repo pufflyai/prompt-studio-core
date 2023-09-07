@@ -9,7 +9,17 @@ head:
 
 # Changelog
 
-**Note**: the API for the packages in this repo will be highly unstable until we reach v1.0.0"
+**Note**: the API for the Prompt Studio packages will be changing rapidly until we reach v1.0.0"
+
+## 0.17.0
+
+:warning: Breaking changes
+
+### Features
+
+- :warning: **API** [@pufflig/ps-chains] pass `NodeOptions` as parameter to the `execute`, `mapInput` and `getTarget` lifecycle methods. Node options now contains the `prevInput` value as well as `global` values. `global` values are variables common for the entire flow, they can be secrets or other references provided as part of the `runOptions`.
+- :warning: **API** [@pufflig/ps-nodes-config] remove `parameters` field as it isn't needed.
+- [@pufflig/ps-nodes-config] fix OpenAI model temperatures max
 
 ## 0.16.0
 

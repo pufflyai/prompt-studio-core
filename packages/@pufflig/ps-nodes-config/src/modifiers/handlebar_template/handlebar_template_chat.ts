@@ -4,7 +4,6 @@ export const handlebarTemplateChat: NodeConfig = {
   name: "Handlebar Template (Chat)",
   description: "",
   tags: ["modifier", "chat"],
-  parameters: [],
   outputs: [
     {
       id: "chat",

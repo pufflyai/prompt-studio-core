@@ -16,14 +16,13 @@ export const loopNode: NodeActions = {
 };
 
 export const joinNode: NodeActions<{ data: string; list: string[] }> = {
-  mapInput: async ({ data }, prev) => {
-    return { list: [...(prev?.list || []), data] };
+  mapInput: async ({ data }, options) => {
+    return { list: [...(options?.prevInput?.list || []), data] };
   },
 };
 
 export const simpleDataNode: Node = {
   name: "simpleNode",
-  parameters: [],
   inputs: [
     {
       name: "data",
@@ -47,7 +46,6 @@ export const simpleDataNode: Node = {
 
 export const configOnlyNode: Node = {
   name: "simpleNode",
-  parameters: [],
   inputs: [
     {
       name: "data",
@@ -70,7 +68,6 @@ export const configOnlyNode: Node = {
 
 export const multiInputDataNode: Node = {
   name: "multiInputNode",
-  parameters: [],
   inputs: [
     {
       name: "data1",
@@ -101,7 +98,6 @@ export const multiInputDataNode: Node = {
 
 export const multiOutputDataNode: Node = {
   name: "multiOutputNode",
-  parameters: [],
   inputs: [
     {
       name: "input1",
@@ -145,7 +141,6 @@ export const simpleExecNode: Node = {
       },
     ],
   },
-  parameters: [],
   inputs: [
     {
       name: "data",
@@ -181,7 +176,6 @@ export const loopNodeConfig: Node = {
       },
     ],
   },
-  parameters: [],
   inputs: [
     {
       name: "list",
@@ -217,7 +211,6 @@ export const joinNodeConfig: Node = {
       },
     ],
   },
-  parameters: [],
   inputs: [
     {
       name: "data",

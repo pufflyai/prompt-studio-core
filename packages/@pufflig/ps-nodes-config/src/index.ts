@@ -1,4 +1,5 @@
 import { adapterNodeTypes, adapterNodes, adapterSettings, modelConfig } from "./adapters";
+import { OPENAI_API_KEY } from "./adapters/openai/openai_settings";
 import { coreNodeTypes, coreNodes } from "./core";
 import { dataNodeTypes, dataNodes } from "./data";
 import { modifierNodes } from "./modifiers";
@@ -17,6 +18,10 @@ export const core = coreNodes;
 
 export const userSettings = {
   ...adapterSettings,
+};
+
+export const secretId = {
+  OPENAI_API_KEY,
 };
 
 export const models = {

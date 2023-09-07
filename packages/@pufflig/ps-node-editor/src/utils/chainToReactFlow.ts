@@ -69,7 +69,7 @@ export const chainToReactFlow = (chain: Flow): ReactFlowData => {
       data: {
         type: node.type,
         label: nodeDefinition.name,
-        parameters: isCoreNode ? coreParameters : nodeDefinition.parameters,
+        parameters: coreParameters,
         inputs: inputs,
         outputs: outputs,
       },

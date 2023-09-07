@@ -21,7 +21,7 @@ export function paramToDefaults(params: Param[]) {
  * @returns node state with default values
  */
 export function applyDefaultInputs(nodeStateData: Record<string, ParamValue> | undefined, node: NodeConfig) {
-  const inputs = [...node.inputs, ...node.parameters];
+  const inputs = [...node.inputs];
   const defaults = paramToDefaults(inputs);
   return { ...defaults, ...(nodeStateData || {}) };
 }

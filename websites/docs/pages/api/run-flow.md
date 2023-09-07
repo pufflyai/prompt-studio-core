@@ -1,8 +1,8 @@
 # Run a workflow
 
-Run a workflow you created in Prompt Studio from within your application given some input values. This endpoint returns the results of the flow. You can retrieve the `version_id` of the workflow from the workflow editor.
+Run a workflow you created in Prompt Studio from within your application given some input values. This endpoint returns the results of the flow. You can retrieve the `deployment_id` of the workflow from the workflow editor.
 
-## `POST` `/v1/workflows/:version_id/run`
+## `POST` `/v1/workflows/:deployment_id/run`
 
 <Badge type="warning" text="unstable" />
 

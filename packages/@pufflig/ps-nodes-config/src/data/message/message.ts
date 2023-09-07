@@ -6,7 +6,6 @@ export const message: NodeConfig = {
   name: "Message",
   description: "",
   tags: ["data", "message"],
-  parameters: [],
   outputs: [
     {
       id: "message",

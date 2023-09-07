@@ -1,5 +1,4 @@
 import { ParamValue } from "@pufflig/ps-types";
-import Mustache from "mustache";
 import { delimiterEnd, delimiterStart } from "../constants";
 import { extractVariables } from "./extractVariables";
 
@@ -24,15 +23,18 @@ export const resolveVariables = async (
   vars.forEach((variable) => promises.push(resolver(variable)));
   const resolvedVariables = await Promise.all(promises);
 
-  // map of variables with resolved variables
-  const variablesMap = vars.reduce((acc, variable, index) => {
-    acc[variable] = resolvedVariables[index];
-    return acc;
-  }, {} as Record<string, string>);
+  // replace variables with resolved variables, text might contain special characters
+  const result = vars.reduce((acc, name, index) => {
+    const regexString = "\\" + delimiterStart + name + delimiterEnd;
+    const regex = new RegExp(regexString, "g");
+    const value = resolvedVariables[index];
+    return Object.entries(acc).reduce((acc2, [key, val]) => {
+      return {
+        ...acc2,
+        [key]: typeof val === "string" ? val?.replace(regex, value) : val,
+      };
+    }, {} as Record<string, ParamValue>);
+  }, input);
 
-  // insert resolved variables into input
-  const newInput: Record<string, ParamValue> = JSON.parse(
-    Mustache.render(JSON.stringify(input), variablesMap, {}, [delimiterStart, delimiterEnd])
-  );
-  return newInput;
+  return result;
 };

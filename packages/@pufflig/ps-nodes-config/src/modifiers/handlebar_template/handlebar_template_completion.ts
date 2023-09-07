@@ -4,7 +4,6 @@ export const handlebarTemplateCompletion: NodeConfig = {
   name: "Handlebar Template (Completion)",
   description: "",
   tags: ["modifier", "text"],
-  parameters: [],
   outputs: [
     {
       id: "text",

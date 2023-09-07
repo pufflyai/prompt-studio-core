@@ -1,12 +1,27 @@
-import { NextNode, Node, ParamValueMap } from "@pufflig/ps-types";
+import { Execute, GetTargets, NextNode, Node, ParamValueMap } from "@pufflig/ps-types";
 
 export const delimiterStart = "${{ps:ref:" as const;
 export const delimiterEnd = "}}" as const;
 export const executionPrefix = "exec:";
 
-export const identity = (i: ParamValueMap, _: Partial<ParamValueMap>) => i;
+/**
+ * Placeholder function for executing a node.
+ * Simply returns the nodes inputs.
+ * @param input
+ * @param _
+ * @returns
+ */
+export const identity: Execute<ParamValueMap> = async (input, _) => input;
+
+/**
+ * Given a node, returns the default targets for the node.
+ * The default target is the first executable output.
+ * @param node
+ * @returns
+ */
 export const getDefaultTargets =
-  (node: Node) => (_input: ParamValueMap, _prev: ParamValueMap, results: ParamValueMap) => {
+  (node: Node): GetTargets<ParamValueMap> =>
+  async (_, results) => {
     if (!node.execution?.outputs?.[0]?.id) return [];
     return [
       {

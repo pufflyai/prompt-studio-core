@@ -194,15 +194,17 @@ test("mapInput - keep default values from the previous state", async () => {
       variables: [],
     },
     {
-      variables: [
-        {
-          id: "longText",
-          name: "longText",
-          type: "text",
-          defaultValue: "some long text",
-          description: "",
-        },
-      ],
+      prevInput: {
+        variables: [
+          {
+            id: "longText",
+            name: "longText",
+            type: "text",
+            defaultValue: "some long text",
+            description: "",
+          },
+        ],
+      },
     }
   );
   expect(variables).toMatchInlineSnapshot(`
@@ -256,15 +258,17 @@ test("mapInput - override values from the previous state with the new value", as
       ],
     },
     {
-      variables: [
-        {
-          id: "longText",
-          name: "longText",
-          type: "text",
-          defaultValue: "old long text",
-          description: "",
-        },
-      ],
+      prevInput: {
+        variables: [
+          {
+            id: "longText",
+            name: "longText",
+            type: "text",
+            defaultValue: "old long text",
+            description: "",
+          },
+        ],
+      },
     }
   );
   expect(variables).toMatchInlineSnapshot(`

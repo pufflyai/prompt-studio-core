@@ -23,7 +23,6 @@ export const forinNodeConfig: NodeConfig = {
       },
     ],
   },
-  parameters: [],
   outputs: [
     {
       id: "item",

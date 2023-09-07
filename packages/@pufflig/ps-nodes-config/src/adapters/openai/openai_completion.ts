@@ -1,10 +1,12 @@
 import { NodeConfig } from "@pufflig/ps-types";
 import { completionModels } from "./openai_models";
+import { OPENAI_API_KEY } from "./openai_settings";
 
 export const openaiCompletionConfig: NodeConfig = {
   name: "OpenAI (Completion)",
   description: "OpenAI Completion",
   tags: ["adapter", "text"],
+  globals: [OPENAI_API_KEY],
   execution: {
     inputs: [
       {
@@ -18,15 +20,6 @@ export const openaiCompletionConfig: NodeConfig = {
       },
     ],
   },
-  parameters: [
-    {
-      id: "api_key",
-      name: "API Key",
-      type: "secret",
-      description: "The API key for OpenAI",
-      defaultValue: "${{ps:ref:secret:openai/api_key}}",
-    },
-  ],
   outputs: [
     {
       id: "completion",

@@ -1,5 +1,6 @@
 import { NodeConfig } from "@pufflig/ps-types";
 import { embeddingModels } from "./openai_models";
+import { OPENAI_API_KEY } from "./openai_settings";
 
 export const openaiEmbeddingNodeType = "adapter/openai_embedding" as const;
 
@@ -7,6 +8,7 @@ export const openaiEmbeddingConfig: NodeConfig = {
   name: "OpenAI (Embedding)",
   description: "OpenAI Embedding",
   tags: ["adapter", "embedding"],
+  globals: [OPENAI_API_KEY],
   execution: {
     inputs: [
       {
@@ -20,15 +22,6 @@ export const openaiEmbeddingConfig: NodeConfig = {
       },
     ],
   },
-  parameters: [
-    {
-      id: "api_key",
-      name: "API Key",
-      type: "secret",
-      description: "The API key for OpenAI",
-      defaultValue: "${{ps:ref:secret:openai/api_key}}",
-    },
-  ],
   outputs: [
     {
       id: "embedding",

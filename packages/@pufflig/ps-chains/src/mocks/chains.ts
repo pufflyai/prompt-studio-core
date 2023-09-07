@@ -18,9 +18,6 @@ export const singleNodeFlow: Flow = {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
     },
   },
@@ -42,9 +39,6 @@ export const configOnlyFlow: Flow = {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
     },
   },
@@ -74,16 +68,10 @@ export const simpleFlow: Flow = {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
       n2: {
         id: "n2",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
     },
   },
@@ -108,9 +96,6 @@ export const simpleLoop: Flow = {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
     },
   },
@@ -164,23 +149,14 @@ export const mappedExample: Flow = {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
       n2: {
         id: "n2",
         type: "multi_input",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
       n3: {
         id: "n3",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
     },
   },
@@ -444,16 +420,10 @@ export const simpleFlowWithVars: Flow = {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
       n2: {
         id: "n2",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
     },
   },
@@ -492,23 +462,14 @@ export const simpleFlowWithExec: Flow = {
       n1: {
         id: "n1",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
       n2: {
         id: "n2",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
       n3: {
         id: "n3",
         type: "simple_node",
-        editor: {
-          position: { x: 0, y: 0 },
-        },
       },
     },
   },

@@ -17,7 +17,6 @@ export const customChatConfig: NodeConfig = {
       },
     ],
   },
-  parameters: [],
   outputs: [
     {
       id: "message",
