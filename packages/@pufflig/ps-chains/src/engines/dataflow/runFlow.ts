@@ -91,7 +91,8 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
     let result: Record<string, ParamValue> | null = null;
     try {
       // resolve references in the input
-      result = await execute(resolvedInput, previousState.input);
+      const nodeOptions = { prevInput: previousState.input, globals: runOptions?.globals || {} };
+      result = await execute(resolvedInput, nodeOptions);
       runOptions?.onNodeRunComplete?.(nodeId, result);
       logger.debug({ nodeId, result }, "Node run complete");
       // track the run
@@ -147,7 +148,7 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
     if (runOptions?.mode === "dataflow") return;
 
     // define the execution order
-    const executionOrder = await getTargets(resolvedInput, previousState.input, result);
+    const executionOrder = await getTargets(resolvedInput, result, { prevInput: previousState.input });
     const executionTargets = targets.filter(
       (edge) => edge.sourceHandle.startsWith(executionPrefix) && edge.source === nodeId
     );

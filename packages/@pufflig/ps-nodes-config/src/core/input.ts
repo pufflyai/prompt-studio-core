@@ -15,7 +15,6 @@ export const inputNodeConfig: NodeConfig = {
     ],
   },
   customSchema: "output",
-  parameters: [],
   outputs: [],
   inputs: [],
 };

@@ -15,21 +15,26 @@ export interface NodeConfig {
   description?: string;
   tags?: string[];
   customSchema?: "input" | "output" | "both";
+  globals?: string[];
   execution?: {
     inputs: Exec[];
     outputs: Exec[];
   };
-  parameters: Param[];
   inputs: Param[];
   outputs: Param[];
 }
 
-export type Execute<I = any, O = any> = (input: I, prevInput?: Partial<I>) => Promise<O | null>;
-export type MapInput<I = any> = (input: I, prevInput?: Partial<I>) => Promise<Partial<I> | null>;
+export interface NodeOptions<I> {
+  prevInput?: Partial<I>;
+  globals?: Record<string, string>;
+}
+
+export type Execute<I = any, O = any> = (input: I, options?: NodeOptions<I>) => Promise<O | null>;
+export type MapInput<I = any> = (input: I, options?: NodeOptions<I>) => Promise<Partial<I> | null>;
 export type GetTargets<I = any, O = any> = (
   input: I,
-  prevInput?: Partial<I>,
-  result?: O
+  result?: O,
+  options?: NodeOptions<I>
 ) => Promise<NextNode<Partial<O>>[]>;
 
 export interface NodeActions<I = any, O = any> {

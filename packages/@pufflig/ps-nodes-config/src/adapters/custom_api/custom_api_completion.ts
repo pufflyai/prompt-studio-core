@@ -17,7 +17,6 @@ export const customCompletionConfig: NodeConfig = {
       },
     ],
   },
-  parameters: [],
   outputs: [
     {
       id: "completion",

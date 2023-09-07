@@ -6,7 +6,6 @@ export const objectNode: NodeConfig = {
   name: "Object",
   description: "Map various input into an object",
   tags: ["data", "text"],
-  parameters: [],
   customSchema: "input",
   inputs: [],
   outputs: [

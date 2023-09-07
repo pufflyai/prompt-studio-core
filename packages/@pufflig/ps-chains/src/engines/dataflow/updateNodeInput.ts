@@ -30,7 +30,7 @@ export async function updateNodeInput(
   // parse the input
   const nodeState = flowState[nodeId];
   const prevInput = nodeState?.input;
-  const parsedInput = await mapInput(input, prevInput);
+  const parsedInput = await mapInput(input, { prevInput, globals: runOptions?.globals });
 
   // compile the new state of the node
   const newInput = { ...applyDefaultInputs(prevInput, nodeDefinition), ...parsedInput };

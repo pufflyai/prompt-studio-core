@@ -1,12 +1,11 @@
-import { nodes } from "@pufflig/ps-nodes-config";
-import { Chat, ChatMessage, ModelValue, Node, ParamValueMap } from "@pufflig/ps-types";
+import { nodes, secretId } from "@pufflig/ps-nodes-config";
+import { Chat, ChatMessage, Execute, ModelValue, Node, ParamValueMap } from "@pufflig/ps-types";
 import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
 import { v4 as uuid } from "uuid";
 
 export const openaiChatNodeType = "adapter/openai_chat" as const;
 
 export interface OpenAIChatInput extends ParamValueMap {
-  api_key: string;
   chat: Chat;
   model: ModelValue;
 }
@@ -15,11 +14,12 @@ export interface OpenAIChatOutput extends ParamValueMap {
   message: ChatMessage;
 }
 
-export const execute = async (input: OpenAIChatInput) => {
-  const { chat, model, api_key } = input;
+export const execute: Execute<OpenAIChatInput> = async (input, options = {}) => {
+  const { chat, model } = input;
   const { modelId, parameters } = model;
+  const { globals } = options;
 
-  const configuration = new Configuration({ apiKey: api_key });
+  const configuration = new Configuration({ apiKey: globals?.[secretId.OPENAI_API_KEY] });
   const openai = new OpenAIApi(configuration);
 
   const params = { ...parameters, model: modelId };
@@ -27,6 +27,7 @@ export const execute = async (input: OpenAIChatInput) => {
     content: m.content,
     role: m.role,
   }));
+
   const completion = await openai.createChatCompletion({ ...params, messages, functions: chat.functions });
   const chatCompletion = completion.data.choices[0].message;
 

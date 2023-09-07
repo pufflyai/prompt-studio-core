@@ -458,7 +458,6 @@ test("a node can run its children multiple times 2", async () => {
     "n1",
     {},
     {
-      logLevel: "debug",
       onNodeRunComplete,
       onNodeInputUpdate,
       onNodeRunError,

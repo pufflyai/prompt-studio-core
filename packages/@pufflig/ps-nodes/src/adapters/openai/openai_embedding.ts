@@ -1,5 +1,5 @@
-import { nodes, nodeTypes } from "@pufflig/ps-nodes-config";
-import { ModelValue, Node } from "@pufflig/ps-types";
+import { nodes, nodeTypes, secretId } from "@pufflig/ps-nodes-config";
+import { Execute, ModelValue, Node } from "@pufflig/ps-types";
 import { Configuration, OpenAIApi } from "openai";
 
 export interface OpenAIEmbeddingInput {
@@ -12,10 +12,11 @@ export interface OpenAIEmbeddingOutput {
   embedding: number[];
 }
 
-export const execute = async (input: OpenAIEmbeddingInput) => {
-  const { model, api_key, text } = input as OpenAIEmbeddingInput;
+export const execute: Execute<OpenAIEmbeddingInput> = async (input, options = {}) => {
+  const { model, text } = input;
+  const { globals } = options;
 
-  const configuration = new Configuration({ apiKey: api_key });
+  const configuration = new Configuration({ apiKey: globals?.[secretId.OPENAI_API_KEY] });
   const openai = new OpenAIApi(configuration);
 
   const response = await openai.createEmbedding({

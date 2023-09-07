@@ -4,7 +4,6 @@ export const appendToChat: NodeConfig = {
   name: "Append To (Chat)",
   description: "Append a message to a chat",
   tags: ["modifier", "chat"],
-  parameters: [],
   outputs: [
     {
       id: "chat",

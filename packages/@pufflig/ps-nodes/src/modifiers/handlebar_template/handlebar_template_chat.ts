@@ -1,5 +1,5 @@
 import { nodes } from "@pufflig/ps-nodes-config";
-import { Chat, Node, NumberParam, ObjectDefinition, TextParam } from "@pufflig/ps-types";
+import { Chat, MapInput, Node, NumberParam, ObjectDefinition, TextParam } from "@pufflig/ps-types";
 import _ from "lodash";
 import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
@@ -42,8 +42,9 @@ export const execute = async (input: HandlebarTemplateChatInput) => {
  * @param prev
  * @returns
  */
-export const mapInput = async (input: HandlebarTemplateChatInput, prev?: Partial<HandlebarTemplateChatInput>) => {
+export const mapInput: MapInput<HandlebarTemplateChatInput> = async (input, options = {}) => {
   const { chat, variables } = input;
+  const { prevInput } = options;
 
   if (chat === undefined) {
     return input;
@@ -69,7 +70,7 @@ export const mapInput = async (input: HandlebarTemplateChatInput, prev?: Partial
   if (uniqueVariables) {
     // extracted variables that already existed in the previous input are assigned the previous value
     const variablesObject = uniqueVariables.map((variable) => {
-      const prevVariable = (prev?.variables || []).find((v) => v.id === variable?.id);
+      const prevVariable = (prevInput?.variables || []).find((v) => v.id === variable?.id);
       if (prevVariable) {
         return {
           ...variable,

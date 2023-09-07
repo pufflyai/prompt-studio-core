@@ -29,3 +29,5 @@ export const modelConfig = {
 export const adapterNodeTypes = {
   openaiEmbeddingNodeType,
 };
+
+

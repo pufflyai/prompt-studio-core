@@ -2,7 +2,7 @@ import _ from "lodash";
 import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
 import { extractVariables } from "./utils/extractVariables";
-import { Node, ObjectDefinition } from "@pufflig/ps-types";
+import { MapInput, Node, ObjectDefinition } from "@pufflig/ps-types";
 import { nodes } from "@pufflig/ps-nodes-config";
 
 export const handlebarTemplateCompletionNodeType = "modifier/handlebar_template_completion";
@@ -32,11 +32,9 @@ export const execute = async (input: HandlebarTemplateCompletionInput) => {
  * @param prev
  * @returns
  */
-export const mapInput = async (
-  input: HandlebarTemplateCompletionInput,
-  prev?: Partial<HandlebarTemplateCompletionInput>
-) => {
+export const mapInput: MapInput<HandlebarTemplateCompletionInput> = async (input, options = {}) => {
   const { template, variables } = input;
+  const { prevInput } = options;
 
   if (template === undefined) {
     return input;
@@ -47,7 +45,7 @@ export const mapInput = async (
   if (extractedVariables) {
     // extracted variables that already existed in the previous input are assigned the previous value
     const variablesObject = extractedVariables.map((variable) => {
-      const prevVariable = (prev?.variables || []).find((v) => v.id === variable.id);
+      const prevVariable = (prevInput?.variables || []).find((v) => v.id === variable.id);
       if (prevVariable) {
         return {
           ...variable,
