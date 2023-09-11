@@ -6,6 +6,7 @@ import {
   multiInput,
   multiInputWithOutput,
   multistep,
+  severalConnections,
   simpleExec,
   simpleExecWithData,
   simpleExistingState,
@@ -465,6 +466,30 @@ test("a node can run its children multiple times 2", async () => {
   );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(7);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(3);
+  expect(onNodeRunError).toHaveBeenCalledTimes(0);
+  expect(res).toMatchSnapshot();
+});
+
+/**
+ * (1.1) -> (2.1)
+ *       -> (2.2)
+ */
+test("running a node with several connections to a child should update the child correctly", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
+  const onNodeRunError = jest.fn();
+  const res = await runFlow(
+    severalConnections,
+    "n1",
+    { data: "TEST DATA" },
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(3);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
 });
