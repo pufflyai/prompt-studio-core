@@ -694,3 +694,39 @@ export const loopWithJoin: Flow = {
     },
   },
 };
+
+export const severalConnections: Flow = {
+  nodeTypes: {
+    simple_node: simpleExecNode,
+    multi_node: multiInputDataNode,
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data",
+        targetHandle: "data1",
+      },
+      e2: {
+        id: "e2",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data",
+        targetHandle: "data2",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "simple_node",
+      },
+      n2: {
+        id: "n2",
+        type: "multi_node",
+      },
+    },
+  },
+  state: {},
+};

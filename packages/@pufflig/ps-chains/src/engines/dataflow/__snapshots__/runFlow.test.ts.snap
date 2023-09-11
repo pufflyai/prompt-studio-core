@@ -279,6 +279,22 @@ exports[`running a node updates the input of its children 1`] = `
 }
 `;
 
+exports[`running a node with several connections to a child should update the child correctly 1`] = `
+{
+  "n1": {
+    "input": {
+      "data": "TEST DATA",
+    },
+  },
+  "n2": {
+    "input": {
+      "data1": "TEST DATA",
+      "data2": "TEST DATA",
+    },
+  },
+}
+`;
+
 exports[`should run even when lifecycle methods are missing 1`] = `
 {
   "n1": {

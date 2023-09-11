@@ -1,6 +1,6 @@
 {
   "name": "@pufflig/ps-types",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "Typescript definitions for Prompt Studio",
   "main": "src/index.ts",
   "author": "Pufflig AB",

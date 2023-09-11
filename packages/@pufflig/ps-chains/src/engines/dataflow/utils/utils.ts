@@ -31,10 +31,14 @@ export function applyDefaultInputs(nodeStateData: Record<string, ParamValue> | u
  * @param edges chain edges
  * @returns record of source and target handles
  */
-export function getEdgeMap(edges: FlowEdge[]): Record<string, string> {
-  const res: Record<string, string> = {};
+export function getEdgeMap(edges: FlowEdge[]): Record<string, string[]> {
+  const res: Record<string, string[]> = {};
   for (const e of edges) {
-    res[e.sourceHandle] = e.targetHandle;
+    if (!res[e.sourceHandle]) {
+      res[e.sourceHandle] = [e.targetHandle];
+    } else {
+      res[e.sourceHandle].push(e.targetHandle);
+    }
   }
   return res;
 }
@@ -45,10 +49,10 @@ export function getEdgeMap(edges: FlowEdge[]): Record<string, string> {
  * @param map
  * @returns
  */
-export function mapOutputToInput(output: Record<string, ParamValue>, map: Record<string, string>) {
+export function mapOutputToInput(output: Record<string, ParamValue>, map: Record<string, string[]>) {
   const res: Record<string, ParamValue> = {};
   for (const [key, value] of Object.entries(map)) {
-    res[value] = output[key];
+    value.forEach((v) => (res[v] = output[key]));
   }
   return res;
 }
