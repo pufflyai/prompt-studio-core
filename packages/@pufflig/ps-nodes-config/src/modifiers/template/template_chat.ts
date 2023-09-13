@@ -1,9 +1,11 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
-export const handlebarTemplateChat: NodeConfig = {
-  name: "Handlebar Template (Chat)",
-  description: "",
-  tags: ["modifier", "chat"],
+export const templateChatNodeType = "modifier/template_chat" as const;
+
+export const templateChat: NodeConfig = {
+  name: "Chat Template",
+  description: "Using this template, you can insert text into a chat.",
+  tags: ["modifier", "chat", "template"],
   outputs: [
     {
       id: "chat",

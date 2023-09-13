@@ -1,15 +1,24 @@
+import { groupNode, groupNodeType } from "./group/group";
+import { list, listNodeType } from "./list/list";
 import { message, messageNodeType } from "./message/message";
-import { objectNode, objectNodeType } from "./object/object";
+import { model, modelNodeType } from "./model/model";
+import { number, numberNodeType } from "./number/number";
 import { text, textNodeType } from "./text/text";
 
 export const dataNodes = {
-  [textNodeType]: text,
+  [groupNodeType]: groupNode,
+  [listNodeType]: list,
   [messageNodeType]: message,
-  [objectNodeType]: objectNode,
+  [modelNodeType]: model,
+  [numberNodeType]: number,
+  [textNodeType]: text,
 };
 
 export const dataNodeTypes = {
-  textNodeType,
+  groupNodeType,
+  listNodeType,
   messageNodeType,
-  objectNodeType,
+  modelNodeType,
+  numberNodeType,
+  textNodeType,
 };

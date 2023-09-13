@@ -1,19 +1,17 @@
-import { nodes } from "@pufflig/ps-nodes-config";
+import { nodeTypes, nodes } from "@pufflig/ps-nodes-config";
 import { Chat, ChatMessage, Node } from "@pufflig/ps-types";
 
-export const appendToChatNodeType = "modifier/append_to_chat";
-
-export interface AppendToChatInput {
+export interface AddMessageInput {
   chat: Chat;
   message: ChatMessage | null;
   messageId: string;
 }
 
-export interface AppendToChatOutput {
+export interface AddMessageOutput {
   chat: Chat;
 }
 
-export const execute = async (input: AppendToChatInput): Promise<AppendToChatOutput | null> => {
+export const execute = async (input: AddMessageInput): Promise<AddMessageOutput | null> => {
   // if there is no message, return the chat without change
   if (!input.message) {
     return {
@@ -51,7 +49,7 @@ export const execute = async (input: AppendToChatInput): Promise<AppendToChatOut
   };
 };
 
-export const appendToChat: Node<AppendToChatInput, AppendToChatOutput> = {
-  ...nodes[appendToChatNodeType],
+export const addMessage: Node<AddMessageInput, AddMessageOutput> = {
+  ...nodes[nodeTypes.addMessageNodeType],
   execute,
 };

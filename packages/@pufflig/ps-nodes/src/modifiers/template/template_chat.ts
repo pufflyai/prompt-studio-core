@@ -1,22 +1,20 @@
-import { nodes } from "@pufflig/ps-nodes-config";
+import { nodeTypes, nodes } from "@pufflig/ps-nodes-config";
 import { Chat, MapInput, Node, NumberParam, ObjectDefinition, TextParam } from "@pufflig/ps-types";
 import _ from "lodash";
 import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
 import { extractVariables } from "./utils/extractVariables";
 
-export const handlebarTemplateChatNodeType = "modifier/handlebar_template_chat";
-
-export interface HandlebarTemplateChatInput {
+export interface TemplateChatInput {
   chat: Chat;
   variables: ObjectDefinition;
 }
 
-export interface HandlebarTemplateChatOutput {
+export interface templateChatOutput {
   chat: Chat;
 }
 
-export const execute = async (input: HandlebarTemplateChatInput) => {
+export const execute = async (input: TemplateChatInput) => {
   const { chat, variables } = input;
   const variablesObject = objectDefinitionToMap(variables);
 
@@ -42,7 +40,7 @@ export const execute = async (input: HandlebarTemplateChatInput) => {
  * @param prev
  * @returns
  */
-export const mapInput: MapInput<HandlebarTemplateChatInput> = async (input, options = {}) => {
+export const mapInput: MapInput<TemplateChatInput> = async (input, options = {}) => {
   const { chat, variables } = input;
   const { prevInput } = options;
 
@@ -94,8 +92,8 @@ export const mapInput: MapInput<HandlebarTemplateChatInput> = async (input, opti
   };
 };
 
-export const handlebarTemplateChat: Node<HandlebarTemplateChatInput, HandlebarTemplateChatOutput> = {
-  ...nodes[handlebarTemplateChatNodeType],
+export const templateChat: Node<TemplateChatInput, templateChatOutput> = {
+  ...nodes[nodeTypes.templateChatNodeType],
   execute,
   mapInput,
 };

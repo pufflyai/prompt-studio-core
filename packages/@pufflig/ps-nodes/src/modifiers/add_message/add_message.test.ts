@@ -1,5 +1,5 @@
 import { Chat, ChatMessage } from "@pufflig/ps-types";
-import { appendToChat } from "./append_to_chat";
+import { addMessage } from "./add_message";
 
 const chat: Chat = {
   messages: [],
@@ -14,7 +14,7 @@ const chatMessage: ChatMessage = {
 };
 
 test("append_to_chat - append message", async () => {
-  const variables = await appendToChat.execute?.({
+  const variables = await addMessage.execute?.({
     chat,
     message: chatMessage,
     messageId: "1",
@@ -40,7 +40,7 @@ test("append_to_chat - append message with existing messages", async () => {
   const chat = {
     messages: [chatMessage, chatMessage],
   };
-  const variables = await appendToChat.execute?.({
+  const variables = await addMessage.execute?.({
     chat,
     message: { ...chatMessage, id: "2" },
     messageId: "",
@@ -80,7 +80,7 @@ test("append_to_chat - don't append message if it hasn't changed", async () => {
   const chat = {
     messages: [chatMessage, chatMessage],
   };
-  const variables = await appendToChat.execute?.({
+  const variables = await addMessage.execute?.({
     chat,
     message: chatMessage,
     messageId: "",
@@ -122,7 +122,7 @@ test("append_to_chat - append to an existing message given the same id", async (
       chatMessage,
     ],
   };
-  const variables = await appendToChat.execute?.({
+  const variables = await addMessage.execute?.({
     chat,
     message: { ...chatMessage, id: "3" },
     messageId: "2",

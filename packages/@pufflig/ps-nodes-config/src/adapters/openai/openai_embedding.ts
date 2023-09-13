@@ -1,5 +1,5 @@
 import { NodeConfig } from "@pufflig/ps-types";
-import { embeddingModels } from "./openai_models";
+import { embeddingModels } from "../../models/openai_models";
 import { OPENAI_API_KEY } from "./openai_settings";
 
 export const openaiEmbeddingNodeType = "adapter/openai_embedding" as const;

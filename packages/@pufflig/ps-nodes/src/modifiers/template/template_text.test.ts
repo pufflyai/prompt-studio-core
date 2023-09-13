@@ -1,4 +1,4 @@
-import { mapInput } from "./handlebar_template_completion";
+import { mapInput } from "./template_text";
 
 test("mapInput - no variables", async () => {
   const variables = await mapInput({

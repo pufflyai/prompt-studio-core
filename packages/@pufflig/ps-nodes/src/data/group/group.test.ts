@@ -1,23 +1,23 @@
-import { objectNode } from "./object";
+import { groupNode } from "./group";
 
 test("correctly map empty inputs", async () => {
-  expect(await objectNode.execute?.({})).toMatchInlineSnapshot(`
+  expect(await groupNode.execute?.({})).toMatchInlineSnapshot(`
     {
-      "object": [],
+      "group": [],
     }
   `);
 });
 
 test("correctly map different inputs", async () => {
   expect(
-    await objectNode.execute?.({
+    await groupNode.execute?.({
       a: "b",
       c: 0.1,
       d: ["1", "2", "3"],
     })
   ).toMatchInlineSnapshot(`
     {
-      "object": [
+      "group": [
         {
           "defaultValue": "b",
           "description": "",

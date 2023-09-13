@@ -11,6 +11,23 @@ head:
 
 **Note**: the API for the Prompt Studio packages will be changing rapidly until we reach v1.0.0"
 
+## 0.18.0
+
+:warning: Breaking changes
+
+**THESE CHANGES WILL BREAK EXISTING WORKFLOWS**
+
+### Features
+
+- :warning: **API** [@pufflig/ps-nodes] rename object node to something less technical
+- :warning: **API** [@pufflig/ps-nodes] rename handlebar template node
+- :warning: **API** [@pufflig/ps-nodes] rename append_to_chat to add_message
+- :warning: **API** [@pufflig/ps-nodes] change the API of the message node
+- **API** [@pufflig/ps-nodes] add model data node
+- **API** [@pufflig/ps-nodes] add number data node
+- **API** [@pufflig/ps-nodes] add list data node
+- **API** [@pufflig/ps-nodes] add split text modifier placeholder
+
 ## 0.17.0
 
 :warning: Breaking changes

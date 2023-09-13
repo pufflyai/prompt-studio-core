@@ -11,11 +11,11 @@ const getTypeFromValue = (value: ParamValue): Param["type"] => {
   return "text";
 };
 
-export const objectNode: Node = {
-  ...nodes[nodeTypes.objectNodeType],
+export const groupNode: Node = {
+  ...nodes[nodeTypes.groupNodeType],
   execute: async (inputs) => {
     return {
-      object: Object.entries(inputs).map(([key, value]) => {
+      group: Object.entries(inputs).map(([key, value]) => {
         return {
           id: key,
           name: key,

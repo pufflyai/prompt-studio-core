@@ -3,7 +3,7 @@ import { customCompletionConfig } from "./custom_api/custom_api_completion";
 import { openaiChatConfig } from "./openai/openai_chat";
 import { openaiCompletionConfig } from "./openai/openai_completion";
 import { openaiEmbeddingConfig, openaiEmbeddingNodeType } from "./openai/openai_embedding";
-import { chatModels, completionModels, embeddingModels } from "./openai/openai_models";
+import { chatModels, completionModels, embeddingModels } from "../models/openai_models";
 import { openAISettings } from "./openai/openai_settings";
 
 export const adapterNodes = {
@@ -29,5 +29,3 @@ export const modelConfig = {
 export const adapterNodeTypes = {
   openaiEmbeddingNodeType,
 };
-
-

@@ -1,9 +1,21 @@
-import { appendToChat } from "./append_to/append_to_chat";
-import { handlebarTemplateChat } from "./handlebar_template/handlebar_template_chat";
-import { handlebarTemplateCompletion } from "./handlebar_template/handlebar_template_completion";
+import { addMessage, addMessageNodeType } from "./add_message/add_message";
+import { addText, addTextNodeType } from "./add_text/add_text";
+import { splitText, splitTextNodeType } from "./split_text/split_text";
+import { templateChat, templateChatNodeType } from "./template/template_chat";
+import { templateText, templateTextNodeType } from "./template/template_text";
 
 export const modifierNodes = {
-  "modifier/handlebar_template_chat": handlebarTemplateChat,
-  "modifier/handlebar_template_completion": handlebarTemplateCompletion,
-  "modifier/append_to_chat": appendToChat,
+  [addMessageNodeType]: addMessage,
+  [addTextNodeType]: addText,
+  [splitTextNodeType]: splitText,
+  [templateChatNodeType]: templateChat,
+  [templateTextNodeType]: templateText,
+};
+
+export const modifierNodeTypes = {
+  addMessageNodeType,
+  addTextNodeType,
+  splitTextNodeType,
+  templateChatNodeType,
+  templateTextNodeType,
 };

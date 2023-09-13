@@ -1,9 +1,11 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
-export const appendToChat: NodeConfig = {
-  name: "Append To (Chat)",
-  description: "Append a message to a chat",
-  tags: ["modifier", "chat"],
+export const addMessageNodeType = "modifier/add_message" as const;
+
+export const addMessage: NodeConfig = {
+  name: "Add Message",
+  description: "Add a message to a chat",
+  tags: ["modifier", "chat", "message"],
   outputs: [
     {
       id: "chat",
@@ -16,15 +18,6 @@ export const appendToChat: NodeConfig = {
     },
   ],
   inputs: [
-    {
-      id: "messageId",
-      name: "Message ID",
-      description:
-        "Given a message id, the message is added as a version to the chat message with the same ID. If empty, the message is appended to the chat.",
-      type: "text",
-      defaultValue: "",
-      singleLine: true,
-    },
     {
       id: "chat",
       name: "Chat",

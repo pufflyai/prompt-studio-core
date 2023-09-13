@@ -2,7 +2,7 @@ import { adapterNodeTypes, adapterNodes, adapterSettings, modelConfig } from "./
 import { OPENAI_API_KEY } from "./adapters/openai/openai_settings";
 import { coreNodeTypes, coreNodes } from "./core";
 import { dataNodeTypes, dataNodes } from "./data";
-import { modifierNodes } from "./modifiers";
+import { modifierNodeTypes, modifierNodes } from "./modifiers";
 
 export const nodes = {
   ...adapterNodes,
@@ -29,9 +29,10 @@ export const models = {
 };
 
 export const nodeTypes = {
-  ...dataNodeTypes,
   ...adapterNodeTypes,
   ...coreNodeTypes,
+  ...dataNodeTypes,
+  ...modifierNodeTypes,
 };
 
 export * from "./types";
