@@ -1,8 +1,10 @@
 import { NodeConfig } from "@pufflig/ps-types";
 
-export const handlebarTemplateCompletion: NodeConfig = {
-  name: "Handlebar Template (Completion)",
-  description: "",
+export const templateTextNodeType = "modifier/template_text" as const;
+
+export const templateText: NodeConfig = {
+  name: "Text Template",
+  description: "Using this template, you can insert variables into text.",
   tags: ["modifier", "text"],
   outputs: [
     {

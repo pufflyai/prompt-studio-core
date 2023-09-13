@@ -1,22 +1,20 @@
+import { nodeTypes, nodes } from "@pufflig/ps-nodes-config";
+import { MapInput, Node, ObjectDefinition } from "@pufflig/ps-types";
 import _ from "lodash";
 import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
 import { extractVariables } from "./utils/extractVariables";
-import { MapInput, Node, ObjectDefinition } from "@pufflig/ps-types";
-import { nodes } from "@pufflig/ps-nodes-config";
 
-export const handlebarTemplateCompletionNodeType = "modifier/handlebar_template_completion";
-
-export interface HandlebarTemplateCompletionInput {
+export interface TemplateTextInput {
   template: string;
   variables: ObjectDefinition;
 }
 
-export interface HandlebarTemplateCompletionOutput {
+export interface TemplateTextOutput {
   text: string;
 }
 
-export const execute = async (input: HandlebarTemplateCompletionInput) => {
+export const execute = async (input: TemplateTextInput) => {
   const { template, variables } = input;
   const variablesObject = objectDefinitionToMap(variables);
   const renderedTemplate = Mustache.render(template, variablesObject);
@@ -32,7 +30,7 @@ export const execute = async (input: HandlebarTemplateCompletionInput) => {
  * @param prev
  * @returns
  */
-export const mapInput: MapInput<HandlebarTemplateCompletionInput> = async (input, options = {}) => {
+export const mapInput: MapInput<TemplateTextInput> = async (input, options = {}) => {
   const { template, variables } = input;
   const { prevInput } = options;
 
@@ -69,8 +67,8 @@ export const mapInput: MapInput<HandlebarTemplateCompletionInput> = async (input
   };
 };
 
-export const handlebarTemplateCompletion: Node<HandlebarTemplateCompletionInput, HandlebarTemplateCompletionOutput> = {
-  ...nodes[handlebarTemplateCompletionNodeType],
+export const templateText: Node<TemplateTextInput, TemplateTextOutput> = {
+  ...nodes[nodeTypes.templateTextNodeType],
   execute,
   mapInput,
 };

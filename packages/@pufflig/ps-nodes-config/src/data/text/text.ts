@@ -4,7 +4,7 @@ export const textNodeType = "data/text" as const;
 
 export const text: NodeConfig = {
   name: "Text",
-  description: "Text data",
+  description: "Can be used to store text, e.g. from a prompt or a file.",
   tags: ["data", "text"],
   outputs: [
     {

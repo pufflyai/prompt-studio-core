@@ -1,4 +1,4 @@
-import { mapInput } from "./handlebar_template_chat";
+import { mapInput } from "./template_chat";
 
 test("mapInput - several variables with two of the same variable", async () => {
   const variables = await mapInput({

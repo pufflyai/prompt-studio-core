@@ -1,5 +1,5 @@
 import { NodeConfig } from "@pufflig/ps-types";
-import { completionModels } from "./openai_models";
+import { completionModels } from "../../models/openai_models";
 import { OPENAI_API_KEY } from "./openai_settings";
 
 export const openaiCompletionConfig: NodeConfig = {
