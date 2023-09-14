@@ -52,7 +52,13 @@ export function getEdgeMap(edges: FlowEdge[]): Record<string, string[]> {
 export function mapOutputToInput(output: Record<string, ParamValue>, map: Record<string, string[]>) {
   const res: Record<string, ParamValue> = {};
   for (const [key, value] of Object.entries(map)) {
-    value.forEach((v) => (res[v] = output[key]));
+    value.forEach((v) => {
+      // if a value is not part of the output, do not map it
+      if (output[key] !== undefined) {
+        // assign the output value to the input at the target key
+        res[v] = output[key];
+      }
+    });
   }
   return res;
 }

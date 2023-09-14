@@ -88,3 +88,20 @@ test("map the outputs of a node to the inputs of a node", async () => {
     }
   `);
 });
+
+test("ignore undefined values that are part of the output", async () => {
+  const res = mapOutputToInput(
+    { 1: "a" },
+    {
+      "1": ["1", "3"],
+      "2": ["2"],
+    }
+  );
+
+  expect(res).toMatchInlineSnapshot(`
+    {
+      "1": "a",
+      "3": "a",
+    }
+  `);
+});
