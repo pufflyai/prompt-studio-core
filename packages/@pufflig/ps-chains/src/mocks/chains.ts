@@ -4,6 +4,7 @@ import {
   joinNodeConfig,
   loopNodeConfig,
   multiInputDataNode,
+  passthroughNode,
   simpleDataNode,
   simpleExecNode,
 } from "./nodes";
@@ -725,6 +726,98 @@ export const severalConnections: Flow = {
       n2: {
         id: "n2",
         type: "multi_node",
+      },
+    },
+  },
+  state: {},
+};
+
+export const multiNodes: Flow = {
+  nodeTypes: {
+    multi_output_node: {
+      name: "multiOutputNode",
+      inputs: [
+        {
+          name: "data1",
+          type: "text",
+          defaultValue: "DEFAULT_DATA_1",
+          description: "",
+          id: "data1",
+        },
+      ],
+      outputs: [
+        {
+          name: "data1",
+          type: "text",
+          defaultValue: "",
+          description: "",
+          id: "data1",
+        },
+        {
+          name: "data2",
+          type: "text",
+          defaultValue: "",
+          description: "",
+          id: "data2",
+        },
+      ],
+      ...passthroughNode,
+    },
+    multi_input_node: {
+      name: "multiInputNode",
+      inputs: [
+        {
+          name: "data1",
+          type: "text",
+          defaultValue: "DEFAULT_DATA_1",
+          description: "",
+          id: "data1",
+        },
+        {
+          name: "data2",
+          type: "text",
+          defaultValue: "DEFAULT_DATA_2",
+          description: "",
+          id: "data2",
+        },
+      ],
+      outputs: [
+        {
+          name: "data1",
+          type: "text",
+          defaultValue: "",
+          description: "",
+          id: "data1",
+        },
+      ],
+      ...passthroughNode,
+    },
+  },
+  definition: {
+    edges: {
+      e1: {
+        id: "e1",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data1",
+        targetHandle: "data1",
+      },
+      e2: {
+        id: "e2",
+        source: "n1",
+        target: "n2",
+        sourceHandle: "data2",
+        targetHandle: "data2",
+      },
+    },
+    nodes: {
+      n1: {
+        id: "n1",
+        type: "multi_output_node",
+      },
+      n2: {
+        id: "n2",
+        type: "multi_input_node",
       },
     },
   },

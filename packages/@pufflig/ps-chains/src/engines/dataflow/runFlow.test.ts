@@ -5,6 +5,7 @@ import {
   mappedExample,
   multiInput,
   multiInputWithOutput,
+  multiNodes,
   multistep,
   severalConnections,
   simpleExec,
@@ -489,6 +490,30 @@ test("running a node with several connections to a child should update the child
     }
   );
   expect(onNodeInputUpdate).toHaveBeenCalledTimes(3);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
+  expect(onNodeRunError).toHaveBeenCalledTimes(0);
+  expect(res).toMatchSnapshot();
+});
+
+/**
+ * (1.1)a -> (2.1)a
+ * (1.2)x -> (2.2)b
+ */
+test("running a node with a missing value does not override the default value in the target node", async () => {
+  const onNodeInputUpdate = jest.fn();
+  const onNodeRunComplete = jest.fn();
+  const onNodeRunError = jest.fn();
+  const res = await runFlow(
+    multiNodes,
+    "n1",
+    { data1: "TEST DATA" },
+    {
+      onNodeRunComplete,
+      onNodeInputUpdate,
+      onNodeRunError,
+    }
+  );
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
   expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
