@@ -4,7 +4,7 @@ export const splitTextNodeType = "modifier/split_text" as const;
 
 export const splitText: NodeConfig = {
   name: "Split Text",
-  description: "[NOT IMPLEMENTED] Can be used to split a text in sections",
+  description: "Can be used to split text into sections.",
   tags: ["modifier", "text", "split"],
   outputs: [
     {
@@ -16,6 +16,22 @@ export const splitText: NodeConfig = {
     },
   ],
   inputs: [
+    {
+      id: "method",
+      name: "Method",
+      description: "How should the text be split.",
+      type: "selection",
+      defaultValue: "paragraph",
+      options: [{ id: "paragraph", name: "paragraph" }],
+    },
+    {
+      id: "chunkSize",
+      name: "Chunk Size",
+      description: "How many characters each chunk should have.",
+      type: "number",
+      defaultValue: 1200,
+      min: 1,
+    },
     {
       id: "text",
       name: "Text",
