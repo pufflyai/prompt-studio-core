@@ -67,11 +67,6 @@ export interface ChatParam extends BaseParam {
   defaultValue: Chat;
 }
 
-export interface SecretParam extends BaseParam {
-  type: "secret";
-  defaultValue: string;
-}
-
 export interface MessageParam extends BaseParam {
   type: "message";
   defaultValue: ChatMessage | null;
@@ -114,7 +109,6 @@ export type Param =
   | APIParam
   | ModelParam
   | ChatParam
-  | SecretParam
   | MessageParam
   | ObjectParam
   | ListParam
