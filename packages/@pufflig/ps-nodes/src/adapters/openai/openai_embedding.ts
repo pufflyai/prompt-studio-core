@@ -1,4 +1,5 @@
-import { nodes, nodeTypes, secretId } from "@pufflig/ps-nodes-config";
+import { OPENAI_API_KEY } from "@pufflig/ps-models";
+import { nodes, nodeTypes } from "@pufflig/ps-nodes-config";
 import { Execute, ModelValue, Node } from "@pufflig/ps-types";
 import { Configuration, OpenAIApi } from "openai";
 
@@ -16,7 +17,7 @@ export const execute: Execute<OpenAIEmbeddingInput> = async (input, options = {}
   const { model, text } = input;
   const { globals } = options;
 
-  const configuration = new Configuration({ apiKey: globals?.[secretId.OPENAI_API_KEY] });
+  const configuration = new Configuration({ apiKey: globals?.[OPENAI_API_KEY] });
   const openai = new OpenAIApi(configuration);
 
   const response = await openai.createEmbedding({

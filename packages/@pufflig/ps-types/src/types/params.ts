@@ -42,6 +42,8 @@ export interface APIParam extends BaseParam {
 
 export interface ModelConfig {
   modelId: string;
+  description?: string;
+  settings?: BaseParam[];
   parameters: (NumberParam | TextParam)[];
 }
 
