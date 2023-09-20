@@ -46,12 +46,16 @@ export async function createCompletion(input: CreateCompletionInput, onTokenRece
     }
   });
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     stream.on("end", () => {
       resolve({
         completion,
         dataPoint,
       });
+    });
+
+    stream.on("error", (error: Error) => {
+      reject(error);
     });
   });
 }
