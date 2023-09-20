@@ -1,6 +1,5 @@
+import { openai, OPENAI_API_KEY } from "@pufflig/ps-models";
 import { NodeConfig } from "@pufflig/ps-types";
-import { chatModels } from "../../models/openai_models";
-import { OPENAI_API_KEY } from "./openai_settings";
 
 export const openaiChatConfig: NodeConfig = {
   name: "OpenAI (Chat)",
@@ -44,7 +43,7 @@ export const openaiChatConfig: NodeConfig = {
       name: "Model",
       description: "The model to use",
       type: "model",
-      definition: chatModels,
+      definition: openai.chat_models,
       defaultValue: {
         modelId: "gpt-3.5-turbo",
         parameters: {},

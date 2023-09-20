@@ -1,5 +1,6 @@
 import { NodeConfig } from "@pufflig/ps-types";
-import { chatModels, completionModels, embeddingModels } from "../../models/openai_models";
+import { default_model } from "../../constants";
+import { models } from "@pufflig/ps-models";
 
 export const modelNodeType = "data/model" as const;
 
@@ -13,9 +14,9 @@ export const model: NodeConfig = {
       name: "Model",
       description: "Configuration of the selected LLM.",
       type: "model",
-      definition: { ...completionModels, ...chatModels, ...embeddingModels },
+      definition: { ...models },
       defaultValue: {
-        modelId: "text-davinci-003",
+        modelId: default_model,
         parameters: {},
       },
     },
@@ -26,8 +27,8 @@ export const model: NodeConfig = {
       name: "Model Name",
       description: "The name of the model to use.",
       type: "selection",
-      defaultValue: "text-davinci-003",
-      options: Object.keys({ ...completionModels, ...chatModels, ...embeddingModels }).map((modelId) => ({
+      defaultValue: default_model,
+      options: Object.keys({ ...models }).map((modelId) => ({
         id: modelId,
         name: modelId,
       })),

@@ -1,6 +1,6 @@
+import { openai, OPENAI_API_KEY } from "@pufflig/ps-models";
 import { NodeConfig } from "@pufflig/ps-types";
-import { completionModels } from "../../models/openai_models";
-import { OPENAI_API_KEY } from "./openai_settings";
+import { default_model } from "../../constants";
 
 export const openaiCompletionConfig: NodeConfig = {
   name: "OpenAI (Completion)",
@@ -42,9 +42,9 @@ export const openaiCompletionConfig: NodeConfig = {
       name: "Model",
       description: "The model to use",
       type: "model",
-      definition: completionModels,
+      definition: openai.completion_models,
       defaultValue: {
-        modelId: "text-davinci-003",
+        modelId: default_model,
         parameters: {},
       },
     },

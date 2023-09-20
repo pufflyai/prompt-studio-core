@@ -1,28 +1,22 @@
 {
-  "name": "@pufflig/ps-nodes-config",
+  "name": "@pufflig/ps-models",
   "private": false,
   "version": "0.18.2",
-  "description": "Configuration files for nodes used in prompt studio.",
+  "description": "Configuration of models used in Prompt Studio",
   "files": [
     "dist"
   ],
-  "main": "./dist/ps-nodes-config.umd.js",
-  "module": "./dist/ps-nodes-config.es.js",
-  "types": "./dist/ps-nodes-config.d.ts",
+  "main": "./dist/ps-models.umd.js",
+  "module": "./dist/ps-models.es.js",
+  "types": "./dist/ps-models.d.ts",
   "scripts": {
     "build": "tsc && vite build",
     "prepublishOnly": "yarn build"
   },
   "author": "Pufflig AB",
   "license": "MIT",
-  "dependencies": {
-    "@pufflig/ps-models": "*"
-  },
   "devDependencies": {
     "@pufflig/ps-types": "^0.18.2",
-    "@types/jest": "^29.5.1",
-    "jest": "^29.5.0",
-    "ts-jest": "^29.1.0",
     "typescript": "^5.1.6",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0"

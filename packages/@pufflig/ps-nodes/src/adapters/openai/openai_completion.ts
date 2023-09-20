@@ -1,4 +1,5 @@
-import { nodes, secretId } from "@pufflig/ps-nodes-config";
+import { OPENAI_API_KEY } from "@pufflig/ps-models";
+import { nodes } from "@pufflig/ps-nodes-config";
 import { Execute, ModelValue, Node, ParamValueMap } from "@pufflig/ps-types";
 import { Configuration, OpenAIApi } from "openai";
 
@@ -18,7 +19,7 @@ export const execute: Execute<OpenAICompletionInput> = async (input, options = {
   const { modelId, parameters } = model;
   const { globals } = options;
 
-  const configuration = new Configuration({ apiKey: globals?.[secretId.OPENAI_API_KEY] });
+  const configuration = new Configuration({ apiKey: globals?.[OPENAI_API_KEY] });
   const openai = new OpenAIApi(configuration);
 
   const params = { ...parameters, model: modelId };
