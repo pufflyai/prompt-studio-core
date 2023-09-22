@@ -135,3 +135,6 @@ dist
 
 # docusaurus
 build
+
+# vite
+*.timestamp-*.mjs
