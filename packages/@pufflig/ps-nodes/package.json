@@ -1,7 +1,7 @@
 {
   "name": "@pufflig/ps-nodes",
   "private": false,
-  "version": "0.19.1",
+  "version": "0.19.2",
   "description": "Collection of nodes used in Prompt Studio",
   "files": [
     "dist"
@@ -17,7 +17,7 @@
   "author": "Pufflig AB",
   "license": "MIT",
   "devDependencies": {
-    "@pufflig/ps-types": "^0.19.1",
+    "@pufflig/ps-types": "^0.19.2",
     "@types/jest": "^29.5.1",
     "@types/lodash": "^4.14.196",
     "@types/mustache": "^4.2.2",
@@ -32,9 +32,10 @@
     "node": "18.16.0"
   },
   "dependencies": {
-    "@pufflig/ps-models": "^0.19.1",
-    "@pufflig/ps-nodes-config": "^0.19.1",
-    "@pufflig/ps-sdk": "^0.19.1",
+    "@pufflig/ps-models": "^0.19.2",
+    "@pufflig/ps-nodes-config": "^0.19.2",
+    "@pufflig/ps-sdk": "^0.19.2",
+    "axios": "^1.5.0",
     "lodash": "^4.17.21",
     "mustache": "^4.2.0",
     "openai": "^3.3.0",
