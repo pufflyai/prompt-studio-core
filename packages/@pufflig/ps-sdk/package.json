@@ -3,7 +3,7 @@
   "version": "0.19.1",
   "license": "MIT",
   "main": "./dist/ps-sdk.umd.js",
-  "module": "./dist/ps-sdk.es.js",
+  "module": "./dist/ps-sdk.cjs.js",
   "types": "./dist/ps-sdk.d.ts",
   "files": [
     "dist"

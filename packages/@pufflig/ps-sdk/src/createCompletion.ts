@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { SERVICE_URL } from "./constants";
+import { getServiceUrl } from "./constants";
 import { Datapoint } from "./types";
 
 interface CreateCompletionInput {
@@ -27,7 +27,7 @@ export async function createCompletion(input: CreateCompletionInput, callbacks?:
 
   const payload: AxiosRequestConfig = {
     method: "post",
-    url: SERVICE_URL,
+    url: getServiceUrl(),
     responseType: "stream",
     headers: {
       "Content-Type": "application/json",

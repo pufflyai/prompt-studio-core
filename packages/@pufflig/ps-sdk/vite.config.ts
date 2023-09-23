@@ -12,7 +12,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       name: "@pufflig/ps-sdk",
-      formats: ["es", "umd"],
+      formats: ["cjs", "es", "umd"],
       fileName: (format) => `ps-sdk.${format}.js`,
     },
     rollupOptions: {
