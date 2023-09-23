@@ -15,7 +15,7 @@ interface CreateCompletionInput {
 }
 
 interface Callbacks {
-  onTokenReceived?: (token: string) => void;
+  onNewToken?: (token: string) => void;
 }
 
 interface Completion {
@@ -50,17 +50,20 @@ export async function createCompletion(input: CreateCompletionInput, callbacks?:
   const response = await axios(payload);
 
   const stream = response.data;
-  let completion = "";
+
   let result = {};
 
   stream.on("data", (buffer: Buffer) => {
     const chunk = buffer.toString("utf-8");
-    const row = chunk.split("\n\n")[0];
-    const match = row.match(/^data: (.+)/);
-    const data = JSON.parse(match?.[1] || "{}");
-    callbacks?.onTokenReceived?.(data.datapoint.model_output);
-    completion += data.datapoint.model_output;
-    result = data;
+    const rows = chunk.split("\n\n");
+    rows.forEach((row) => {
+      const match = row.match(/^data: (.+)/);
+      const data = JSON.parse(match?.[1] || "{}");
+      if (data.datapoint?.model_output) {
+        callbacks?.onNewToken?.(data.datapoint.model_output);
+        result = data;
+      }
+    });
   });
 
   return new Promise((resolve, reject) => {
