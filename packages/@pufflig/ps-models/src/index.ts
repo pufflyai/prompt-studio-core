@@ -8,10 +8,6 @@ export const embedding_models = { ...openai_embedding };
 export const models = { ...openai_chat, ...openai_completion, ...open_router_completion, ...hf_completion };
 export const settings = { ...openai_settings, ...hf_settings, ...open_router_settings };
 
-export type CompletionModels = keyof typeof completion_models;
-export type ChatModels = keyof typeof chat_models;
-export type EmbeddingModels = keyof typeof embedding_models;
-
 export const openai = {
   chat_models: openai_chat,
   completion_models: openai_completion,
@@ -20,3 +16,7 @@ export const openai = {
 
 // export globals
 export { OPENAI_API_KEY } from "./models/openai";
+export { HF_ACCESS_TOKEN } from "./models/hf";
+export { OPEN_ROUTER_API_KEY } from "./models/open_router";
+
+export const default_completion_model = "gpt-3.5-turbo-instruct";

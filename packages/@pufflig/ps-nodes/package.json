@@ -32,6 +32,7 @@
     "node": "18.16.0"
   },
   "dependencies": {
+    "@pufflig/ps-sdk": "*",
     "@pufflig/ps-models": "^0.18.2",
     "@pufflig/ps-nodes-config": "^0.18.2",
     "lodash": "^4.17.21",

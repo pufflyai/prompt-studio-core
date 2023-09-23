@@ -1,8 +1,10 @@
 import { ModelDefinition } from "@pufflig/ps-types";
 
+export const OPEN_ROUTER_API_KEY = "open_router/api_key";
+
 export const open_router_settings = [
   {
-    id: "open_router/api_key",
+    id: OPEN_ROUTER_API_KEY,
     name: "Open Router API Key",
     description: "Your Open Router API key",
   },

@@ -1,8 +1,10 @@
 import { ModelDefinition } from "@pufflig/ps-types";
 
+export const HF_ACCESS_TOKEN = "hf/access_token";
+
 export const hf_settings = [
   {
-    id: "hf/access_token",
+    id: HF_ACCESS_TOKEN,
     name: "User Access Tokens",
     description: "Access tokens programmatically authenticate your identity to the Hugging Face Hub.",
   },
