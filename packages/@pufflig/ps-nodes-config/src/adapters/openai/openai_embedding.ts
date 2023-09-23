@@ -1,6 +1,5 @@
+import { openai, OPENAI_API_KEY } from "@pufflig/ps-models";
 import { NodeConfig } from "@pufflig/ps-types";
-import { embeddingModels } from "../../models/openai_models";
-import { OPENAI_API_KEY } from "./openai_settings";
 
 export const openaiEmbeddingNodeType = "adapter/openai_embedding" as const;
 
@@ -44,7 +43,7 @@ export const openaiEmbeddingConfig: NodeConfig = {
       name: "Model",
       description: "The model to use",
       type: "model",
-      definition: embeddingModels,
+      definition: openai.embedding_models,
       defaultValue: {
         modelId: "text-embedding-ada-002",
         parameters: {},

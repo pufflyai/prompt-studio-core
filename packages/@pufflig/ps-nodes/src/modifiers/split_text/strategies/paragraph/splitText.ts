@@ -94,8 +94,6 @@ export const splitText = (text: string, CHUNK_LENGTH_LIMIT = 1500) => {
     .map((chunk) => chunk.trim())
     .filter(filterEmptySections);
 
-  console.log(split);
-
   const dedup = deduplicateInput(split);
   return dedup;
 };
