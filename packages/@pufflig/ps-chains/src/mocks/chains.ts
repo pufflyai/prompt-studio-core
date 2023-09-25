@@ -7,6 +7,7 @@ import {
   passthroughNode,
   simpleDataNode,
   simpleExecNode,
+  startNode,
 } from "./nodes";
 
 export const singleNodeFlow: Flow = {
@@ -479,6 +480,7 @@ export const simpleFlowWithExec: Flow = {
 
 export const simpleExec: Flow = {
   nodeTypes: {
+    start_node: startNode,
     simple_node: simpleExecNode,
   },
   definition: {
@@ -501,7 +503,7 @@ export const simpleExec: Flow = {
     nodes: {
       n1: {
         id: "n1",
-        type: "simple_node",
+        type: "start_node",
       },
       n2: {
         id: "n2",
@@ -518,6 +520,7 @@ export const simpleExec: Flow = {
 
 export const simpleExecWithData: Flow = {
   nodeTypes: {
+    start_node: startNode,
     simple_node: simpleExecNode,
   },
   definition: {
@@ -554,7 +557,7 @@ export const simpleExecWithData: Flow = {
     nodes: {
       n1: {
         id: "n1",
-        type: "simple_node",
+        type: "start_node",
       },
       n2: {
         id: "n2",
@@ -571,6 +574,7 @@ export const simpleExecWithData: Flow = {
 
 export const execWithLoop: Flow = {
   nodeTypes: {
+    start_node: startNode,
     simple_node: simpleExecNode,
     loop_node: loopNodeConfig,
   },
@@ -608,7 +612,7 @@ export const execWithLoop: Flow = {
     nodes: {
       n1: {
         id: "n1",
-        type: "simple_node",
+        type: "start_node",
       },
       n2: {
         id: "n2",
@@ -636,12 +640,20 @@ export const execWithLoop: Flow = {
 
 export const loopWithJoin: Flow = {
   nodeTypes: {
+    start_node: startNode,
     simple_node: simpleExecNode,
     loop_node: loopNodeConfig,
     join_node: joinNodeConfig,
   },
   definition: {
     edges: {
+      e0: {
+        id: "e0",
+        source: "n0",
+        target: "n1",
+        sourceHandle: "exec:output",
+        targetHandle: "exec:input",
+      },
       e1: {
         id: "e1",
         source: "n1",
@@ -672,6 +684,10 @@ export const loopWithJoin: Flow = {
       },
     },
     nodes: {
+      n0: {
+        id: "n0",
+        type: "start_node",
+      },
       n1: {
         id: "n1",
         type: "loop_node",
@@ -698,7 +714,7 @@ export const loopWithJoin: Flow = {
 
 export const severalConnections: Flow = {
   nodeTypes: {
-    simple_node: simpleExecNode,
+    simple_node: simpleDataNode,
     multi_node: multiInputDataNode,
   },
   definition: {
