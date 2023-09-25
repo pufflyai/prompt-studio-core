@@ -60,14 +60,15 @@ export async function runFlow(flow: Flow, nodeId: string, input: Record<string, 
       return;
     }
 
-    // if the node is executable, only run it if the parent is complete
+    // if the node is executable, only run it if the execution parent is complete and exists
     const parentNodeId = Object.values(flow.definition.edges).find(
       (e) => e.target === nodeId && e.targetHandle.startsWith(executionPrefix)
     )?.source;
     const isParentComplete = parentNodeId ? runs[parentNodeId] > 0 : true;
     const isExecutableNode = !!node.execution?.inputs.length;
+    const skipExecution = isExecutableNode && (!isParentComplete || !parentNodeId);
 
-    if (!isParentComplete && isExecutableNode) {
+    if (skipExecution) {
       logger.debug("Parent node is not complete, skip execution");
       return;
     }

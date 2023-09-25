@@ -113,8 +113,8 @@ test("nodes with an execution input are not run without an execution connection"
       onNodeRunError,
     }
   );
-  expect(onNodeInputUpdate).toHaveBeenCalledTimes(2);
-  expect(onNodeRunComplete).toHaveBeenCalledTimes(1);
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(1);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(0);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
 });
@@ -449,7 +449,7 @@ test("a node can run its children multiple times", async () => {
 });
 
 /**
- * (🔄1) =2> (2) =2> (3)
+ * (0) => (🔄1) =2> (2) =2> (3)
  */
 test("a node can run its children multiple times 2", async () => {
   const onNodeInputUpdate = jest.fn();
@@ -457,7 +457,7 @@ test("a node can run its children multiple times 2", async () => {
   const onNodeRunError = jest.fn();
   const res = await runFlow(
     loopWithJoin,
-    "n1",
+    "n0",
     {},
     {
       onNodeRunComplete,
@@ -465,8 +465,8 @@ test("a node can run its children multiple times 2", async () => {
       onNodeRunError,
     }
   );
-  expect(onNodeInputUpdate).toHaveBeenCalledTimes(7);
-  expect(onNodeRunComplete).toHaveBeenCalledTimes(3);
+  expect(onNodeInputUpdate).toHaveBeenCalledTimes(8);
+  expect(onNodeRunComplete).toHaveBeenCalledTimes(4);
   expect(onNodeRunError).toHaveBeenCalledTimes(0);
   expect(res).toMatchSnapshot();
 });

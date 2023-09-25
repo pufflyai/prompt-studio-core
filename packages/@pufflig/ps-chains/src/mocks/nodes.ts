@@ -126,6 +126,38 @@ export const multiOutputDataNode: Node = {
   ...passthroughNode,
 };
 
+export const startNode: Node = {
+  name: "startNode",
+  execution: {
+    inputs: [],
+    outputs: [
+      {
+        id: "exec:output",
+        name: "Completed",
+      },
+    ],
+  },
+  inputs: [
+    {
+      name: "data",
+      type: "text",
+      defaultValue: "",
+      description: "",
+      id: "data",
+    },
+  ],
+  outputs: [
+    {
+      name: "data",
+      type: "text",
+      defaultValue: "",
+      description: "",
+      id: "data",
+    },
+  ],
+  ...passthroughNode,
+};
+
 export const simpleExecNode: Node = {
   name: "simpleNode",
   execution: {

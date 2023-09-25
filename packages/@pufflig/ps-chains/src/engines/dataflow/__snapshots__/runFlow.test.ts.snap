@@ -31,6 +31,11 @@ exports[`a node can run its children multiple times 1`] = `
 
 exports[`a node can run its children multiple times 2 1`] = `
 {
+  "n0": {
+    "input": {
+      "data": "",
+    },
+  },
   "n1": {
     "input": {
       "list": [
@@ -195,11 +200,6 @@ exports[`merge existing state on input 1`] = `
 exports[`nodes with an execution input are not run without an execution connection 1`] = `
 {
   "n1": {
-    "input": {
-      "data": "Hello {{World}}",
-    },
-  },
-  "n2": {
     "input": {
       "data": "Hello {{World}}",
     },
