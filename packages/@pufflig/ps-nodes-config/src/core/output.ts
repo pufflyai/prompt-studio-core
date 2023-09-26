@@ -4,14 +4,10 @@ export const outputNodeType = "core/output" as const;
 
 export const outputNodeConfig: NodeConfig = {
   name: "End",
-  description: "Final node in a workflow",
+  description: "Pass the values you want to send to your app here.",
   tags: ["core", "output"],
   execution: {
-    inputs: [
-      {
-        id: "exec:input",
-      },
-    ],
+    inputs: [],
     outputs: [],
   },
   customSchema: "input",
