@@ -6,6 +6,7 @@ export const forinNodeConfig: NodeConfig = {
   name: "Loop",
   description: "Loop over items in a list",
   tags: ["core", "forin"],
+  status: "experimental",
   execution: {
     inputs: [
       {

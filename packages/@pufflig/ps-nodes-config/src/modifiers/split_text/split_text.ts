@@ -6,6 +6,7 @@ export const splitText: NodeConfig = {
   name: "Split Text",
   description: "Can be used to split text into sections.",
   tags: ["modifier", "text", "split"],
+  status: "experimental",
   outputs: [
     {
       id: "list",

@@ -16,6 +16,7 @@ export const openai_completion: ModelDefinition = {
     description:
       "Similar capabilities as text-davinci-003 but compatible with legacy Completions endpoint and not Chat Completions.",
     settings: openai_settings,
+    streaming: true,
     parameters: [
       {
         id: "temperature",
@@ -78,6 +79,7 @@ export const openai_completion: ModelDefinition = {
     modelId: "babbage-002",
     description: "Replacement for the GPT-3 ada and babbage base models.",
     settings: openai_settings,
+    streaming: true,
     parameters: [
       {
         id: "temperature",
@@ -140,6 +142,7 @@ export const openai_completion: ModelDefinition = {
     modelId: "davinci-002",
     description: "Replacement for the GPT-3 curie and davinci base models.",
     settings: openai_settings,
+    streaming: true,
     parameters: [
       {
         id: "temperature",
@@ -205,6 +208,7 @@ export const openai_chat: ModelDefinition = {
     modelId: "gpt-4",
     description: "More capable than any GPT-3.5 model, able to do more complex tasks, and optimized for chat.",
     settings: openai_settings,
+    streaming: true,
     parameters: [
       {
         id: "temperature",
@@ -267,6 +271,7 @@ export const openai_chat: ModelDefinition = {
     modelId: "gpt-4-32k",
     description: "Same capabilities as the standard gpt-4 mode but with 4x the context length. ",
     settings: openai_settings,
+    streaming: true,
     parameters: [
       {
         id: "temperature",
@@ -329,6 +334,7 @@ export const openai_chat: ModelDefinition = {
     modelId: "gpt-3.5-turbo",
     description: "Most capable GPT-3.5 model and optimized for chat at 1/10th the cost of text-davinci-003.",
     settings: openai_settings,
+    streaming: true,
     parameters: [
       {
         id: "temperature",
@@ -391,6 +397,7 @@ export const openai_chat: ModelDefinition = {
     modelId: "gpt-3.5-turbo-16k",
     description: "Same capabilities as the standard gpt-3.5-turbo model but with 4 times the context.",
     settings: openai_settings,
+    streaming: true,
     parameters: [
       {
         id: "temperature",
@@ -456,6 +463,7 @@ export const openai_embedding: ModelDefinition = {
     modelId: "text-embedding-ada-002",
     description: "Designed to replace the previous 16 first-generation embedding models at a fraction of the cost",
     settings: openai_settings,
+    streaming: true,
     parameters: [],
   },
 };

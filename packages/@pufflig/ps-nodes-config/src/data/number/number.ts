@@ -6,6 +6,7 @@ export const number: NodeConfig = {
   name: "Number",
   description: "A numerical value.",
   tags: ["data", "number"],
+  status: "experimental",
   outputs: [
     {
       id: "number",

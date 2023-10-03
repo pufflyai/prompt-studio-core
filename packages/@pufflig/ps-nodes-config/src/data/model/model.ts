@@ -8,6 +8,7 @@ export const model: NodeConfig = {
   name: "LLM",
   description: "Configuration for a Large Language Model.",
   tags: ["data", "model", "completion"],
+  status: "experimental",
   outputs: [
     {
       id: "model",

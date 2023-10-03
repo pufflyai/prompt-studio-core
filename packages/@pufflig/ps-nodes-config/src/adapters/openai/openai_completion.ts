@@ -5,6 +5,7 @@ import { default_model } from "../../constants";
 export const openaiCompletionConfig: NodeConfig = {
   name: "OpenAI (Completion)",
   description: "OpenAI Completion",
+  status: "stable",
   tags: ["adapter", "text"],
   globals: [OPENAI_API_KEY],
   execution: {
