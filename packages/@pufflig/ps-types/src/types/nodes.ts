@@ -13,7 +13,7 @@ export interface NextNode<I = any> {
 export interface NodeConfig {
   name: string;
   description?: string;
-  status: "stable" | "experimental" | "deprecated";
+  status?: "stable" | "experimental" | "deprecated";
   tags?: string[];
   customSchema?: "input" | "output" | "both";
   globals?: string[];
