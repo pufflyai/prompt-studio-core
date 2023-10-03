@@ -6,6 +6,7 @@ export const templateChat: NodeConfig = {
   name: "Chat Template",
   description: "Using this template, you can insert text into a chat.",
   tags: ["modifier", "chat", "template"],
+  status: "experimental",
   outputs: [
     {
       id: "chat",

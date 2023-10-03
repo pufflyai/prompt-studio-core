@@ -6,6 +6,7 @@ export const inputNodeConfig: NodeConfig = {
   name: "Start",
   description: "First node in a workflow",
   tags: ["core", "input"],
+  status: "stable",
   execution: {
     inputs: [],
     outputs: [

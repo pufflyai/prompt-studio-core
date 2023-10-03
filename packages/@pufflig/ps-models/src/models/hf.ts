@@ -15,6 +15,7 @@ export const hf_completion: ModelDefinition = {
     modelId: "gpt-2",
     description: "",
     settings: hf_settings,
+    streaming: false,
     parameters: [
       {
         id: "temperature",

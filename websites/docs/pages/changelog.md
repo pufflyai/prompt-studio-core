@@ -11,6 +11,12 @@ head:
 
 **Note**: the API for the Prompt Studio packages will be changing rapidly until we reach v1.0.0"
 
+## 0.19.5
+
+### Features
+
+- [@pufflig/ps-node-configs] add api status to node config. A status can be: "experimental", "deprecated", "stable"
+
 ## 0.18.0
 
 :warning: Breaking changes
