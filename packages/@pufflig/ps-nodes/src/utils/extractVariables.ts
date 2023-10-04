@@ -1,4 +1,4 @@
-import { NumberParam, ObjectDefinition, TextParam } from "@pufflig/ps-types";
+import { NumberParam, Param, TextParam } from "@pufflig/ps-types";
 import Mustache from "mustache";
 
 /**
@@ -6,7 +6,7 @@ import Mustache from "mustache";
  * @param template
  * @returns
  */
-export const extractVariables = (template: string, onError: (err: any) => void = () => {}): ObjectDefinition | null => {
+export const extractVariables = (template: string, onError: (err: any) => void = () => {}): Param[] | null => {
   try {
     return Mustache.parse(template)
       .filter((v) => v[0] === "name" || v[0] === "#")

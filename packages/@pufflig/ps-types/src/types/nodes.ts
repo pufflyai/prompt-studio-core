@@ -37,11 +37,13 @@ export type GetTargets<I = any, O = any> = (
   result?: O,
   options?: NodeOptions<I>
 ) => Promise<NextNode<Partial<O>>[]>;
+export type GetInputDefinition<I = any> = (input: I, options?: NodeOptions<I>) => Promise<Param[]>;
 
 export interface NodeActions<I = any, O = any> {
   execute?: Execute<I, O>;
   mapInput?: MapInput<I>;
   getTargets?: GetTargets<I, O>;
+  getInputDefinition?: GetInputDefinition<I>;
 }
 
 export type Node<I = any, O = any> = NodeConfig & NodeActions<I, O>;
