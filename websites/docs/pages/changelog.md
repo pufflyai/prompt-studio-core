@@ -18,8 +18,6 @@ head:
 - **API** [@pufflig/ps-nodes] add the `prompt` node. This node will replace the text template node. It doesn't require a "variables" input anymore, instead it derives it's input fields from the template content.
 - **API** [@pufflig/ps-node-configs] add the optional `getInputDefinition` method to nodes. This is not a lifecycle function. This function can be used to derive an input definition (what input fields a node has) given the values provided in the input. This method can be used for example to show input fields given a template.
 
-NOTE: since this method is intended client side, there is no longer a need to split this nodes package in two. Instead we should join the configuration and
-
 ## 0.19.5
 
 ### Features
