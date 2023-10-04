@@ -31,7 +31,7 @@ export interface NodeOptions<I> {
 }
 
 export type Execute<I = any, O = any> = (input: I, options?: NodeOptions<I>) => Promise<O | null>;
-export type MapInput<I = any> = (input: I, options?: NodeOptions<I>) => Promise<Partial<I> | null>;
+export type MapInput<I = any> = (input: I, options?: NodeOptions<I>) => Promise<Param[] | null>;
 export type GetTargets<I = any, O = any> = (
   input: I,
   result?: O,

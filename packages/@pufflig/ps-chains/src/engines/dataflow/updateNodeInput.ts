@@ -1,7 +1,6 @@
 import { ParamValue } from "@pufflig/ps-types";
 import { Flow, NodeState, RunOptions } from "../../types";
 import { applyDefaultInputs } from "./utils/utils";
-import { identity } from "./constants";
 
 /**
  * This function updates the input state of a node without executing the chain.
@@ -21,19 +20,15 @@ export async function updateNodeInput(
   const flowState: Record<string, NodeState> = { ...flow.state };
   const nodeConfig = flow.definition.nodes[nodeId];
   const nodeDefinition = flow.nodeTypes[nodeConfig?.type];
-  const mapInput = nodeDefinition?.mapInput || identity;
 
   if (!nodeConfig || !nodeDefinition) {
     throw new Error(`Definition for node ${nodeId} not found`);
   }
 
-  // parse the input
+  // compile the new state of the node
   const nodeState = flowState[nodeId];
   const prevInput = nodeState?.input;
-  const parsedInput = await mapInput(input, { prevInput, globals: runOptions?.globals });
-
-  // compile the new state of the node
-  const newInput = { ...applyDefaultInputs(prevInput, nodeDefinition), ...parsedInput };
+  const newInput = { ...applyDefaultInputs(prevInput, nodeDefinition), ...input };
   const newState: NodeState = { ...nodeState, input: newInput };
 
   runOptions?.onNodeInputUpdate?.(nodeId, newState);
