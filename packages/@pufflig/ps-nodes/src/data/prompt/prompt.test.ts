@@ -24,8 +24,8 @@ test("execute - some variables", async () => {
   `);
 });
 
-test("getInputDefinition - no variables", async () => {
-  const variables = await getInputDefinition({
+test("getInputDefinition - no variables", () => {
+  const variables = getInputDefinition({
     template: `summarize {{longText}}`,
   });
   expect(variables).toMatchInlineSnapshot(`
@@ -48,8 +48,8 @@ test("getInputDefinition - no variables", async () => {
   `);
 });
 
-test("getInputDefinition - if you pass a template and a variable, take value of the variable", async () => {
-  const variables = await getInputDefinition({
+test("getInputDefinition - if you pass a template and a variable, take value of the variable", () => {
+  const variables = getInputDefinition({
     template: `summarize {{longText}}`,
     longText: "some long text",
   });
@@ -73,8 +73,8 @@ test("getInputDefinition - if you pass a template and a variable, take value of 
   `);
 });
 
-test("getInputDefinition - ignores non existing variables", async () => {
-  const variables = await getInputDefinition({
+test("getInputDefinition - ignores non existing variables", () => {
+  const variables = getInputDefinition({
     template: `summarize {{longText}}`,
     otherVariable: "",
   });

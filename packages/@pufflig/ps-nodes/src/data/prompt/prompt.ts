@@ -27,7 +27,7 @@ export const execute = async (input: TemplateTextInput) => {
  * @param prev
  * @returns
  */
-export const getInputDefinition: GetInputDefinition<TemplateTextInput> = async (input) => {
+export const getInputDefinition: GetInputDefinition<TemplateTextInput> = (input) => {
   const { template, ...rest } = input;
 
   if (template === undefined) {

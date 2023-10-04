@@ -2,7 +2,7 @@ import { Node, NodeConfig, ParamValue } from "@pufflig/ps-types";
 
 export interface FlowNode {
   id: string;
-  type: keyof Flow["nodeTypes"];
+  type: string;
   editor?: {
     position: { x: number; y: number };
   };
