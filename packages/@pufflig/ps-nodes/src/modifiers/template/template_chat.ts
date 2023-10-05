@@ -1,9 +1,9 @@
 import { nodeTypes, nodes } from "@pufflig/ps-nodes-config";
-import { Chat, MapInput, Node, NumberParam, ObjectDefinition, TextParam } from "@pufflig/ps-types";
+import { Chat, MapInput, Node, ObjectDefinition, Param } from "@pufflig/ps-types";
 import _ from "lodash";
 import Mustache from "mustache";
+import { extractVariables } from "../../utils/extractVariables";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
-import { extractVariables } from "./utils/extractVariables";
 
 export interface TemplateChatInput {
   chat: Chat;
@@ -54,16 +54,13 @@ export const mapInput: MapInput<TemplateChatInput> = async (input, options = {})
 
   const extractedVariables = _.flatten(extractedVariableArrays);
 
-  const uniqueVariables = extractedVariables.reduce(
-    (uniqueArr: (NumberParam | TextParam | null)[], currentVariable: NumberParam | TextParam | null) => {
-      const existingVariable = uniqueArr.find((variable) => variable?.id === currentVariable?.id);
-      if (!existingVariable) {
-        uniqueArr.push(currentVariable);
-      }
-      return uniqueArr;
-    },
-    []
-  );
+  const uniqueVariables = extractedVariables.reduce((uniqueArr: (Param | null)[], currentVariable: Param | null) => {
+    const existingVariable = uniqueArr.find((variable) => variable?.id === currentVariable?.id);
+    if (!existingVariable) {
+      uniqueArr.push(currentVariable);
+    }
+    return uniqueArr;
+  }, []);
 
   if (uniqueVariables) {
     // extracted variables that already existed in the previous input are assigned the previous value

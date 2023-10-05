@@ -3,7 +3,7 @@ import { MapInput, Node, ObjectDefinition } from "@pufflig/ps-types";
 import _ from "lodash";
 import Mustache from "mustache";
 import { objectDefinitionToMap } from "../../utils/objectDefinitionToMap";
-import { extractVariables } from "./utils/extractVariables";
+import { extractVariables } from "../../utils/extractVariables";
 
 export interface TemplateTextInput {
   template: string;

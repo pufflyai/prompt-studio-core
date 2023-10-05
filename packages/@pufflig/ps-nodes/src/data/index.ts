@@ -5,6 +5,7 @@ import { messageNode } from "./message/message";
 import { modelNode } from "./model/model";
 import { numberNode } from "./number/number";
 import { textNode } from "./text/text";
+import { promptNode } from "./prompt/prompt";
 
 export const dataNodes = {
   [nodeTypes.groupNodeType]: groupNode,
@@ -13,4 +14,5 @@ export const dataNodes = {
   [nodeTypes.modelNodeType]: modelNode,
   [nodeTypes.numberNodeType]: numberNode,
   [nodeTypes.textNodeType]: textNode,
+  [nodeTypes.promptNodeType]: promptNode,
 };
