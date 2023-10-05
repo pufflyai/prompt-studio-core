@@ -28,6 +28,23 @@ export const open_router_completion: ModelDefinition = {
       },
     ],
   },
+  "meta-llama/llama-2-13b-chat": {
+    modelId: "meta-llama/llama-2-13b-chat",
+    description: "Meta: Llama v2 13B Chat (beta)",
+    settings: open_router_settings,
+    parameters: [
+      {
+        id: "temperature",
+        type: "number",
+        name: "Temperature",
+        max: 2,
+        min: 0,
+        step: 0.1,
+        defaultValue: 0.4,
+        description: "",
+      },
+    ],
+  },
   "anthropic/claude-2": {
     modelId: "anthropic/claude-2",
     description: "Claude: superior performance on tasks that require complex reasoning",
