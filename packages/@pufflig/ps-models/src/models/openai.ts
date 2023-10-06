@@ -225,7 +225,8 @@ export const openai_chat: ModelDefinition = {
         id: "max_tokens",
         type: "number",
         name: "Max Tokens",
-        max: 8192,
+        // although the documentation says the model should support 8192 tokens, it actually supports 4096
+        max: 4096,
         min: 1,
         step: 20,
         defaultValue: 1024,
