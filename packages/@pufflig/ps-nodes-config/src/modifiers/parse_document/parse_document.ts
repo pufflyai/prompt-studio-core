@@ -7,6 +7,19 @@ export const parseDocument: NodeConfig = {
   description: "Run a prompt over a document",
   tags: ["modifier", "document", "text"],
   status: "experimental",
+  execution: {
+    inputs: [
+      {
+        id: "exec:input",
+      },
+    ],
+    outputs: [
+      {
+        id: "exec:output",
+        name: "Completed",
+      },
+    ],
+  },
   outputs: [
     {
       id: "text",
@@ -22,7 +35,14 @@ export const parseDocument: NodeConfig = {
       name: "Prompt",
       description: "Prompt to parse the document with",
       type: "text",
-      defaultValue: "",
+      defaultValue: "Summarize the following:\n{{document}}",
+    },
+    {
+      id: "join",
+      name: "Join Instruction",
+      description: "Describe how the output should assembled if the document was to long",
+      type: "text",
+      defaultValue: "Join the sections below:\n{{document}}",
     },
     {
       id: "document",
@@ -30,13 +50,6 @@ export const parseDocument: NodeConfig = {
       description: "Document to be processed",
       type: "text",
       defaultValue: "",
-    },
-    {
-      id: "join",
-      name: "Join Instruction",
-      description: "Describe how the output should assembled if the document was to long",
-      type: "text",
-      defaultValue: "Join the sections below, keep values that have already been set.",
     },
   ],
 };
