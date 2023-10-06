@@ -40,7 +40,7 @@ export const parseDocument: NodeConfig = {
     {
       id: "join",
       name: "Join Instruction",
-      description: "Describe how the output should assembled if the document was to long",
+      description: "Describe how the output should be put together if the document was to long",
       type: "text",
       defaultValue: "Join the sections below:\n{{document}}",
     },
