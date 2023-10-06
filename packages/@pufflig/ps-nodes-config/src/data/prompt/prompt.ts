@@ -7,7 +7,6 @@ export const prompt: NodeConfig = {
   description: "Write a prompt with variables",
   tags: ["data", "text"],
   status: "experimental",
-  customSchema: "input",
   outputs: [
     {
       id: "prompt",

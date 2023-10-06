@@ -1,9 +1,11 @@
 import path from "node:path";
 import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
+import wasm from "vite-plugin-wasm";
 
 export default defineConfig({
   plugins: [
+    wasm(),
     dts({
       insertTypesEntry: true,
     }),
@@ -16,7 +18,7 @@ export default defineConfig({
       fileName: (format) => `ps-nodes.${format}.js`,
     },
     rollupOptions: {
-      external: ["axios", "lodash", "uuid", "openai"],
+      external: ["axios", "lodash", "uuid", "openai", "@dqbd/tiktoken"],
     },
   },
 });
