@@ -25,6 +25,16 @@ const model = "gpt-3.5-turbo-16k";
 const MAX_TOKENS = 8000;
 const MAX_CONCURRENCY = 2;
 
+const tags = ["[[", "]]"] as [string, string];
+
+/**
+ * Runs a prompt across a variable length input. Map the prompt across chunks, concatenate or reduce the result
+ * using the join prompt. If no join prompt is provided, the first result will be returned.
+ *
+ * @param input
+ * @param options
+ * @returns
+ */
 export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (input, options = {}) => {
   const { prompt, document } = input;
   const { globals } = options;
@@ -62,7 +72,7 @@ export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (
     const promises: Promise<any>[] = [];
 
     for (const chunk of chunkGroup) {
-      const content = Mustache.render(prompt, { document: chunk.pageContent });
+      const content = Mustache.render(prompt, { document: chunk.pageContent }, {}, { tags });
       const message = { content, role: "system" as const };
       promises.push(
         openai.createChatCompletion({
@@ -83,10 +93,20 @@ export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (
     completions.push(...results);
   }
 
+  // if there is only one chunk, return the result
   if (completions.length <= 1) {
     return {
       text: completions[0] || "",
-      reduceCompletions: [],
+    };
+  }
+
+  // if there is no join prompt, return the concatenated results
+  if (!input.join) {
+    return {
+      text: completions.reduce((acc, cur) => {
+        if (!acc) return cur;
+        return acc + "\n" + cur;
+      }, ""),
     };
   }
 
@@ -116,7 +136,8 @@ export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (
   reducedGroups.push(reduceGroup);
   // --
 
-  // TODO: recursively reduce the chunks
+  // Recursively reduce the chunks if we cannot fit them into the max tokens.
+  // TODO: Currently we only return the first result of the reduction.
 
   // reduce using the join prompt
   const reduceCompletions = [];
@@ -126,7 +147,7 @@ export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (
 
     for (const answer of reducedAnswers) {
       // insert the chunk into the prompt
-      const joinPrompt = Mustache.render(input.join, { document: answer });
+      const joinPrompt = Mustache.render(input.join, { document: answer }, {}, { tags });
       const message = { content: joinPrompt, role: "system" as const };
       // run the completion on the chunk
       const remainingTokens = MAX_TOKENS - countTokens(joinPrompt);
@@ -138,6 +159,7 @@ export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (
           max_tokens: remainingTokens - 1,
         })
       );
+      // avoid 429 errors from the Openai API.
       await delay(500);
     }
 

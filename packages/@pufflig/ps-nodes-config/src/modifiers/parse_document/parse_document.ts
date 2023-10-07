@@ -35,14 +35,15 @@ export const parseDocument: NodeConfig = {
       name: "Prompt",
       description: "Prompt to parse the document with",
       type: "text",
-      defaultValue: "Summarize the following:\n{{document}}",
+      defaultValue: "Summarize the following:\n[[document]]",
     },
     {
       id: "join",
       name: "Join Instruction",
-      description: "Describe how the output should be put together if the document was to long",
+      description:
+        "Describe how the output should be put together if the document was to long. Leave empty if you don't want to join the outputs.",
       type: "text",
-      defaultValue: "Join the sections below:\n{{document}}",
+      defaultValue: "",
     },
     {
       id: "document",
