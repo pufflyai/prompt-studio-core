@@ -23,7 +23,7 @@ interface Completion {
 }
 
 export async function createCompletion(input: CreateCompletionInput, callbacks?: Callbacks): Promise<Completion> {
-  const { modelId, prompt, apiKey, config, options } = input;
+  const { modelId, prompt, apiKey, config, options, parameters = {} } = input;
 
   const payload: AxiosRequestConfig = {
     method: "post",
@@ -36,6 +36,7 @@ export async function createCompletion(input: CreateCompletionInput, callbacks?:
     data: {
       modelId,
       prompt: prompt,
+      parameters,
     },
   };
 
