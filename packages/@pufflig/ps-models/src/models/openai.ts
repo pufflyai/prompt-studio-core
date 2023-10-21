@@ -30,7 +30,7 @@ export const openai_completion: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "max_tokens",
+        id: "maxTokens",
         type: "number",
         name: "Max Tokens",
         max: 4097,
@@ -93,7 +93,7 @@ export const openai_completion: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "max_tokens",
+        id: "maxTokens",
         type: "number",
         name: "Max Tokens",
         max: 16384,
@@ -156,7 +156,7 @@ export const openai_completion: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "max_tokens",
+        id: "maxTokens",
         type: "number",
         name: "Max Tokens",
         max: 16384,
@@ -222,7 +222,7 @@ export const openai_chat: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "max_tokens",
+        id: "maxTokens",
         type: "number",
         name: "Max Tokens",
         // although the documentation says the model should support 8192 tokens, it actually supports 4096
@@ -286,7 +286,7 @@ export const openai_chat: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "max_tokens",
+        id: "maxTokens",
         type: "number",
         name: "Max Tokens",
         max: 32768,
@@ -349,7 +349,7 @@ export const openai_chat: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "max_tokens",
+        id: "maxTokens",
         type: "number",
         name: "Max Tokens",
         max: 4097,
@@ -412,7 +412,7 @@ export const openai_chat: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "max_tokens",
+        id: "maxTokens",
         type: "number",
         name: "Max Tokens",
         max: 16385,
