@@ -11,8 +11,8 @@ export const hf_settings = [
 ];
 
 export const hf_completion: ModelDefinition = {
-  "gpt-2": {
-    modelId: "gpt-2",
+  gpt2: {
+    modelId: "gpt2",
     description: "",
     settings: hf_settings,
     streaming: false,
