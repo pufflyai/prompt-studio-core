@@ -45,6 +45,7 @@ export interface ModelConfig {
   description?: string;
   settings?: BaseParam[];
   streaming?: boolean;
+  contextLength?: number;
   parameters: (NumberParam | TextParam)[];
 }
 

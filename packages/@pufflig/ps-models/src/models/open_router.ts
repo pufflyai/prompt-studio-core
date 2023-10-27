@@ -15,6 +15,7 @@ export const open_router_completion: ModelDefinition = {
     modelId: "gryphe/mythomax-l2-13b",
     description: "An improved, potentially even perfected variant of MythoMix.",
     settings: open_router_settings,
+    contextLength: 4096,
     parameters: [
       {
         id: "temperature",
@@ -32,6 +33,7 @@ export const open_router_completion: ModelDefinition = {
     modelId: "meta-llama/llama-2-13b-chat",
     description: "Meta: Llama v2 13B Chat (beta)",
     settings: open_router_settings,
+    contextLength: 4096,
     parameters: [
       {
         id: "temperature",
@@ -49,6 +51,7 @@ export const open_router_completion: ModelDefinition = {
     modelId: "anthropic/claude-2",
     description: "Claude: superior performance on tasks that require complex reasoning",
     settings: open_router_settings,
+    contextLength: 8192,
     parameters: [
       {
         id: "temperature",

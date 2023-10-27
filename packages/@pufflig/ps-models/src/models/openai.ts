@@ -17,6 +17,7 @@ export const openai_completion: ModelDefinition = {
       "Similar capabilities as text-davinci-003 but compatible with legacy Completions endpoint and not Chat Completions.",
     settings: openai_settings,
     streaming: true,
+    contextLength: 4096,
     parameters: [
       {
         id: "temperature",
@@ -30,10 +31,10 @@ export const openai_completion: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "maxTokens",
+        id: "max_tokens",
         type: "number",
         name: "Max Tokens",
-        max: 4097,
+        max: 4096,
         min: 1,
         step: 20,
         defaultValue: 1024,
@@ -80,6 +81,7 @@ export const openai_completion: ModelDefinition = {
     description: "Replacement for the GPT-3 ada and babbage base models.",
     settings: openai_settings,
     streaming: true,
+    contextLength: 16384,
     parameters: [
       {
         id: "temperature",
@@ -93,7 +95,7 @@ export const openai_completion: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "maxTokens",
+        id: "max_tokens",
         type: "number",
         name: "Max Tokens",
         max: 16384,
@@ -143,6 +145,7 @@ export const openai_completion: ModelDefinition = {
     description: "Replacement for the GPT-3 curie and davinci base models.",
     settings: openai_settings,
     streaming: true,
+    contextLength: 16384,
     parameters: [
       {
         id: "temperature",
@@ -156,7 +159,7 @@ export const openai_completion: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "maxTokens",
+        id: "max_tokens",
         type: "number",
         name: "Max Tokens",
         max: 16384,
@@ -209,6 +212,7 @@ export const openai_chat: ModelDefinition = {
     description: "More capable than any GPT-3.5 model, able to do more complex tasks, and optimized for chat.",
     settings: openai_settings,
     streaming: true,
+    contextLength: 4096,
     parameters: [
       {
         id: "temperature",
@@ -222,7 +226,7 @@ export const openai_chat: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "maxTokens",
+        id: "max_tokens",
         type: "number",
         name: "Max Tokens",
         // although the documentation says the model should support 8192 tokens, it actually supports 4096
@@ -273,6 +277,7 @@ export const openai_chat: ModelDefinition = {
     description: "Same capabilities as the standard gpt-4 mode but with 4x the context length. ",
     settings: openai_settings,
     streaming: true,
+    contextLength: 32768,
     parameters: [
       {
         id: "temperature",
@@ -286,7 +291,7 @@ export const openai_chat: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "maxTokens",
+        id: "max_tokens",
         type: "number",
         name: "Max Tokens",
         max: 32768,
@@ -336,6 +341,7 @@ export const openai_chat: ModelDefinition = {
     description: "Most capable GPT-3.5 model and optimized for chat at 1/10th the cost of text-davinci-003.",
     settings: openai_settings,
     streaming: true,
+    contextLength: 4096,
     parameters: [
       {
         id: "temperature",
@@ -349,10 +355,10 @@ export const openai_chat: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "maxTokens",
+        id: "max_tokens",
         type: "number",
         name: "Max Tokens",
-        max: 4097,
+        max: 4096,
         min: 1,
         step: 20,
         defaultValue: 1024,
@@ -399,6 +405,7 @@ export const openai_chat: ModelDefinition = {
     description: "Same capabilities as the standard gpt-3.5-turbo model but with 4 times the context.",
     settings: openai_settings,
     streaming: true,
+    contextLength: 16385,
     parameters: [
       {
         id: "temperature",
@@ -412,7 +419,7 @@ export const openai_chat: ModelDefinition = {
           "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.",
       },
       {
-        id: "maxTokens",
+        id: "max_tokens",
         type: "number",
         name: "Max Tokens",
         max: 16385,
