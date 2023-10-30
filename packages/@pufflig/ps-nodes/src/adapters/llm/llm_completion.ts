@@ -79,4 +79,5 @@ export const getInputDefinition: GetInputDefinition<LLMCompletionInput> = (input
 export const llmCompletion: Node<LLMCompletionInput, LLMCompletionOutput> = {
   ...nodes[nodeTypes.llmCompletionNodeType],
   execute,
+  getInputDefinition,
 };
