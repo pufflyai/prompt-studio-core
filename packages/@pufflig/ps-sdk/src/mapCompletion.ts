@@ -1,10 +1,11 @@
 import axios from "axios";
 import { getServiceUrl } from "./constants";
 
-interface CreateCompletionInput {
+interface MapCompletionInput {
   apiKey: string;
   modelId: string;
   prompt: string;
+  document: string;
   parameters?: Record<string, any>;
   config?: Record<string, any>;
   options?: {
@@ -14,16 +15,17 @@ interface CreateCompletionInput {
 }
 
 interface Completion {
-  datapoint?: {
+  datapoints?: {
     model_output: string;
     model_input: string;
     model_id: string;
   };
 }
 
-interface CreateCompletionPayload {
+interface MapCompletionPayload {
   modelId: string;
   prompt: string;
+  document: string;
   parameters?: Record<string, any>;
   config?: Record<string, any>;
   options?: {
@@ -32,12 +34,22 @@ interface CreateCompletionPayload {
   };
 }
 
-export async function createCompletion(input: CreateCompletionInput): Promise<Completion> {
-  const { modelId, prompt, apiKey, config, options, parameters = {} } = input;
+/**
+ * Map a prompt over a document of variable length. Return a completion for each chunk.
+ *
+ * @param input.document - The document to be processed
+ * @param input.parameters - Parameters to be passed to the model
+ * @param input.modelId - Name of the LLM to be used
+ *
+ * @returns The completion
+ */
+export async function mapCompletion(input: MapCompletionInput): Promise<{ completions: Completion[] }> {
+  const { modelId, prompt, document, apiKey, config, options, parameters = {} } = input;
 
-  const payload: CreateCompletionPayload = {
+  const payload: MapCompletionPayload = {
     modelId,
     prompt,
+    document,
     parameters,
   };
 
@@ -56,7 +68,7 @@ export async function createCompletion(input: CreateCompletionInput): Promise<Co
     payload.options = options;
   }
 
-  const response = await axios.post(`${getServiceUrl()}/api/v1/completion/buffered`, payload, requestConfig);
+  const response = await axios.post(`${getServiceUrl()}/api/v1/completion/mapped`, payload, requestConfig);
 
   return response.data;
 }
