@@ -6,7 +6,7 @@ export const openaiEmbeddingNodeType = "adapter/openai_embedding" as const;
 export const openaiEmbeddingConfig: NodeConfig = {
   name: "OpenAI (Embedding)",
   description: "OpenAI Embedding",
-  status: "stable",
+  status: "deprecated",
   tags: ["adapter", "embedding"],
   globals: [OPENAI_API_KEY],
   execution: {

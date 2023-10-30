@@ -4,9 +4,9 @@ export const promptNodeType = "data/prompt" as const;
 
 export const prompt: NodeConfig = {
   name: "Prompt",
-  description: "Write a prompt with variables",
-  tags: ["data", "text"],
-  status: "experimental",
+  description: "A prompt with variables.",
+  tags: ["data", "text", "prompt"],
+  status: "stable",
   outputs: [
     {
       id: "prompt",
@@ -20,7 +20,7 @@ export const prompt: NodeConfig = {
     {
       id: "template",
       name: "Template",
-      description: "Template to fill in",
+      description: "Prompt Template to fill in",
       type: "text",
       defaultValue: "",
     },

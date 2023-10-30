@@ -4,8 +4,8 @@ import { NodeConfig } from "@pufflig/ps-types";
 export const llmCompletionNodeType = "adapter/llm_completion" as const;
 
 export const llmCompletionConfig: NodeConfig = {
-  name: "LLM (Completion)",
-  description: "Given a prompt and a model to call, this node will generate a completion.",
+  name: "Instruction",
+  description: "Generate a completion using an LLM.",
   status: "experimental",
   tags: ["adapter", "text"],
   globals: [],

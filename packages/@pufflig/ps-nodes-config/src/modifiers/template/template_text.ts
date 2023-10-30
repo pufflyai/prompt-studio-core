@@ -6,7 +6,7 @@ export const templateText: NodeConfig = {
   name: "Text Template",
   description: "Using this template, you can insert variables into text.",
   tags: ["modifier", "text"],
-  status: "stable",
+  status: "deprecated",
   outputs: [
     {
       id: "text",
