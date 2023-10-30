@@ -29,23 +29,23 @@ test("getInputDefinition - no variables", () => {
     template: `summarize {{longText}}`,
   });
   expect(variables).toMatchInlineSnapshot(`
-    [
-      {
-        "defaultValue": "summarize {{longText}}",
-        "description": "Template to fill in",
-        "id": "template",
-        "name": "Template",
-        "type": "text",
-      },
-      {
-        "defaultValue": "",
-        "description": "",
-        "id": "longText",
-        "name": "longText",
-        "type": "text",
-      },
-    ]
-  `);
+[
+  {
+    "defaultValue": "summarize {{longText}}",
+    "description": "Prompt Template to fill in",
+    "id": "template",
+    "name": "Template",
+    "type": "text",
+  },
+  {
+    "defaultValue": "",
+    "description": "",
+    "id": "longText",
+    "name": "longText",
+    "type": "text",
+  },
+]
+`);
 });
 
 test("getInputDefinition - if you pass a template and a variable, take value of the variable", () => {
@@ -54,23 +54,23 @@ test("getInputDefinition - if you pass a template and a variable, take value of 
     longText: "some long text",
   });
   expect(variables).toMatchInlineSnapshot(`
-    [
-      {
-        "defaultValue": "summarize {{longText}}",
-        "description": "Template to fill in",
-        "id": "template",
-        "name": "Template",
-        "type": "text",
-      },
-      {
-        "defaultValue": "some long text",
-        "description": "",
-        "id": "longText",
-        "name": "longText",
-        "type": "text",
-      },
-    ]
-  `);
+[
+  {
+    "defaultValue": "summarize {{longText}}",
+    "description": "Prompt Template to fill in",
+    "id": "template",
+    "name": "Template",
+    "type": "text",
+  },
+  {
+    "defaultValue": "some long text",
+    "description": "",
+    "id": "longText",
+    "name": "longText",
+    "type": "text",
+  },
+]
+`);
 });
 
 test("getInputDefinition - ignores non existing variables", () => {
@@ -79,21 +79,21 @@ test("getInputDefinition - ignores non existing variables", () => {
     otherVariable: "",
   });
   expect(variables).toMatchInlineSnapshot(`
-    [
-      {
-        "defaultValue": "summarize {{longText}}",
-        "description": "Template to fill in",
-        "id": "template",
-        "name": "Template",
-        "type": "text",
-      },
-      {
-        "defaultValue": "",
-        "description": "",
-        "id": "longText",
-        "name": "longText",
-        "type": "text",
-      },
-    ]
-  `);
+[
+  {
+    "defaultValue": "summarize {{longText}}",
+    "description": "Prompt Template to fill in",
+    "id": "template",
+    "name": "Template",
+    "type": "text",
+  },
+  {
+    "defaultValue": "",
+    "description": "",
+    "id": "longText",
+    "name": "longText",
+    "type": "text",
+  },
+]
+`);
 });
