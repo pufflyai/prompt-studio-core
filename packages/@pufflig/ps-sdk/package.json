@@ -13,7 +13,7 @@
     "prepublishOnly": "yarn build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "echo \"no test specified\" "
+    "test": "jest"
   },
   "devDependencies": {
     "typescript": "^5.1.6",
