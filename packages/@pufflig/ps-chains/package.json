@@ -1,6 +1,6 @@
 {
   "name": "@pufflig/ps-chains",
-  "version": "0.20.1",
+  "version": "0.21.0",
   "license": "MIT",
   "main": "./dist/ps-chains.umd.js",
   "module": "./dist/ps-chains.es.js",
@@ -16,7 +16,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@pufflig/ps-types": "^0.20.1",
+    "@pufflig/ps-types": "^0.21.0",
     "@types/react-dom": "^18.2.7",
     "immer": "^10.0.2",
     "prop-types": "^15.8.1",
