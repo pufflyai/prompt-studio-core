@@ -14,7 +14,7 @@ export interface LLMCompletionInput {
 }
 
 export interface LLMCompletionOutput {
-  completion: string;
+  result: string;
 }
 
 export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (input, options = {}) => {
@@ -40,7 +40,7 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
   });
 
   return {
-    completion: result || "",
+    result: result || "",
   };
 };
 

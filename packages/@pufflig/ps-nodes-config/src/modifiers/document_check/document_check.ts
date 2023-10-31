@@ -23,8 +23,8 @@ export const documentCheck: NodeConfig = {
   },
   outputs: [
     {
-      id: "list",
-      name: "List",
+      id: "result",
+      name: "Result",
       description: "A list, checklist or other information about the document",
       type: "text",
       defaultValue: "",
