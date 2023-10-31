@@ -6,7 +6,7 @@ export const parseDocument: NodeConfig = {
   name: "Parse Document",
   description: "Run a prompt over a document",
   tags: ["modifier", "document", "text"],
-  status: "experimental",
+  status: "deprecated",
   execution: {
     inputs: [
       {

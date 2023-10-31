@@ -1,5 +1,5 @@
-import { nodes, nodeTypes } from "@pufflig/ps-nodes-config";
-import { createCompletion } from "@pufflig/ps-sdk";
+import { nodeTypes, nodes } from "@pufflig/ps-nodes-config";
+import { refineCompletion } from "@pufflig/ps-sdk";
 import { Execute, GetInputDefinition, ModelValue, Node, Param } from "@pufflig/ps-types";
 import { getPromptStudioKey } from "../../utils/getPromptStudioKey";
 import { extractVariables } from "../../utils/extractVariables";
@@ -8,6 +8,8 @@ import Mustache from "mustache";
 export interface LLMCompletionInput {
   prompt: string;
   model: ModelValue;
+  document: string;
+  table: string;
   [key: string]: any;
 }
 
@@ -16,16 +18,18 @@ export interface LLMCompletionOutput {
 }
 
 export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (input, options = {}) => {
-  const { prompt, model, ...variables } = input;
+  const { prompt, model, document, table, ...variables } = input;
   const { modelId, parameters } = model;
   const { globals } = options;
 
-  const renderedTemplate = Mustache.render(prompt, variables);
+  const renderedPrompt = Mustache.render(prompt, variables);
 
-  const result = await createCompletion({
+  const { result } = await refineCompletion({
     apiKey: getPromptStudioKey(globals || {}),
     modelId,
-    prompt: renderedTemplate,
+    prompt: renderedPrompt,
+    document: document,
+    format: table,
     parameters,
     config: globals,
     options: {
@@ -35,7 +39,7 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
   });
 
   return {
-    completion: result?.datapoint?.model_output || "",
+    completion: result || "",
   };
 };
 
@@ -50,10 +54,10 @@ export const getInputDefinition: GetInputDefinition<LLMCompletionInput> = (input
   const { prompt, ...rest } = input;
 
   if (prompt === undefined) {
-    return nodes[nodeTypes.llmCompletionNodeType].inputs;
+    return nodes[nodeTypes.documentCheckNodeType].inputs;
   }
 
-  const definitionsWithDefaults = nodes[nodeTypes.llmCompletionNodeType].inputs.map((input) => {
+  const definitionsWithDefaults = nodes[nodeTypes.documentCheckNodeType].inputs.map((input) => {
     if (input.id === "prompt") {
       return {
         ...input,
@@ -66,12 +70,16 @@ export const getInputDefinition: GetInputDefinition<LLMCompletionInput> = (input
   const extractedVariables = extractVariables(prompt);
 
   if (extractedVariables) {
-    const extractedVariablesWithDefaults = extractedVariables.map((variable) => {
-      return {
-        ...variable,
-        defaultValue: rest[variable.id] || "",
-      } as Param;
-    });
+    const extractedVariablesWithDefaults = extractedVariables
+      .filter((param) => {
+        return ["document", "table"].includes(param.id);
+      })
+      .map((variable) => {
+        return {
+          ...variable,
+          defaultValue: rest[variable.id] || "",
+        } as Param;
+      });
 
     return [...definitionsWithDefaults, ...extractedVariablesWithDefaults];
   }
@@ -79,8 +87,8 @@ export const getInputDefinition: GetInputDefinition<LLMCompletionInput> = (input
   return definitionsWithDefaults;
 };
 
-export const llmCompletion: Node<LLMCompletionInput, LLMCompletionOutput> = {
-  ...nodes[nodeTypes.llmCompletionNodeType],
+export const documentCheck: Node = {
+  ...nodes[nodeTypes.documentCheckNodeType],
   execute,
   getInputDefinition,
 };

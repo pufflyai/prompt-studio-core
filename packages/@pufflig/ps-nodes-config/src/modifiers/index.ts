@@ -1,5 +1,6 @@
 import { addMessage, addMessageNodeType } from "./add_message/add_message";
 import { addText, addTextNodeType } from "./add_text/add_text";
+import { documentCheck, documentCheckNodeType } from "./document_check/document_check";
 import { parseDocument, parseDocumentNodeType } from "./parse_document/parse_document";
 import { splitText, splitTextNodeType } from "./split_text/split_text";
 import { templateChat, templateChatNodeType } from "./template/template_chat";
@@ -12,6 +13,7 @@ export const modifierNodes = {
   [splitTextNodeType]: splitText,
   [templateChatNodeType]: templateChat,
   [templateTextNodeType]: templateText,
+  [documentCheckNodeType]: documentCheck,
 };
 
 export const modifierNodeTypes = {
@@ -21,4 +23,5 @@ export const modifierNodeTypes = {
   splitTextNodeType,
   templateChatNodeType,
   templateTextNodeType,
+  documentCheckNodeType,
 };

@@ -16,11 +16,12 @@ interface RefineCompletionInput {
 }
 
 interface Completion {
-  datapoint?: {
+  result: string;
+  datapoints?: {
     model_output: string;
     model_input: string;
     model_id: string;
-  };
+  }[];
 }
 
 interface RefineCompletionPayload {

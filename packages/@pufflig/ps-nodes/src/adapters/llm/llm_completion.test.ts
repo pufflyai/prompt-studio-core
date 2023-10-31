@@ -63,13 +63,6 @@ test("getInputDefinition - no variables", () => {
   expect(variables).toMatchInlineSnapshot(`
 [
   {
-    "defaultValue": "summarize {{longText}}",
-    "description": "The prompt to send to the LLM.",
-    "id": "prompt",
-    "name": "Prompt",
-    "type": "text",
-  },
-  {
     "defaultValue": {
       "modelId": "gpt-3.5-turbo-instruct",
       "parameters": {},
@@ -402,6 +395,13 @@ test("getInputDefinition - no variables", () => {
     "id": "model",
     "name": "Model",
     "type": "model",
+  },
+  {
+    "defaultValue": "summarize {{longText}}",
+    "description": "The prompt to send to the LLM",
+    "id": "prompt",
+    "name": "Prompt",
+    "type": "text",
   },
   {
     "defaultValue": "",
@@ -426,13 +426,6 @@ test("getInputDefinition - if you pass a template and a variable, take value of 
   expect(variables).toMatchInlineSnapshot(`
 [
   {
-    "defaultValue": "summarize {{longText}}",
-    "description": "The prompt to send to the LLM.",
-    "id": "prompt",
-    "name": "Prompt",
-    "type": "text",
-  },
-  {
     "defaultValue": {
       "modelId": "gpt-3.5-turbo-instruct",
       "parameters": {},
@@ -765,6 +758,13 @@ test("getInputDefinition - if you pass a template and a variable, take value of 
     "id": "model",
     "name": "Model",
     "type": "model",
+  },
+  {
+    "defaultValue": "summarize {{longText}}",
+    "description": "The prompt to send to the LLM",
+    "id": "prompt",
+    "name": "Prompt",
+    "type": "text",
   },
   {
     "defaultValue": "some long text",
@@ -789,13 +789,6 @@ test("getInputDefinition - ignores non existing variables", () => {
   expect(variables).toMatchInlineSnapshot(`
 [
   {
-    "defaultValue": "summarize {{longText}}",
-    "description": "The prompt to send to the LLM.",
-    "id": "prompt",
-    "name": "Prompt",
-    "type": "text",
-  },
-  {
     "defaultValue": {
       "modelId": "gpt-3.5-turbo-instruct",
       "parameters": {},
@@ -1128,6 +1121,13 @@ test("getInputDefinition - ignores non existing variables", () => {
     "id": "model",
     "name": "Model",
     "type": "model",
+  },
+  {
+    "defaultValue": "summarize {{longText}}",
+    "description": "The prompt to send to the LLM",
+    "id": "prompt",
+    "name": "Prompt",
+    "type": "text",
   },
   {
     "defaultValue": "",
