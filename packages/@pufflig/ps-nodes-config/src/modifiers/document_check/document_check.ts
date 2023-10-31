@@ -47,7 +47,7 @@ export const documentCheck: NodeConfig = {
       name: "Prompt",
       description: "Prompt to check the document with",
       type: "text",
-      defaultValue: `Extract information in the document below and insert them in the csv table, don't overwrite existing values and keep things empty if you cannot find information in the document:\n\nTABLE EXAMPLE:\ncharacters, age\nmickey mouse, 10\ndonald duck, -\n\nTABLE:\n[[table]]\n\nDOCUMENT:\n[[document]]\n\nTABLE:\n`,
+      defaultValue: `Extract information in the document below and insert them in the csv table, don't overwrite existing values and keep things empty if you cannot find information in the document:\n\nTABLE EXAMPLE:\ncharacters, age\nmickey mouse, 10\ndonald duck, -\n\nTABLE:\n{{table}}\n\nDOCUMENT:\n{{document}}\n\nTABLE:\n`,
     },
     {
       id: "table",

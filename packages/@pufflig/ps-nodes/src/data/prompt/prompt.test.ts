@@ -6,7 +6,19 @@ test("execute - no variables", async () => {
   });
   expect(variables).toMatchInlineSnapshot(`
     {
-      "prompt": "summarize ",
+      "prompt": "summarize {{longText}}",
+    }
+  `);
+});
+
+test("execute - empty variables", async () => {
+  const variables = await execute({
+    template: `summarize {{longText}}`,
+    longText: "",
+  });
+  expect(variables).toMatchInlineSnapshot(`
+    {
+      "prompt": "summarize {{longText}}",
     }
   `);
 });

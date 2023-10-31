@@ -22,7 +22,8 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
   const { modelId, parameters } = model;
   const { globals } = options;
 
-  const renderedPrompt = Mustache.render(prompt, variables);
+  // render the prompt without overwriting the document and table variables
+  const renderedPrompt = Mustache.render(prompt, { ...variables, document: "{{document}}", table: "{{table}}" });
 
   const { result } = await refineCompletion({
     apiKey: getPromptStudioKey(globals || {}),
