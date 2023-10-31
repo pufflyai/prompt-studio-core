@@ -14,7 +14,7 @@ export interface LLMCompletionInput {
 }
 
 export interface LLMCompletionOutput {
-  completion: string;
+  result: string;
 }
 
 export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (input, options = {}) => {
@@ -22,7 +22,8 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
   const { modelId, parameters } = model;
   const { globals } = options;
 
-  const renderedPrompt = Mustache.render(prompt, variables);
+  // render the prompt without overwriting the document and table variables
+  const renderedPrompt = Mustache.render(prompt, { ...variables, document: "{{document}}", table: "{{table}}" });
 
   const { result } = await refineCompletion({
     apiKey: getPromptStudioKey(globals || {}),
@@ -39,7 +40,7 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
   });
 
   return {
-    completion: result || "",
+    result: result || "",
   };
 };
 
@@ -51,19 +52,22 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
  * @returns
  */
 export const getInputDefinition: GetInputDefinition<LLMCompletionInput> = (input) => {
-  const { prompt, ...rest } = input;
+  const { prompt, document, model, table, ...rest } = input;
 
   if (prompt === undefined) {
     return nodes[nodeTypes.documentCheckNodeType].inputs;
   }
 
+  const defaults = { prompt, document, model, table };
+
   const definitionsWithDefaults = nodes[nodeTypes.documentCheckNodeType].inputs.map((input) => {
-    if (input.id === "prompt") {
+    if (Object.keys(defaults).includes(input.id)) {
       return {
         ...input,
-        defaultValue: prompt,
+        defaultValue: defaults[input.id as keyof typeof defaults],
       } as Param;
     }
+
     return input;
   });
 
@@ -72,7 +76,7 @@ export const getInputDefinition: GetInputDefinition<LLMCompletionInput> = (input
   if (extractedVariables) {
     const extractedVariablesWithDefaults = extractedVariables
       .filter((param) => {
-        return ["document", "table"].includes(param.id);
+        return !Object.keys(defaults).includes(param.id);
       })
       .map((variable) => {
         return {

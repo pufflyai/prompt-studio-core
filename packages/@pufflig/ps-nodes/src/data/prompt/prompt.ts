@@ -14,7 +14,18 @@ export interface TemplateTextOutput {
 
 export const execute = async (input: TemplateTextInput) => {
   const { template, ...variables } = input;
-  const renderedTemplate = Mustache.render(template, variables);
+
+  // keep template values for undefined variables
+  const extractedVariables = extractVariables(template) || [];
+  const variablesWithDefaults = extractedVariables.reduce((acc, param) => {
+    return {
+      ...acc,
+      [param.id]:
+        variables[param.id] === undefined || variables[param.id] === "" ? `{{${param.id}}}` : variables[param.id],
+    };
+  }, {} as Record<string, string>);
+
+  const renderedTemplate = Mustache.render(template, variablesWithDefaults);
   return {
     prompt: renderedTemplate,
   };

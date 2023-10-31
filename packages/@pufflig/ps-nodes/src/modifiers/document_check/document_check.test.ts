@@ -1,4 +1,4 @@
-import { execute, LLMCompletionInput } from "./document_check";
+import { execute, getInputDefinition, LLMCompletionInput } from "./document_check";
 import axios from "axios";
 
 jest.mock("axios");
@@ -25,7 +25,7 @@ describe("documentCheck", () => {
 
     const output = await execute(input);
 
-    expect(output).toEqual({ completion: "This is a test completion." });
+    expect(output).toEqual(expectedOutput);
     expect(axios.post).toHaveBeenCalledTimes(1);
   });
 
@@ -47,7 +47,7 @@ describe("documentCheck", () => {
 
     const output = await execute(input);
 
-    expect(output).toEqual({ completion: "This is a test completion." });
+    expect(output).toEqual(expectedOutput);
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
       expect.any(String),
@@ -69,6 +69,21 @@ describe("documentCheck", () => {
         },
       }
     );
+  });
+
+  it("should extract variables correctly", async () => {
+    const output = getInputDefinition({
+      prompt: "Hello, {{myVariable}}!",
+      model: {
+        modelId: "test_model",
+        parameters: {},
+      },
+      document: "This is a test document.",
+      table: "test_table",
+      myVariable: "myValue",
+    });
+
+    expect(output).toMatchSnapshot();
   });
 
   it("should throw an error if the API call fails", async () => {
