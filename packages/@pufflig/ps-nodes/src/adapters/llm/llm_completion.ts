@@ -47,17 +47,19 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
  * @returns
  */
 export const getInputDefinition: GetInputDefinition<LLMCompletionInput> = (input) => {
-  const { prompt, ...rest } = input;
+  const { prompt, model, ...rest } = input;
 
   if (prompt === undefined) {
     return nodes[nodeTypes.llmCompletionNodeType].inputs;
   }
 
+  const defaults = { prompt, model };
+
   const definitionsWithDefaults = nodes[nodeTypes.llmCompletionNodeType].inputs.map((input) => {
-    if (input.id === "prompt") {
+    if (Object.keys(defaults).includes(input.id)) {
       return {
         ...input,
-        defaultValue: prompt,
+        defaultValue: defaults[input.id as keyof typeof defaults],
       } as Param;
     }
     return input;
@@ -66,12 +68,16 @@ export const getInputDefinition: GetInputDefinition<LLMCompletionInput> = (input
   const extractedVariables = extractVariables(prompt);
 
   if (extractedVariables) {
-    const extractedVariablesWithDefaults = extractedVariables.map((variable) => {
-      return {
-        ...variable,
-        defaultValue: rest[variable.id] || "",
-      } as Param;
-    });
+    const extractedVariablesWithDefaults = extractedVariables
+      .filter((param) => {
+        return !Object.keys(defaults).includes(param.id);
+      })
+      .map((variable) => {
+        return {
+          ...variable,
+          defaultValue: rest[variable.id] || "",
+        } as Param;
+      });
 
     return [...definitionsWithDefaults, ...extractedVariablesWithDefaults];
   }
