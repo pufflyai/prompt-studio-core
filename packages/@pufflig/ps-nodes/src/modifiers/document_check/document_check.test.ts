@@ -25,7 +25,7 @@ describe("documentCheck", () => {
 
     const output = await execute(input);
 
-    expect(output).toEqual({ completion: "This is a test completion." });
+    expect(output).toEqual(expectedOutput);
     expect(axios.post).toHaveBeenCalledTimes(1);
   });
 
@@ -47,7 +47,7 @@ describe("documentCheck", () => {
 
     const output = await execute(input);
 
-    expect(output).toEqual({ completion: "This is a test completion." });
+    expect(output).toEqual(expectedOutput);
     expect(axios.post).toHaveBeenCalledTimes(1);
     expect(axios.post).toHaveBeenCalledWith(
       expect.any(String),
