@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: install monorepo dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
       - name: build monorepo packages
         run: npx lerna run build
       - name: test monorepo

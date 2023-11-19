@@ -11,7 +11,7 @@
   "types": "./dist/ps-nodes.d.ts",
   "scripts": {
     "build": "tsc && vite build",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "npm run build",
     "test": "jest"
   },
   "author": "Pufflig AB",
@@ -43,5 +43,5 @@
     "openai": "^4.19.0",
     "uuid": "^9.0.1"
   },
-  "gitHead": "d637557b77c60c4aa75f6f65b038a6eb4e9d5dc4"
+  "gitHead": "534ff07d186327e38133c0c14a5badd04ced0a9c"
 }
