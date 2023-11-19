@@ -1,9 +1,9 @@
 {
   "name": "@pufflig/ps-types",
-  "version": "0.21.1",
+  "version": "0.21.7",
   "description": "Typescript definitions for Prompt Studio",
   "main": "src/index.ts",
   "author": "Pufflig AB",
   "license": "MIT",
-  "gitHead": "d637557b77c60c4aa75f6f65b038a6eb4e9d5dc4"
+  "gitHead": "534ff07d186327e38133c0c14a5badd04ced0a9c"
 }

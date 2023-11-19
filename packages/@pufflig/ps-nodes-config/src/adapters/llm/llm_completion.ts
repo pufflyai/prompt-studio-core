@@ -6,7 +6,7 @@ export const llmCompletionNodeType = "adapter/llm_completion" as const;
 export const llmCompletionConfig: NodeConfig = {
   name: "Instruction",
   description: "Generate a completion using an LLM",
-  status: "experimental",
+  status: "stable",
   tags: ["adapter", "text"],
   globals: [],
   execution: {

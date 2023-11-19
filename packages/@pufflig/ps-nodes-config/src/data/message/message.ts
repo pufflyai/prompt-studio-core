@@ -6,7 +6,7 @@ export const message: NodeConfig = {
   name: "Message",
   description: "Can be used to create a message that can be added to a chat.",
   tags: ["data", "message"],
-  status: "stable",
+  status: "experimental",
   outputs: [
     {
       id: "message",

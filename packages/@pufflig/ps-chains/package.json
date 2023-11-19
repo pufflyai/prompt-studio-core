@@ -1,6 +1,6 @@
 {
   "name": "@pufflig/ps-chains",
-  "version": "0.21.1",
+  "version": "0.21.7",
   "license": "MIT",
   "main": "./dist/ps-chains.umd.js",
   "module": "./dist/ps-chains.es.js",
@@ -10,20 +10,20 @@
   ],
   "scripts": {
     "build": "tsc && vite build",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest"
   },
   "devDependencies": {
-    "@pufflig/ps-types": "^0.21.1",
+    "@pufflig/ps-types": "^0.21.7",
     "@types/react-dom": "^18.2.7",
     "immer": "^10.0.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "reactflow": "^11.8.1",
-    "typescript": "^5.1.6",
+    "typescript": "^5.2.2",
     "vite": "^4.4.8",
     "vite-plugin-dts": "^2.3.0"
   },
@@ -31,5 +31,5 @@
     "mustache": "^4.2.0",
     "pino": "^8.15.0"
   },
-  "gitHead": "d637557b77c60c4aa75f6f65b038a6eb4e9d5dc4"
+  "gitHead": "534ff07d186327e38133c0c14a5badd04ced0a9c"
 }

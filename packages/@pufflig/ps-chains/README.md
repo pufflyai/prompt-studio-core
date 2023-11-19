@@ -13,5 +13,5 @@ You can find the documentation for this package [here]().
 You can preview the chain in a storybook by running:
 
 ```
-yarn storybook
+npm run storybook
 ```
