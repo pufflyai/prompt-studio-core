@@ -4,7 +4,7 @@ import { NodeConfig } from "@pufflig/ps-types";
 export const openaiChatConfig: NodeConfig = {
   name: "OpenAI (Chat)",
   description: "OpenAI Chat",
-  status: "stable",
+  status: "deprecated",
   tags: ["adapter", "chat"],
   globals: [OPENAI_API_KEY],
   execution: {

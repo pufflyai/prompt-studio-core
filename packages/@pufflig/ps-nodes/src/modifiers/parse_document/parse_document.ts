@@ -4,7 +4,7 @@ import { Execute, Node } from "@pufflig/ps-types";
 import { Document } from "langchain/document";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import Mustache from "mustache";
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 import { countTokens } from "../../utils/countTokens";
 
 export interface ParseDocumentInput {
@@ -63,8 +63,7 @@ export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (
   chunkGroups.push(chunkGroup);
   // --
 
-  const configuration = new Configuration({ apiKey: globals?.[OPENAI_API_KEY] });
-  const openai = new OpenAIApi(configuration);
+  const openai = new OpenAI({ apiKey: globals?.[OPENAI_API_KEY] });
 
   const completions = [];
 
@@ -75,7 +74,7 @@ export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (
       const content = Mustache.render(prompt, { document: chunk.pageContent }, {}, { tags });
       const message = { content, role: "system" as const };
       promises.push(
-        openai.createChatCompletion({
+        openai.chat.completions.create({
           model,
           messages: [message],
           temperature: 0,
@@ -152,7 +151,7 @@ export const execute: Execute<ParseDocumentInput, ParseDocumentOutput> = async (
       // run the completion on the chunk
       const remainingTokens = MAX_TOKENS - countTokens(joinPrompt);
       promises.push(
-        openai.createChatCompletion({
+        openai.chat.completions.create({
           model,
           messages: [message],
           temperature: 0,

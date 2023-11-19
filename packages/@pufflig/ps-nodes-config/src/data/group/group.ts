@@ -6,7 +6,7 @@ export const groupNode: NodeConfig = {
   name: "Group",
   description: "Group different values together.",
   tags: ["data", "group"],
-  status: "stable",
+  status: "experimental",
   customSchema: "input",
   inputs: [],
   outputs: [

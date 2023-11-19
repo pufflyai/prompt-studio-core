@@ -6,7 +6,7 @@ export const addText: NodeConfig = {
   name: "Add Text",
   description: "Add tex to a list",
   tags: ["modifier", "list", "text"],
-  status: "experimental",
+  status: "deprecated",
   outputs: [
     {
       id: "list",

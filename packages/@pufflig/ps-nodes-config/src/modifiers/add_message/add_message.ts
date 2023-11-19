@@ -6,7 +6,7 @@ export const addMessage: NodeConfig = {
   name: "Add Message",
   description: "Add a message to a chat",
   tags: ["modifier", "chat", "message"],
-  status: "stable",
+  status: "experimental",
   outputs: [
     {
       id: "chat",
