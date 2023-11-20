@@ -44,7 +44,7 @@ test("getInputDefinition - no variables", () => {
 [
   {
     "defaultValue": "summarize {{longText}}",
-    "description": "Prompt Template to fill in",
+    "description": "Template with variables",
     "id": "template",
     "name": "Template",
     "type": "text",
@@ -69,7 +69,7 @@ test("getInputDefinition - if you pass a template and a variable, take value of 
 [
   {
     "defaultValue": "summarize {{longText}}",
-    "description": "Prompt Template to fill in",
+    "description": "Template with variables",
     "id": "template",
     "name": "Template",
     "type": "text",
@@ -94,7 +94,7 @@ test("getInputDefinition - ignores non existing variables", () => {
 [
   {
     "defaultValue": "summarize {{longText}}",
-    "description": "Prompt Template to fill in",
+    "description": "Template with variables",
     "id": "template",
     "name": "Template",
     "type": "text",
