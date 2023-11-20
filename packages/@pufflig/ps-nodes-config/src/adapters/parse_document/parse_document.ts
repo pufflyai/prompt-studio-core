@@ -5,7 +5,7 @@ export const parseDocumentNodeType = "modifier/parse_document" as const;
 export const parseDocument: NodeConfig = {
   name: "Parse Document",
   description: "Run a prompt over a document",
-  tags: ["modifier", "document", "text"],
+  tags: ["adapter", "document", "text"],
   status: "deprecated",
   execution: {
     inputs: [

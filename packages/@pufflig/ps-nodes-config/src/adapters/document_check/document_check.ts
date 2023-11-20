@@ -6,7 +6,7 @@ export const documentCheckNodeType = "modifier/document_check" as const;
 export const documentCheck: NodeConfig = {
   name: "Document Check",
   description: "Run a checklist or extract information from a document.",
-  tags: ["modifier", "document", "text"],
+  tags: ["adapter", "document", "text"],
   status: "stable",
   execution: {
     inputs: [
