@@ -33,7 +33,7 @@ describe("documentCheck", () => {
 
   it("should parse input variables", async () => {
     const input: LLMCompletionInput = {
-      instructions: "Hello, {{world}}! Run a checklist on the following document: {{document}}",
+      instructions: "Hello, {{world}}! Run a checklist on the following document:",
       model: {
         modelId: "test_model",
         parameters: {},
@@ -81,18 +81,19 @@ is_formal,`,
           track: true,
         },
         parameters: {},
-        prompt: `Hello, test! Run a checklist on the following document: {{document}}
+        prompt: `Hello, test! Run a checklist on the following document:
+DOCUMENT:
+{{document}}
 
 CHECKLIST DESCRIPTION:
 check,description
 is_greeting, is the text a greeting?
 is_formal, is the greeting formal?
 
-CHECKLIST FORMAT:
+TABLE FORMAT:
 {{table}}
 
-CHECKLIST IN CSV FORMAT:
-`,
+Return only the TABLE IN CSV FORMAT:`,
       },
       {
         headers: {
@@ -105,7 +106,7 @@ CHECKLIST IN CSV FORMAT:
 
   it("should parse input variables", async () => {
     const input: LLMCompletionInput = {
-      instructions: "Hello, {{world}}! Run a checklist on the following document: {{document}}",
+      instructions: "Hello, {{world}}! Run a checklist on the following document:",
       model: {
         modelId: "test_model",
         parameters: {},
@@ -153,18 +154,19 @@ CHECKLIST IN CSV FORMAT:
           track: true,
         },
         parameters: {},
-        prompt: `Hello, test! Run a checklist on the following document: {{document}}
+        prompt: `Hello, test! Run a checklist on the following document:
+DOCUMENT:
+{{document}}
 
 CHECKLIST DESCRIPTION:
 |check|description|
 |is_greeting|is the text a greeting?|
 |is_formal|is the greeting formal?|
 
-CHECKLIST FORMAT:
+TABLE FORMAT:
 {{table}}
 
-CHECKLIST IN MARKDOWN FORMAT:
-`,
+Return only the TABLE IN MARKDOWN FORMAT:`,
       },
       {
         headers: {

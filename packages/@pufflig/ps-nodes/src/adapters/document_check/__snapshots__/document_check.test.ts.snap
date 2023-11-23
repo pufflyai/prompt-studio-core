@@ -213,7 +213,7 @@ exports[`documentCheck should extract variables correctly 1`] = `
     "type": "model",
   },
   {
-    "defaultValue": "Run the checklist below on the document.",
+    "defaultValue": "",
     "description": "Instructions for the AI",
     "id": "instructions",
     "name": "Instructions",
@@ -230,9 +230,18 @@ exports[`documentCheck should extract variables correctly 1`] = `
     "defaultValue": [],
     "description": "The checklist to run on the document",
     "editableSchema": true,
-    "id": "checklist",
-    "name": "Checklist",
+    "id": "checks",
+    "name": "Checks",
     "type": "object",
+  },
+  {
+    "defaultValue": [
+      "ok (yes/no)",
+    ],
+    "description": "Custom fields to include in the output for each checklist item",
+    "id": "fields",
+    "name": "Fields",
+    "type": "list",
   },
   {
     "defaultValue": "markdown",
@@ -250,15 +259,6 @@ exports[`documentCheck should extract variables correctly 1`] = `
       },
     ],
     "type": "selection",
-  },
-  {
-    "defaultValue": [
-      "ok",
-    ],
-    "description": "Custom fields to include in the output for each checklist item",
-    "id": "fields",
-    "name": "Fields",
-    "type": "list",
   },
 ]
 `;

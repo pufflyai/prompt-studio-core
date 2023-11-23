@@ -77,7 +77,7 @@ ${description}
 TABLE FORMAT:
 {{table}}
 
-Return only the TABLE IN ${format.toUpperCase()} FORMAT`;
+Return only the TABLE IN ${format.toUpperCase()} FORMAT:`;
 
   // render the prompt without overwriting the document and table variables
   const renderedPrompt = Mustache.render(instructionsWithChecklist, {
