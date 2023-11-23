@@ -68,6 +68,8 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
 
   // TODO: move into the API
   const instructionsWithChecklist = `${instructions}
+DOCUMENT:
+{{document}}
 
 CHECKLIST DESCRIPTION:
 ${description}
@@ -75,8 +77,8 @@ ${description}
 CHECKLIST FORMAT:
 {{table}}
 
-CHECKLIST IN ${format.toUpperCase()} FORMAT:
-`;
+Return only the CHECKLIST IN ${format.toUpperCase()} FORMAT:
+${isCSV ? "check," : "|check|"}`;
 
   // render the prompt without overwriting the document and table variables
   const renderedPrompt = Mustache.render(instructionsWithChecklist, {

@@ -65,6 +65,13 @@ export const documentCheck: NodeConfig = {
       defaultValue: [],
     },
     {
+      id: "fields",
+      name: "Fields",
+      description: "Custom fields to include in the output for each checklist item",
+      type: "list",
+      defaultValue: ["ok (yes/no)"],
+    },
+    {
       id: "format",
       name: "Format",
       description: "The format in which to return the cheklist results",
@@ -74,13 +81,6 @@ export const documentCheck: NodeConfig = {
         { id: "csv", name: "CSV" },
         { id: "markdown", name: "Markdown" },
       ],
-    },
-    {
-      id: "fields",
-      name: "Fields",
-      description: "Custom fields to include in the output for each checklist item",
-      type: "list",
-      defaultValue: ["ok"],
     },
   ],
 };
