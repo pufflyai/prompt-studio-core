@@ -57,8 +57,8 @@ export const documentCheck: NodeConfig = {
       defaultValue: "",
     },
     {
-      id: "checklist",
-      name: "Checklist",
+      id: "checks",
+      name: "Checks",
       description: "The checklist to run on the document",
       type: "object",
       editableSchema: true,
