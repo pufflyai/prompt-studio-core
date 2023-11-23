@@ -16,9 +16,7 @@ describe("documentCheck", () => {
         parameters: {},
       },
       document: "This is a test document.",
-      checklist: [
-        { id: "is_greeting", defaultValue: "test_table", type: "text", name: "is_greeting", description: "" },
-      ],
+      checks: [{ id: "is_greeting", defaultValue: "test_table", type: "text", name: "is_greeting", description: "" }],
       fields: ["ok"],
       format: "csv",
     };
@@ -41,7 +39,7 @@ describe("documentCheck", () => {
         parameters: {},
       },
       document: "This is a test document.",
-      checklist: [
+      checks: [
         {
           id: "is_greeting",
           defaultValue: "is the text a greeting?",
@@ -113,7 +111,7 @@ CHECKLIST IN CSV FORMAT:
         parameters: {},
       },
       document: "This is a test document.",
-      checklist: [
+      checks: [
         {
           id: "is_greeting",
           defaultValue: "is the text a greeting?",
@@ -185,7 +183,7 @@ CHECKLIST IN MARKDOWN FORMAT:
         parameters: {},
       },
       document: "This is a test document.",
-      checklist: [
+      checks: [
         {
           id: "is_greeting",
           defaultValue: "is the text a greeting?",
@@ -217,9 +215,7 @@ CHECKLIST IN MARKDOWN FORMAT:
         parameters: {},
       },
       document: "This is a test document.",
-      checklist: [
-        { id: "is_greeting", defaultValue: "test_table", type: "text", name: "is_greeting", description: "" },
-      ],
+      checks: [{ id: "is_greeting", defaultValue: "test_table", type: "text", name: "is_greeting", description: "" }],
       fields: ["ok"],
       format: "csv",
     };
