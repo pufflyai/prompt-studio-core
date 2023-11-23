@@ -4,7 +4,7 @@ exports[`documentCheck should extract variables correctly 1`] = `
 [
   {
     "defaultValue": {
-      "modelId": "test_model",
+      "modelId": "gpt-3.5-turbo-instruct",
       "parameters": {},
     },
     "definition": {
@@ -213,32 +213,52 @@ exports[`documentCheck should extract variables correctly 1`] = `
     "type": "model",
   },
   {
-    "defaultValue": "Hello, {{myVariable}}!",
-    "description": "Prompt to check the document with",
-    "id": "prompt",
-    "name": "Prompt",
+    "defaultValue": "Run the checklist below on the document.",
+    "description": "Instructions for the AI",
+    "id": "instructions",
+    "name": "Instructions",
     "type": "text",
   },
   {
-    "defaultValue": "test_table",
-    "description": "The list, table or checklist to parse the document with.",
-    "id": "table",
-    "name": "Table",
-    "type": "text",
-  },
-  {
-    "defaultValue": "This is a test document.",
-    "description": "Document to be processed",
+    "defaultValue": "",
+    "description": "Document to be checked",
     "id": "document",
     "name": "Document",
     "type": "text",
   },
   {
-    "defaultValue": "myValue",
-    "description": "",
-    "id": "myVariable",
-    "name": "myVariable",
-    "type": "text",
+    "defaultValue": [],
+    "description": "The checklist to run on the document",
+    "editableSchema": true,
+    "id": "checklist",
+    "name": "Checklist",
+    "type": "object",
+  },
+  {
+    "defaultValue": "markdown",
+    "description": "The format in which to return the cheklist results",
+    "id": "format",
+    "name": "Format",
+    "options": [
+      {
+        "id": "csv",
+        "name": "CSV",
+      },
+      {
+        "id": "markdown",
+        "name": "Markdown",
+      },
+    ],
+    "type": "selection",
+  },
+  {
+    "defaultValue": [
+      "ok",
+    ],
+    "description": "Custom fields to include in the output for each checklist item",
+    "id": "fields",
+    "name": "Fields",
+    "type": "list",
   },
 ]
 `;

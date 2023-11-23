@@ -1,36 +1,96 @@
 import { nodeTypes, nodes } from "@pufflig/ps-nodes-config";
 import { refineCompletion } from "@pufflig/ps-sdk";
-import { Execute, GetInputDefinition, ModelValue, Node, Param } from "@pufflig/ps-types";
+import { Execute, GetInputDefinition, ModelValue, Node, ObjectDefinition, Param } from "@pufflig/ps-types";
 import { getPromptStudioKey } from "../../utils/getPromptStudioKey";
 import { extractVariables } from "../../utils/extractVariables";
 import Mustache from "mustache";
 
 export interface LLMCompletionInput {
-  prompt: string;
+  instructions: string;
   model: ModelValue;
   document: string;
-  table: string;
+  checklist: ObjectDefinition;
+  format: string;
+  fields: string[];
   [key: string]: any;
 }
 
 export interface LLMCompletionOutput {
-  result: string;
+  checklist: string;
 }
 
+const makeCSVChecklist = (checklist: ObjectDefinition, fields: string[]) => {
+  const header = "check," + fields.join(",");
+  const rows = checklist.map((row) => {
+    return row.id + "," + fields.map(() => "").join(",");
+  });
+
+  return `${header}\n${rows.join("\n")}`;
+};
+
+const makeMarkdownChecklist = (checklist: ObjectDefinition, fields: string[]) => {
+  const header = "|check|" + fields.join("|") + "|";
+  const rows = checklist.map((row) => {
+    return "|" + row.id + "|" + fields.map(() => "").join("|") + "|";
+  });
+
+  return `${header}\n${rows.join("\n")}`;
+};
+
+const makeCSVDescription = (checklist: ObjectDefinition) => {
+  const header = "check,description";
+  const rows = checklist.map((item) => {
+    return `${item.id}, ${(item.defaultValue as string).replace(/,/g, "")}`;
+  });
+  return `${header}\n${rows.join("\n")}`;
+};
+
+const makeMarkdownDescription = (checklist: ObjectDefinition) => {
+  const header = "|check|description|";
+  const rows = checklist.map((item) => {
+    return `|${item.id}|${(item.defaultValue as string).replace(/,/g, "")}|`;
+  });
+  return `${header}\n${rows.join("\n")}`;
+};
+
 export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (input, options = {}) => {
-  const { prompt, model, document, table, ...variables } = input;
+  const { instructions, model, document, checklist, fields, format, ...variables } = input;
   const { modelId, parameters } = model;
   const { globals } = options;
 
+  const isCSV = format === "csv";
+
+  // checklist format
+  const checkListFormat = isCSV ? makeCSVChecklist(checklist, fields) : makeMarkdownChecklist(checklist, fields);
+
+  // checklist description
+  const description = isCSV ? makeCSVDescription(checklist) : makeMarkdownDescription(checklist);
+
+  // TODO: move into the API
+  const instructionsWithChecklist = `${instructions}
+
+CHECKLIST DESCRIPTION:
+${description}
+
+CHECKLIST FORMAT:
+{{table}}
+
+CHECKLIST IN ${format.toUpperCase()} FORMAT:
+`;
+
   // render the prompt without overwriting the document and table variables
-  const renderedPrompt = Mustache.render(prompt, { ...variables, document: "{{document}}", table: "{{table}}" });
+  const renderedPrompt = Mustache.render(instructionsWithChecklist, {
+    ...variables,
+    document: "{{document}}",
+    table: "{{table}}",
+  });
 
   const { result } = await refineCompletion({
     apiKey: getPromptStudioKey(globals || {}),
     modelId,
     prompt: renderedPrompt,
     document: document,
-    format: table,
+    format: checkListFormat,
     parameters,
     config: globals,
     options: {
@@ -40,7 +100,7 @@ export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (
   });
 
   return {
-    result: result || "",
+    checklist: result || "",
   };
 };
 
