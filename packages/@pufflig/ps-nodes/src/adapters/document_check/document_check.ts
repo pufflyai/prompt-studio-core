@@ -74,11 +74,10 @@ DOCUMENT:
 CHECKLIST DESCRIPTION:
 ${description}
 
-CHECKLIST FORMAT:
+TABLE FORMAT:
 {{table}}
 
-Return only the CHECKLIST IN ${format.toUpperCase()} FORMAT:
-${isCSV ? "check," : "|check|"}`;
+Return only the TABLE IN ${format.toUpperCase()} FORMAT`;
 
   // render the prompt without overwriting the document and table variables
   const renderedPrompt = Mustache.render(instructionsWithChecklist, {
