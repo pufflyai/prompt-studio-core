@@ -1,6 +1,5 @@
+import { default_completion_model, models } from "@pufflig/ps-models";
 import { NodeConfig } from "@pufflig/ps-types";
-import { default_model } from "../../constants";
-import { models } from "@pufflig/ps-models";
 
 export const modelNodeType = "data/model" as const;
 
@@ -17,7 +16,7 @@ export const model: NodeConfig = {
       type: "model",
       definition: { ...models },
       defaultValue: {
-        modelId: default_model,
+        modelId: default_completion_model,
         parameters: {},
       },
     },
@@ -28,7 +27,7 @@ export const model: NodeConfig = {
       name: "Model Name",
       description: "The name of the model to use.",
       type: "selection",
-      defaultValue: default_model,
+      defaultValue: default_completion_model,
       options: Object.keys({ ...models }).map((modelId) => ({
         id: modelId,
         name: modelId,
