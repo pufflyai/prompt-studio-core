@@ -86,7 +86,8 @@ export interface ObjectParam extends BaseParam {
 
 export interface ListParam extends BaseParam {
   type: "list";
-  defaultValue: [];
+  files?: boolean;
+  defaultValue: string[];
 }
 
 export interface VectorParam extends BaseParam {
@@ -102,7 +103,7 @@ export type ParamValue =
   | Chat
   | ChatMessage
   | null
-  | (NumberParam | TextParam)[]
+  | ObjectDefinition
   | Array<number>
   | Array<string>;
 

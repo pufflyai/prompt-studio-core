@@ -4,7 +4,7 @@ import { NodeConfig } from "@pufflig/ps-types";
 export const documentCheckNodeType = "modifier/document_check" as const;
 
 export const documentCheck: NodeConfig = {
-  name: "Document Checklist",
+  name: "Checklist",
   description: "Run a checklist on a document.",
   tags: ["adapter", "document", "text"],
   status: "stable",
@@ -23,9 +23,9 @@ export const documentCheck: NodeConfig = {
   },
   outputs: [
     {
-      id: "result",
-      name: "Result",
-      description: "A list, checklist or other information about the document",
+      id: "checklist",
+      name: "Checklist",
+      description: "A checklist of items to run on the document",
       type: "text",
       defaultValue: "",
     },
@@ -43,25 +43,44 @@ export const documentCheck: NodeConfig = {
       },
     },
     {
-      id: "prompt",
-      name: "Prompt",
-      description: "Prompt to check the document with",
+      id: "instructions",
+      name: "Instructions",
+      description: "Instructions for the AI",
       type: "text",
-      defaultValue: `Extract information in the document below and insert them in the csv table, don't overwrite existing values and keep things empty if you cannot find information in the document:\n\nTABLE EXAMPLE:\ncharacters, age\nmickey mouse, 10\ndonald duck, -\n\nTABLE:\n{{table}}\n\nDOCUMENT:\n{{document}}\n\nTABLE:\n`,
-    },
-    {
-      id: "table",
-      name: "Table",
-      description: "The list, table or checklist to parse the document with.",
-      type: "text",
-      defaultValue: "",
+      defaultValue: ``,
     },
     {
       id: "document",
       name: "Document",
-      description: "Document to be processed",
+      description: "Document to be checked",
       type: "text",
       defaultValue: "",
+    },
+    {
+      id: "checks",
+      name: "Checks",
+      description: "The checklist to run on the document",
+      type: "object",
+      editableSchema: true,
+      defaultValue: [],
+    },
+    {
+      id: "fields",
+      name: "Fields",
+      description: "Custom fields to include in the output for each checklist item",
+      type: "list",
+      defaultValue: ["ok (yes/no)"],
+    },
+    {
+      id: "format",
+      name: "Format",
+      description: "The format in which to return the cheklist results",
+      type: "selection",
+      defaultValue: "markdown",
+      options: [
+        { id: "csv", name: "CSV" },
+        { id: "markdown", name: "Markdown" },
+      ],
     },
   ],
 };
