@@ -1,6 +1,5 @@
-import { openai, OPENAI_API_KEY } from "@pufflig/ps-models";
+import { default_completion_model, openai, OPENAI_API_KEY } from "@pufflig/ps-models";
 import { NodeConfig } from "@pufflig/ps-types";
-import { default_model } from "../../constants";
 
 export const openaiCompletionConfig: NodeConfig = {
   name: "OpenAI (Completion)",
@@ -45,7 +44,7 @@ export const openaiCompletionConfig: NodeConfig = {
       type: "model",
       definition: openai.completion_models,
       defaultValue: {
-        modelId: default_model,
+        modelId: default_completion_model,
         parameters: {},
       },
     },
