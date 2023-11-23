@@ -1,7 +1,7 @@
 {
   "name": "@pufflig/ps-nodes",
   "private": false,
-  "version": "0.24.1",
+  "version": "0.24.2",
   "description": "Collection of nodes used in Prompt Studio",
   "files": [
     "dist"
@@ -34,7 +34,7 @@
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.7",
     "@pufflig/ps-models": "^0.24.0",
-    "@pufflig/ps-nodes-config": "^0.24.1",
+    "@pufflig/ps-nodes-config": "^0.24.2",
     "@pufflig/ps-sdk": "^0.24.0",
     "axios": "^1.6.2",
     "langchain": "^0.0.193",
