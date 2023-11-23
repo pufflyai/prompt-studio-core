@@ -9,7 +9,7 @@ export interface LLMCompletionInput {
   instructions: string;
   model: ModelValue;
   document: string;
-  checklist: ObjectDefinition;
+  checks: ObjectDefinition;
   format: string;
   fields: string[];
   [key: string]: any;
@@ -47,24 +47,24 @@ const makeCSVDescription = (checklist: ObjectDefinition) => {
 
 const makeMarkdownDescription = (checklist: ObjectDefinition) => {
   const header = "|check|description|";
-  const rows = checklist.map((item) => {
+  const rows = (checklist || []).map((item) => {
     return `|${item.id}|${(item.defaultValue as string).replace(/,/g, "")}|`;
   });
   return `${header}\n${rows.join("\n")}`;
 };
 
 export const execute: Execute<LLMCompletionInput, LLMCompletionOutput> = async (input, options = {}) => {
-  const { instructions, model, document, checklist, fields, format, ...variables } = input;
+  const { instructions, model, document, checks, fields, format, ...variables } = input;
   const { modelId, parameters } = model;
   const { globals } = options;
 
   const isCSV = format === "csv";
 
   // checklist format
-  const checkListFormat = isCSV ? makeCSVChecklist(checklist, fields) : makeMarkdownChecklist(checklist, fields);
+  const checkListFormat = isCSV ? makeCSVChecklist(checks, fields) : makeMarkdownChecklist(checks, fields);
 
   // checklist description
-  const description = isCSV ? makeCSVDescription(checklist) : makeMarkdownDescription(checklist);
+  const description = isCSV ? makeCSVDescription(checks) : makeMarkdownDescription(checks);
 
   // TODO: move into the API
   const instructionsWithChecklist = `${instructions}

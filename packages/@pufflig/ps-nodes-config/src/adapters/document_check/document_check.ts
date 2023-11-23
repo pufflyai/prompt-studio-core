@@ -47,7 +47,7 @@ export const documentCheck: NodeConfig = {
       name: "Instructions",
       description: "Instructions for the AI",
       type: "text",
-      defaultValue: `Run the checklist below on the document.`,
+      defaultValue: ``,
     },
     {
       id: "document",
