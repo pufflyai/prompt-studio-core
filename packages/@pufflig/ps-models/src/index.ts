@@ -32,13 +32,22 @@ export { OPENAI_API_KEY } from "./models/openai";
 export { HF_ACCESS_TOKEN } from "./models/hf";
 export { OPEN_ROUTER_API_KEY } from "./models/open_router";
 
-// openai specific models
+// provider specific models
 export const openai = {
   chat_models: openai_chat,
   completion_models: openai_completion,
   embedding_models: openai_embedding,
 };
 
+export const hf = {
+  completion_models: hf_completion,
+};
+
+export const open_router = {
+  completion_models: open_router_completion,
+};
+
+// defaults
 export const default_completion_model = "gpt-3.5-turbo-instruct";
 export const default_assistant_model = "gpt-4-1106-preview";
 
