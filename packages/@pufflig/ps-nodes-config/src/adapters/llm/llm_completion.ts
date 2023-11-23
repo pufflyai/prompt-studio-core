@@ -1,5 +1,6 @@
-import { default_completion_model, completion_models } from "@pufflig/ps-models";
+import { models } from "@pufflig/ps-models";
 import { NodeConfig } from "@pufflig/ps-types";
+import { default_model } from "../../constants";
 
 export const llmCompletionNodeType = "adapter/llm_completion" as const;
 
@@ -34,12 +35,12 @@ export const llmCompletionConfig: NodeConfig = {
   inputs: [
     {
       id: "model",
-      name: "Model",
+      name: "AI Settings",
       description: "The model to use",
       type: "model",
-      definition: completion_models,
+      definition: models,
       defaultValue: {
-        modelId: default_completion_model,
+        modelId: default_model,
         parameters: {},
       },
     },

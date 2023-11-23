@@ -1,11 +1,11 @@
-import { chat_models, completion_models, default_completion_model } from "@pufflig/ps-models";
 import { NodeConfig } from "@pufflig/ps-types";
+import { default_model, models } from "../../constants";
 
 export const documentCheckNodeType = "modifier/document_check" as const;
 
 export const documentCheck: NodeConfig = {
-  name: "Document Check",
-  description: "Run a checklist or extract information from a document.",
+  name: "Document Checklist",
+  description: "Run a checklist on a document.",
   tags: ["adapter", "document", "text"],
   status: "stable",
   execution: {
@@ -33,12 +33,12 @@ export const documentCheck: NodeConfig = {
   inputs: [
     {
       id: "model",
-      name: "Model",
+      name: "AI Settings",
       description: "The model to use",
       type: "model",
-      definition: { ...completion_models, ...chat_models },
+      definition: models,
       defaultValue: {
-        modelId: default_completion_model,
+        modelId: default_model,
         parameters: {},
       },
     },
