@@ -64,3 +64,5 @@ export const models = Object.entries({ ...completion_models, ...chat_models })
     acc[modelId] = model;
     return acc;
   }, {} as Record<string, ModelConfig>);
+
+export { getDefaultModelParams } from "./utils/getDefaultModelParams";

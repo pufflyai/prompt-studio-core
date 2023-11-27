@@ -1,4 +1,4 @@
-import { default_completion_model, models } from "@pufflig/ps-models";
+import { default_completion_model, models, getDefaultModelParams } from "@pufflig/ps-models";
 import { NodeConfig } from "@pufflig/ps-types";
 
 export const llmCompletionNodeType = "adapter/llm_completion" as const;
@@ -40,7 +40,7 @@ export const llmCompletionConfig: NodeConfig = {
       definition: models,
       defaultValue: {
         modelId: default_completion_model,
-        parameters: {},
+        parameters: getDefaultModelParams(default_completion_model),
       },
     },
     {
