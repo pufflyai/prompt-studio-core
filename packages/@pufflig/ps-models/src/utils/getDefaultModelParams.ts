@@ -7,8 +7,8 @@ export const getDefaultModelParams = (modelId: string) => {
     return {};
   }
 
-  return Object.entries(modelDefinition.parameters).reduce((acc, [key, param]) => {
-    acc[key] = param.defaultValue;
+  return modelDefinition.parameters.reduce((acc, param) => {
+    acc[param.id] = param.defaultValue;
     return acc;
   }, {} as Record<string, number | string>);
 };
