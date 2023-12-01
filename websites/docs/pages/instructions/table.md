@@ -1,6 +1,4 @@
-# Secrets
-
-In order to connect safely with LLM Providers like OpenAI, you need to manage your API Keys within Prompt Studio. A secret contains stores your sensitive information.
+# Table
 
 ::: warning Under Construction
 

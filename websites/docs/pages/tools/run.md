@@ -1,6 +1,4 @@
-# Workflow
-
-A workflow is a series of instructions that can be combined to create more complex features. Once created, your workflow can be deployed and becomes available through an API. You can use our SDK or our Rest API to integrate the workflow into your codebase.
+# Run your Tool
 
 ::: warning Under Construction
 
