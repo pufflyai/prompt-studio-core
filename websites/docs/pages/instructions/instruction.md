@@ -1,6 +1,4 @@
-# Chat
-
-In Prompt Studio, a chat is a format for an **instruction** to a Language Model. By providing the history of instructions / answers between a user and a Language Model we can improve the quality of the results provided by the language model.
+# Instruction
 
 ::: warning Under Construction
 

@@ -21,30 +21,35 @@ export default defineConfig({
       { text: "API Reference", link: "/api/getting-started" },
       { text: "Blog", link: "https://blog.prompt.studio" },
     ],
-
     sidebar: [
       { text: "Introduction", link: "/" },
       // {
       //   text: "Guides",
-      //   items: [
-      //     { text: "Getting Started", link: "/guides/getting-started" },
-      //     { text: "Setting up a Provider", link: "/guides/setting-up-provider" },
-      //   ],
+      //   items: [{ text: "Getting Started", link: "/guides/getting-started" }],
       // },
       {
         text: "Concepts",
         items: [
-          {
-            text: "Instructions",
-            items: [
-              { text: "Prompt", link: "/concepts/prompt" },
-              { text: "Chat", link: "/concepts/chat" },
-            ],
-          },
-          { text: "Workflow", link: "/concepts/workflow" },
-          { text: "File", link: "/concepts/file" },
-          { text: "Knowledge Base", link: "/concepts/knowledge-base" },
-          { text: "Secrets", link: "/concepts/secrets" },
+          { text: "Tools", link: "/concepts/tools" },
+          { text: "Instructions", link: "/concepts/instructions" },
+          { text: "Files", link: "/concepts/file" },
+          { text: "Knowledge Bases", link: "/concepts/knowledge-base" },
+        ],
+      },
+      {
+        text: "Instructions",
+        items: [
+          { text: "Instruction", link: "/instructions/instruction" },
+          { text: "Table", link: "/instructions/table" },
+        ],
+      },
+      {
+        text: "Building Tools",
+        items: [
+          { text: "Introduction", link: "/tools/introduction" },
+          { text: "Run your Tool", link: "/tools/run" },
+          { text: "Preview your Tool", link: "/tools/preview" },
+          { text: "Deploy your Tool", link: "/tools/deploy" },
         ],
       },
       {

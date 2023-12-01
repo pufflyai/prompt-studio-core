@@ -3,7 +3,7 @@
 Files are how you keep track of text you want to pass to a Language Models. It is different from an instruction in that
 it only contains data. This could be anything from a user question, a short story, a recipe or a research paper.
 
-You can use your files to test your **instructions** or as part of a **workflow**.
+You can use your files to test your [instructions](instructions.md) or as part of a [tool](tools.md).
 
 ::: warning Under Construction
 

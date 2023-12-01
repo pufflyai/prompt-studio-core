@@ -1,8 +1,4 @@
-# Prompt
-
-In Prompt Studio, a prompt is a format for an **instruction** to a Language Model. It is text that the language model will try to complete.
-
-A good prompt should be structured to provide context and guidance to the model to generate a meaningful response.
+# Deploy your Tool
 
 ::: warning Under Construction
 
