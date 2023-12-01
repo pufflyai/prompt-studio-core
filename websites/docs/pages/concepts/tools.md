@@ -1,6 +1,6 @@
 # Tools
 
-A tool is a series of [instructions](instructions.md) that can be combined to create more complex features. Once created, your tool can be deployed and becomes available through an API. You can use our SDK or our Rest API to integrate the workflow into your codebase. You can also share a preview of the tool using our [shareable ui]() feature.
+A tool is a series of [instructions](instructions.md) that can be combined to create more complex features. Once created, your tool can be deployed and becomes available through an API. You can use our SDK or our Rest API to integrate the workflow into your codebase. You can also share a preview of the tool using our [shareable ui](../tools/preview.md) feature.
 
 ::: warning Under Construction
 
