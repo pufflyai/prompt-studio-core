@@ -8,10 +8,10 @@ export default defineConfig({
   lastUpdated: true,
   head: [
     ["script", { async: "", src: "https://www.googletagmanager.com/gtag/js?id=G-GEPCR3WDKS" }],
-    ["link", { rel: "icon", href: "/assets/favicon.ico" }],
+    ["link", { rel: "icon", href: "/favicon.ico" }],
   ],
   themeConfig: {
-    logo: "/assets/logo_inverted.svg",
+    logo: "/logo_inverted.svg",
     search: {
       provider: "local",
     },
@@ -80,9 +80,5 @@ export default defineConfig({
       { icon: "discord", link: "https://discord.gg/3RxwUEk8fW" },
       { icon: "github", link: "https://github.com/pufflyai/prompt-studio-core" },
     ],
-    footer: {
-      message: "Made with ❤️ at Pufflig",
-      copyright: "Copyright © 2023 Pufflig AB",
-    },
   },
 });
