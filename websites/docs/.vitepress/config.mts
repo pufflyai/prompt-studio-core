@@ -32,6 +32,8 @@ export default defineConfig({
         items: [
           { text: "Tools", link: "/concepts/tools" },
           { text: "Instructions", link: "/concepts/instructions" },
+          { text: "Prompts", link: "/concepts/prompts" },
+          { text: "LLMs", link: "/concepts/llms" },
           { text: "Files", link: "/concepts/file" },
           { text: "Knowledge Bases", link: "/concepts/knowledge-base" },
         ],
@@ -40,7 +42,7 @@ export default defineConfig({
         text: "Instructions",
         items: [
           { text: "Instruction", link: "/instructions/instruction" },
-          { text: "Table", link: "/instructions/table" },
+          { text: "Checklist", link: "/instructions/table" },
         ],
       },
       {
@@ -52,10 +54,10 @@ export default defineConfig({
           { text: "Deploy your Tool", link: "/tools/deploy" },
         ],
       },
-      {
-        text: "SDKs",
-        items: [{ text: "Javascript", link: "/sdk/js" }],
-      },
+      // {
+      //   text: "SDKs",
+      //   items: [{ text: "Javascript", link: "/sdk/js" }],
+      // },
       {
         text: "Rest API",
         items: [
