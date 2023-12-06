@@ -54,10 +54,10 @@ export default defineConfig({
           { text: "Deploy your Tool", link: "/tools/deploy" },
         ],
       },
-      // {
-      //   text: "SDKs",
-      //   items: [{ text: "Javascript", link: "/sdk/js" }],
-      // },
+      {
+        text: "SDKs",
+        items: [{ text: "Javascript", link: "/sdk/js" }],
+      },
       {
         text: "Rest API",
         items: [

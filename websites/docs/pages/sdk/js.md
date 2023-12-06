@@ -1,4 +1,4 @@
-# Javascript SDK v1.0
+# Javascript SDK
 
 Our Javascript SDK is a wrapper around our Rest API. You can use it to integrate the workflows you build into your NodeJS codebase.
 
