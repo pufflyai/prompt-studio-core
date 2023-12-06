@@ -1,8 +1,25 @@
 # Instruction
 
-::: warning Under Construction
+The default instruction will provide your prompt to a language model without any transformation besides inserting variables. For prompts that exceed the context length of the target llm, the start and end of the prompt are preserved while the center is summarized.
 
-The documentation for Prompt Studio is currently under construction. If you have any questions about how Prompt Studio
-works you can reach us in our [discord](https://discord.gg/3RxwUEk8fW), or you can send us an email at `support@prompt.studio`.
+![Instruction](./images/instruction_simple.png)
 
-:::
+## Inputs
+
+The Instruction node has the following inputs:
+
+- **Control**: if this field is not connected the instruction will not run.
+- **AI Settings**: what [language model](/concepts/llms) and parameters to use to complete the instruction
+- **Prompt**: The [prompt](/concepts/prompts) to provide to the language model
+
+## Adding variables
+
+When you add a variable to the instruction node a new text input will appear that you can connect to. You can add a variable in the prompt using curly brackets, e.g.:
+
+```
+Summarize the following message: {{message}}
+```
+
+![Instruction](./images/instruction_variable.png)
+
+You can now connect a file, template or another instruction to the message input.
