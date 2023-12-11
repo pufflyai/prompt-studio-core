@@ -2,7 +2,7 @@
 
 Tools can automate tasks, process documents, classify data and do a lot more. We are constantly expanding the set of features available within the tool editor.
 
-A tool is a series of `nodes` that can either be [instructions](instructions.md) or [data](file.md) and that can be combined together to create more complex features. Once created, your tool can be deployed through an API. You can use our [SDK](/sdk/js) or our [Rest API](/api/getting-started) to integrate the tool into your codebase. You can also share a preview of the tool using our [shareable ui](../tools/preview.md) feature.
+A tool is a series of `nodes` that can either be [instructions](instructions.md) or [data](file.md) and that can be combined together to create more advance functionality. Once created, your tool can be deployed through an API. You can use our [SDK](/sdk/js) or our [Rest API](/api/getting-started) to integrate the tool into your codebase. You can also share a preview of the tool using our [shareable ui](../tools/preview.md) feature.
 
 ::: warning Under Construction
 

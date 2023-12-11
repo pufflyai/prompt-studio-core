@@ -1,6 +1,6 @@
 # Checklist
 
-The **checklist instruction** will run your prompt sequentially over a document of any length and fill a table with parameters you requested. The full document is provided to the LLM as is, to ensure no information is missed. This is ideal for analyzing documents, running checklists or extracting information from unstructured data.
+The **checklist node** will process your document, no matter its length, and fill a table with the requested parameters. The entire document is given to the AI to make sure no details are overlooked. This method is great for analyzing documents, completing checklists, or getting information from unstructured data.
 
 This node returns a table in either CSV or markdown formats, and will self heal incompatible results.
 
@@ -8,9 +8,9 @@ This node returns a table in either CSV or markdown formats, and will self heal 
 
 ## Inputs
 
-The Instruction node has the following inputs:
+The Checklist node has the following inputs:
 
-**`Control`** if this field is not connected the instruction will not run.
+**`Control`** controls the order in which instructions are run. This field needs to be connected for the instruction to run.
 
 **`AI Settings`** what [language model](/concepts/llms) and parameters to use to complete the instruction
 

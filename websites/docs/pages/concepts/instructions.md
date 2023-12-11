@@ -37,7 +37,7 @@ Below is a list of currently available instructions and when to use them.
 
 - [Instruction](/nodes/instruction) : will provide your prompt to a language model without any transformation besides inserting variables. For prompts that exceed the context length of the target llm, the start and end of the prompt are preserved while the center is summarized.
 
-- [Checklist](/nodes/table): will run your prompt sequentially over a document of variable length and fill a table with parameters you requested. The full document is provided to the LLM as is to ensure no information is missed. This Instruction type is ideal for analyzing documents, running checklists or extracting information from unstructured data.
+- [Checklist](/nodes/table): will process your document, no matter its length, and fill a table with the requested parameters. The entire document is given to the AI to make sure no details are overlooked. This method is great for analyzing documents, completing checklists, or getting information from unstructured data.
 
 ## Instruction Playground
 
