@@ -39,14 +39,16 @@ export default defineConfig({
         ],
       },
       {
-        text: "Instructions",
+        text: "Nodes",
         items: [
-          { text: "Instruction", link: "/instructions/instruction" },
-          { text: "Checklist", link: "/instructions/table" },
+          { text: "File", link: "/nodes/file" },
+          { text: "Template", link: "/nodes/template" },
+          { text: "Instruction", link: "/nodes/instruction" },
+          { text: "Checklist", link: "/nodes/table" },
         ],
       },
       {
-        text: "Building Tools",
+        text: "Guides",
         items: [
           { text: "Introduction", link: "/tools/introduction" },
           { text: "Run your Tool", link: "/tools/run" },

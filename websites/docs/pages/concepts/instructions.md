@@ -35,9 +35,9 @@ How prompts are presented to a language model makes a big difference regarding t
 
 Below is a list of currently available instructions and when to use them.
 
-- [Instruction](/instructions/instruction) : will provide your prompt to a language model without any transformation besides inserting variables. For prompts that exceed the context length of the target llm, the start and end of the prompt are preserved while the center is summarized.
+- [Instruction](/nodes/instruction) : will provide your prompt to a language model without any transformation besides inserting variables. For prompts that exceed the context length of the target llm, the start and end of the prompt are preserved while the center is summarized.
 
-- [Checklist](/instructions/table): will run your prompt sequentially over a document of variable length and fill a table with parameters you requested. The full document is provided to the LLM as is to ensure no information is missed. This Instruction type is ideal for analyzing documents, running checklists or extracting information from unstructured data.
+- [Checklist](/nodes/table): will run your prompt sequentially over a document of variable length and fill a table with parameters you requested. The full document is provided to the LLM as is to ensure no information is missed. This Instruction type is ideal for analyzing documents, running checklists or extracting information from unstructured data.
 
 ## Instruction Playground
 
