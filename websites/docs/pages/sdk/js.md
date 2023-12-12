@@ -13,7 +13,7 @@ npm i @pufflig/ps-sdk
 or yarn
 
 ```
-npm yarn @pufflig/ps-sdk
+yarn add @pufflig/ps-sdk
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ const { datapoint } = await runInstruction({
 console.log(datapoint.modelOutput); // As of 2021, the fastest car in the world is the Bugatti Chiron Super Sport 300+, with a top speed of 304 mph.
 ```
 
-You can find your api key in prompt studio under the "API" tab of the tool editor. Each workspace in prompt studio will have its own key, this allows you to
+Your API key is located in Prompt Studio, specifically under the "API" tab in the tool editor. Note that each workspace within Prompt Studio has a distinct key.
 
 ## Datapoints
 
@@ -54,13 +54,13 @@ Each model accepts different parameters.
 
 ## `runInstruction(RunInstructionInput)`
 
-Generate a completion given a prompt. If the prompt is
+Generate a completion given a prompt. If the prompt is larger than the context length permitted by the LLM the start and end of the prompt are preserved while the center is summarized.
 
 Input
 
 > | name       | type     | data type              | description                                     |
 > | ---------- | -------- | ---------------------- | ----------------------------------------------- |
-> | apiKey     | required | string                 | Your prompt studio api key                      |
+> | apiKey     | required | string                 | Your Prompt Studio api key                      |
 > | modelId    | required | string                 | The model to call                               |
 > | prompt     | required | string                 | The prompt to provide to the language model     |
 > | parameters | optional | Record<string, string> | The parameters to provide to the language model |
@@ -74,14 +74,14 @@ Return
 
 ## `runWorkflow(RunWorkflowInput)`
 
-Run a deployed workflow on prompt studio.
+Run a deployed workflow on Prompt Studio.
 
 Inputs
 
 > | name         | type     | data type           | description                |
 > | ------------ | -------- | ------------------- | -------------------------- |
-> | apiKey       | required | string              | Your prompt studio api key |
-> | deploymentId | required | string              | Your prompt studio api key |
+> | apiKey       | required | string              | Your Prompt Studio api key |
+> | deploymentId | required | string              | Your Prompt Studio api key |
 > | input        | required | Record<string, any> | Input to a workflow        |
 > | options      | optional | [Options](#options) | Request options            |
 
@@ -103,7 +103,7 @@ Return
 
 ## `Options`
 
-> | name  | type     | data type | description                                                                      |
-> | ----- | -------- | --------- | -------------------------------------------------------------------------------- |
-> | cache | optional | boolean   | Return cached value, note some parameters like temperature will invalidate cache |
-> | track | optional | boolean   | Track the resulting datapoint                                                    |
+> | name  | type     | data type | description                                                                              |
+> | ----- | -------- | --------- | ---------------------------------------------------------------------------------------- |
+> | cache | optional | boolean   | Return cached value if true, note some parameters like temperature will invalidate cache |
+> | store | optional | boolean   | If true, store the completion in Prompt Studio for later use, e.g. for fine-tuning       |
