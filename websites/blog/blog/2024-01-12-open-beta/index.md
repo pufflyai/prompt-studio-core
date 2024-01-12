@@ -1,5 +1,5 @@
 ---
-slug: end-of-closedbeta
+slug: open-beta
 title: Our Shift to Open Beta - A brand new way to interact with AI
 authors: [sara]
 tags: [Prompt Studio]
