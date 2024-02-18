@@ -34,9 +34,9 @@ export default defineConfig({
               text: "Recipe",
               link: "/key-concepts/recipe/",
               items: [
-                { text: "AI Instruction", link: "/key-concepts/recipe/ai-instruction.md" },
+                { text: "Instruction", link: "/key-concepts/recipe/instruction.md" },
                 { text: "Content", link: "/key-concepts/recipe/content.md" },
-                { text: "LLM Preset", link: "/key-concepts/recipe/llm-preset.md" },
+                { text: "AI Setting", link: "/key-concepts/recipe/AI-Setting.md" },
                 { text: "Preview", link: "/key-concepts/recipe/preview.md" },
                 { text: "Deployment", link: "/key-concepts/recipe/deployment.md" },
               ],

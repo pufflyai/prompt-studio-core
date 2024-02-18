@@ -1,2 +1,2 @@
-# AI Instruction
+# Instruction
 AI Instructions are the core of a Recipe. They combine a user-defined prompt with a specific LLM configuration to guide the AI's response. These instructions are pivotal in shaping the outcome of a Recipe
