@@ -56,4 +56,4 @@ Replace `'your-deployment-id'` with the actual ID of your deployment and provide
 
 ## Support
 
-If you encounter any issues or have questions regarding the SDK integration, please reach out to our support team or visit the FAQ section.
+If you encounter any issues or have questions regarding the SDK integration, please reach out to our [support team](mailto:support@prompt.studio) or visit the FAQ section.

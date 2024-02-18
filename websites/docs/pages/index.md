@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome to the documentation for Prompt Studio, a SAAS platform that allows both domain experts and tech experts to build AI workflows that provide business value. Our product, Prompt Studio, is designed to streamline the process of building complex workflows by utilizing innovative technology and a user-friendly interface.
+Welcome to the documentation for Prompt Studio, a SAAS platform that allows both domain experts and tech experts to build AI workflows that provide business value. Our product, Prompt Studio, is designed to streamline the process of building complex workflows with an intuitive and user-friendly interface.
 
 In this documentation, we will introduce you to the key concepts of Prompt Studio and provide a guide on how to get started using our platform. We will also cover important features, such as LLMs fine-tuning, workflow automation, and SDK integration, to help you make the most out of your experience with Prompt Studio.
 
