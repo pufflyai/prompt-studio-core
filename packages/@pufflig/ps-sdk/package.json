@@ -1,6 +1,6 @@
 {
   "name": "@pufflig/ps-sdk",
-  "version": "1.0.1-alpha.0",
+  "version": "1.0.1-alpha.1",
   "license": "MIT",
   "main": "./dist/ps-sdk.umd.js",
   "module": "./dist/ps-sdk.es.js",
@@ -22,7 +22,7 @@
     "vite-plugin-dts": "^3.7.3"
   },
   "dependencies": {
-    "@pufflig/ps-models": "^1.0.1-alpha.0",
+    "@pufflig/ps-models": "^1.0.1-alpha.1",
     "axios": "^1.6.7",
     "pino": "^8.17.2",
     "unws": "^0.2.4"

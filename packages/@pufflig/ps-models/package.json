@@ -1,7 +1,7 @@
 {
   "name": "@pufflig/ps-models",
   "private": false,
-  "version": "1.0.1-alpha.0",
+  "version": "1.0.1-alpha.1",
   "description": "Configuration of models used in Prompt Studio",
   "files": [
     "dist"
