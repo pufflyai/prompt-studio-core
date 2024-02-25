@@ -17,6 +17,7 @@ export const hf_completion: ModelDefinition = {
     settings: hf_settings,
     streaming: false,
     contextLength: 512,
+    maxTokens: 1024,
     parameters: [
       {
         id: "temperature",

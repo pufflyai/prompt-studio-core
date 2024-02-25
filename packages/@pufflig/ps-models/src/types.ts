@@ -24,6 +24,7 @@ export interface ModelConfig {
   settings?: BaseParam[];
   streaming?: boolean;
   contextLength: number;
+  maxTokens: number;
   parameters: (NumberParam | TextParam)[];
 }
 

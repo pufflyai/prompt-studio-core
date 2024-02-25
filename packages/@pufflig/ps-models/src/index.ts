@@ -53,6 +53,7 @@ export const default_assistant_model = "gpt-4-1106-preview";
 
 export const available_models = [
   "gpt-3.5-turbo-instruct",
+  "gpt-3.5-turbo-0125",
   "gpt-4-1106-preview",
   "anthropic/claude-2",
   "meta-llama/llama-2-13b-chat",
@@ -66,5 +67,4 @@ export const models = Object.entries({ ...completion_models, ...chat_models })
   }, {} as Record<string, ModelConfig>);
 
 export { getDefaultModelParams } from "./utils/getDefaultModelParams";
-export { getModelFromPreset } from "./utils/getModelFromPreset";
-export * from "./types";
+export { getModelFromPreset, presets } from "./utils/getModelFromPreset";

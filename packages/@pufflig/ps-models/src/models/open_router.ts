@@ -16,6 +16,7 @@ export const open_router_completion: ModelDefinition = {
     description: "An improved, potentially even perfected variant of MythoMix.",
     settings: open_router_settings,
     contextLength: 4096,
+    maxTokens: 2048,
     parameters: [
       {
         id: "temperature",
@@ -34,6 +35,7 @@ export const open_router_completion: ModelDefinition = {
     description: "Meta: Llama v2 13B Chat (beta)",
     settings: open_router_settings,
     contextLength: 4096,
+    maxTokens: 2048,
     parameters: [
       {
         id: "temperature",
@@ -52,6 +54,7 @@ export const open_router_completion: ModelDefinition = {
     description: "Claude: superior performance on tasks that require complex reasoning",
     settings: open_router_settings,
     contextLength: 8192,
+    maxTokens: 2048,
     parameters: [
       {
         id: "temperature",

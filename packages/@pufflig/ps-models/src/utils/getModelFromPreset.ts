@@ -1,6 +1,6 @@
 import { ModelValue } from "../types";
 
-const presets: Record<string, ModelValue> = {
+export const presets: Record<string, ModelValue> = {
   accurate: {
     modelId: "gpt-4-1106-preview",
     parameters: {
@@ -8,13 +8,13 @@ const presets: Record<string, ModelValue> = {
     },
   },
   casual: {
-    modelId: "gpt-3.5-turbo-instruct",
+    modelId: "gpt-3.5-turbo-0125",
     parameters: {
       temperature: 0.5,
     },
   },
   creative: {
-    modelId: "gpt-3.5-turbo-instruct",
+    modelId: "gpt-3.5-turbo-0125",
     parameters: {
       temperature: 1,
     },
