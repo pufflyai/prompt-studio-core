@@ -1,7 +1,7 @@
 import pino from "pino";
 import { WebSocket } from "unws";
-import { getApiServiceWebSocketUrl } from "./constants";
-import { CreateCompletionInput, CreateCompletionPayload } from "./types";
+import { getApiServiceWebSocketUrl } from "../constants";
+import { CreateCompletionInput, CreateCompletionPayload } from "../types";
 
 const logger = pino();
 

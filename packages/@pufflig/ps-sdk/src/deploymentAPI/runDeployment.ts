@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getServiceUrl } from "./constants";
-import { Completion, RunDeploymentInput, RunDeploymentPayload } from "./types";
+import { getServiceUrl } from "../constants";
+import { Completion, RunDeploymentInput, RunDeploymentPayload } from "../types";
 
 export async function runDeployment(input: RunDeploymentInput): Promise<Completion> {
   const { apiKey, deploymentId, deploymentInput } = input;

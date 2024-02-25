@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getServiceUrl } from "./constants";
-import { CreateCompletionInput, Completion, CreateCompletionPayload } from "./types";
+import { getServiceUrl } from "../constants";
+import { CreateCompletionInput, Completion, CreateCompletionPayload } from "../types";
 
 export async function createCompletion(input: CreateCompletionInput): Promise<Completion> {
   const { modelId, prompt, apiKey, tags, options, parameters = {} } = input;

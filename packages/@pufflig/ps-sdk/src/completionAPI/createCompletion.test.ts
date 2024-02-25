@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createCompletion } from "./createCompletion";
+import { createCompletion } from "../completionAPI/createCompletion";
 
 jest.mock("axios");
 
