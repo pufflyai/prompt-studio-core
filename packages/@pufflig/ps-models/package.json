@@ -1,7 +1,7 @@
 {
   "name": "@pufflig/ps-models",
   "private": false,
-  "version": "0.25.1",
+  "version": "1.0.1-alpha.1",
   "description": "Configuration of models used in Prompt Studio",
   "files": [
     "dist"
@@ -16,13 +16,12 @@
   "author": "Pufflig AB",
   "license": "MIT",
   "devDependencies": {
-    "@pufflig/ps-types": "^0.25.1",
-    "typescript": "^5.2.2",
-    "vite": "^4.3.9",
-    "vite-plugin-dts": "^2.3.0"
+    "typescript": "^5.3.3",
+    "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3"
   },
   "volta": {
-    "node": "18.16.0"
+    "node": "18.19.1"
   },
   "gitHead": "534ff07d186327e38133c0c14a5badd04ced0a9c"
 }

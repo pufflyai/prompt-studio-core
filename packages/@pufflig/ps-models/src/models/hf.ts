@@ -1,4 +1,4 @@
-import { ModelDefinition } from "@pufflig/ps-types";
+import { ModelDefinition } from "../types";
 
 export const HF_ACCESS_TOKEN = "hf/access_token";
 
@@ -17,6 +17,7 @@ export const hf_completion: ModelDefinition = {
     settings: hf_settings,
     streaming: false,
     contextLength: 512,
+    maxTokens: 1024,
     parameters: [
       {
         id: "temperature",

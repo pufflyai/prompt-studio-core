@@ -2,7 +2,7 @@
   <img src="assets/banner.png" />
 </p>
 
-> ⚠️ **Under Construction** the API and project structure are subject to change and no documentation was added yet. ⚠️
+> ⚠️ **Under Construction** the API and project structure are subject to change. ⚠️
 
 # Prompt Studio Core
 

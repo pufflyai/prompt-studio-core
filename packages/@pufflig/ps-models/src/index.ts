@@ -1,7 +1,7 @@
-import { ModelConfig } from "@pufflig/ps-types";
 import { hf_completion, hf_settings } from "./models/hf";
 import { open_router_completion, open_router_settings } from "./models/open_router";
 import { openai_chat, openai_completion, openai_embedding, openai_settings } from "./models/openai";
+import { ModelConfig } from "./types";
 
 export const chat_models = { ...openai_chat };
 export const completion_models = { ...openai_completion, ...open_router_completion, ...hf_completion };
@@ -53,6 +53,7 @@ export const default_assistant_model = "gpt-4-1106-preview";
 
 export const available_models = [
   "gpt-3.5-turbo-instruct",
+  "gpt-3.5-turbo-0125",
   "gpt-4-1106-preview",
   "anthropic/claude-2",
   "meta-llama/llama-2-13b-chat",
@@ -66,3 +67,4 @@ export const models = Object.entries({ ...completion_models, ...chat_models })
   }, {} as Record<string, ModelConfig>);
 
 export { getDefaultModelParams } from "./utils/getDefaultModelParams";
+export { getModelFromPreset, presets } from "./utils/getModelFromPreset";

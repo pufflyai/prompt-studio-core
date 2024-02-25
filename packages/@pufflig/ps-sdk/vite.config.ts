@@ -16,7 +16,7 @@ export default defineConfig({
       fileName: (format) => `ps-sdk.${format}.js`,
     },
     rollupOptions: {
-      external: ["axios"],
+      external: ["axios", "unws"],
     },
   },
 });
