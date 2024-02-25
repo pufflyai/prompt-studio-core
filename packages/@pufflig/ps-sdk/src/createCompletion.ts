@@ -1,39 +1,9 @@
 import axios from "axios";
 import { getServiceUrl } from "./constants";
-
-interface CreateCompletionInput {
-  apiKey: string;
-  modelId: string;
-  prompt: string;
-  parameters?: Record<string, any>;
-  config?: Record<string, any>;
-  options?: {
-    track?: boolean;
-    cache?: boolean;
-  };
-}
-
-interface Completion {
-  datapoint?: {
-    model_output: string;
-    model_input: string;
-    model_id: string;
-  };
-}
-
-interface CreateCompletionPayload {
-  modelId: string;
-  prompt: string;
-  parameters?: Record<string, any>;
-  config?: Record<string, any>;
-  options?: {
-    track?: boolean;
-    cache?: boolean;
-  };
-}
+import { CreateCompletionInput, Completion, CreateCompletionPayload } from "./types";
 
 export async function createCompletion(input: CreateCompletionInput): Promise<Completion> {
-  const { modelId, prompt, apiKey, config, options, parameters = {} } = input;
+  const { modelId, prompt, apiKey, tags, options, parameters = {} } = input;
 
   const payload: CreateCompletionPayload = {
     modelId,
@@ -48,8 +18,8 @@ export async function createCompletion(input: CreateCompletionInput): Promise<Co
     },
   };
 
-  if (config) {
-    payload.config = config;
+  if (tags) {
+    payload.tags = tags;
   }
 
   if (options) {

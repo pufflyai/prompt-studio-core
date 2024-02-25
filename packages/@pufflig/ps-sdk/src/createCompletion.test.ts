@@ -39,7 +39,6 @@ describe("createCompletion", () => {
         modelId: "model_123",
         prompt: "Hello",
         parameters: { name: "John" },
-        config: { temperature: 0.5 },
         options: { track: true },
       },
       {

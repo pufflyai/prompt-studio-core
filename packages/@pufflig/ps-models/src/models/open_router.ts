@@ -1,4 +1,4 @@
-import { ModelDefinition } from "@pufflig/ps-types";
+import { ModelDefinition } from "../types";
 
 export const OPEN_ROUTER_API_KEY = "open_router/api_key";
 

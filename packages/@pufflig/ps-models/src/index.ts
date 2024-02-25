@@ -1,7 +1,7 @@
-import { ModelConfig } from "@pufflig/ps-types";
 import { hf_completion, hf_settings } from "./models/hf";
 import { open_router_completion, open_router_settings } from "./models/open_router";
 import { openai_chat, openai_completion, openai_embedding, openai_settings } from "./models/openai";
+import { ModelConfig } from "./types";
 
 export const chat_models = { ...openai_chat };
 export const completion_models = { ...openai_completion, ...open_router_completion, ...hf_completion };
@@ -66,3 +66,5 @@ export const models = Object.entries({ ...completion_models, ...chat_models })
   }, {} as Record<string, ModelConfig>);
 
 export { getDefaultModelParams } from "./utils/getDefaultModelParams";
+export { getModelFromPreset } from "./utils/getModelFromPreset";
+export * from "./types";

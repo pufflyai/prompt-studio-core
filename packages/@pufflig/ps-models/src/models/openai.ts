@@ -1,4 +1,4 @@
-import { ModelDefinition } from "@pufflig/ps-types";
+import { ModelDefinition } from "../types";
 
 export const OPENAI_API_KEY = "openai/api_key";
 
@@ -534,6 +534,7 @@ export const openai_chat: ModelDefinition = {
 export const openai_embedding: ModelDefinition = {
   "text-embedding-ada-002": {
     modelId: "text-embedding-ada-002",
+    contextLength: 2048,
     description: "Designed to replace the previous 16 first-generation embedding models at a fraction of the cost",
     settings: openai_settings,
     streaming: true,

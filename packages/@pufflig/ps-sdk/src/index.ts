@@ -1,3 +1,4 @@
 export { createCompletion } from "./createCompletion";
-export { refineCompletion } from "./refineCompletion";
-export { mapCompletion } from "./mapCompletion";
+export { streamCompletion } from "./streamCompletion";
+export { runDeployment } from "./runDeployment";
+export { type Completion, type CreateCompletionInput } from "./types";

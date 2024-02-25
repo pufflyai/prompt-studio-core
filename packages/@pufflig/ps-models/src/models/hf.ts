@@ -1,4 +1,4 @@
-import { ModelDefinition } from "@pufflig/ps-types";
+import { ModelDefinition } from "../types";
 
 export const HF_ACCESS_TOKEN = "hf/access_token";
 
