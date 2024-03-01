@@ -6,8 +6,16 @@ import { CreateCompletionInput, CreateCompletionPayload } from "../types";
 const logger = pino();
 
 interface MessageData {
-  datapoint: any;
+  datapoint: {
+    model_output: string;
+    is_error?: boolean;
+    error?: string;
+  };
   request: { is_cached: boolean };
+}
+
+interface MessageEvent {
+  data: string;
 }
 
 enum MessageType {
@@ -79,12 +87,23 @@ export async function* streamCompletion(input: CreateCompletionInput) {
     websocket.send(JSON.stringify(requestStartMessage));
   };
 
-  websocket.onerror = (err: Error) => logger.error("SDK:CompletionStreamError", err.message);
+  websocket.onerror = (err: Error) => {
+    logger.error("SDK:CompletionStreamError", err.message);
+    completionChunks.push({
+      datapoint: {
+        is_error: true,
+        error: err.message,
+      },
+    });
+    streamEnded = true;
+    websocket.close();
+  };
 
-  websocket.onmessage = (event: any) => {
+  websocket.onmessage = (event: MessageEvent) => {
     const message = JSON.parse(event.data) as StreamedCompletionResponseMessage;
     if (message.type === MessageType.end) {
       streamEnded = true;
+      websocket.close();
     } else {
       completionChunks.push(message.data);
     }
