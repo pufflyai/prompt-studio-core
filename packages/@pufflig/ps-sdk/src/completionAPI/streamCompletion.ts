@@ -4,6 +4,7 @@ import { getApiServiceWebSocketUrl } from "../constants";
 import { CreateCompletionInput, CreateCompletionPayload } from "../types";
 
 const logger = pino();
+const WAIT_FOR_CHUNKS_MS = 50;
 
 interface MessageData {
   datapoint: {
@@ -32,6 +33,7 @@ class StreamedCompletionResponseMessage {
     this.data = data;
   }
 }
+
 enum StreamedCompletionRequestType {
   CompletionRequestStart = "CompletionRequestStart",
 }
@@ -89,12 +91,13 @@ export async function* streamCompletion(input: CreateCompletionInput) {
 
   websocket.onerror = (err: Error) => {
     logger.error("SDK:CompletionStreamError", err.message);
-    completionChunks.push({
+    const errorMessage = {
       datapoint: {
         is_error: true,
         error: err.message,
       },
-    });
+    };
+    completionChunks.push(errorMessage);
     streamEnded = true;
     websocket.close();
   };
@@ -109,11 +112,15 @@ export async function* streamCompletion(input: CreateCompletionInput) {
     }
   };
 
+  websocket.onclose = () => {
+    streamEnded = true;
+  };
+
   while (completionChunks.length > 0 || !streamEnded) {
     if (completionChunks.length > 0) {
       yield completionChunks.shift();
     } else {
-      await new Promise((resolve) => setTimeout(resolve, 50)); // Wait for chunks to arrive
+      await new Promise((resolve) => setTimeout(resolve, WAIT_FOR_CHUNKS_MS)); // Wait for chunks to arrive
     }
   }
 }
