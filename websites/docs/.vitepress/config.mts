@@ -30,30 +30,21 @@ export default defineConfig({
       {
         text: "Concepts",
         items: [
-          { text: "Tools", link: "/concepts/tools" },
+          { text: "Recipes", link: "/concepts/recipe" },
           { text: "Instructions", link: "/concepts/instructions" },
           { text: "Prompts", link: "/concepts/prompts" },
-          { text: "LLMs", link: "/concepts/llms" },
           { text: "Files", link: "/concepts/file" },
-          { text: "Knowledge Bases", link: "/concepts/knowledge-base" },
+          { text: "Preview", link: "/concepts/preview" },
+          { text: "Scenarios", link: "/concepts/scenarios" },
         ],
       },
-      {
-        text: "Nodes",
-        items: [
-          { text: "File", link: "/nodes/file" },
-          { text: "Template", link: "/nodes/template" },
-          { text: "Instruction", link: "/nodes/instruction" },
-          { text: "Checklist", link: "/nodes/table" },
-        ],
-      },
+      { text: "FAQs", link: "/faq.md" },
       {
         text: "Guides",
         items: [
-          { text: "Introduction", link: "/tools/introduction" },
-          { text: "Run your Tool", link: "/tools/run" },
-          { text: "Preview your Tool", link: "/tools/preview" },
-          { text: "Deploy your Tool", link: "/tools/deploy" },
+          { text: "Run your Instructions", link: "/recipes/run" },
+          { text: "Preview your Recipe", link: "/recipes/preview" },
+          { text: "Deploy your Recipe", link: "/recipes/deploy" },
         ],
       },
       {
