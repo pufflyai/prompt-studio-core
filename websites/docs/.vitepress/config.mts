@@ -23,10 +23,14 @@ export default defineConfig({
     ],
     sidebar: [
       { text: "Introduction", link: "/" },
-      // {
-      //   text: "Guides",
-      //   items: [{ text: "Getting Started", link: "/guides/getting-started" }],
-      // },
+      {
+        text: "Guides",
+        items: [
+          { text: "Run your Instructions", link: "/recipes/run" },
+          { text: "Preview your Recipe", link: "/recipes/preview" },
+          { text: "Deploy your Recipe", link: "/recipes/deploy" },
+        ],
+      },
       {
         text: "Concepts",
         items: [
@@ -40,14 +44,6 @@ export default defineConfig({
       },
       { text: "FAQs", link: "/faq.md" },
       {
-        text: "Guides",
-        items: [
-          { text: "Run your Instructions", link: "/recipes/run" },
-          { text: "Preview your Recipe", link: "/recipes/preview" },
-          { text: "Deploy your Recipe", link: "/recipes/deploy" },
-        ],
-      },
-      {
         text: "SDKs",
         items: [{ text: "Javascript", link: "/sdk/js" }],
       },
@@ -56,14 +52,6 @@ export default defineConfig({
         items: [
           { text: "Getting Started", link: "/api/getting-started" },
           { text: "Run a Workflow", link: "/api/run-flow" },
-        ],
-      },
-      {
-        text: "Packages",
-        items: [
-          { text: "@pufflig/ps-chains", link: "/@pufflig/ps-chains" },
-          { text: "@pufflig/ps-nodes", link: "/@pufflig/ps-nodes" },
-          { text: "@pufflig/ps-node-configs", link: "/@pufflig/ps-node-configs" },
         ],
       },
       {
