@@ -1,51 +1,25 @@
-# Welcome to the Prompt Studio docs!
+# Welcome to the Prompt Studio documentation!
 
-Prompt Studio is a collaborative no-code platform for teams building LLM-powered apps, tools and assistants.
+## What can I use Prompt Studio for?
+Think of those tasks that you have to do everyday at work, they're a vital part of your job, yet so repetitive and time-consuming. Maybe you even tried ChatGPT to automate parts of it and you're starting to notice just how handy AI can be. If so, you're in the right place! With Prompt Studio, you can craft your unique AI-driven solution, all in natural language and in just text!  You meticulously design your [Recipe](../pages/concepts/recipe.md) once, embedding all the nuances of your business use case by combining [instructions](../pages/concepts/instructions.md) and Voilà! You have your own "app"! Do you want to share it with your colleagues? Click on [preview](../pages/concepts/preview.md) and generate a shareable UI which is a web application based on the logic you build in your recipe! This isn't just any application; it's your personalized tool, born from your specific needs and understanding of your daily challenges. Sharing the preview with your team is as simple as sending a link.
+It gets even better! What if your team wants this AI solution to be part of a customer facing application that your company? Just click on "API" and let us do the work for you, within literally seconds, your AI solution is available through our API for the engineers in your team to integrate with the codebase of your company!
 
-It's a fully managed backend were you can quickly build and deploy [AI tools](concepts/tools.md) as [shareable prototypes](tools/preview.md) or integrate them via our [API](tools/deploy.md) into existing software. Prompt Studio makes it easy to integrate LLMs into your application by fully decoupling app development and prompt engineering.
 
-::: warning Under Construction
 
-The documentation for Prompt Studio is currently under construction. If you have any questions about how Prompt Studio
-works you can reach us in our [discord](https://discord.gg/3RxwUEk8fW), or you can send us an email at `support@prompt.studio`.
+## Overview of functionalities in Prompt Studio
 
-:::
+In Prompt Studio, you can start by creating your first [**recipe**](concepts/recipe.md) which would be a collection of AI instructions.
 
-## Concepts
+- Does your AI solution involve multiple steps? Chain your AI [**instructions**](concepts/instructions.md#chained-instructions-in-a-recipe) by simply referring with `/` to the output of the previous instruction. 
 
-- [**Assistants**]() _coming soon_ AI that finds out how to solve a problem using tools and context.
-- [**Tools**](concepts/tools.md): Tools are automation for specific tasks, e.g. running a checklist on a document.
-- [**Instructions**](concepts/instructions.md): Instructions tell the AI what to do, several instructions can be assembled into a tool.
-- [**Files**](concepts/file.md): A file is a piece of text that you can pass to instructions, e.g. a legal contract to analyze.
-- [**Knowledge Bases**](concepts/knowledge-base.md): A collection of files that can be provided as context to an assistant or tool. The assistant / tool will pick the most relevant parts of the knowledge base to solve specific queries.
+- Do you need to enrich the AI instruction with contextual data from [**files**](concepts/file.md)? Type "/", define your context name and upload your file. This will include the content of the file within the instruction and give more context to guide the LLM for better output.
 
-## Features
+- Do you want to share your AI solution with your colleagues or customers? Simply click on [**preview**](concepts/preview.md) to generate a user interface that you can share with your colleagues. 
 
-### **Provider Agnostic**
+- Does your engineering team need to integrate this AI solution with an application or your internal systems? Click on "API" and deploy your solution. This makes it available through Prompt Studio's API.
 
-Connect to LLMs from `Mistral`, `Meta`, `Anthropic` and `OpenAI`, switch between language models at any time.
+- We know that testing your AI instructions is an integral part of AI development, that's why we have the [**scenarios**](concepts/scenarios.md) page, where you can run your instructions across a large batch of inputs to test how your recipe performs in different scenarios.
 
-### **Instructions with Batteries Included**
+You can find a summary of our features [here](concepts/features.md)
 
-Don't worry about context length, we can run instructions optimized for different use cases, from document analysis to summarization, we provide you with the tools you need out of the box. If you want total control, you can still build your own custom instructions.
 
-### **No Code Editor**
-
-Our no-code editor and tailored instructions let you use LLMs without the need to code.
-
-### **Shareable Previews**
-
-Turn your AI tools and assistants into shareable previews for your colleagues
-
-### **API Deployments**
-
-Prompt Studio is a fully-managed LLM backend that allows you to deploy your AI tools in an instant. We'll take care of infrastructure, scaling and maintenance for you.
-
-## Use Cases
-
-LLMs excel in tasks such as personalized customer service, efficient data analysis and synthesis, automating complex workflows, and providing intuitive interfaces for human-machine interaction. Below are some of the things you can build with Prompt Studio:
-
-- Document Processing (unstructured text to structured data)
-- Retrieval + Q&A
-- Quick prototyping of AI workflows
-- Conversational Systems

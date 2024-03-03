@@ -18,7 +18,11 @@ This is a monorepo managed using [lerna](https://lerna.js.org/)
 
 ### Install dependencies
 
-From the root of the repo, run `yarn install`.
+From the root of the repo, run `npm install`.
+
+### To launch documentation
+
+From the websites/docs folder run  `npm start`.
 
 ### Build all packages
 
