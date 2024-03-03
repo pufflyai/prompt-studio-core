@@ -21,24 +21,18 @@ In the first instruction, we're passing a [File](file.md) containing the intervi
 
 ```
 
-Based on the following /interviews, list the concerns expressed by the interviewees
+Based on the following interviews: /interviews, list the concerns expressed by the interviewees
 ```
 
 In the second instruction, we want the LLM to suggest solutions based on the concerns extracted from the first instruction. For that, we're referring to the output of the first instruction with `/concerns`. The second instruction looks like this:
 
 ```
-Based on the following: /concerns, suggest a solution that would make the interviewee happy
+Based on the following concerns: /concerns, suggest a solution that would make the interviewee happy
 ```
 
 This is the flow when you run the second instruction:
-1. The first instruction runs, we get the output called `/concerns`. Let's say the output is `the couch is too small`
+1. The first instruction runs, we get the output called `/concerns`. Let's say the content of the output is `the couch is too small`
 2. The second instruction will run and replace `/concerns` with `the couch is too small`
-
-This is how the second instruction **actually** looks like when it's sent to the LLM:
-```
-
-Based on the following: "the couch was too small", suggest a solution that would make the interviewee happy
-```
 
 
 ## AI behavior of an instruction
@@ -64,10 +58,10 @@ You can set the output format of an instruction to either **text** or **table** 
 <img src="./images/select_output_type.png" style="width: 48%;"/>
 
 
-### Text output format
+### Text format
 Text output is ideal for narrative responses, explanations, creative writing, or any scenario where a flowing, continuous form of information is preferred. 
 
-### Table output format
+### Table format
 Table output is invaluable for organizing data, comparisons, statistical information, or any content where structure and quick reference are key. Tables make it easier to digest complex information at a glance, facilitating analysis and decision-making processes. More on how to set the table to guide the LLM [here](#how-to-return-output-in-a-table-format).
 
 ### Example of text and table formats
@@ -81,7 +75,7 @@ If we go back to the previous instruction where we extracted the concerns expres
 #### Step 1: Select table output format
 <img src="./images/select_table_output.png" style="width: 48%;"/>
 
-### Step 2: Fill the table in the instruction field
+#### Step 2: Fill the table in the instruction field
 In the video below, I write the two columns or fields that I want the LLM to fill out. In this case, I want it to extract the interviewees and to write the concerns of every interviewee. 
 
 <div style="position: relative; padding-bottom: 53.22916666666667%; height: 0;"><iframe src="https://www.loom.com/embed/db4338f9a2d14b0fabb1efec3b2e206d?sid=2ad6a959-4a2c-4243-af6f-3503cb9b1d2f" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>

@@ -1,8 +1,8 @@
 # Recipes
 
-A recipe is a combination of AI [instructions](instructions.md). It can be described as code written in natural language that you can use as automation, part of an automation or as part of a customer facing application. A recipe is your way of defining a blueprint of AI [**instructions**](concepts/instructions.md) that the LLM follows to solve your specific problem.
+A recipe is a combination of AI [instructions](instructions.md). It can be described as code written in natural language that you can use as automation, part of an automation or as part of a customer facing application. A recipe is your way of defining a blueprint of AI instructions that the LLM follows to solve your specific problem.
 
-In a recipe, instructions can be combined together to create more advanced functionality. Once created, a recipe can be deployed through an API. You can use our [SDK](/sdk/js) or our [Rest API](/api/getting-started) to integrate the tool into your codebase. You can also share a preview of the tool using our [shareable ui](../tools/preview.md) feature.
+In a recipe, instructions can be combined together to create more advanced functionality. Once created, a recipe can be deployed through an API. You can use our [SDK](/sdk/js) or our [Rest API](/api/getting-started) to integrate the tool into your codebase. You can also share a preview of the recipe using our [shareable ui](../concepts/preview.md) feature.
 
 A recipe can contain [**chained**](instructions.md#chained-instructions-in-a-recipe) instructions. But, unless you chain the instructions by referring to the other instructions, then they the default behavior is that they run independently.
 

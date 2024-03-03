@@ -15,6 +15,6 @@ Prompt Studio is a fully-managed LLM backend that allows you to deploy your AI r
 
 ### Extra Notes
 
-LLMs excel in tasks such as information extraction, text classification, summarization, text generation, etc. The possibilities are endless, and the quality of the results you get from LLMs will be determined by the quality of your instructions. That's why we're soon adding what we call our "Promptly", which is a sort of Grammarly for prompts to help you craft better instructions to the LLM.
+LLMs excel in tasks such as information extraction, text classification, summarization, text generation, etc. The possibilities are endless, and the quality of the results you get from LLMs will be determined by the quality of your instructions. That's why we're soon adding features to enhance your prompts to help you craft better instructions to the LLM.
 
 With Prompt Studio, we are fully decoupling prompt engineering and AI development from software development and we are adding new features quite often to support you in your AI development journey. If you have any feature requests or questions, you can contact us at `support@prompt.studio` or our [discord](https://discord.gg/3RxwUEk8fW)

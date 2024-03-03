@@ -16,7 +16,8 @@
     ]
   },
   "devDependencies": {
-    "lerna": "^7.4.2"
+    "lerna": "^7.4.2",
+    "vite-plugin-dts": "^3.7.3"
   },
   "volta": {
     "node": "18.18.2"

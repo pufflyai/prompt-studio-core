@@ -1,9 +1,7 @@
-# Welcome to the Prompt Studio docs!
-
-Prompt Studio is your integrated AI development environment (IDE) where you can write LLM-powered business logic in natural language. 
+# Welcome to the Prompt Studio documentation!
 
 ## What can I use Prompt Studio for?
-Think of those tasks that you have to do everyday at work, they're a vital part of your job, yet so repetitive and time-consuming. Maybe you even tried ChatGPT to automate parts of it and you're starting to notice just how handy AI can be. If so, you're in the right place! With Prompt Studio, you can craft your unique AI-driven solution, all in natural language and in just text!  You meticulously design your ["Recipe"](../pages/concepts/recipe.md) once, embedding all the nuances of your business use case by combining [instructions](../pages/concepts/instructions.md) and Voilà! You have your own "app"! Do you want to share it with your colleagues? Click on [preview](../pages/concepts/preview.md) and generate a shareable UI which is a web application based on the logic you build in your recipe! This isn't just any application; it's your personalized tool, born from your specific needs and understanding of your daily challenges. Sharing the preview with your team is as simple as sending a link.
+Think of those tasks that you have to do everyday at work, they're a vital part of your job, yet so repetitive and time-consuming. Maybe you even tried ChatGPT to automate parts of it and you're starting to notice just how handy AI can be. If so, you're in the right place! With Prompt Studio, you can craft your unique AI-driven solution, all in natural language and in just text!  You meticulously design your [Recipe](../pages/concepts/recipe.md) once, embedding all the nuances of your business use case by combining [instructions](../pages/concepts/instructions.md) and Voilà! You have your own "app"! Do you want to share it with your colleagues? Click on [preview](../pages/concepts/preview.md) and generate a shareable UI which is a web application based on the logic you build in your recipe! This isn't just any application; it's your personalized tool, born from your specific needs and understanding of your daily challenges. Sharing the preview with your team is as simple as sending a link.
 It gets even better! What if your team wants this AI solution to be part of a customer facing application that your company? Just click on "API" and let us do the work for you, within literally seconds, your AI solution is available through our API for the engineers in your team to integrate with the codebase of your company!
 
 
@@ -12,7 +10,7 @@ It gets even better! What if your team wants this AI solution to be part of a cu
 
 In Prompt Studio, you can start by creating your first [**recipe**](concepts/recipe.md) which would be a collection of AI instructions.
 
-- Does your AI solution involve multiple steps? Chain your AI [**instructions**](concepts/instructions.md#chained-instructions-in-a-recipe) by simply referring with `/ to the output of the previous instruction. 
+- Does your AI solution involve multiple steps? Chain your AI [**instructions**](concepts/instructions.md#chained-instructions-in-a-recipe) by simply referring with `/` to the output of the previous instruction. 
 
 - Do you need to enrich the AI instruction with contextual data from [**files**](concepts/file.md)? Type "/", define your context name and upload your file. This will include the content of the file within the instruction and give more context to guide the LLM for better output.
 

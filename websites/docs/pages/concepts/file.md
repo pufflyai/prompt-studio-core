@@ -13,15 +13,15 @@ When you add a file to your instruction, the content of the file is added **in-l
 Let's go back to the same instruction that we used earlier to extract concerns from a file containing interviews:
 
 ```
-Based on the following: /interviews, list the concerns expressed by the interviewees.
+Based on the following interviews: /interviews, list the concerns expressed by the interviewees.
 ```
 
 Once you upload your file, the string `/interviews` will be replaced with the actual content of the file. This will make the context available to the LLM in the instruction.
 
 
-::: warning Should I follow a specific format when adding file content to an instruction
+::: warning Should I follow a specific format when adding file content to an instruction?
 
-Adding context to a prompt is something that we are planning to assist you in with our upcoming "Promptly", which a sort of "Grammarly" for prompts.
+Adding context to a prompt is something that we are planning to assist you in with our upcoming prompt enhancement features.
 
 :::
 
